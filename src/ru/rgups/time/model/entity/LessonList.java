@@ -10,7 +10,8 @@ import org.simpleframework.xml.Root;
 @Root(name = "xml")
 public class LessonList {
 	
-
+	private int groupId;
+	
 	@Element(name = "nazvanie")
 	private String title;
 	

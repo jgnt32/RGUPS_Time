@@ -31,6 +31,9 @@ public class Day {
 	}
 
 	public void setLessons(Collection<Lesson> lessons) {
+		for(Lesson lesson : lessons){
+			lesson.setDayNumber(this.number);
+		}
 		this.lessons = lessons;
 	}
 	

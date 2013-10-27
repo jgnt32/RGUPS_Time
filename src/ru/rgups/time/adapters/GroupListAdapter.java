@@ -6,6 +6,7 @@ import ru.rgups.time.R;
 import ru.rgups.time.model.entity.Group;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,8 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 	private LayoutInflater mInflater;
 	private ViewHolder mHolder;
 	private DividerHolder dividerHolder;
+	
+	
 	public GroupListAdapter(Context context, ArrayList<Group> groupList ){
 		this.mContext = context;
 		this.mGroupList = groupList;
@@ -41,7 +44,7 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 
 	@Override
 	public long getItemId(int position) {
-		return mGroupList.get(position).getId();
+		return 0;//mGroupList.get(position).getId();
 	}
 
 	@Override
@@ -61,7 +64,7 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 	}
 	
 
-	static class ViewHolder{
+	private class ViewHolder{
 		private TextView mFacultetName;
 		
 		public ViewHolder(View view){
@@ -81,6 +84,7 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 
 	@Override
 	public View getHeaderView(int position, View convertView, ViewGroup parent) {
+		Log.e("GroupListAdapter","getHeaderView");
 		if(convertView == null){
 			convertView = mInflater.inflate(R.layout.group_list_divier, parent, false);
 			dividerHolder = new DividerHolder(convertView);
@@ -95,6 +99,7 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 
 	@Override
 	public long getHeaderId(int position) {
+		Log.e("GroupListAdapter","getHeaderId");
 		return mGroupList.get(position).getLevel();
 	}
 	
