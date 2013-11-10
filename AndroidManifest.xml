@@ -27,7 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".spice.SampleSpiceService"></service>
+        <activity android:name=".fragments.WelcomeActivity"></activity><service android:name=".spice.SampleSpiceService"></service>
+        
     </application>
 
 </manifest>

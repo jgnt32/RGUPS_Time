@@ -12,11 +12,13 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+	/*	Intent i = new Intent(this, WelcomeActivity.class);
+		startActivity(i);*/
 	//	FacultetListFragment facultetList = new FacultetListFragment();
 	//	GroupListFragment list = new GroupListFragment();
 		TimeTableFragment list = new TimeTableFragment();
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.replace(R.id.frameLayout, list);
+		ft.replace(R.id.frameLayout, list, null);
 		ft.commit();
 	}
 

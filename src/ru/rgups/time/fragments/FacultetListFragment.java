@@ -2,7 +2,7 @@ package ru.rgups.time.fragments;
 
 import java.util.ArrayList;
 
-import ru.rgups.time.BaseFragment;
+import ru.rgups.time.BaseDialogFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.FacultetListAdapter;
 import ru.rgups.time.model.entity.Facultet;
@@ -19,7 +19,7 @@ import android.widget.ListView;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-public class FacultetListFragment extends BaseFragment {
+public class FacultetListFragment extends BaseDialogFragment {
 	private ArrayList<Facultet> mFacultetList = new ArrayList<Facultet>();
 	private ListView mListView;
 	private FacultetListAdapter adapter;

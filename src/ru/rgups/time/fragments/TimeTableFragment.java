@@ -1,29 +1,32 @@
 package ru.rgups.time.fragments;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
-import ru.rgups.time.adapters.LessonAdapter;
-import ru.rgups.time.model.entity.Day;
+import ru.rgups.time.adapters.CalendarAdapter;
 import ru.rgups.time.model.entity.Lesson;
 import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.spice.TimeTableRequest;
-import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
+import com.devsmart.android.ui.HorizontalListView;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 public class TimeTableFragment extends BaseFragment{
-	private StickyListHeadersListView mList;
-	private ArrayList<LessonInformation> mLessons = new ArrayList<LessonInformation>(); 
+	private HorizontalListView mList;
+	private ArrayList<LessonInformation> mLessons = new ArrayList<LessonInformation>();
+	private CalendarAdapter mAdapter; 
+
 	private void getGroupList(){	
 		this.getSpiceManager().execute(new TimeTableRequest("15144"), new GetTimeListener());
 	}
@@ -38,7 +41,9 @@ public class TimeTableFragment extends BaseFragment{
 		public void onRequestSuccess(LessonList list) {
 			Log.e("list",""+list.getDays().size());
 			ArrayList<Lesson> lessons = new ArrayList<Lesson>();
-			for(Day day:list.getDays()){
+		
+	
+	/*		for(Day day:list.getDays()){
 		//		Log.e("day number",""+day.getNumber());
 				for(Lesson lesson:day.getLessons()){
 			//		Log.e("lesson number",""+lesson.getNumber());
@@ -64,20 +69,31 @@ public class TimeTableFragment extends BaseFragment{
 		//	Log.e("all lessons",""+lessons.size());
 			
 			LessonAdapter adapter = new LessonAdapter(getActivity(),lessons);
-			mList.setAdapter(adapter);
+			mList.setAdapter(adapter);*/
 		}
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getGroupList();
+
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.timetable_fragment, null);
-		mList = (StickyListHeadersListView) v.findViewById(R.id.lessonList);
+		mList = (HorizontalListView) v.findViewById(R.id.lessonList);
+		mAdapter = new CalendarAdapter(getActivity());
+		mList.setAdapter(mAdapter);
+		mList.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View v, int position,	long id) {
+				Calendar c = (Calendar) mAdapter.getItem(position);
+				c.set(Calendar.DAY_OF_YEAR, (int) id);
+				Log.e("mAdapter.getItem(position)",""+c.getTime());
+			}
+		});
 		return v;
 	}
 		

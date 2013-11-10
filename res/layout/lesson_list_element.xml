@@ -4,15 +4,21 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
+    <View
+        android:id="@+id/view1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp" >
+        android:layout_height="wrap_content" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:layout_weight="0"
-            android:background="#C0C0C0" >
+            android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/lesson_number"
@@ -22,9 +28,17 @@
                 android:layout_weight="0"
                 android:padding="15dp"
                 android:text="1"
-                android:textColor="#FFFFFF"
                 android:textSize="17sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lesson_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0"
+                android:text="8.20-9.50"
+                android:textSize="10dp" />
 
         </LinearLayout>
 
@@ -61,7 +75,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp" >
 
                 <TextView
                     android:id="@+id/lesson_teacher"

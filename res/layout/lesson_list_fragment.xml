@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.devsmart.android.ui.HorizontalListView
-        android:id="@+id/lessonList"
+    <ListView
+        android:id="@+id/lesson_list"
         android:layout_width="match_parent"
-         android:listSelector="@drawable/calendar_selector"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content" >
+    </ListView>
 
 </LinearLayout>
