@@ -2,9 +2,17 @@ package ru.rgups.time.model.entity;
 
 import org.simpleframework.xml.Element;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
+@DatabaseTable(tableName = "lesson_information_table")
 public class LessonInformation {
 	
+	@DatabaseField(foreign = true, columnName = "lesson_id")
 	private Lesson lesson_id;
+	
+	@DatabaseField(id = true)
+	private int id;
 	
 	private int shift;	
 	

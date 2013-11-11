@@ -10,7 +10,15 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.xml.SimpleXmlHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import ru.rgups.time.model.HelperManager;
+import ru.rgups.time.model.entity.Day;
+import ru.rgups.time.model.entity.DoubleLine;
 import ru.rgups.time.model.entity.Facultet;
+import ru.rgups.time.model.entity.Lesson;
+import ru.rgups.time.model.entity.LessonInformation;
+import ru.rgups.time.model.entity.LessonList;
+import ru.rgups.time.model.entity.OverLine;
+import ru.rgups.time.model.entity.UnderLine;
 import android.app.Application;
 
 import com.octo.android.robospice.SpringAndroidSpiceService;
@@ -35,12 +43,22 @@ public class SampleSpiceService extends SpringAndroidSpiceService {
 
         // add persisted classes to class collection
         classCollection.add( Facultet.class );
+        classCollection.add( LessonList.class );
+        classCollection.add( Day.class );
+        classCollection.add( Lesson.class );
+        classCollection.add( LessonInformation.class );
+        classCollection.add( DoubleLine.class );
+        classCollection.add( UnderLine.class );
+        classCollection.add( OverLine.class );
 
 
-        // init
-        RoboSpiceDatabaseHelper databaseHelper = new RoboSpiceDatabaseHelper( application, "time_database.db", 1 );
-        InDatabaseObjectPersisterFactory inDatabaseObjectPersisterFactory = new InDatabaseObjectPersisterFactory( application, databaseHelper, classCollection );
+        if (HelperManager.getHelper() == null) {
+			RoboSpiceDatabaseHelper databaseHelper = new RoboSpiceDatabaseHelper(application, HelperManager.DB_NAME, HelperManager.DB_VERSION);
+			HelperManager.setHelper(databaseHelper);
+		}
+        InDatabaseObjectPersisterFactory inDatabaseObjectPersisterFactory = new InDatabaseObjectPersisterFactory( application, HelperManager.getHelper(), classCollection );
         cacheManager.addPersister( inDatabaseObjectPersisterFactory );
+        
         return cacheManager;
     }
 

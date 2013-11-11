@@ -23,6 +23,8 @@ public class CalendarAdapter extends BaseAdapter{
 	private LayoutInflater mInflater;
 	private ViewHolder mHolder;
 	private View mView;
+	private int mSelectedItem;
+	
 	public CalendarAdapter(Context context){
 		
 		mCalendar = Calendar.getInstance();
@@ -34,7 +36,10 @@ public class CalendarAdapter extends BaseAdapter{
 		return DAY_COUNT;
 	}
 	
-
+	public void setSelectedItem(int selecteNumber){
+		this.mSelectedItem = selecteNumber;
+	}
+	
 	@Override
 	public Object getItem(int position) {
 		Calendar calendar = Calendar.getInstance();
@@ -51,17 +56,25 @@ public class CalendarAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent){
-		mView = convertView;
-		if(mView == null){
+	//	mView = convertView;
+	//	if(mView == null){
 			mView = mInflater.inflate(R.layout.calendar_element, null);
-			mHolder = new ViewHolder(mView);
+		/*	mHolder = new ViewHolder(mView);
 			mView.setTag(mHolder);
 		}else{
 			mHolder = (ViewHolder) mView.getTag();
-		}
-		mCalendar = Calendar.getInstance();
-		mCalendar.set(Calendar.DAY_OF_YEAR, position+DAY_OFFSET);
-		mHolder.text.setText(Integer.toString(mCalendar.get(Calendar.DAY_OF_MONTH)));
+		}*/
+		  TextView text = (TextView) mView.findViewById(R.id.calendar_element_text); 
+		  mCalendar = Calendar.getInstance();
+		  mCalendar.set(Calendar.DAY_OF_YEAR, position+DAY_OFFSET);
+		  text.setText(Integer.toString(mCalendar.get(Calendar.DAY_OF_MONTH)));
+		  if(mSelectedItem == position){
+			  mView.setSelected(true);
+		  }else{
+			  mView.setSelected(false);
+		  }
+		//mHolder.calendar.set(Calendar.DAY_OF_YEAR, position+DAY_OFFSET);
+		//mHolder.text.setText(Integer.toString(mHolder.calendar.get(Calendar.DAY_OF_MONTH)));
 		return mView;
 	}
 	
@@ -105,6 +118,8 @@ public class CalendarAdapter extends BaseAdapter{
 	private class ViewHolder{
 		private TextView text;
 		
+		private Calendar calendar = Calendar.getInstance();
+
 		
 		public ViewHolder(View v) {
 			text = (TextView) v.findViewById(R.id.calendar_element_text);

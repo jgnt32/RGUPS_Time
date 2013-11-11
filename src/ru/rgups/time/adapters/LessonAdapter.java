@@ -54,7 +54,7 @@ public class LessonAdapter extends BaseAdapter{
 		}else{
 			mHolder = (ViewHolder) mView.getTag();
 		}
-		Log.e("day number",""+getItem(position).getDayNumber());
+	//	Log.e("day number",""+getItem(position).getDayNumber());
 		ArrayList<LessonInformation> inf = new ArrayList<LessonInformation>(getItem(position).getInfromation());
 		mHolder.getNumber().setText(Integer.toString(this.getItem(position).getNumber()));
 

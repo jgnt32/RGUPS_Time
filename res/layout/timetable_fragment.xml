@@ -4,10 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <com.devsmart.android.ui.HorizontalListView
+    <com.meetme.android.horizontallistview.HorizontalListView
         android:id="@+id/lessonList"
+		android:choiceMode="singleChoice"
         android:layout_width="match_parent"
-         android:listSelector="@drawable/calendar_selector"
-        android:layout_height="wrap_content" />
+        android:background="@color/theme_blue"
+        android:layout_height="60dp"/>
 
 </LinearLayout>
