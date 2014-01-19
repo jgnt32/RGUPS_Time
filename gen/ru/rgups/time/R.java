@@ -16,6 +16,9 @@ public final class R {
         public static final int abc_slide_out_bottom=0x7f040004;
         public static final int abc_slide_out_top=0x7f040005;
     }
+    public static final class array {
+        public static final int drawer_titles=0x7f0c0000;
+    }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
@@ -1021,12 +1024,13 @@ containing a value of this type.
         public static final int enter_reg_information_shape=0x7f02005f;
         public static final int green_rectangle=0x7f020060;
         public static final int header_bg=0x7f020061;
-        public static final int ic_launcher=0x7f020062;
-        public static final int lesson=0x7f020063;
-        public static final int right_arrow=0x7f020064;
-        public static final int right_arrow2x=0x7f020065;
-        public static final int right_arrow_blue=0x7f020066;
-        public static final int shape=0x7f020067;
+        public static final int ic_drawer=0x7f020062;
+        public static final int ic_launcher=0x7f020063;
+        public static final int lesson=0x7f020064;
+        public static final int right_arrow=0x7f020065;
+        public static final int right_arrow2x=0x7f020066;
+        public static final int right_arrow_blue=0x7f020067;
+        public static final int shape=0x7f020068;
     }
     public static final class id {
         public static final int action_bar=0x7f05001c;
@@ -1040,53 +1044,66 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050057;
+        public static final int action_settings=0x7f050063;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
-        public static final int calendar_element_text=0x7f05003d;
+        public static final int calendar_bottom_indicator=0x7f050042;
+        public static final int calendar_element_text=0x7f050043;
+        public static final int calendar_left_indicator=0x7f05003f;
+        public static final int calendar_list=0x7f05005d;
+        public static final int calendar_right_indicator=0x7f050040;
+        public static final int calendar_top_indicator=0x7f050041;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
-        public static final int dayOfWeek=0x7f050049;
-        public static final int day_title=0x7f05003e;
+        public static final int dayOfWeek=0x7f050051;
+        public static final int day_title=0x7f050044;
         public static final int default_activity_button=0x7f050028;
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
+        public static final int drawer_image=0x7f050046;
+        public static final int drawer_layout=0x7f05003c;
+        public static final int drawer_text=0x7f050047;
         public static final int dropdown=0x7f05000f;
         public static final int edit_query=0x7f050030;
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
-        public static final int facultetList=0x7f050041;
-        public static final int facultetName=0x7f050040;
-        public static final int facultet_select=0x7f050054;
-        public static final int fakid=0x7f050043;
-        public static final int frameLayout=0x7f05003c;
-        public static final int groupList=0x7f050047;
-        public static final int groupName=0x7f050045;
-        public static final int group_select=0x7f050055;
+        public static final int facultetList=0x7f050049;
+        public static final int facultetName=0x7f050048;
+        public static final int facultet_select=0x7f050060;
+        public static final int fakid=0x7f05004b;
+        public static final int frameLayout=0x7f05003d;
+        public static final int groupList=0x7f05004f;
+        public static final int groupName=0x7f05004d;
+        public static final int group_select=0x7f050061;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int imageView1=0x7f050046;
-        public static final int lesseon_divider_text=0x7f050048;
-        public static final int lessonList=0x7f050052;
-        public static final int lesson_layout=0x7f05003f;
-        public static final int lesson_list=0x7f050051;
-        public static final int lesson_number=0x7f05004b;
-        public static final int lesson_room=0x7f05004e;
-        public static final int lesson_teacher=0x7f05004f;
-        public static final int lesson_time=0x7f05004c;
-        public static final int lesson_title=0x7f05004d;
-        public static final int lesson_type=0x7f050050;
-        public static final int levelTitle=0x7f050044;
+        public static final int imageView1=0x7f05004e;
+        public static final int left_drawer=0x7f05003e;
+        public static final int lesseon_divider_text=0x7f050050;
+        public static final int lesson_current_date=0x7f050059;
+        public static final int lesson_current_day_of_week=0x7f05005a;
+        public static final int lesson_epty_view=0x7f05005e;
+        public static final int lesson_layout=0x7f050045;
+        public static final int lesson_list=0x7f050058;
+        public static final int lesson_number=0x7f050052;
+        public static final int lesson_room=0x7f050055;
+        public static final int lesson_selected_date=0x7f05005b;
+        public static final int lesson_selected_day_of_week=0x7f05005c;
+        public static final int lesson_teacher=0x7f050056;
+        public static final int lesson_time=0x7f050053;
+        public static final int lesson_title=0x7f050054;
+        public static final int lesson_type=0x7f050057;
+        public static final int levelTitle=0x7f05004c;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
-        public static final int login_button=0x7f050056;
+        public static final int login_button=0x7f050062;
         public static final int middle=0x7f050012;
-        public static final int name=0x7f050042;
+        public static final int name=0x7f05004a;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
@@ -1114,8 +1131,7 @@ containing a value of this type.
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
-        public static final int view1=0x7f05004a;
-        public static final int welcome_frame_layout=0x7f050053;
+        public static final int welcome_frame_layout=0x7f05005f;
         public static final int withText=0x7f05000c;
     }
     public static final class integer {
@@ -1170,23 +1186,25 @@ containing a value of this type.
         public static final int activity_main=0x7f030017;
         public static final int calendar_element=0x7f030018;
         public static final int day_list_element=0x7f030019;
-        public static final int facultet_list_element=0x7f03001a;
-        public static final int facultet_list_fragment=0x7f03001b;
-        public static final int group_list=0x7f03001c;
-        public static final int group_list_divier=0x7f03001d;
-        public static final int group_list_element=0x7f03001e;
-        public static final int group_list_fargment=0x7f03001f;
-        public static final int lesson_divider=0x7f030020;
-        public static final int lesson_list_divier=0x7f030021;
-        public static final int lesson_list_element=0x7f030022;
-        public static final int lesson_list_fragment=0x7f030023;
-        public static final int support_simple_spinner_dropdown_item=0x7f030024;
-        public static final int timetable_fragment=0x7f030025;
-        public static final int welcome_activity=0x7f030026;
-        public static final int welcome_fragment=0x7f030027;
+        public static final int drawer_list_element=0x7f03001a;
+        public static final int facultet_list_element=0x7f03001b;
+        public static final int facultet_list_fragment=0x7f03001c;
+        public static final int group_list=0x7f03001d;
+        public static final int group_list_divier=0x7f03001e;
+        public static final int group_list_element=0x7f03001f;
+        public static final int group_list_fargment=0x7f030020;
+        public static final int lesson_divider=0x7f030021;
+        public static final int lesson_list_divier=0x7f030022;
+        public static final int lesson_list_element=0x7f030023;
+        public static final int lesson_list_fragment=0x7f030024;
+        public static final int setting_fragment=0x7f030025;
+        public static final int support_simple_spinner_dropdown_item=0x7f030026;
+        public static final int timetable_fragment=0x7f030027;
+        public static final int welcome_activity=0x7f030028;
+        public static final int welcome_fragment=0x7f030029;
     }
     public static final class menu {
-        public static final int main=0x7f0c0000;
+        public static final int main=0x7f0d0000;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1231,12 +1249,18 @@ containing a value of this type.
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
         public static final int action_settings=0x7f0a000e;
         public static final int app_name=0x7f0a000d;
+        public static final int draw_close=0x7f0a0011;
+        /**  DRAWER 
+         */
+        public static final int draw_open=0x7f0a0010;
         public static final int hello_world=0x7f0a000f;
         /**  Captions 
          */
-        public static final int login_button_caption=0x7f0a0010;
-        public static final int login_facultet_caption=0x7f0a0011;
-        public static final int login_group_caption=0x7f0a0012;
+        public static final int login_button_caption=0x7f0a0012;
+        public static final int login_facultet_caption=0x7f0a0013;
+        public static final int login_group_caption=0x7f0a0014;
+        public static final int setting_logout=0x7f0a0015;
+        public static final int setting_staff=0x7f0a0016;
     }
     public static final class style {
         /** 

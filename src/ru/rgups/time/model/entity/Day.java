@@ -14,18 +14,23 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "day_table")
 public class Day {
 	
+	public Day() {
+	}
+	
 	public final static String TABLE_NAME = "day_table";
 		
-	@DatabaseField (foreign = true, columnName = "lessonList_id")
+	@DatabaseField (foreign = true, columnName = "lessonList_id", foreignAutoRefresh = true)
 	private LessonList list;
-
+	
+	
 	@Element(name = "nomer_d")
-	@DatabaseField (id = true)
+	@DatabaseField(id = true)
 	private int number;
 	
-	@ElementList(inline = true, type = Lesson.class)
+	@ElementList(inline = true, type = Lesson.class )
 	@ForeignCollectionField(eager = true)
 	private Collection<Lesson> lessons;
+
 
 	public int getNumber() {
 		return number;
@@ -42,7 +47,6 @@ public class Day {
 	public void setLessons(Collection<Lesson> lessons) {
 		this.lessons = lessons;
 	}
-	
 	
 
 }

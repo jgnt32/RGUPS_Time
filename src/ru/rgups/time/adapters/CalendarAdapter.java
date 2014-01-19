@@ -5,6 +5,7 @@ import java.util.Calendar;
 import ru.rgups.time.R;
 import ru.rgups.time.utils.ConstUtils;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +20,28 @@ public class CalendarAdapter extends BaseAdapter{
 	
 	public final static int DAY_OFFSET = getDayOffset(); 
 	
+	public final static boolean UPARITY_WEEK_IS_OVERLINE = getPointOfReference();
+	
 	private Calendar mCalendar;
 	private LayoutInflater mInflater;
 	private ViewHolder mHolder;
 	private View mView;
 	private int mSelectedItem;
+	private int mBlueColor;
+	private int mGreenColor;
+
+	private View leftIndicator;
+
+	private View rightIndicator;
+
+	private View topIndicator;
+
+	private View bootomIndicator;
 	
 	public CalendarAdapter(Context context){
-		
+		mGreenColor = context.getResources().getColor(R.color.theme_green);
+		mBlueColor = context.getResources().getColor(R.color.theme_blue);
+
 		mCalendar = Calendar.getInstance();
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -56,23 +71,32 @@ public class CalendarAdapter extends BaseAdapter{
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent){
-	//	mView = convertView;
-	//	if(mView == null){
+//		mView = convertView;
+//		if(mView == null){
 			mView = mInflater.inflate(R.layout.calendar_element, null);
-		/*	mHolder = new ViewHolder(mView);
+/*			mHolder = new ViewHolder(mView);
 			mView.setTag(mHolder);
 		}else{
 			mHolder = (ViewHolder) mView.getTag();
 		}*/
 		  TextView text = (TextView) mView.findViewById(R.id.calendar_element_text); 
+		  leftIndicator = mView.findViewById(R.id.calendar_left_indicator);
+		  rightIndicator = mView.findViewById(R.id.calendar_right_indicator);
+		  topIndicator = mView.findViewById(R.id.calendar_top_indicator);
+		  bootomIndicator = mView.findViewById(R.id.calendar_bottom_indicator);
 		  mCalendar = Calendar.getInstance();
 		  mCalendar.set(Calendar.DAY_OF_YEAR, position+DAY_OFFSET);
 		  text.setText(Integer.toString(mCalendar.get(Calendar.DAY_OF_MONTH)));
-		  if(mSelectedItem == position){
-			  mView.setSelected(true);
+		  
+	/*	  if(this.isOverLine(mCalendar)){
+			  bootomIndicator.setVisibility(View.VISIBLE);
+			  topIndicator.setVisibility(View.INVISIBLE);
 		  }else{
-			  mView.setSelected(false);
-		  }
+			  bootomIndicator.setVisibility(View.INVISIBLE);
+			  topIndicator.setVisibility(View.VISIBLE);
+		  }*/
+		  
+		
 		//mHolder.calendar.set(Calendar.DAY_OF_YEAR, position+DAY_OFFSET);
 		//mHolder.text.setText(Integer.toString(mHolder.calendar.get(Calendar.DAY_OF_MONTH)));
 		return mView;
@@ -115,14 +139,74 @@ public class CalendarAdapter extends BaseAdapter{
 	
 	}
 	
+	private static boolean getPointOfReference(){
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.MONTH, Calendar.SEPTEMBER);
+		calendar.set(Calendar.DAY_OF_MONTH, 1);
+		
+		int firstWeekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
+		
+		if(calendar.get(Calendar.DAY_OF_WEEK)!=Calendar.SATURDAY && calendar.get(Calendar.DAY_OF_WEEK)!=Calendar.SUNDAY){
+			if(weekIsParity(firstWeekOfYear)){
+				return false;
+			}else{
+				return true;
+			}
+						
+		}else{
+			if(weekIsParity(firstWeekOfYear)){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		
+	}
+	
+	public static boolean weekIsParity(int weekNumber){
+		if(weekNumber%2==0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	private boolean isOverLine(Calendar c){
+		Calendar calendar = c;
+		int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);	
+		boolean currentWeekIsParity = (weekOfYear%2)==0;
+		Log.e("huy",""+currentWeekIsParity);
+		if(UPARITY_WEEK_IS_OVERLINE){
+			if(currentWeekIsParity){
+				return false;
+			
+			}else{
+				return true;
+			}
+			
+		}else{
+			if(currentWeekIsParity){
+				return true;
+			}else{
+				return false;
+			}
+			
+		}
+	}
+	
 	private class ViewHolder{
+		private View leftIndicator;
+		private View rightIndicator;
+		private View topIndicator;
+		private View bootomIndicator;
+		
 		private TextView text;
-		
-		private Calendar calendar = Calendar.getInstance();
-
-		
 		public ViewHolder(View v) {
 			text = (TextView) v.findViewById(R.id.calendar_element_text);
+			leftIndicator = v.findViewById(R.id.calendar_left_indicator);
+			rightIndicator = v.findViewById(R.id.calendar_right_indicator);
+			topIndicator = v.findViewById(R.id.calendar_top_indicator);
+			bootomIndicator = v.findViewById(R.id.calendar_bottom_indicator);
 		}
 	}
 	

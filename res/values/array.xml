@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="drawer_titles">
+        <item >Расписание</item>
+        <item >Преподователи</item>
+        <item >Домашнии задания</item>
+        <item >Настройки</item>
+    </string-array>
+</resources>

@@ -14,27 +14,28 @@ import com.j256.ormlite.table.DatabaseTable;
 @Root(name = "block_1",strict = false)
 @DatabaseTable(tableName = "lesson_table")
 public class Lesson {
+	public static final String TABLE_NAME = "lesson_table";
+	public static final String DAY_ID = "day_id";
+	public static final String NUMBER = "number";
+	public static final String ID = "id";
 	
 	public Lesson() {
 	}
 	
-	@DatabaseField(foreign = true, columnName = "day_id")
+	@DatabaseField(foreign = true, columnName = "day_id", foreignAutoRefresh = true)
 	private Day day;
 	
-	@DatabaseField(id = true)
+	@DatabaseField(generatedId = true)
 	private int id;
 	
+
 	@Element(name = "para_n")
 	@DatabaseField
 	private int number;
 	
 	@Element(name = "vrem")
 	@DatabaseField
-	private String time;
-	
-	@ForeignCollectionField(eager = true)
-	private Collection<LessonInformation> infromation = new ArrayList<LessonInformation>();
-	
+	private String time;	
 	
 	@ElementList(inline = true, type = DoubleLine.class,required = false, empty = true)
 	@ForeignCollectionField(eager = true)
@@ -64,14 +65,21 @@ public class Lesson {
 	public void setTime(String time) {
 		this.time = time;
 	}
-
-	public Collection<LessonInformation> getInfromation() {
-		return infromation;
+	
+	public Day getDay() {
+		return day;
 	}
 
-	public void setInfromation(Collection<LessonInformation> infromation) {
-		
-		this.infromation = infromation;
+	public void setDay(Day day) {
+		this.day = day;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Collection<DoubleLine> getDoubleLine() {
@@ -79,12 +87,6 @@ public class Lesson {
 	}
 
 	public void setDoubleLine(Collection<DoubleLine> doubleLine) {
-//		infromation.addAll(doubleLine);
-/*		for(DoubleLine doubl:doubleLine){
-//			doubl.setDayNumber(dayNumber);
-			doubl.setLessonNumber(number);
-			doubl.setTime(time);
-		}*/
 		this.doubleLine = doubleLine;
 	}
 
@@ -94,12 +96,6 @@ public class Lesson {
 	}
 
 	public void setUnderLine(Collection<UnderLine> underLine) {
-	//	infromation.addAll(underLine);
-/*		for(UnderLine under:underLine){
-//			under.setDayNumber(dayNumber);
-			under.setLessonNumber(number);
-			under.setTime(time);
-		}*/
 		this.underLine = underLine;
 	}
 
@@ -109,23 +105,8 @@ public class Lesson {
 	}
 
 	public void setOverLine(Collection<OverLine> overLine) {
-	//	infromation.addAll(overLine);
-	/*	for(OverLine over:overLine){
-		//	Log.w("try set day namber",""+dayNumber);
-		//	over.setDayNumber(dayNumber);
-			over.setLessonNumber(number);
-			over.setTime(time);
-		}*/
 		this.overLine = overLine;		
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}	
 	
-
 }

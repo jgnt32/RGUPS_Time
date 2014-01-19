@@ -24,7 +24,7 @@ public class LessonList {
 	private String title;
 	
 	@ElementList(inline = true, type = Day.class)
-	@ForeignCollectionField(eager = false)
+	@ForeignCollectionField(eager = true)
 	private Collection<Day> days;
 
 	public String getTitle() {
@@ -49,6 +49,7 @@ public class LessonList {
 
 	public void setGroupId(int groupId) {
 		this.groupId = groupId;
+//		PreferenceManager.getInstance().saveGroupId(Integer.toString(groupId));
 	}
 	
 

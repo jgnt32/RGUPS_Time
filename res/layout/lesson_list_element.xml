@@ -4,12 +4,6 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
-    <View
-        android:id="@+id/view1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000000" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -27,7 +21,6 @@
                 android:layout_gravity="center_vertical"
                 android:layout_weight="0"
                 android:padding="15dp"
-                android:text="1"
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
@@ -37,7 +30,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="0"
-                android:text="8.20-9.50"
                 android:textSize="10dp" />
 
         </LinearLayout>
@@ -58,7 +50,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:text="Физ-ра"
                     android:textSize="17dp" />
 
                 <TextView
@@ -68,7 +59,6 @@
                     android:layout_gravity="right"
                     android:layout_weight="0.3"
                     android:padding="3dp"
-                    android:text="Д404"
                     android:textSize="17dp" />
 
             </LinearLayout>
@@ -84,7 +74,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="3dp"
-                    android:text="Жуков В.В."
                     android:textSize="17dp" />
 
                 <TextView
@@ -93,7 +82,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
                     android:padding="3dp"
-                    android:text="ЛАБ"
                     android:textSize="17dp" />
 
             </LinearLayout>
