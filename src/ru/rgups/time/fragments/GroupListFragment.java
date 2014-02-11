@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -66,7 +65,7 @@ public class GroupListFragment extends BaseFragment{
 			Log.e("list",""+list.getGroupList().size());
 			mGroupList = new ArrayList<Group>(list.getGroupList());
 			adapter = new GroupListAdapter(getActivity(), mGroupList);
-			mListView.setAdapter(adapter);
+	//		mListView.setAdapter(adapter);
 		}
 		
 	}

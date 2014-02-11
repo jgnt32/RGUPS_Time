@@ -24,12 +24,12 @@ public final class R {
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionBarDivider=0x7f01000c;
+        public static final int actionBarDivider=0x7f01000d;
         /**  Custom item state list drawable background for action bar items. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionBarItemBackground=0x7f01000d;
+        public static final int actionBarItemBackground=0x7f01000e;
         /**  Size of the Action Bar, including the contextual
          bar used to present Action Modes. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
@@ -41,7 +41,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int actionBarSize=0x7f01000b;
+        public static final int actionBarSize=0x7f01000c;
         /**  Reference to a theme that should be used to inflate widgets
          and layouts destined for the action bar. Most of the time
          this will be a reference to the current theme, but when
@@ -52,25 +52,25 @@ containing a value of this type.
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionBarSplitStyle=0x7f010009;
+        public static final int actionBarSplitStyle=0x7f01000a;
         /**  Reference to a style for the Action Bar 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionBarStyle=0x7f010008;
+        public static final int actionBarStyle=0x7f010009;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionBarTabBarStyle=0x7f010005;
+        public static final int actionBarTabBarStyle=0x7f010006;
         /**  Default style for tabs within an action bar 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionBarTabStyle=0x7f010004;
+        public static final int actionBarTabStyle=0x7f010005;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionBarTabTextStyle=0x7f010006;
+        public static final int actionBarTabTextStyle=0x7f010007;
         /**  Reference to a theme that should be used to inflate widgets
          and layouts destined for the action bar. Most of the time
          this will be a reference to the current theme, but when
@@ -81,104 +81,104 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionBarWidgetTheme=0x7f01000a;
+        public static final int actionBarWidgetTheme=0x7f01000b;
         /**  Default action button style. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionButtonStyle=0x7f010013;
+        public static final int actionButtonStyle=0x7f010014;
         /**  Default ActionBar dropdown style. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionDropDownStyle=0x7f010044;
+        public static final int actionDropDownStyle=0x7f010045;
         /**  An optional layout to be used as an action view.
              See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionLayout=0x7f01004b;
+        public static final int actionLayout=0x7f01004c;
         /**  TextAppearance style that will be applied to text that
          appears within action menu items. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionMenuTextAppearance=0x7f01000e;
+        public static final int actionMenuTextAppearance=0x7f01000f;
         /**  Color for text that appears within action menu items. 
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int actionMenuTextColor=0x7f01000f;
+        public static final int actionMenuTextColor=0x7f010010;
         /**  Background drawable to use for action mode UI 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModeBackground=0x7f010039;
+        public static final int actionModeBackground=0x7f01003a;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModeCloseButtonStyle=0x7f010038;
+        public static final int actionModeCloseButtonStyle=0x7f010039;
         /**  Drawable to use for the close action mode button 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModeCloseDrawable=0x7f01003b;
+        public static final int actionModeCloseDrawable=0x7f01003c;
         /**  Drawable to use for the Copy action button in Contextual Action Bar 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModeCopyDrawable=0x7f01003d;
+        public static final int actionModeCopyDrawable=0x7f01003e;
         /**  Drawable to use for the Cut action button in Contextual Action Bar 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModeCutDrawable=0x7f01003c;
+        public static final int actionModeCutDrawable=0x7f01003d;
         /**  Drawable to use for the Find action button in WebView selection action modes 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModeFindDrawable=0x7f010041;
+        public static final int actionModeFindDrawable=0x7f010042;
         /**  Drawable to use for the Paste action button in Contextual Action Bar 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModePasteDrawable=0x7f01003e;
+        public static final int actionModePasteDrawable=0x7f01003f;
         /**  PopupWindow style to use for action modes when showing as a window overlay. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModePopupWindowStyle=0x7f010043;
+        public static final int actionModePopupWindowStyle=0x7f010044;
         /**  Drawable to use for the Select all action button in Contextual Action Bar 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModeSelectAllDrawable=0x7f01003f;
+        public static final int actionModeSelectAllDrawable=0x7f010040;
         /**  Drawable to use for the Share action button in WebView selection action modes 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModeShareDrawable=0x7f010040;
+        public static final int actionModeShareDrawable=0x7f010041;
         /**  Background drawable to use for action mode UI in the lower split bar 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModeSplitBackground=0x7f01003a;
+        public static final int actionModeSplitBackground=0x7f01003b;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModeStyle=0x7f010037;
+        public static final int actionModeStyle=0x7f010038;
         /**  Drawable to use for the Web Search action button in WebView selection action modes 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionModeWebSearchDrawable=0x7f010042;
+        public static final int actionModeWebSearchDrawable=0x7f010043;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int actionOverflowButtonStyle=0x7f010007;
+        public static final int actionOverflowButtonStyle=0x7f010008;
         /**  The name of an optional ActionProvider class to instantiate an action view
              and perform operations such as default action for that menu item.
              See {@link android.view.MenuItem#setActionProvider(android.view.ActionProvider)}
@@ -190,7 +190,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int actionProviderClass=0x7f01004d;
+        public static final int actionProviderClass=0x7f01004e;
         /**  The name of an optional View class to instantiate and use as an
              action view. See {@link android.view.MenuItem#setActionView(android.view.View)}
              for more info. 
@@ -201,48 +201,48 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int actionViewClass=0x7f01004c;
+        public static final int actionViewClass=0x7f01004d;
         /**  Default ActivityChooserView style. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int activityChooserViewStyle=0x7f010069;
+        public static final int activityChooserViewStyle=0x7f01006a;
         /**  Specifies a background drawable for the action bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int background=0x7f01002c;
+        public static final int background=0x7f01002d;
         /**  Specifies a background drawable for the bottom component of a split action bar. 
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int backgroundSplit=0x7f01002e;
+        public static final int backgroundSplit=0x7f01002f;
         /**  Specifies a background drawable for a second stacked row of the action bar. 
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int backgroundStacked=0x7f01002d;
+        public static final int backgroundStacked=0x7f01002e;
         /**  A style that may be applied to Buttons placed within a
          LinearLayout with the style buttonBarStyle to form a button bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int buttonBarButtonStyle=0x7f010015;
+        public static final int buttonBarButtonStyle=0x7f010016;
         /**  A style that may be applied to horizontal LinearLayouts
          to form a button bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int buttonBarStyle=0x7f010014;
+        public static final int buttonBarStyle=0x7f010015;
         /**  Specifies a layout for custom navigation. Overrides navigationMode. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int customNavigationLayout=0x7f01002f;
+        public static final int customNavigationLayout=0x7f010030;
         /**  Whether this spinner should mark child views as enabled/disabled when
              the spinner itself is enabled/disabled. 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
@@ -252,7 +252,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int disableChildrenWhenDisabled=0x7f010051;
+        public static final int disableChildrenWhenDisabled=0x7f010052;
         /**  Options affecting how the action bar is displayed. 
          <p>Must be one or more (separated by '|') of the following constant values.</p>
 <table>
@@ -268,17 +268,17 @@ containing a value of this type.
 <tr><td><code>disableHome</code></td><td>0x20</td><td></td></tr>
 </table>
          */
-        public static final int displayOptions=0x7f010025;
+        public static final int displayOptions=0x7f010026;
         /**  Specifies the drawable used for item dividers. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int divider=0x7f01002b;
+        public static final int divider=0x7f01002c;
         /**  A drawable that may be used as a horizontal divider between visual elements. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int dividerHorizontal=0x7f010018;
+        public static final int dividerHorizontal=0x7f010019;
         /**  Size of padding on either end of a divider. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -289,27 +289,17 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int dividerPadding=0x7f010053;
+        public static final int dividerPadding=0x7f010054;
         /**  A drawable that may be used as a vertical divider between visual elements. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int dividerVertical=0x7f010017;
-        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-         */
-        public static final int dividerWidth=0x7f010000;
+        public static final int dividerVertical=0x7f010018;
         /**  ListPopupWindow comaptibility 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int dropDownListViewStyle=0x7f01001e;
+        public static final int dropDownListViewStyle=0x7f01001f;
         /**  The preferred item height for dropdown lists. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -320,7 +310,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int dropdownListPreferredItemHeight=0x7f010045;
+        public static final int dropdownListPreferredItemHeight=0x7f010046;
         /**  The drawable to show in the button for expanding the activities overflow popup.
              <strong>Note:</strong> Clients would like to set this drawable
              as a clue about the action the chosen activity will perform. For
@@ -330,7 +320,7 @@ containing a value of this type.
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int expandActivityOverflowButtonDrawable=0x7f010068;
+        public static final int expandActivityOverflowButtonDrawable=0x7f010069;
         /**  StickyListHeaders attributes 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -339,7 +329,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int hasStickyHeaders=0x7f01006b;
+        public static final int hasStickyHeaders=0x7f010000;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -349,22 +339,22 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int height=0x7f010023;
+        public static final int height=0x7f010024;
         /**  Specifies a drawable to use for the 'home as up' indicator. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int homeAsUpIndicator=0x7f010010;
+        public static final int homeAsUpIndicator=0x7f010011;
         /**  Specifies a layout to use for the "home" section of the action bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int homeLayout=0x7f010030;
+        public static final int homeLayout=0x7f010031;
         /**  Specifies the drawable used for the application icon. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int icon=0x7f010029;
+        public static final int icon=0x7f01002a;
         /**  The default state of the SearchView. If true, it will be iconified when not in
              use and expanded when clicked. 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
@@ -374,12 +364,12 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int iconifiedByDefault=0x7f010057;
+        public static final int iconifiedByDefault=0x7f010058;
         /**  Specifies a style resource to use for an indeterminate progress spinner. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int indeterminateProgressStyle=0x7f010032;
+        public static final int indeterminateProgressStyle=0x7f010033;
         /**  The maximal number of items initially shown in the activity list. 
          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
@@ -388,7 +378,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int initialActivityCount=0x7f010067;
+        public static final int initialActivityCount=0x7f010068;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -396,7 +386,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int isDrawingListUnderStickyHeader=0x7f01006c;
+        public static final int isDrawingListUnderStickyHeader=0x7f010001;
         /**  Specifies whether the theme is light, otherwise it is dark. 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -405,7 +395,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int isLightTheme=0x7f010056;
+        public static final int isLightTheme=0x7f010057;
         /**  Specifies padding that should be applied to the left and right sides of
              system-provided items in the bar. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
@@ -417,16 +407,16 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int itemPadding=0x7f010034;
+        public static final int itemPadding=0x7f010035;
         /**  Drawable used as a background for selected list items. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int listChoiceBackgroundIndicator=0x7f010049;
+        public static final int listChoiceBackgroundIndicator=0x7f01004a;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int listPopupWindowStyle=0x7f01001f;
+        public static final int listPopupWindowStyle=0x7f010020;
         /**  The preferred list item height. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -437,7 +427,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int listPreferredItemHeight=0x7f010019;
+        public static final int listPreferredItemHeight=0x7f01001a;
         /**  A larger, more robust list item height. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -448,7 +438,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int listPreferredItemHeightLarge=0x7f01001b;
+        public static final int listPreferredItemHeightLarge=0x7f01001c;
         /**  A smaller, sleeker list item height. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -459,7 +449,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int listPreferredItemHeightSmall=0x7f01001a;
+        public static final int listPreferredItemHeightSmall=0x7f01001b;
         /**  The preferred padding along the left edge of list items. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -470,7 +460,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int listPreferredItemPaddingLeft=0x7f01001c;
+        public static final int listPreferredItemPaddingLeft=0x7f01001d;
         /**  The preferred padding along the right edge of list items. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -481,12 +471,12 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int listPreferredItemPaddingRight=0x7f01001d;
+        public static final int listPreferredItemPaddingRight=0x7f01001e;
         /**  Specifies the drawable used for the application logo. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int logo=0x7f01002a;
+        public static final int logo=0x7f01002b;
         /**  The type of navigation to use. 
          <p>Must be one of the following constant values.</p>
 <table>
@@ -499,7 +489,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>tabMode</code></td><td>2</td><td> The action bar will use a series of horizontal tabs for navigation. </td></tr>
 </table>
          */
-        public static final int navigationMode=0x7f010024;
+        public static final int navigationMode=0x7f010025;
         /**  Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -510,7 +500,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int paddingEnd=0x7f010036;
+        public static final int paddingEnd=0x7f010037;
         /**  Sets the padding, in pixels, of the start edge; see {@link android.R.attr#padding}. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -521,12 +511,12 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int paddingStart=0x7f010035;
+        public static final int paddingStart=0x7f010036;
         /**  Default Panel Menu style. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int panelMenuListTheme=0x7f010048;
+        public static final int panelMenuListTheme=0x7f010049;
         /**  Default Panel Menu width. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -537,19 +527,19 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int panelMenuListWidth=0x7f010047;
+        public static final int panelMenuListWidth=0x7f010048;
         /**  Default PopupMenu style. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int popupMenuStyle=0x7f010046;
+        public static final int popupMenuStyle=0x7f010047;
         /**  Reference to a layout to use for displaying a prompt in the dropdown for
              spinnerMode="dropdown". This layout must contain a TextView with the id
              {@code @android:id/text1} to be populated with the prompt text. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int popupPromptView=0x7f010050;
+        public static final int popupPromptView=0x7f010051;
         /**  Specifies the horizontal padding on either end for an embedded progress bar. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -560,17 +550,17 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int progressBarPadding=0x7f010033;
+        public static final int progressBarPadding=0x7f010034;
         /**  Specifies a style resource to use for an embedded progress bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int progressBarStyle=0x7f010031;
+        public static final int progressBarStyle=0x7f010032;
         /**  The prompt to display when the spinner's dialog is shown. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int prompt=0x7f01004e;
+        public static final int prompt=0x7f01004f;
         /**  An optional query hint string to be displayed in the empty query field. 
          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
@@ -579,12 +569,12 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int queryHint=0x7f010058;
+        public static final int queryHint=0x7f010059;
         /**  SearchView dropdown background 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int searchDropdownBackground=0x7f010059;
+        public static final int searchDropdownBackground=0x7f01005a;
         /**  The list item height for search results. @hide 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -595,59 +585,59 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int searchResultListItemHeight=0x7f010062;
+        public static final int searchResultListItemHeight=0x7f010063;
         /**  SearchView AutoCompleteTextView style 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int searchViewAutoCompleteTextView=0x7f010066;
+        public static final int searchViewAutoCompleteTextView=0x7f010067;
         /**  SearchView close button icon 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int searchViewCloseIcon=0x7f01005a;
+        public static final int searchViewCloseIcon=0x7f01005b;
         /**  SearchView query refinement icon 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int searchViewEditQuery=0x7f01005e;
+        public static final int searchViewEditQuery=0x7f01005f;
         /**  SearchView query refinement icon background 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int searchViewEditQueryBackground=0x7f01005f;
+        public static final int searchViewEditQueryBackground=0x7f010060;
         /**  SearchView Go button icon 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int searchViewGoIcon=0x7f01005b;
+        public static final int searchViewGoIcon=0x7f01005c;
         /**  SearchView Search icon 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int searchViewSearchIcon=0x7f01005c;
+        public static final int searchViewSearchIcon=0x7f01005d;
         /**  SearchView text field background for the left section 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int searchViewTextField=0x7f010060;
+        public static final int searchViewTextField=0x7f010061;
         /**  SearchView text field background for the right section 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int searchViewTextFieldRight=0x7f010061;
+        public static final int searchViewTextFieldRight=0x7f010062;
         /**  SearchView Voice button icon 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int searchViewVoiceIcon=0x7f01005d;
+        public static final int searchViewVoiceIcon=0x7f01005e;
         /**  A style that may be applied to buttons or other selectable items
          that should react to pressed and focus states, but that do not
          have a clear visual border along the edges. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int selectableItemBackground=0x7f010016;
+        public static final int selectableItemBackground=0x7f010017;
         /**  How this item should display in the Action Bar, if present. 
          <p>Must be one or more (separated by '|') of the following constant values.</p>
 <table>
@@ -671,7 +661,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
                  larger segment of its container. </td></tr>
 </table>
          */
-        public static final int showAsAction=0x7f01004a;
+        public static final int showAsAction=0x7f01004b;
         /**  Setting for which dividers to show. 
          <p>Must be one or more (separated by '|') of the following constant values.</p>
 <table>
@@ -685,12 +675,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>end</code></td><td>4</td><td></td></tr>
 </table>
          */
-        public static final int showDividers=0x7f010052;
+        public static final int showDividers=0x7f010053;
         /**  Default Spinner style. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int spinnerDropDownItemStyle=0x7f010055;
+        public static final int spinnerDropDownItemStyle=0x7f010056;
         /**  Display mode for spinner options. 
          <p>Must be one of the following constant values.</p>
 <table>
@@ -703,12 +693,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
                  anchored to the spinner widget itself. </td></tr>
 </table>
          */
-        public static final int spinnerMode=0x7f01004f;
+        public static final int spinnerMode=0x7f010050;
         /**  Default Spinner style. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int spinnerStyle=0x7f010054;
+        public static final int spinnerStyle=0x7f010055;
         /**  Specifies subtitle text used for navigationMode="normal" 
          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
@@ -717,55 +707,55 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int subtitle=0x7f010026;
+        public static final int subtitle=0x7f010027;
         /**  Specifies a style to use for subtitle text. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int subtitleTextStyle=0x7f010028;
+        public static final int subtitleTextStyle=0x7f010029;
         /**  Present the text in ALL CAPS. This may use a small-caps form when available. 
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a boolean value, either "<code>true</code>" or "<code>false</code>".
          */
-        public static final int textAllCaps=0x7f01006a;
+        public static final int textAllCaps=0x7f01006b;
         /**  Text color, typeface, size, and style for the text inside of a popup menu. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int textAppearanceLargePopupMenu=0x7f010011;
+        public static final int textAppearanceLargePopupMenu=0x7f010012;
         /**  The preferred TextAppearance for the primary text of list items. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int textAppearanceListItem=0x7f010020;
+        public static final int textAppearanceListItem=0x7f010021;
         /**  The preferred TextAppearance for the primary text of small list items. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int textAppearanceListItemSmall=0x7f010021;
+        public static final int textAppearanceListItemSmall=0x7f010022;
         /**  Text color, typeface, size, and style for system search result subtitle. Defaults to primary inverse text color. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int textAppearanceSearchResultSubtitle=0x7f010064;
+        public static final int textAppearanceSearchResultSubtitle=0x7f010065;
         /**  Text color, typeface, size, and style for system search result title. Defaults to primary inverse text color. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int textAppearanceSearchResultTitle=0x7f010063;
+        public static final int textAppearanceSearchResultTitle=0x7f010064;
         /**  Text color, typeface, size, and style for small text inside of a popup menu. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int textAppearanceSmallPopupMenu=0x7f010012;
+        public static final int textAppearanceSmallPopupMenu=0x7f010013;
         /**  Text color for urls in search suggestions, used by things like global search 
          <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int textColorSearchUrl=0x7f010065;
+        public static final int textColorSearchUrl=0x7f010066;
         /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -773,12 +763,12 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int title=0x7f010022;
+        public static final int title=0x7f010023;
         /**  Specifies a style to use for title text. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int titleTextStyle=0x7f010027;
+        public static final int titleTextStyle=0x7f010028;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -786,7 +776,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int windowActionBar=0x7f010001;
+        public static final int windowActionBar=0x7f010002;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -794,7 +784,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int windowActionBarOverlay=0x7f010002;
+        public static final int windowActionBarOverlay=0x7f010003;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -802,7 +792,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int windowSplitActionBar=0x7f010003;
+        public static final int windowSplitActionBar=0x7f010004;
     }
     public static final class bool {
         public static final int abc_action_bar_embed_tabs_pre_jb=0x7f060000;
@@ -1044,66 +1034,68 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050024;
-        public static final int action_settings=0x7f050063;
+        public static final int action_settings=0x7f050065;
         public static final int activity_chooser_view_content=0x7f050025;
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
         public static final int calendar_bottom_indicator=0x7f050042;
+        public static final int calendar_divider_text=0x7f050044;
         public static final int calendar_element_text=0x7f050043;
         public static final int calendar_left_indicator=0x7f05003f;
-        public static final int calendar_list=0x7f05005d;
+        public static final int calendar_list=0x7f05005e;
+        public static final int calendar_list_hint=0x7f05005f;
         public static final int calendar_right_indicator=0x7f050040;
         public static final int calendar_top_indicator=0x7f050041;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
-        public static final int dayOfWeek=0x7f050051;
-        public static final int day_title=0x7f050044;
+        public static final int dayOfWeek=0x7f050052;
+        public static final int day_title=0x7f050045;
         public static final int default_activity_button=0x7f050028;
         public static final int dialog=0x7f05000e;
         public static final int disableHome=0x7f050008;
-        public static final int drawer_image=0x7f050046;
+        public static final int drawer_image=0x7f050047;
         public static final int drawer_layout=0x7f05003c;
-        public static final int drawer_text=0x7f050047;
+        public static final int drawer_text=0x7f050048;
         public static final int dropdown=0x7f05000f;
         public static final int edit_query=0x7f050030;
         public static final int end=0x7f050013;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
-        public static final int facultetList=0x7f050049;
-        public static final int facultetName=0x7f050048;
-        public static final int facultet_select=0x7f050060;
-        public static final int fakid=0x7f05004b;
+        public static final int facultetList=0x7f05004a;
+        public static final int facultetName=0x7f050049;
+        public static final int facultet_select=0x7f050062;
+        public static final int fakid=0x7f05004c;
         public static final int frameLayout=0x7f05003d;
-        public static final int groupList=0x7f05004f;
-        public static final int groupName=0x7f05004d;
-        public static final int group_select=0x7f050061;
+        public static final int groupList=0x7f050050;
+        public static final int groupName=0x7f05004e;
+        public static final int group_select=0x7f050063;
         public static final int home=0x7f050014;
         public static final int homeAsUp=0x7f050005;
         public static final int icon=0x7f05002a;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050027;
-        public static final int imageView1=0x7f05004e;
+        public static final int imageView1=0x7f05004f;
         public static final int left_drawer=0x7f05003e;
-        public static final int lesseon_divider_text=0x7f050050;
-        public static final int lesson_current_date=0x7f050059;
-        public static final int lesson_current_day_of_week=0x7f05005a;
-        public static final int lesson_epty_view=0x7f05005e;
-        public static final int lesson_layout=0x7f050045;
-        public static final int lesson_list=0x7f050058;
-        public static final int lesson_number=0x7f050052;
-        public static final int lesson_room=0x7f050055;
-        public static final int lesson_selected_date=0x7f05005b;
-        public static final int lesson_selected_day_of_week=0x7f05005c;
-        public static final int lesson_teacher=0x7f050056;
-        public static final int lesson_time=0x7f050053;
-        public static final int lesson_title=0x7f050054;
-        public static final int lesson_type=0x7f050057;
-        public static final int levelTitle=0x7f05004c;
+        public static final int lesseon_divider_text=0x7f050051;
+        public static final int lesson_current_date=0x7f05005a;
+        public static final int lesson_current_day_of_week=0x7f05005b;
+        public static final int lesson_epty_view=0x7f050060;
+        public static final int lesson_layout=0x7f050046;
+        public static final int lesson_list=0x7f050059;
+        public static final int lesson_number=0x7f050053;
+        public static final int lesson_room=0x7f050056;
+        public static final int lesson_selected_date=0x7f05005c;
+        public static final int lesson_selected_day_of_week=0x7f05005d;
+        public static final int lesson_teacher=0x7f050057;
+        public static final int lesson_time=0x7f050054;
+        public static final int lesson_title=0x7f050055;
+        public static final int lesson_type=0x7f050058;
+        public static final int levelTitle=0x7f05004d;
         public static final int listMode=0x7f050001;
         public static final int list_item=0x7f050029;
-        public static final int login_button=0x7f050062;
+        public static final int login_button=0x7f050064;
         public static final int middle=0x7f050012;
-        public static final int name=0x7f05004a;
+        public static final int name=0x7f05004b;
         public static final int never=0x7f050009;
         public static final int none=0x7f050010;
         public static final int normal=0x7f050000;
@@ -1131,7 +1123,7 @@ containing a value of this type.
         public static final int top_action_bar=0x7f050020;
         public static final int up=0x7f050021;
         public static final int useLogo=0x7f050003;
-        public static final int welcome_frame_layout=0x7f05005f;
+        public static final int welcome_frame_layout=0x7f050061;
         public static final int withText=0x7f05000c;
     }
     public static final class integer {
@@ -1185,23 +1177,24 @@ containing a value of this type.
         public static final int abc_search_view=0x7f030016;
         public static final int activity_main=0x7f030017;
         public static final int calendar_element=0x7f030018;
-        public static final int day_list_element=0x7f030019;
-        public static final int drawer_list_element=0x7f03001a;
-        public static final int facultet_list_element=0x7f03001b;
-        public static final int facultet_list_fragment=0x7f03001c;
-        public static final int group_list=0x7f03001d;
-        public static final int group_list_divier=0x7f03001e;
-        public static final int group_list_element=0x7f03001f;
-        public static final int group_list_fargment=0x7f030020;
-        public static final int lesson_divider=0x7f030021;
-        public static final int lesson_list_divier=0x7f030022;
-        public static final int lesson_list_element=0x7f030023;
-        public static final int lesson_list_fragment=0x7f030024;
-        public static final int setting_fragment=0x7f030025;
-        public static final int support_simple_spinner_dropdown_item=0x7f030026;
-        public static final int timetable_fragment=0x7f030027;
-        public static final int welcome_activity=0x7f030028;
-        public static final int welcome_fragment=0x7f030029;
+        public static final int calendar_list_divider=0x7f030019;
+        public static final int day_list_element=0x7f03001a;
+        public static final int drawer_list_element=0x7f03001b;
+        public static final int facultet_list_element=0x7f03001c;
+        public static final int facultet_list_fragment=0x7f03001d;
+        public static final int group_list=0x7f03001e;
+        public static final int group_list_divier=0x7f03001f;
+        public static final int group_list_element=0x7f030020;
+        public static final int group_list_fargment=0x7f030021;
+        public static final int lesson_divider=0x7f030022;
+        public static final int lesson_list_divier=0x7f030023;
+        public static final int lesson_list_element=0x7f030024;
+        public static final int lesson_list_fragment=0x7f030025;
+        public static final int setting_fragment=0x7f030026;
+        public static final int support_simple_spinner_dropdown_item=0x7f030027;
+        public static final int timetable_fragment=0x7f030028;
+        public static final int welcome_activity=0x7f030029;
+        public static final int welcome_fragment=0x7f03002a;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -1371,6 +1364,7 @@ containing a value of this type.
         /**  Base platform-dependent theme providing a light-themed activity. 
          */
         public static final int Theme_Base_Light=0x7f0b007d;
+        public static final int TwoWayView=0x7f0b0085;
         /**  Styles in here can be extended for customisation in your application. Each utilises
          one of the Base styles. If Holo themes are available on the current platform version
          they will be used instead of the compat styles. 
@@ -1522,11 +1516,11 @@ containing a value of this type.
            @see #ActionBar_titleTextStyle
          */
         public static final int[] ActionBar = {
-            0x7f010022, 0x7f010023, 0x7f010024, 0x7f010025,
-            0x7f010026, 0x7f010027, 0x7f010028, 0x7f010029,
-            0x7f01002a, 0x7f01002b, 0x7f01002c, 0x7f01002d,
-            0x7f01002e, 0x7f01002f, 0x7f010030, 0x7f010031,
-            0x7f010032, 0x7f010033, 0x7f010034
+            0x7f010023, 0x7f010024, 0x7f010025, 0x7f010026,
+            0x7f010027, 0x7f010028, 0x7f010029, 0x7f01002a,
+            0x7f01002b, 0x7f01002c, 0x7f01002d, 0x7f01002e,
+            0x7f01002f, 0x7f010030, 0x7f010031, 0x7f010032,
+            0x7f010033, 0x7f010034, 0x7f010035
         };
         /**
           <p>
@@ -1843,7 +1837,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            @see #ActionBarWindow_windowSplitActionBar
          */
         public static final int[] ActionBarWindow = {
-            0x7f010001, 0x7f010002, 0x7f010003
+            0x7f010002, 0x7f010003, 0x7f010004
         };
         /**
           <p>This symbol is the offset where the {@link ru.rgups.time.R.attr#windowActionBar}
@@ -1930,8 +1924,8 @@ containing a value of this type.
            @see #ActionMode_titleTextStyle
          */
         public static final int[] ActionMode = {
-            0x7f010023, 0x7f010027, 0x7f010028, 0x7f01002c,
-            0x7f01002e
+            0x7f010024, 0x7f010028, 0x7f010029, 0x7f01002d,
+            0x7f01002f
         };
         /**
           <p>
@@ -2014,7 +2008,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            @see #ActivityChooserView_initialActivityCount
          */
         public static final int[] ActivityChooserView = {
-            0x7f010067, 0x7f010068
+            0x7f010068, 0x7f010069
         };
         /**
           <p>
@@ -2060,7 +2054,7 @@ containing a value of this type.
            @see #CompatTextView_textAllCaps
          */
         public static final int[] CompatTextView = {
-            0x7f01006a
+            0x7f01006b
         };
         /**
           <p>
@@ -2075,59 +2069,6 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name ru.rgups.time:textAllCaps
         */
         public static final int CompatTextView_textAllCaps = 0;
-        /**  Defines the custom XML attributes supported for a HorizontalListView 
-           <p>Includes the following attributes:</p>
-           <table>
-           <colgroup align="left" />
-           <colgroup align="left" />
-           <tr><th>Attribute</th><th>Description</th></tr>
-           <tr><td><code>{@link #HorizontalListView_android_divider android:divider}</code></td><td></td></tr>
-           <tr><td><code>{@link #HorizontalListView_android_fadingEdgeLength android:fadingEdgeLength}</code></td><td></td></tr>
-           <tr><td><code>{@link #HorizontalListView_android_requiresFadingEdge android:requiresFadingEdge}</code></td><td></td></tr>
-           <tr><td><code>{@link #HorizontalListView_dividerWidth ru.rgups.time:dividerWidth}</code></td><td></td></tr>
-           </table>
-           @see #HorizontalListView_android_divider
-           @see #HorizontalListView_android_fadingEdgeLength
-           @see #HorizontalListView_android_requiresFadingEdge
-           @see #HorizontalListView_dividerWidth
-         */
-        public static final int[] HorizontalListView = {
-            0x010100e0, 0x01010129, 0x010103a5, 0x7f010000
-        };
-        /**
-          <p>This symbol is the offset where the {@link android.R.attr#divider}
-          attribute's value can be found in the {@link #HorizontalListView} array.
-          @attr name android:divider
-        */
-        public static final int HorizontalListView_android_divider = 1;
-        /**
-          <p>This symbol is the offset where the {@link android.R.attr#fadingEdgeLength}
-          attribute's value can be found in the {@link #HorizontalListView} array.
-          @attr name android:fadingEdgeLength
-        */
-        public static final int HorizontalListView_android_fadingEdgeLength = 0;
-        /**
-          <p>This symbol is the offset where the {@link android.R.attr#requiresFadingEdge}
-          attribute's value can be found in the {@link #HorizontalListView} array.
-          @attr name android:requiresFadingEdge
-        */
-        public static final int HorizontalListView_android_requiresFadingEdge = 2;
-        /**
-          <p>This symbol is the offset where the {@link ru.rgups.time.R.attr#dividerWidth}
-          attribute's value can be found in the {@link #HorizontalListView} array.
-
-
-          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
-Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
-in (inches), mm (millimeters).
-<p>This may also be a reference to a resource (in the form
-"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
-theme attribute (in the form
-"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
-containing a value of this type.
-          @attr name ru.rgups.time:dividerWidth
-        */
-        public static final int HorizontalListView_dividerWidth = 3;
         /** Attributes that can be used with a LinearLayoutICS.
            <p>Includes the following attributes:</p>
            <table>
@@ -2143,7 +2084,7 @@ containing a value of this type.
            @see #LinearLayoutICS_showDividers
          */
         public static final int[] LinearLayoutICS = {
-            0x7f01002b, 0x7f010052, 0x7f010053
+            0x7f01002c, 0x7f010053, 0x7f010054
         };
         /**
           <p>
@@ -2325,8 +2266,8 @@ containing a value of this type.
             0x01010002, 0x0101000e, 0x010100d0, 0x01010106,
             0x01010194, 0x010101de, 0x010101df, 0x010101e1,
             0x010101e2, 0x010101e3, 0x010101e4, 0x010101e5,
-            0x0101026f, 0x7f01004a, 0x7f01004b, 0x7f01004c,
-            0x7f01004d
+            0x0101026f, 0x7f01004b, 0x7f01004c, 0x7f01004d,
+            0x7f01004e
         };
         /**
           <p>
@@ -2653,8 +2594,8 @@ containing a value of this type.
            @see #SearchView_queryHint
          */
         public static final int[] SearchView = {
-            0x0101011f, 0x01010220, 0x01010264, 0x7f010057,
-            0x7f010058
+            0x0101011f, 0x01010220, 0x01010264, 0x7f010058,
+            0x7f010059
         };
         /**
           <p>
@@ -2750,8 +2691,8 @@ containing a value of this type.
          */
         public static final int[] Spinner = {
             0x010100af, 0x01010175, 0x01010176, 0x01010262,
-            0x010102ac, 0x010102ad, 0x7f01004e, 0x7f01004f,
-            0x7f010050, 0x7f010051
+            0x010102ac, 0x010102ad, 0x7f01004f, 0x7f010050,
+            0x7f010051, 0x7f010052
         };
         /**
           <p>
@@ -2923,7 +2864,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x010100d8, 0x010100d9, 0x010100e0, 0x010100eb,
             0x010100fb, 0x010100fc, 0x010100fe, 0x01010101,
             0x01010129, 0x0101012a, 0x0101012b, 0x01010226,
-            0x010103a5, 0x7f01006b, 0x7f01006c
+            0x010103a5, 0x7f010000, 0x7f010001
         };
         /**
           <p>This symbol is the offset where the {@link android.R.attr#cacheColorHint}
@@ -3084,8 +3025,8 @@ containing a value of this type.
            @see #Theme_popupMenuStyle
          */
         public static final int[] Theme = {
-            0x7f010044, 0x7f010045, 0x7f010046, 0x7f010047,
-            0x7f010048, 0x7f010049
+            0x7f010045, 0x7f010046, 0x7f010047, 0x7f010048,
+            0x7f010049, 0x7f01004a
         };
         /**
           <p>
@@ -3171,6 +3112,603 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
           @attr name ru.rgups.time:popupMenuStyle
         */
         public static final int Theme_popupMenuStyle = 2;
+        /** Attributes that can be used with a TwoWayView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #TwoWayView_android_alpha android:alpha}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_background android:background}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_choiceMode android:choiceMode}</code></td><td> Imported from AbsListView </td></tr>
+           <tr><td><code>{@link #TwoWayView_android_clickable android:clickable}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_contentDescription android:contentDescription}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_drawSelectorOnTop android:drawSelectorOnTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_drawingCacheQuality android:drawingCacheQuality}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_duplicateParentState android:duplicateParentState}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_fadeScrollbars android:fadeScrollbars}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_fadingEdge android:fadingEdge}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_fadingEdgeLength android:fadingEdgeLength}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_filterTouchesWhenObscured android:filterTouchesWhenObscured}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_fitsSystemWindows android:fitsSystemWindows}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_focusable android:focusable}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_focusableInTouchMode android:focusableInTouchMode}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_hapticFeedbackEnabled android:hapticFeedbackEnabled}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_id android:id}</code></td><td> Imported from View </td></tr>
+           <tr><td><code>{@link #TwoWayView_android_isScrollContainer android:isScrollContainer}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_keepScreenOn android:keepScreenOn}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_layerType android:layerType}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_layoutDirection android:layoutDirection}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_listSelector android:listSelector}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_longClickable android:longClickable}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_minHeight android:minHeight}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_minWidth android:minWidth}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_nextFocusDown android:nextFocusDown}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_nextFocusForward android:nextFocusForward}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_nextFocusLeft android:nextFocusLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_nextFocusRight android:nextFocusRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_nextFocusUp android:nextFocusUp}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_onClick android:onClick}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_orientation android:orientation}</code></td><td> Imported from Android </td></tr>
+           <tr><td><code>{@link #TwoWayView_android_overScrollMode android:overScrollMode}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_padding android:padding}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingBottom android:paddingBottom}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingEnd android:paddingEnd}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingLeft android:paddingLeft}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingRight android:paddingRight}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingStart android:paddingStart}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_paddingTop android:paddingTop}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_requiresFadingEdge android:requiresFadingEdge}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_rotation android:rotation}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_rotationX android:rotationX}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_rotationY android:rotationY}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_saveEnabled android:saveEnabled}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scaleX android:scaleX}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scaleY android:scaleY}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollX android:scrollX}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollY android:scrollY}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarAlwaysDrawHorizontalTrack android:scrollbarAlwaysDrawHorizontalTrack}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarAlwaysDrawVerticalTrack android:scrollbarAlwaysDrawVerticalTrack}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarDefaultDelayBeforeFade android:scrollbarDefaultDelayBeforeFade}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarFadeDuration android:scrollbarFadeDuration}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarSize android:scrollbarSize}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarStyle android:scrollbarStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarThumbHorizontal android:scrollbarThumbHorizontal}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarThumbVertical android:scrollbarThumbVertical}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarTrackHorizontal android:scrollbarTrackHorizontal}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbarTrackVertical android:scrollbarTrackVertical}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_scrollbars android:scrollbars}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_soundEffectsEnabled android:soundEffectsEnabled}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_tag android:tag}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_textAlignment android:textAlignment}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_textDirection android:textDirection}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_transformPivotX android:transformPivotX}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_transformPivotY android:transformPivotY}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_translationX android:translationX}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_translationY android:translationY}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_verticalScrollbarPosition android:verticalScrollbarPosition}</code></td><td></td></tr>
+           <tr><td><code>{@link #TwoWayView_android_visibility android:visibility}</code></td><td></td></tr>
+           </table>
+           @see #TwoWayView_android_alpha
+           @see #TwoWayView_android_background
+           @see #TwoWayView_android_choiceMode
+           @see #TwoWayView_android_clickable
+           @see #TwoWayView_android_contentDescription
+           @see #TwoWayView_android_drawSelectorOnTop
+           @see #TwoWayView_android_drawingCacheQuality
+           @see #TwoWayView_android_duplicateParentState
+           @see #TwoWayView_android_fadeScrollbars
+           @see #TwoWayView_android_fadingEdge
+           @see #TwoWayView_android_fadingEdgeLength
+           @see #TwoWayView_android_filterTouchesWhenObscured
+           @see #TwoWayView_android_fitsSystemWindows
+           @see #TwoWayView_android_focusable
+           @see #TwoWayView_android_focusableInTouchMode
+           @see #TwoWayView_android_hapticFeedbackEnabled
+           @see #TwoWayView_android_id
+           @see #TwoWayView_android_isScrollContainer
+           @see #TwoWayView_android_keepScreenOn
+           @see #TwoWayView_android_layerType
+           @see #TwoWayView_android_layoutDirection
+           @see #TwoWayView_android_listSelector
+           @see #TwoWayView_android_longClickable
+           @see #TwoWayView_android_minHeight
+           @see #TwoWayView_android_minWidth
+           @see #TwoWayView_android_nextFocusDown
+           @see #TwoWayView_android_nextFocusForward
+           @see #TwoWayView_android_nextFocusLeft
+           @see #TwoWayView_android_nextFocusRight
+           @see #TwoWayView_android_nextFocusUp
+           @see #TwoWayView_android_onClick
+           @see #TwoWayView_android_orientation
+           @see #TwoWayView_android_overScrollMode
+           @see #TwoWayView_android_padding
+           @see #TwoWayView_android_paddingBottom
+           @see #TwoWayView_android_paddingEnd
+           @see #TwoWayView_android_paddingLeft
+           @see #TwoWayView_android_paddingRight
+           @see #TwoWayView_android_paddingStart
+           @see #TwoWayView_android_paddingTop
+           @see #TwoWayView_android_requiresFadingEdge
+           @see #TwoWayView_android_rotation
+           @see #TwoWayView_android_rotationX
+           @see #TwoWayView_android_rotationY
+           @see #TwoWayView_android_saveEnabled
+           @see #TwoWayView_android_scaleX
+           @see #TwoWayView_android_scaleY
+           @see #TwoWayView_android_scrollX
+           @see #TwoWayView_android_scrollY
+           @see #TwoWayView_android_scrollbarAlwaysDrawHorizontalTrack
+           @see #TwoWayView_android_scrollbarAlwaysDrawVerticalTrack
+           @see #TwoWayView_android_scrollbarDefaultDelayBeforeFade
+           @see #TwoWayView_android_scrollbarFadeDuration
+           @see #TwoWayView_android_scrollbarSize
+           @see #TwoWayView_android_scrollbarStyle
+           @see #TwoWayView_android_scrollbarThumbHorizontal
+           @see #TwoWayView_android_scrollbarThumbVertical
+           @see #TwoWayView_android_scrollbarTrackHorizontal
+           @see #TwoWayView_android_scrollbarTrackVertical
+           @see #TwoWayView_android_scrollbars
+           @see #TwoWayView_android_soundEffectsEnabled
+           @see #TwoWayView_android_tag
+           @see #TwoWayView_android_textAlignment
+           @see #TwoWayView_android_textDirection
+           @see #TwoWayView_android_transformPivotX
+           @see #TwoWayView_android_transformPivotY
+           @see #TwoWayView_android_translationX
+           @see #TwoWayView_android_translationY
+           @see #TwoWayView_android_verticalScrollbarPosition
+           @see #TwoWayView_android_visibility
+         */
+        public static final int[] TwoWayView = {
+            0x01010063, 0x01010064, 0x01010065, 0x01010066,
+            0x01010067, 0x01010068, 0x01010069, 0x0101007f,
+            0x010100c4, 0x010100d0, 0x010100d1, 0x010100d2,
+            0x010100d3, 0x010100d4, 0x010100d5, 0x010100d6,
+            0x010100d7, 0x010100d8, 0x010100d9, 0x010100da,
+            0x010100db, 0x010100dc, 0x010100dd, 0x010100de,
+            0x010100df, 0x010100e0, 0x010100e1, 0x010100e2,
+            0x010100e3, 0x010100e4, 0x010100e5, 0x010100e6,
+            0x010100e7, 0x010100e8, 0x010100e9, 0x010100fb,
+            0x010100fc, 0x0101012b, 0x0101013f, 0x01010140,
+            0x01010215, 0x01010216, 0x0101024e, 0x0101025e,
+            0x0101026f, 0x01010273, 0x010102a8, 0x010102a9,
+            0x010102aa, 0x010102c1, 0x010102c4, 0x0101031f,
+            0x01010320, 0x01010321, 0x01010322, 0x01010323,
+            0x01010324, 0x01010325, 0x01010326, 0x01010327,
+            0x01010328, 0x01010334, 0x0101033c, 0x01010354,
+            0x010103a5, 0x010103b0, 0x010103b1, 0x010103b2,
+            0x010103b3, 0x010103b4
+        };
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#alpha}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:alpha
+        */
+        public static final int TwoWayView_android_alpha = 51;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#background}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:background
+        */
+        public static final int TwoWayView_android_background = 13;
+        /**
+          <p>
+          @attr description
+           Imported from AbsListView 
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#choiceMode}.
+          @attr name android:choiceMode
+        */
+        public static final int TwoWayView_android_choiceMode = 37;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#clickable}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:clickable
+        */
+        public static final int TwoWayView_android_clickable = 30;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#contentDescription}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:contentDescription
+        */
+        public static final int TwoWayView_android_contentDescription = 45;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#drawSelectorOnTop}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:drawSelectorOnTop
+        */
+        public static final int TwoWayView_android_drawSelectorOnTop = 36;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#drawingCacheQuality}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:drawingCacheQuality
+        */
+        public static final int TwoWayView_android_drawingCacheQuality = 33;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#duplicateParentState}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:duplicateParentState
+        */
+        public static final int TwoWayView_android_duplicateParentState = 34;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#fadeScrollbars}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:fadeScrollbars
+        */
+        public static final int TwoWayView_android_fadeScrollbars = 48;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#fadingEdge}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:fadingEdge
+        */
+        public static final int TwoWayView_android_fadingEdge = 24;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#fadingEdgeLength}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:fadingEdgeLength
+        */
+        public static final int TwoWayView_android_fadingEdgeLength = 25;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#filterTouchesWhenObscured}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:filterTouchesWhenObscured
+        */
+        public static final int TwoWayView_android_filterTouchesWhenObscured = 50;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#fitsSystemWindows}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:fitsSystemWindows
+        */
+        public static final int TwoWayView_android_fitsSystemWindows = 22;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#focusable}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:focusable
+        */
+        public static final int TwoWayView_android_focusable = 19;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#focusableInTouchMode}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:focusableInTouchMode
+        */
+        public static final int TwoWayView_android_focusableInTouchMode = 20;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#hapticFeedbackEnabled}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:hapticFeedbackEnabled
+        */
+        public static final int TwoWayView_android_hapticFeedbackEnabled = 43;
+        /**
+          <p>
+          @attr description
+           Imported from View 
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#id}.
+          @attr name android:id
+        */
+        public static final int TwoWayView_android_id = 9;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#isScrollContainer}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:isScrollContainer
+        */
+        public static final int TwoWayView_android_isScrollContainer = 42;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#keepScreenOn}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:keepScreenOn
+        */
+        public static final int TwoWayView_android_keepScreenOn = 41;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#layerType}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:layerType
+        */
+        public static final int TwoWayView_android_layerType = 63;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#layoutDirection}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:layoutDirection
+        */
+        public static final int TwoWayView_android_layoutDirection = 67;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#listSelector}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:listSelector
+        */
+        public static final int TwoWayView_android_listSelector = 35;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#longClickable}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:longClickable
+        */
+        public static final int TwoWayView_android_longClickable = 31;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#minHeight}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:minHeight
+        */
+        public static final int TwoWayView_android_minHeight = 39;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#minWidth}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:minWidth
+        */
+        public static final int TwoWayView_android_minWidth = 38;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#nextFocusDown}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:nextFocusDown
+        */
+        public static final int TwoWayView_android_nextFocusDown = 29;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#nextFocusForward}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:nextFocusForward
+        */
+        public static final int TwoWayView_android_nextFocusForward = 62;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#nextFocusLeft}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:nextFocusLeft
+        */
+        public static final int TwoWayView_android_nextFocusLeft = 26;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#nextFocusRight}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:nextFocusRight
+        */
+        public static final int TwoWayView_android_nextFocusRight = 27;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#nextFocusUp}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:nextFocusUp
+        */
+        public static final int TwoWayView_android_nextFocusUp = 28;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#onClick}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:onClick
+        */
+        public static final int TwoWayView_android_onClick = 44;
+        /**
+          <p>
+          @attr description
+           Imported from Android 
+          <p>This corresponds to the global attribute
+          resource symbol {@link android.R.attr#orientation}.
+          @attr name android:orientation
+        */
+        public static final int TwoWayView_android_orientation = 8;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#overScrollMode}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:overScrollMode
+        */
+        public static final int TwoWayView_android_overScrollMode = 49;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#padding}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:padding
+        */
+        public static final int TwoWayView_android_padding = 14;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#paddingBottom}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:paddingBottom
+        */
+        public static final int TwoWayView_android_paddingBottom = 18;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#paddingEnd}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:paddingEnd
+        */
+        public static final int TwoWayView_android_paddingEnd = 69;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#paddingLeft}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:paddingLeft
+        */
+        public static final int TwoWayView_android_paddingLeft = 15;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#paddingRight}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:paddingRight
+        */
+        public static final int TwoWayView_android_paddingRight = 17;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#paddingStart}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:paddingStart
+        */
+        public static final int TwoWayView_android_paddingStart = 68;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#paddingTop}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:paddingTop
+        */
+        public static final int TwoWayView_android_paddingTop = 16;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#requiresFadingEdge}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:requiresFadingEdge
+        */
+        public static final int TwoWayView_android_requiresFadingEdge = 64;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#rotation}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:rotation
+        */
+        public static final int TwoWayView_android_rotation = 58;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#rotationX}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:rotationX
+        */
+        public static final int TwoWayView_android_rotationX = 59;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#rotationY}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:rotationY
+        */
+        public static final int TwoWayView_android_rotationY = 60;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#saveEnabled}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:saveEnabled
+        */
+        public static final int TwoWayView_android_saveEnabled = 32;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scaleX}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scaleX
+        */
+        public static final int TwoWayView_android_scaleX = 56;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scaleY}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scaleY
+        */
+        public static final int TwoWayView_android_scaleY = 57;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollX}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollX
+        */
+        public static final int TwoWayView_android_scrollX = 11;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollY}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollY
+        */
+        public static final int TwoWayView_android_scrollY = 12;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbarAlwaysDrawHorizontalTrack}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollbarAlwaysDrawHorizontalTrack
+        */
+        public static final int TwoWayView_android_scrollbarAlwaysDrawHorizontalTrack = 5;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbarAlwaysDrawVerticalTrack}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollbarAlwaysDrawVerticalTrack
+        */
+        public static final int TwoWayView_android_scrollbarAlwaysDrawVerticalTrack = 6;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbarDefaultDelayBeforeFade}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollbarDefaultDelayBeforeFade
+        */
+        public static final int TwoWayView_android_scrollbarDefaultDelayBeforeFade = 47;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbarFadeDuration}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollbarFadeDuration
+        */
+        public static final int TwoWayView_android_scrollbarFadeDuration = 46;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbarSize}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollbarSize
+        */
+        public static final int TwoWayView_android_scrollbarSize = 0;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbarStyle}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollbarStyle
+        */
+        public static final int TwoWayView_android_scrollbarStyle = 7;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbarThumbHorizontal}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollbarThumbHorizontal
+        */
+        public static final int TwoWayView_android_scrollbarThumbHorizontal = 1;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbarThumbVertical}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollbarThumbVertical
+        */
+        public static final int TwoWayView_android_scrollbarThumbVertical = 2;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbarTrackHorizontal}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollbarTrackHorizontal
+        */
+        public static final int TwoWayView_android_scrollbarTrackHorizontal = 3;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbarTrackVertical}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollbarTrackVertical
+        */
+        public static final int TwoWayView_android_scrollbarTrackVertical = 4;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#scrollbars}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:scrollbars
+        */
+        public static final int TwoWayView_android_scrollbars = 23;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#soundEffectsEnabled}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:soundEffectsEnabled
+        */
+        public static final int TwoWayView_android_soundEffectsEnabled = 40;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#tag}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:tag
+        */
+        public static final int TwoWayView_android_tag = 10;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#textAlignment}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:textAlignment
+        */
+        public static final int TwoWayView_android_textAlignment = 66;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#textDirection}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:textDirection
+        */
+        public static final int TwoWayView_android_textDirection = 65;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#transformPivotX}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:transformPivotX
+        */
+        public static final int TwoWayView_android_transformPivotX = 52;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#transformPivotY}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:transformPivotY
+        */
+        public static final int TwoWayView_android_transformPivotY = 53;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#translationX}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:translationX
+        */
+        public static final int TwoWayView_android_translationX = 54;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#translationY}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:translationY
+        */
+        public static final int TwoWayView_android_translationY = 55;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#verticalScrollbarPosition}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:verticalScrollbarPosition
+        */
+        public static final int TwoWayView_android_verticalScrollbarPosition = 61;
+        /**
+          <p>This symbol is the offset where the {@link android.R.attr#visibility}
+          attribute's value can be found in the {@link #TwoWayView} array.
+          @attr name android:visibility
+        */
+        public static final int TwoWayView_android_visibility = 21;
         /** Attributes that can be used with a View.
            <p>Includes the following attributes:</p>
            <table>
@@ -3186,7 +3724,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            @see #View_paddingStart
          */
         public static final int[] View = {
-            0x010100da, 0x7f010035, 0x7f010036
+            0x010100da, 0x7f010036, 0x7f010037
         };
         /**
           <p>

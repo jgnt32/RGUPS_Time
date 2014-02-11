@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.lucasr.twowayview.TwoWayView;
+import org.lucasr.twowayview.TwoWayView.OnScrollListener;
+
 import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.CalendarAdapter;
@@ -13,6 +16,8 @@ import ru.rgups.time.model.entity.Day;
 import ru.rgups.time.model.entity.Lesson;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.spice.TimeTableRequest;
+import ru.rgups.time.utils.CalendarManager;
+import ru.rgups.time.views.CalendarHint;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -25,17 +30,16 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.meetme.android.horizontallistview.HorizontalListView;
 import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-public class TimeTableFragment extends BaseFragment{
+public class TimeTableFragment extends BaseFragment implements OnScrollListener,OnItemClickListener{
 	
 	public final static String DAY_MONTH_DATE_FORMAT = "d MMMM";
 	public static final String DAY_OF_WEEK_DATE_FORMAT = "EEEE";
 	
-	private HorizontalListView mCalendarList;
+	private TwoWayView mCalendarList;
 	private ListView mLessonList;
 	private ArrayList<Lesson> mLessons = new ArrayList<Lesson>();
 	private CalendarAdapter mCalendarAdapter;
@@ -48,6 +52,9 @@ public class TimeTableFragment extends BaseFragment{
 	
 	private TextView mSelectedDate;
 	private TextView mSelectedDay;
+	private CalendarHint mCalendarHint;
+	private View mCalendarListelement;
+	
 	
 	private void getGroupList(){	
 		this.getSpiceManager().execute(
@@ -59,7 +66,8 @@ public class TimeTableFragment extends BaseFragment{
 	
 	
 	private class GetTimeListener implements RequestListener< LessonList >{
-
+		
+		
 		@Override
 		public void onRequestFailure(SpiceException exception) {
 		}
@@ -123,52 +131,16 @@ public class TimeTableFragment extends BaseFragment{
 		mSelectedDay = (TextView) v.findViewById(R.id.lesson_selected_day_of_week);
 		mLessonList = (ListView) v.findViewById(R.id.lesson_list);
 		mEmptyView = v.findViewById(R.id.lesson_epty_view);
+		mCalendarHint = (CalendarHint) v.findViewById(R.id.calendar_list_hint);
+		
 		mLessonList.setEmptyView(mEmptyView);
 		mLessonList.setAdapter(mLessonAdapter);
-		mCalendarList = (HorizontalListView) v.findViewById(R.id.calendar_list);
+		mCalendarList = (TwoWayView) v.findViewById(R.id.calendar_list);
 		mCalendarAdapter = new CalendarAdapter(getActivity());
 		mCalendarList.setAdapter(mCalendarAdapter);
-		mCalendarList.setOnItemClickListener(new OnItemClickListener() {
+		mCalendarList.setOnScrollListener( this);
+		mCalendarList.setOnItemClickListener(this);
 		
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View v, int position,	long id) {
-			
-				Calendar c = (Calendar) mCalendarAdapter.getItem(position);
-				c.set(Calendar.DAY_OF_YEAR, (int) id);
-				displaySelectedDate(c.getTime());
-				Log.e("mAdapter.getItem(position)",""+c.getTime()+"; ������ ���� "+c.get(Calendar.WEEK_OF_YEAR)+";������  "+c.get(Calendar.WEEK_OF_YEAR)%2);
-				mWeekIndicator = 0;
-
-				if(isOverLine(c)){
-					mWeekIndicator = LessonAdapter.OVER_LINE;
-					Log.e("������","��� ������");
-				}else{
-					mWeekIndicator = LessonAdapter.UNDER_LINE;
-
-					Log.e("������","��� ������");
-				}
-				try {
-					Log.e("mAdapter.getItem(position)",""+c.getTime()+"; ������ ���� "+c.get(Calendar.WEEK_OF_YEAR)+";������  "+c.get(Calendar.WEEK_OF_YEAR)%2);
-					Log.e("Day OF calendar",""+c.get(Calendar.DAY_OF_WEEK));
-
-					Day d = HelperManager.getDayDAO().queryForId(c.get(Calendar.DAY_OF_WEEK)-1);
-					Log.e("Day from db",""+d.getNumber());
-					mLessons  = new ArrayList<Lesson>(d.getLessons());
-					mLessonList.setAdapter(new LessonAdapter(getActivity(),mLessons,mWeekIndicator));
-			
-				} catch (Exception e) {
-					e.printStackTrace();
-					mLessons  = new ArrayList<Lesson>();
-					mLessonList.setAdapter(new LessonAdapter(getActivity(),mLessons,mWeekIndicator));
-
-				}
-				
-				/*	v.setSelected(true);
-				mAdapter.setSelectedItem(position);
-				mLastSelectedView = v;
-				mAdapter.notifyDataSetChanged();*/
-			}
-		});
 		return v;
 	}
 
@@ -220,6 +192,74 @@ public class TimeTableFragment extends BaseFragment{
 	//	Cursor c = HelperManager.getHelper().getReadableDatabase().rawQuery("SELECT * FROM "+LessonList.TABLE_NAME, new String[]{});
 	//	Log.e("fuack e",""+c.getCount());
 	}
+
+
+
+
+	@Override
+	public void onScrollStateChanged(TwoWayView view, int scrollState) {
+	
+	}
+
+
+	@Override
+	public void onScroll(TwoWayView view, int firstVisibleItem,	int visibleItemCount, int totalItemCount) {
+			
+		mCalendarHint.setText(""+CalendarManager.getInstance().getCalendarListMonthTitle(firstVisibleItem));
+		
+		if(CalendarManager.getInstance().montIsChanged(firstVisibleItem)){
+			mCalendarHint.showHint();
+		}
+	}
+
+
+
+
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View v, int position,	long id) {
+		if(mCalendarListelement != null){
+			mCalendarListelement.setSelected(false);
+		}
+		v.setSelected(true);
+
+		mCalendarListelement = v;
+		Calendar c = (Calendar) mCalendarAdapter.getItem(position);
+		c.set(Calendar.DAY_OF_YEAR, (int) id);
+		displaySelectedDate(c.getTime());
+		Log.e("mAdapter.getItem(position)",""+c.getTime()+"; ������ ���� "+c.get(Calendar.WEEK_OF_YEAR)+";������  "+c.get(Calendar.WEEK_OF_YEAR)%2);
+		mWeekIndicator = 0;
+
+		if(isOverLine(c)){
+			mWeekIndicator = LessonAdapter.OVER_LINE;
+//				Log.e("������","��� ������");
+		}else{
+			mWeekIndicator = LessonAdapter.UNDER_LINE;
+
+	//		Log.e("������","��� ������");
+		}
+		try {
+			Log.e("mAdapter.getItem(position)",""+c.getTime()+"; ������ ���� "+c.get(Calendar.WEEK_OF_YEAR)+";������  "+c.get(Calendar.WEEK_OF_YEAR)%2);
+			Log.e("Day OF calendar",""+c.get(Calendar.DAY_OF_WEEK));
+
+			Day d = HelperManager.getDayDAO().queryForId(c.get(Calendar.DAY_OF_WEEK)-1);
+		//	Log.e("Day from db",""+d.getNumber());
+			mLessons  = new ArrayList<Lesson>(d.getLessons());
+			mLessonList.setAdapter(new LessonAdapter(getActivity(),mLessons,mWeekIndicator));
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+			mLessons  = new ArrayList<Lesson>();
+			mLessonList.setAdapter(new LessonAdapter(getActivity(),mLessons,mWeekIndicator));
+
+		}
+		
+		/*	v.setSelected(true);
+		mAdapter.setSelectedItem(position);
+		mLastSelectedView = v;
+		mAdapter.notifyDataSetChanged();*/
+	}
+
 		
 
 }

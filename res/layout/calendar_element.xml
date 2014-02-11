@@ -8,45 +8,45 @@
   
     android:orientation="vertical" >
     
-    <View 
-        android:visibility="visible"
+    <View
         android:id="@+id/calendar_left_indicator"
-        android:layout_width="5dp"
-        android:layout_height="match_parent"
+        android:layout_width="2dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
         android:background="@color/theme_green"
-        android:layout_alignParentLeft="true"/>
+        android:visibility="invisible" />
 
-     <View 
-        android:visibility="visible"
-        android:id="@+id/calendar_right_indicator"         
-        android:layout_width="5dp"
-        android:layout_height="match_parent"
-        android:background="@color/theme_green"
-        android:layout_alignParentRight="true"/>
+     <View
+         android:id="@+id/calendar_right_indicator"
+         android:layout_width="2dp"
+         android:layout_height="60dp"
+         android:layout_alignParentRight="true"
+         android:background="@color/theme_green"
+         android:visibility="invisible" />
      
-      <View 
-        android:id="@+id/calendar_top_indicator"          
-        android:layout_width="match_parent"
-        android:layout_height="5dp"
-        android:background="@color/theme_green"
-        android:layout_alignParentTop="true"/>
+      <View
+          android:id="@+id/calendar_top_indicator"
+          android:layout_width="60dp"
+          android:layout_height="5dp"
+          android:layout_alignParentTop="true"
+          android:background="@color/theme_green" />
 
       <View 
         android:id="@+id/calendar_bottom_indicator"          
-        android:layout_width="match_parent"
+        android:layout_width="60dp"
         android:layout_height="5dp"
         android:background="@color/theme_green"
         android:layout_alignParentBottom="true"/>      
       
     <TextView
         android:id="@+id/calendar_element_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal"
         android:layout_centerInParent="true"
         android:padding="10dp"
         android:text="1"
         android:textColor="#ffffff"
-        android:textSize="30dp" />
+        android:textSize="25sp" />
 
 </RelativeLayout>
