@@ -2,10 +2,9 @@
 <RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/calendar_selector"
     android:layout_width="60dp"
     android:layout_height="60dp"
-  
+ 	android:background="@drawable/calendar_list_selector"
     android:orientation="vertical" >
     
     <View
@@ -42,11 +41,22 @@
         android:id="@+id/calendar_element_text"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:gravity="center_horizontal"
         android:layout_centerInParent="true"
-        android:padding="10dp"
+        android:gravity="center_horizontal"
+        android:paddingTop="5dp"
         android:text="1"
         android:textColor="#ffffff"
         android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/calendar_element_day_of_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/calendar_bottom_indicator"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="5dp"
+        android:text="ПН"
+        android:textColor="@color/theme_blue"
+        android:textSize="10sp" />
 
 </RelativeLayout>

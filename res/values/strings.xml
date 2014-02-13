@@ -5,6 +5,9 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
+    <!-- ACTION MENUS -->
+    <string name="action_scroll_to_today">Сегодня</string>
+    
     <!-- DRAWER -->
     <string name="draw_open">Меню</string>
     <string name="draw_close">Расписание</string>

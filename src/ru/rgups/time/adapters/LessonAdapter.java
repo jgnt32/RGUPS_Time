@@ -61,7 +61,7 @@ public class LessonAdapter extends BaseAdapter{
 			mHolder = (ViewHolder) mView.getTag();
 		}
 		
-		mHolder.getNumber().setText(Integer.toString(this.getItem(position).getNumber()));
+	//	mHolder.getNumber().setText(Integer.toString(this.getItem(position).getNumber()));
 		mHolder.getTime().setText(this.getItem(position).getTime());
 		
 		if(!this.getItem(position).getDoubleLine().isEmpty()){
@@ -69,7 +69,7 @@ public class LessonAdapter extends BaseAdapter{
 			mHolder.getTitle().setText(mDouble.get(0).getTitle());
 			mHolder.getRoom().setText(mDouble.get(0).getRoom());
 			mHolder.getTeacher().setText(mDouble.get(0).getTeacher());
-			mHolder.getType().setText(mDouble.get(0).getType());
+		//	mHolder.getType().setText(mDouble.get(0).getType());
 		}else{
 			switch(this.mWeekIndicator){
 			case OVER_LINE:
@@ -78,13 +78,13 @@ public class LessonAdapter extends BaseAdapter{
 					mHolder.getTitle().setText(mOver.get(0).getTitle());
 					mHolder.getRoom().setText(mOver.get(0).getRoom());
 					mHolder.getTeacher().setText(mOver.get(0).getTeacher());
-					mHolder.getType().setText(mOver.get(0).getType());
+	//				mHolder.getType().setText(mOver.get(0).getType());
 				}else{
 					mHolder.getTitle().setText("--");
 					mHolder.getTitle().setText("");
 					mHolder.getRoom().setText("");
 					mHolder.getTeacher().setText("");
-					mHolder.getType().setText("");
+			//		mHolder.getType().setText("");
 				}
 				break;	
 			case UNDER_LINE:
@@ -93,13 +93,13 @@ public class LessonAdapter extends BaseAdapter{
 					mHolder.getTitle().setText(mUnder.get(0).getTitle());
 					mHolder.getRoom().setText(mUnder.get(0).getRoom());
 					mHolder.getTeacher().setText(mUnder.get(0).getTeacher());
-					mHolder.getType().setText(mUnder.get(0).getType());
+//					mHolder.getType().setText(mUnder.get(0).getType());
 				}else{
 					mHolder.getTitle().setText("--");
 					mHolder.getTitle().setText("");
 					mHolder.getRoom().setText("");
 					mHolder.getTeacher().setText("");
-					mHolder.getType().setText("");
+	//				mHolder.getType().setText("");
 				}
 				break;
 			}
@@ -112,18 +112,18 @@ public class LessonAdapter extends BaseAdapter{
 
 	private class ViewHolder{
 		private TextView title;
-		private TextView number;
+//		private TextView number;
 		private TextView room;
-		private TextView type;
+//		private TextView type;
 		private TextView teacher;
 		private TextView time;
 
 
 		public ViewHolder(View view){
 			this.setTitle((TextView) view.findViewById(R.id.lesson_title));
-			this.setNumber((TextView) view.findViewById(R.id.lesson_number));
+		//	this.setNumber((TextView) view.findViewById(R.id.lesson_number));
 			this.setRoom((TextView) view.findViewById(R.id.lesson_room));
-			this.setType((TextView) view.findViewById(R.id.lesson_type));
+		//	this.setType((TextView) view.findViewById(R.id.lesson_type));
 			this.setTeacher((TextView) view.findViewById(R.id.lesson_teacher));
 			this.setTime((TextView) view.findViewById(R.id.lesson_time));
 		}
@@ -145,14 +145,6 @@ public class LessonAdapter extends BaseAdapter{
 			this.title = title;
 		}
 
-		public TextView getNumber() {
-			return number;
-		}
-
-		public void setNumber(TextView number) {
-			this.number = number;
-		}
-
 		public TextView getRoom() {
 			return room;
 		}
@@ -161,13 +153,6 @@ public class LessonAdapter extends BaseAdapter{
 			this.room = room;
 		}
 
-		public TextView getType() {
-			return type;
-		}
-
-		public void setType(TextView type) {
-			this.type = type;
-		}
 
 		public TextView getTeacher() {
 			return teacher;

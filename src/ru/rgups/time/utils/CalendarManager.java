@@ -35,6 +35,11 @@ public class CalendarManager {
 	
 	}
 	
+	public int getCurrentDatOfTheYear(){
+		mSemestrCalendar.setTime(Calendar.getInstance().getTime());
+		return mSemestrCalendar.get(GregorianCalendar.DAY_OF_YEAR)-getDayOffset();
+	}
+	
 	public int getCalendarListMonthNumber(int shift){
 		mSemestrCalendar.set(GregorianCalendar.DAY_OF_YEAR, shift+getDayOffset());
 		return mSemestrCalendar.get(GregorianCalendar.MONTH);
@@ -60,7 +65,7 @@ public class CalendarManager {
 
 	}
 	
-	private static int getDayOffset(){
+	public static int getDayOffset(){
 		if(spotSemestr() == FIRST_SEMESTR){
 			Calendar calendar = Calendar.getInstance();
 			int dayOffset = calendar.getMaximum(Calendar.DAY_OF_YEAR)-getCorrectDayCount();

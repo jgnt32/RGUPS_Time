@@ -1,8 +1,10 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"/>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" 
+    	xmlns:sabd="http://schemas.android.com/apk/res-auto">
+    
+    <item 
+        android:id="@+id/action_scroll_to_today"
+        android:title="@string/action_scroll_to_today"
+        android:visible="false"
+        sabd:showAsAction="always|withText"/>
 
 </menu>

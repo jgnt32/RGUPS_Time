@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import ru.rgups.time.R;
 import ru.rgups.time.utils.ConstUtils;
 import android.content.Context;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,7 @@ public class CalendarAdapter extends BaseAdapter{
 	public final static int DAY_OFFSET = getDayOffset(); 
 	
 	public final static boolean UPARITY_WEEK_IS_OVERLINE = getPointOfReference();
-	
+	public final static String DAY_OF_WEEK_FORMAT = "EE";
 	private GregorianCalendar mCalendar;
 	private LayoutInflater mInflater;
 	private ViewHolder mHolder;
@@ -38,6 +39,8 @@ public class CalendarAdapter extends BaseAdapter{
 	private View topIndicator;
 
 	private View bootomIndicator;
+
+	private int mLastSelected = -1;
 	
 	public CalendarAdapter(Context context){
 		mGreenColor = context.getResources().getColor(R.color.theme_green);
@@ -81,7 +84,13 @@ public class CalendarAdapter extends BaseAdapter{
 		}else{
 			mHolder = (ViewHolder) mView.getTag();
 		}*/
-		  TextView text = (TextView) mView.findViewById(R.id.calendar_element_text); 
+			 if(mLastSelected == position){
+				 mView.setSelected(true);
+			 }else{
+				 mView.setSelected(false);
+			 }
+		  TextView text = (TextView) mView.findViewById(R.id.calendar_element_text);
+		  TextView dayOfWeek = (TextView) mView.findViewById(R.id.calendar_element_day_of_week);
 		  leftIndicator = mView.findViewById(R.id.calendar_left_indicator);
 		  rightIndicator = mView.findViewById(R.id.calendar_right_indicator);
 		  topIndicator = mView.findViewById(R.id.calendar_top_indicator);
@@ -89,7 +98,7 @@ public class CalendarAdapter extends BaseAdapter{
 
 		  mCalendar.set(Calendar.DAY_OF_YEAR, position+DAY_OFFSET);
 		  text.setText(Integer.toString(mCalendar.get(Calendar.DAY_OF_MONTH)));
-		  
+		  dayOfWeek.setText(DateFormat.format(DAY_OF_WEEK_FORMAT, mCalendar.getTime()).toString().toUpperCase());
 		  if(this.isOverLine(mCalendar.getTime())){
 			  bootomIndicator.setVisibility(View.VISIBLE);
 			  topIndicator.setVisibility(View.INVISIBLE);
@@ -217,10 +226,11 @@ public class CalendarAdapter extends BaseAdapter{
 		private View rightIndicator;
 		private View topIndicator;
 		private View bootomIndicator;
-		
+		private TextView dayOfWeek;
 		private TextView text;
 		public ViewHolder(View v) {
 			text = (TextView) v.findViewById(R.id.calendar_element_text);
+			dayOfWeek = (TextView) v.findViewById(R.id.calendar_element_day_of_week);
 			leftIndicator = v.findViewById(R.id.calendar_left_indicator);
 			rightIndicator = v.findViewById(R.id.calendar_right_indicator);
 			topIndicator = v.findViewById(R.id.calendar_top_indicator);
@@ -228,4 +238,7 @@ public class CalendarAdapter extends BaseAdapter{
 		}
 	}
 	
+	public void setSelected(int last){
+		mLastSelected  = last;
+	}
 }

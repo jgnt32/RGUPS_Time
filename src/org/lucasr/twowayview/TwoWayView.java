@@ -64,6 +64,8 @@ import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Checkable;
@@ -2830,6 +2832,9 @@ public class TwoWayView extends AdapterView<ListAdapter> implements
             mTouchRemainderPos = 0;
         }
     }
+    
+    protected Scroller mFlingTracker = new Scroller(getContext());
+
 
     /**
      * What is the distance between the source and destination rectangles given the direction of
@@ -6546,4 +6551,5 @@ public class TwoWayView extends AdapterView<ListAdapter> implements
             return false;
         }
     }
+    
 }
