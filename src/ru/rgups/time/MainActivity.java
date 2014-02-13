@@ -3,8 +3,10 @@ package ru.rgups.time;
 import ru.rgups.time.adapters.DrawerListAdapter;
 import ru.rgups.time.fragments.SettingFragment;
 import ru.rgups.time.fragments.TimeTableFragment;
+import ru.rgups.time.fragments.WelcomeActivity;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -41,8 +43,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.frameLayout, mTimeTableFragment, null);
 		ft.commit();
+		
+		openWelcomeActivity();
 	}
 
+	private void openWelcomeActivity(){
+		Intent i = new Intent(this, WelcomeActivity.class);
+		startActivity(i);
+	}
 	
 	@Override
 	protected void onResume() {

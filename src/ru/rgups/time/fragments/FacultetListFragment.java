@@ -5,24 +5,29 @@ import java.util.ArrayList;
 import ru.rgups.time.BaseDialogFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.FacultetListAdapter;
+import ru.rgups.time.interfaces.WelcomeListener;
 import ru.rgups.time.model.entity.Facultet;
 import ru.rgups.time.model.entity.FacultetList;
 import ru.rgups.time.spice.SampleXmlRequest;
 import android.app.Activity;
+import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-public class FacultetListFragment extends BaseDialogFragment {
+public class FacultetListFragment extends BaseDialogFragment implements OnItemClickListener{
 	private ArrayList<Facultet> mFacultetList = new ArrayList<Facultet>();
 	private ListView mListView;
 	private FacultetListAdapter adapter;
+	private WelcomeListener mAuthListener;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -33,6 +38,7 @@ public class FacultetListFragment extends BaseDialogFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		mAuthListener = (WelcomeListener) activity;
 	}
 	
 	private void getFacultetList(){
@@ -69,7 +75,7 @@ public class FacultetListFragment extends BaseDialogFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View v = getActivity().getLayoutInflater().inflate(R.layout.facultet_list_fragment, null);
 		mListView = (ListView) v.findViewById(R.id.facultetList);
-		
+		mListView.setOnItemClickListener(this);
 		return  v;
 	}
 
@@ -79,6 +85,11 @@ public class FacultetListFragment extends BaseDialogFragment {
 	public void onResume() {
 		getFacultetList();
 		super.onResume();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+		mAuthListener.OpenGroupList(id);
 	}
 	
 	

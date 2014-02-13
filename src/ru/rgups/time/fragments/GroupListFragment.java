@@ -25,6 +25,11 @@ public class GroupListFragment extends BaseFragment{
 	private ArrayList<Group> mGroupList;
 	private StickyListHeadersListView mListView;
 	private GroupListAdapter adapter;
+	private Long mFacultetId;
+	
+	public GroupListFragment(long facultetId) {
+		mFacultetId = facultetId;
+	}
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -49,7 +54,7 @@ public class GroupListFragment extends BaseFragment{
 	
 	private void getGroupList(){
 		
-		this.getSpiceManager().execute(new GroupListRequest("1"), new GetGroupListListener());
+		this.getSpiceManager().execute(new GroupListRequest(mFacultetId.toString()), new GetGroupListListener());
 	}
 	
 	private class GetGroupListListener implements RequestListener< GroupList >{
@@ -65,7 +70,7 @@ public class GroupListFragment extends BaseFragment{
 			Log.e("list",""+list.getGroupList().size());
 			mGroupList = new ArrayList<Group>(list.getGroupList());
 			adapter = new GroupListAdapter(getActivity(), mGroupList);
-	//		mListView.setAdapter(adapter);
+			mListView.setAdapter(adapter);
 		}
 		
 	}

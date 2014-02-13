@@ -16,6 +16,7 @@ public class AuthActivity extends FragmentActivity implements WelcomeListener{
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.auth_activity);
+		OpenFacultetList();
 	}
 
 	@Override
@@ -28,7 +29,9 @@ public class AuthActivity extends FragmentActivity implements WelcomeListener{
 	@Override
 	public void OpenGroupList(Long facultetId) {
 		mFt = getSupportFragmentManager().beginTransaction();
-		mFt.replace(R.id.auth_frame_layout, new GroupListFragment());
+		mFt.replace(R.id.auth_frame_layout, new GroupListFragment(facultetId));
+		mFt.addToBackStack(null);
+		mFt.commit();
 	}
 	
 	

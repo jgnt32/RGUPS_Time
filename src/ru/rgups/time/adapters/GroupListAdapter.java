@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import ru.rgups.time.R;
 import ru.rgups.time.model.entity.Group;
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class GroupListAdapter extends BaseAdapter {
+public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 	private ArrayList<Group> mGroupList;
 	private Group mGroup;
 	private TextView mGroupName;
@@ -119,6 +120,22 @@ public class GroupListAdapter extends BaseAdapter {
 			this.dividerText = dividerText;
 		}
 		
+	}
+
+
+	@Override
+	public View getHeaderView(int position, View convertView, ViewGroup parent) {
+		View v = mInflater.inflate(R.layout.group_list_divier,null);
+		TextView text = (TextView) v.findViewById(R.id.levelTitle);
+		text.setText(getItem(position).getTitle());
+		return v;
+	}
+
+
+	@Override
+	public long getHeaderId(int position) {
+		// TODO Auto-generated method stub
+		return getItem(position).getLevel();
 	}
 
 }
