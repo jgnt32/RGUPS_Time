@@ -9,7 +9,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class WelcomeActivity extends FragmentActivity implements OnClickListener,WelcomeListener{
+public class WelcomeActivity extends FragmentActivity implements OnClickListener{
 
 	private FacultetListFragment facultetListFragment;
 	private TextView mFacultetTextView;
@@ -22,7 +22,7 @@ public class WelcomeActivity extends FragmentActivity implements OnClickListener
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.welcome_fragment);
+		setContentView(R.layout.welcome_activity);
 		facultetListFragment = new FacultetListFragment();
 		mFacultetTextView = (TextView) findViewById(R.id.facultet_select);
 		mGroupTextView = (TextView) findViewById(R.id.group_select);
@@ -49,18 +49,5 @@ public class WelcomeActivity extends FragmentActivity implements OnClickListener
 		}
 	}
 
-
-
-	@Override
-	public void OnFacultetClick(String facultetTitle) {
-		
-	}
-
-
-
-	@Override
-	public void OnGroupClick(String groupTitle) {
-		
-	}	
 
 }

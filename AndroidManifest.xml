@@ -28,6 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".fragments.WelcomeActivity"></activity><service android:name=".spice.SampleSpiceService"></service>
+        <activity android:name=".activities.AuthActivity"></activity>
         
     </application>
 
