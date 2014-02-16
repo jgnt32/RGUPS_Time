@@ -10,10 +10,14 @@ public class LessonTableModel {
 	public static final String ID = "id";
 	public static final String DAY = "day";
 	public static final String NUMBER = "number";
-	public static final String GROUP_ID = "";
+	public static final String GROUP_ID = "groupId";
+	public static final String WEEK_STATE = "weekState";
+	public static final String LESSON_TITLE = "lessonTitle";
+	public static final String LESSON_TYPE = "lessonType";
+	public static final String TEACHER_NAME = "teacherName";
+	public static final String ROOM = "room";
 	
-	
-	@DatabaseField(id = true)
+	@DatabaseField(generatedId = true)
 	private int id;
 	
 	@DatabaseField

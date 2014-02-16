@@ -70,8 +70,8 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 	@Override
 	public void onResume() {
 		super.onResume();
-		mCalendarList.setSelection(CalendarManager.getInstance().getCurrentDatOfTheYear());
-		mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDatOfTheYear(), 0);//		getGroupList();
+//		mCalendarList.setSelection(CalendarManager.getInstance().getCurrentDatOfTheYear());
+//		mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDatOfTheYear(), 0);//		getGroupList();
 		DataManager.getInstance().setSpiceManager(getSpiceManager());
 		DataManager.getInstance().timeTableRequest(new GetTimeListener());
 		
@@ -102,7 +102,7 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 		@Override
 		public void onRequestSuccess(LessonList list) {
 			Log.e("list",""+list.getDays().size());
-			ArrayList<Lesson> lessons = new ArrayList<Lesson>();
+	/*		ArrayList<Lesson> lessons = new ArrayList<Lesson>();
 			lessons.addAll(lessons);
 			Cursor c = HelperManager.getHelper().getReadableDatabase().rawQuery("SELECT * FROM "+Lesson.TABLE_NAME, new String[]{});
 			Log.e("fuack e",""+c.getCount());
@@ -110,7 +110,7 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 			while(c.moveToNext()){
 				Log.e("huy",""+c.getString(c.getColumnIndex(Lesson.DAY_ID))+" "+c.getString(c.getColumnIndex(Lesson.NUMBER))+" id = "+c.getString(c.getColumnIndex(Lesson.ID)));
 			}
-
+*/
 		}
 	}
 

@@ -8,9 +8,6 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "lesson_information_table")
 public class LessonInformation {
 	
-	@DatabaseField(foreign = true, columnName = "lesson_id", foreignAutoRefresh = true)
-	private Lesson lesson_id;
-	
 	@DatabaseField(generatedId = true)
 	private int id;
 

@@ -10,6 +10,9 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "under_line_table")
 public class UnderLine {
 	
+	public static final int WEEK_STATE = 1;
+
+	
 	public UnderLine(){
 		
 	}

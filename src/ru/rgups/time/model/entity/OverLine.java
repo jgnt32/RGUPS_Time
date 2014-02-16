@@ -8,6 +8,8 @@ import com.j256.ormlite.table.DatabaseTable;
 @Root(name = "nad", strict = false)
 @DatabaseTable(tableName = "over_line_table")
 public class OverLine{
+	
+	public static final int WEEK_STATE = 0;
 
 	public OverLine(){
 		

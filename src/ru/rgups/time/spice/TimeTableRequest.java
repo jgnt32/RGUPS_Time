@@ -3,7 +3,9 @@ package ru.rgups.time.spice;
 import org.springframework.web.client.RestClientException;
 
 import roboguice.util.temp.Ln;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.entity.LessonList;
+import ru.rgups.time.utils.PreferenceManager;
 import android.util.Log;
 
 import com.octo.android.robospice.request.springandroid.SpringAndroidSpiceRequest;
@@ -22,8 +24,9 @@ public class TimeTableRequest extends SpringAndroidSpiceRequest< LessonList > {
 
     @Override
     public LessonList loadDataFromNetwork() throws RestClientException {
-        Ln.d( "Call web service " + baseUrl );
-        return getRestTemplate().getForObject( baseUrl, LessonList.class );
+    	LessonList list = getRestTemplate().getForObject( baseUrl, LessonList.class );
+    	DataManager.getInstance().saveLessons(list, PreferenceManager.getInstance().getGroupId());
+    	return list;
     }
 
 }

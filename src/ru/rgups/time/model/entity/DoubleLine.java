@@ -10,6 +10,8 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "double_line_table")
 public class DoubleLine {
 	
+	public static final int WEEK_STATE = 2;
+	
 	public DoubleLine(){
 	}
 
