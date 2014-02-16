@@ -26,7 +26,7 @@ public class DoubleLine {
 	@DatabaseField
 	private String title;
 	
-	@Element(name = "tip")
+	@Element(required = true, name = "tip")
 	@DatabaseField
 	private String type;
 	

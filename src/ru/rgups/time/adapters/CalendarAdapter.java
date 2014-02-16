@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ru.rgups.time.R;
+import ru.rgups.time.model.entity.OverLine;
+import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.ConstUtils;
 import android.content.Context;
 import android.text.format.DateFormat;
@@ -60,8 +62,9 @@ public class CalendarAdapter extends BaseAdapter{
 	}
 	
 	@Override
-	public Object getItem(int position) {
-		Calendar calendar = Calendar.getInstance();
+	public GregorianCalendar getItem(int position) {
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(Calendar.getInstance().getTime());
 		calendar.set(Calendar.DAY_OF_YEAR, position);
 		return calendar;
 	}
@@ -219,6 +222,18 @@ public class CalendarAdapter extends BaseAdapter{
 			}
 			
 		}
+	}
+	
+	public int getWeekState(int position){
+		if(this.isOverLine(getItem(position).getTime())){
+			return OverLine.WEEK_STATE;
+		}else{
+			return UnderLine.WEEK_STATE;
+		}
+	}
+	
+	public int getDayNumber(int position){
+		return getItem(position).get(GregorianCalendar.DAY_OF_WEEK);
 	}
 	
 	private class ViewHolder{

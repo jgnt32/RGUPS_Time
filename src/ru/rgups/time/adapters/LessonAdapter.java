@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import ru.rgups.time.R;
+import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.DoubleLine;
-import ru.rgups.time.model.entity.Lesson;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import android.content.Context;
@@ -20,7 +20,7 @@ public class LessonAdapter extends BaseAdapter{
 	public static final int UNDER_LINE = 1;
 	private Context mContext;
 	private LayoutInflater mInflater;
-	private ArrayList<Lesson> mLessonList;
+	private ArrayList<LessonListElement> mLessonList;
 	private ArrayList<DoubleLine> mDouble;
 	private ArrayList<OverLine> mOver;
 	private ArrayList<UnderLine> mUnder;
@@ -28,10 +28,9 @@ public class LessonAdapter extends BaseAdapter{
 	private int mWeekIndicator;
 	private View mView;
 	private View headerView;
-	public LessonAdapter(Context context, Collection<Lesson> list, int weekIndicator){
+	public LessonAdapter(Context context, Collection<LessonListElement> list){
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
-		mLessonList = new ArrayList<Lesson>(list);
-		mWeekIndicator = weekIndicator;
+		mLessonList = new ArrayList<LessonListElement>(list);
 	}
 	
 
@@ -41,7 +40,7 @@ public class LessonAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public Lesson getItem(int position) {
+	public LessonListElement getItem(int position) {
 		return mLessonList.get(position);
 	}
 
@@ -61,10 +60,22 @@ public class LessonAdapter extends BaseAdapter{
 			mHolder = (ViewHolder) mView.getTag();
 		}
 		
-	//	mHolder.getNumber().setText(Integer.toString(this.getItem(position).getNumber()));
-		mHolder.getTime().setText(this.getItem(position).getTime());
+		if(getItem(position).getInformation().size()>0){
+			mHolder.title.setText(getItem(position).getInformation().get(0).getTitle());
+			mHolder.room.setText(getItem(position).getInformation().get(0).getRoom());
+			mHolder.teacher.setText(getItem(position).getInformation().get(0).getTeacher());
+
+		}else{
+			mHolder.getTitle().setText("--");
+			mHolder.getRoom().setText("");
+			mHolder.getTeacher().setText("");
+		//	mHolder.getType().setText("");
+		}
 		
-		if(!this.getItem(position).getDoubleLine().isEmpty()){
+	//	mHolder.getNumber().setText(Integer.toString(this.getItem(position).getNumber()));
+//		mHolder.getTime().setText(this.getItem(position).getTime());
+		
+/*		if(!this.getItem(position).getDoubleLine().isEmpty()){
 			mDouble = new ArrayList<DoubleLine>(this.getItem(position).getDoubleLine());
 			mHolder.getTitle().setText(mDouble.get(0).getTitle());
 			mHolder.getRoom().setText(mDouble.get(0).getRoom());
@@ -104,7 +115,7 @@ public class LessonAdapter extends BaseAdapter{
 				break;
 			}
 			
-		}
+		}*/
 
 		return mView;
 	}

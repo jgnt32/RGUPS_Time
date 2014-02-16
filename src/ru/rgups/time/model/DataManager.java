@@ -90,18 +90,18 @@ public class DataManager {
 					
 					if(lesson.getUnderLine() != null){
 
-							for(UnderLine underLine : lesson.getUnderLine()){
-								Log.e("saveLessons", " underLine "+underLine.getTitle());
-		
-								mSaveLessonStatement.bindLong(1, day.getNumber());
-								mSaveLessonStatement.bindLong(2, lesson.getNumber());
-								mSaveLessonStatement.bindLong(3, groupId);
-								mSaveLessonStatement.bindLong(4, underLine.WEEK_STATE);
-								mSaveLessonStatement.bindString(5, underLine.getTitle());
-								mSaveLessonStatement.bindString(6, underLine.getType());
-								mSaveLessonStatement.bindString(7, underLine.getTeacher());
-								mSaveLessonStatement.execute();
-							}
+						for(UnderLine underLine : lesson.getUnderLine()){
+							Log.e("saveLessons", " underLine "+underLine.getTitle());
+	
+							mSaveLessonStatement.bindLong(1, day.getNumber());
+							mSaveLessonStatement.bindLong(2, lesson.getNumber());
+							mSaveLessonStatement.bindLong(3, groupId);
+							mSaveLessonStatement.bindLong(4, underLine.WEEK_STATE);
+							mSaveLessonStatement.bindString(5, underLine.getTitle());
+							mSaveLessonStatement.bindString(6, underLine.getType());
+							mSaveLessonStatement.bindString(7, underLine.getTeacher());
+							mSaveLessonStatement.execute();
+						}
 					}
 					
 					if(lesson.getOverLine() != null){
@@ -135,11 +135,14 @@ public class DataManager {
 		ArrayList<LessonListElement> result = new ArrayList<LessonListElement>();
 		Cursor c = mDb.rawQuery(TextUtils.concat(
 				"SELECT * FROM ",LessonTableModel.TABLE_NAME," WHERE ",
+				LessonTableModel.GROUP_ID," =? AND ",
 				LessonTableModel.DAY,"=?", " AND ",
 				"(",LessonTableModel.WEEK_STATE,"=? OR " ,
 				LessonTableModel.WEEK_STATE,"='",Integer.toString(DoubleLine.WEEK_STATE),"')",
 				" GROUP BY ",LessonTableModel.NUMBER, " ORDER BY ",LessonTableModel.NUMBER
-				).toString(), new String[]{dayNumber.toString(), weekState.toString()});
+				).toString(), new String[]{
+			PreferenceManager.getInstance().getGroupId().toString(),
+			dayNumber.toString(), weekState.toString()});
 		LessonListElement lesson;
 		while(c.moveToNext()){
 				lesson = new LessonListElement();
@@ -148,6 +151,8 @@ public class DataManager {
 				lesson.setInformation(getLessonInformation(dayNumber, c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)), weekState));
 				result.add(lesson);
 		}
+		Log.e("getLessonList",""+result.size());
+
 		return result;
 	}
 	
@@ -155,8 +160,11 @@ public class DataManager {
 		ArrayList<LessonInformation> result = new ArrayList<LessonInformation>();
 		Cursor c = mDb.rawQuery(TextUtils.concat(
 				"SELECT * FROM ",LessonTableModel.TABLE_NAME, " WHERE ",
+				LessonTableModel.GROUP_ID," =? AND ",
 				LessonTableModel.DAY,"=? AND ",LessonTableModel.NUMBER,"=? AND ",LessonTableModel.WEEK_STATE,"=?"
-				).toString(), new String[]{dayNumber.toString(), lessonNumber.toString(), weekState.toString()});
+				).toString(), new String[]{
+			PreferenceManager.getInstance().getGroupId().toString(),
+			dayNumber.toString(), lessonNumber.toString(), weekState.toString()});
 		LessonInformation inf;
 		while(c.moveToNext()){
 			inf = new LessonInformation();
@@ -167,6 +175,7 @@ public class DataManager {
 			result.add(inf);
 		}
 		
+		Log.e("getLessonInformation",""+result.size());
 		return result;
 	}
 
