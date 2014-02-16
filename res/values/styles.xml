@@ -11,7 +11,14 @@
             backward-compatibility can go here.
         -->
     </style>
-
+	
+    <style name="AppButton"  parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/app_button_selector</item>
+        <item name="android:textColor">@color/white</item> 
+        <item name="android:textSize">20sp</item>
+        
+    </style>
+    
     <!-- Application theme. -->
     <style name="AppTheme" parent="Theme.Base.AppCompat.Light">
         <item name="android:background">@android:color/white</item>

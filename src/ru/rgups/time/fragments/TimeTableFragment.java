@@ -12,11 +12,11 @@ import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.CalendarAdapter;
 import ru.rgups.time.adapters.LessonAdapter;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HelperManager;
 import ru.rgups.time.model.entity.Day;
 import ru.rgups.time.model.entity.Lesson;
 import ru.rgups.time.model.entity.LessonList;
-import ru.rgups.time.spice.TimeTableRequest;
 import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.views.CalendarHint;
 import android.database.Cursor;
@@ -30,7 +30,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import com.octo.android.robospice.persistence.DurationInMillis;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
@@ -52,15 +51,46 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 	private CalendarHint mCalendarHint;
 	private View mCalendarListelement;
 	
-	
-	private void getGroupList(){	
-		this.getSpiceManager().execute(
-				new TimeTableRequest("15144"), 
-				0, 
-				DurationInMillis.ALWAYS_EXPIRED, 
-				new GetTimeListener());
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
+		this.mLessonAdapter = new LessonAdapter(getActivity(), mLessons,0);
 	}
 	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		inflater.inflate(R.menu.main, menu);
+		menu.findItem(R.id.action_scroll_to_today).setVisible(true);
+	}
+	
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		mCalendarList.setSelection(CalendarManager.getInstance().getCurrentDatOfTheYear());
+		mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDatOfTheYear(), 0);//		getGroupList();
+		DataManager.getInstance().setSpiceManager(getSpiceManager());
+		DataManager.getInstance().timeTableRequest(new GetTimeListener());
+		
+	}
+
+	
+
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		calendarListItemClick();
+		return true;
+	}
+
+	private void calendarListItemClick(){
+		mCalendarList.smoothScrollToPosition(CalendarManager.getInstance().getCurrentDatOfTheYear());
+		mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDatOfTheYear(), 0);
+	}
+
 	
 	private class GetTimeListener implements RequestListener< LessonList >{
 		
@@ -81,50 +111,9 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 				Log.e("huy",""+c.getString(c.getColumnIndex(Lesson.DAY_ID))+" "+c.getString(c.getColumnIndex(Lesson.NUMBER))+" id = "+c.getString(c.getColumnIndex(Lesson.ID)));
 			}
 
-			/*		for(Day day:list.getDays()){
-		//		Log.e("day number",""+day.getNumber());
-				for(Lesson lesson:day.getLessons()){
-			//		Log.e("lesson number",""+lesson.getNumber());
-					ArrayList<LessonInformation> tempList = new ArrayList<LessonInformation>();
-					
-					if(lesson.getDoubleLine()!=null){
-						tempList.addAll(lesson.getDoubleLine());
-					}
-
-					if(lesson.getOverLine()!=null){
-						tempList.addAll(lesson.getOverLine());
-					}
-					if(lesson.getUnderLine()!=null){
-						tempList.addAll(lesson.getUnderLine());
-					}
-					
-					lesson.getInfromation().addAll(tempList);
-			//Ы		Log.e("inf count",""+lesson.getInfromation().size());
-					lesson.setDayNumber(day.getNumber());
-				}
-				lessons.addAll(day.getLessons());
-			}
-		//	Log.e("all lessons",""+lessons.size());
-			
-			LessonAdapter adapter = new LessonAdapter(getActivity(),lessons);
-			mList.setAdapter(adapter);*/
 		}
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setHasOptionsMenu(true);
-		this.mLessonAdapter = new LessonAdapter(getActivity(), mLessons,0);
-	}
-	
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.main, menu);
-		menu.findItem(R.id.action_scroll_to_today).setVisible(true);
-	}
-	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -153,97 +142,21 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 		Log.e("huy",""+currentWeekIsParity);
 		if(mCalendarAdapter.UPARITY_WEEK_IS_OVERLINE){
 			if(currentWeekIsParity){
-				Log.e("huy","��� ������");
 				return false;
-			
 			}else{
-				
-				Log.e("pizduy","��� ������");
 				return true;
 			}
-			
 		}else{
 			if(currentWeekIsParity){
-				Log.e("pizduy","��� ������");
 				return true;
 			}else{
-				Log.e("huy","��� ������");
 				return false;
 			}
-			
 		}
 	}
 	
 	
-	@Override
-	public void onResume() {
-		super.onResume();
-		mCalendarList.setSelection(CalendarManager.getInstance().getCurrentDatOfTheYear());
-		mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDatOfTheYear(), 0);//		getGroupList();
-	//	Cursor c = HelperManager.getHelper().getReadableDatabase().rawQuery("SELECT * FROM "+LessonList.TABLE_NAME, new String[]{});
-	//	Log.e("fuack e",""+c.getCount());
-	}
 
-	
-
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		calendarListItemClick();
-		return true;
-	}
-
-	private void calendarListItemClick(){
-		mCalendarList.smoothScrollToPosition(CalendarManager.getInstance().getCurrentDatOfTheYear());
-		mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDatOfTheYear(), 0);
-	}
-
-
-
-/*	@Override
-	public void onItemClick(AdapterView<?> arg0, View v, int position,	long id) {
-		if(mCalendarListelement != null){
-			mCalendarListelement.setSelected(false);
-		}
-		v.setSelected(true);
-		mCalendarAdapter.setSelected(position);
-
-		mCalendarListelement = v;
-		Calendar c = (Calendar) mCalendarAdapter.getItem(position);
-		c.set(Calendar.DAY_OF_YEAR, (int) id);
-		Log.e("mAdapter.getItem(position)",""+c.getTime()+"; ������ ���� "+c.get(Calendar.WEEK_OF_YEAR)+";������  "+c.get(Calendar.WEEK_OF_YEAR)%2);
-		mWeekIndicator = 0;
-
-		if(isOverLine(c)){
-			mWeekIndicator = LessonAdapter.OVER_LINE;
-//				Log.e("������","��� ������");
-		}else{
-			mWeekIndicator = LessonAdapter.UNDER_LINE;
-
-	//		Log.e("������","��� ������");
-		}
-		try {
-			Log.e("mAdapter.getItem(position)",""+c.getTime()+"; ������ ���� "+c.get(Calendar.WEEK_OF_YEAR)+";������  "+c.get(Calendar.WEEK_OF_YEAR)%2);
-			Log.e("Day OF calendar",""+c.get(Calendar.DAY_OF_WEEK));
-
-			Day d = HelperManager.getDayDAO().queryForId(c.get(Calendar.DAY_OF_WEEK)-1);
-		//	Log.e("Day from db",""+d.getNumber());
-			mLessons  = new ArrayList<Lesson>(d.getLessons());
-			mLessonList.setAdapter(new LessonAdapter(getActivity(),mLessons,mWeekIndicator));
-	
-		} catch (Exception e) {
-			e.printStackTrace();
-			mLessons  = new ArrayList<Lesson>();
-			mLessonList.setAdapter(new LessonAdapter(getActivity(),mLessons,mWeekIndicator));
-
-		}
-		
-		/*	v.setSelected(true);
-		mAdapter.setSelectedItem(position);
-		mLastSelectedView = v;
-		mAdapter.notifyDataSetChanged();
-	}
-*/
 	@Override
 	public void onItemClick(it.sephiroth.android.library.widget.AdapterView<?> parent,
 			View view, int position, long id) {

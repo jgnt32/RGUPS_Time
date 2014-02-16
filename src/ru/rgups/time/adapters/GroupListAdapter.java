@@ -1,6 +1,8 @@
 package ru.rgups.time.adapters;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import ru.rgups.time.R;
 import ru.rgups.time.model.entity.Group;
@@ -26,6 +28,7 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 	public GroupListAdapter(Context context, ArrayList<Group> groupList ){
 		this.mContext = context;
 		this.mGroupList = groupList;
+		Collections.sort(mGroupList, new GroupComparator());
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
 	}
@@ -43,7 +46,7 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 
 	@Override
 	public long getItemId(int position) {
-		return 0;//mGroupList.get(position).getId();
+		return getItem(position).getId();
 	}
 
 	@Override
@@ -127,7 +130,7 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 	public View getHeaderView(int position, View convertView, ViewGroup parent) {
 		View v = mInflater.inflate(R.layout.group_list_divier,null);
 		TextView text = (TextView) v.findViewById(R.id.levelTitle);
-		text.setText(getItem(position).getTitle());
+		text.setText(getItem(position).getLevel()+"-й курс");
 		return v;
 	}
 
@@ -138,4 +141,18 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 		return getItem(position).getLevel();
 	}
 
+	private class GroupComparator implements Comparator<Group>{
+
+		@Override
+		public int compare(Group lhs, Group rhs) {
+			if(lhs.getLevel()>rhs.getLevel()){
+				return 0;
+			}else{
+				return 1;
+			}
+			
+		}
+		
+	}
+	
 }

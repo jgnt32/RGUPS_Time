@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#66BFFF"
+    android:background="@color/theme_blue"
     android:orientation="vertical"
     android:padding="5dp" >
 
@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1-й курс"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/theme_green"
         android:textSize="15sp"
         android:textStyle="bold" />
 

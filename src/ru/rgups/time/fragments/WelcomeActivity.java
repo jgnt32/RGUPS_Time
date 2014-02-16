@@ -11,6 +11,8 @@ import android.widget.Button;
 
 public class WelcomeActivity extends FragmentActivity implements OnClickListener{
 
+	public static final int AUTH_REQUEST_CODE = 0;
+	
 	private FacultetListFragment facultetListFragment;
 
 	private Button mLoginButton;
@@ -27,12 +29,23 @@ public class WelcomeActivity extends FragmentActivity implements OnClickListener
 		mLoginButton.setOnClickListener(this);
 	}
 
-
+	private void openAuthActivity(){
+		Intent i = new Intent(this, AuthActivity.class);
+		startActivityForResult(i, AUTH_REQUEST_CODE);
+	}
 
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent i) {
+	//	if(requestCode == AUTH_REQUEST_CODE){
+			if(requestCode == RESULT_OK){
+				finish();
+			}
+	//	}
+	}
+	
+	@Override
 	public void onClick(View v) {
-		Intent i = new Intent(this, AuthActivity.class);
-		startActivity(i);
+		openAuthActivity();
 	}
 
 

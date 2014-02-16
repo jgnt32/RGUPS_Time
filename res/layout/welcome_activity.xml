@@ -1,42 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/facultet_select"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="70dp"
-        android:background="@drawable/enter_reg_information_shape"
-        android:padding="10dp"
-        android:text="@string/login_facultet_caption"
-        android:textColor="@color/white"
-        android:textSize="20dp" />
-
-    <TextView
-        android:id="@+id/group_select"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/enter_reg_information_shape"
-        android:enabled="false"
-        android:padding="10dp"
-        android:text="@string/login_group_caption"
-        android:textColor="@color/white"
-        android:textSize="20dp" />
-
     <Button
         android:id="@+id/login_button"
+        style="@style/AppButton"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/blue_button_selector"
-        android:text="@string/login_button_caption"
-        android:textColor="@color/white" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="164dp"
+        android:text="@string/login_button_caption" />
 
-</LinearLayout>
+</RelativeLayout>

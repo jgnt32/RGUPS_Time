@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import ru.rgups.time.BaseDialogFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.FacultetListAdapter;
-import ru.rgups.time.interfaces.WelcomeListener;
+import ru.rgups.time.interfaces.AuthListener;
 import ru.rgups.time.model.entity.Facultet;
 import ru.rgups.time.model.entity.FacultetList;
 import ru.rgups.time.spice.SampleXmlRequest;
@@ -27,7 +27,7 @@ public class FacultetListFragment extends BaseDialogFragment implements OnItemCl
 	private ArrayList<Facultet> mFacultetList = new ArrayList<Facultet>();
 	private ListView mListView;
 	private FacultetListAdapter adapter;
-	private WelcomeListener mAuthListener;
+	private AuthListener mAuthListener;
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -38,8 +38,38 @@ public class FacultetListFragment extends BaseDialogFragment implements OnItemCl
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
-		mAuthListener = (WelcomeListener) activity;
+		mAuthListener = (AuthListener) activity;
 	}
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+		View v = getActivity().getLayoutInflater().inflate(R.layout.facultet_list_fragment, null);
+		mListView = (ListView) v.findViewById(R.id.facultetList);
+		mListView.setOnItemClickListener(this);
+		return  v;
+	}
+
+
+
+	@Override
+	public void onResume() {
+		mAuthListener.setActionbarTitle(R.string.login_facultet_caption);
+		getFacultetList();
+		super.onResume();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+		mAuthListener.OpenGroupList(id);
+	}
+	
+	
 	
 	private void getFacultetList(){
 	
@@ -65,32 +95,7 @@ public class FacultetListFragment extends BaseDialogFragment implements OnItemCl
 		
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-		View v = getActivity().getLayoutInflater().inflate(R.layout.facultet_list_fragment, null);
-		mListView = (ListView) v.findViewById(R.id.facultetList);
-		mListView.setOnItemClickListener(this);
-		return  v;
-	}
-
-
-
-	@Override
-	public void onResume() {
-		getFacultetList();
-		super.onResume();
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-		mAuthListener.OpenGroupList(id);
-	}
+	
 	
 	
 

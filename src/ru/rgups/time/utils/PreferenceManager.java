@@ -39,14 +39,14 @@ public class PreferenceManager {
 		return mPreference.getString(FACULTET_ID, DEFAULT_VALUE);
 	}
 	
-	public void saveGroupId(String id){
+	public void saveGroupId(Long id){
 		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
-		mPreference.edit().putString(GROUP_ID, id).commit();		
+		mPreference.edit().putLong(GROUP_ID, id).commit();		
 	}
 	
-	public String getGroupId(){
+	public Long getGroupId(){
 		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
-		return mPreference.getString(GROUP_ID, DEFAULT_VALUE);
+		return mPreference.getLong(GROUP_ID, -1);
 	}
 	
 	

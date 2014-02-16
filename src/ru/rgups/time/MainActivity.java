@@ -4,6 +4,7 @@ import ru.rgups.time.adapters.DrawerListAdapter;
 import ru.rgups.time.fragments.SettingFragment;
 import ru.rgups.time.fragments.TimeTableFragment;
 import ru.rgups.time.fragments.WelcomeActivity;
+import ru.rgups.time.interfaces.SettingListener;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
@@ -21,7 +22,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class MainActivity extends ActionBarActivity implements OnClickListener, OnItemClickListener{
+public class MainActivity extends ActionBarActivity implements  SettingListener, OnClickListener, OnItemClickListener{
 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
@@ -48,15 +49,15 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 	}
 
 	private void openWelcomeActivity(){
-		Intent i = new Intent(this, WelcomeActivity.class);
-		startActivity(i);
+		if(PreferenceManager.getInstance().getGroupId() == -1){
+			Intent i = new Intent(this, WelcomeActivity.class);
+			startActivity(i);
+		}
 	}
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		PreferenceManager.getInstance().saveGroupId("15144");
-
 	}
 
 	
@@ -139,6 +140,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener, 
 		}
 		mDrawerLayout.closeDrawers();
 		
+	}
+
+	@Override
+	public void logOut() {
+		PreferenceManager.getInstance().saveGroupId((long) -1);
+		this.openWelcomeActivity();
 	}
 	
 	
