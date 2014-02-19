@@ -5,6 +5,7 @@ import ru.rgups.time.fragments.SettingFragment;
 import ru.rgups.time.fragments.TimeTableFragment;
 import ru.rgups.time.fragments.WelcomeActivity;
 import ru.rgups.time.interfaces.SettingListener;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
@@ -37,7 +38,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mDrawerList.setOnItemClickListener(this);
 		mDrawerList.setAdapter(new DrawerListAdapter(this));
-
+		DataManager.getInstance().getAllLessons();
 		initActionBar();
 		initDrawer();
 		initFragmenets();

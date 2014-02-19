@@ -202,6 +202,8 @@ public class CalendarAdapter extends BaseAdapter{
 	
 	private boolean isOverLine(Date date){
 		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setMinimalDaysInFirstWeek(4);
+		calendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
 		calendar.setTime(date);
 		int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);	
 		boolean currentWeekIsParity = (weekOfYear%2)==0;

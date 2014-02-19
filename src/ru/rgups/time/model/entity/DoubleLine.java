@@ -26,15 +26,15 @@ public class DoubleLine {
 	@DatabaseField
 	private String title;
 	
-	@Element(required = true, name = "tip")
+	@Element(required = false, name = "tip")
 	@DatabaseField
 	private String type;
 	
-	@Element(name = "name_p")
+	@Element(required = false, name = "name_p")
 	@DatabaseField
 	private String teacher;
 	
-	@Element(name = "kab")
+	@Element(required = false, name = "kab")
 	@DatabaseField
 	private String room;
 
