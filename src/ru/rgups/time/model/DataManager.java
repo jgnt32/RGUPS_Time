@@ -24,7 +24,7 @@ public class DataManager {
 	
 	private SQLiteStatement mSaveLessonStatement;
 	private SQLiteDatabase mDb;
-	
+	private SQLiteStatement mDeleteStatement;
 	public DataManager() {
 		mDb = HelperManager.getHelper().getWritableDatabase();
 		
@@ -41,6 +41,9 @@ public class DataManager {
 				LessonTableModel.ROOM,
 				") VALUES (?,?,?,?,?,?,?,?)"
 						).toString());
+		mDeleteStatement = mDb.compileStatement(TextUtils.concat(
+				"DELETE FROM ",LessonTableModel.TABLE_NAME,
+				" WHERE ",LessonTableModel.GROUP_ID,"=?").toString());
 	}
 	
 	private SpiceManager mSpiceManager;
@@ -68,9 +71,23 @@ public class DataManager {
 		this.getSpiceManager().execute(new TimeTableRequest(PreferenceManager.getInstance().getGroupId().toString()), listener);
 	}
 	
+	private void deleteOldLessons(long groupId){
+		try{
+			mDb.beginTransaction();
+			mDeleteStatement.bindLong(1, groupId);
+			mDeleteStatement.execute();
+			mDb.setTransactionSuccessful();
+		} catch (Exception e){			
+		}
+		finally{
+			mDb.endTransaction();
+		}
+	}
+	
 	public void saveLessons(LessonList lessonList, long groupId){
 		Log.e("saveLessons", " lessonList "+lessonList.getDays().size());
-
+		deleteOldLessons(groupId);
+	
 		try{
 			mDb.beginTransaction();
 			for(Day day : lessonList.getDays()){
@@ -179,16 +196,19 @@ public class DataManager {
 	public ArrayList<LessonListElement> getLessonList(final Integer dayNumber, final Integer weekState){
 		Log.e("getLessonList","weekState  ="+weekState);
 		ArrayList<LessonListElement> result = new ArrayList<LessonListElement>();
-		Cursor c = mDb.rawQuery(TextUtils.concat(
+		
+		String query = TextUtils.concat(
 				"SELECT * FROM ",LessonTableModel.TABLE_NAME," WHERE ",
-				LessonTableModel.GROUP_ID," =? AND ",
-				LessonTableModel.DAY,"=?", " AND ",
-				"(",LessonTableModel.WEEK_STATE,"=? OR " ,
-				LessonTableModel.WEEK_STATE,"='",Integer.toString(DoubleLine.WEEK_STATE),"')",
+				LessonTableModel.GROUP_ID," ='",PreferenceManager.getInstance().getGroupId().toString(),"' AND ",
+				LessonTableModel.DAY,"='",dayNumber.toString(),"'", " AND ",
+				"(",LessonTableModel.WEEK_STATE,"='",weekState.toString(),"' OR " ,
+				LessonTableModel.WEEK_STATE,"='2')",
 				" GROUP BY ",LessonTableModel.NUMBER, " ORDER BY ",LessonTableModel.NUMBER
-				).toString(), new String[]{
-			PreferenceManager.getInstance().getGroupId().toString(),
-			dayNumber.toString(), weekState.toString()});
+				).toString();
+		
+		Log.e("getLessonList", query);
+
+		Cursor c = mDb.rawQuery(query, new String[]{});
 		LessonListElement lesson;
 		while(c.moveToNext()){
 				lesson = new LessonListElement();
@@ -206,15 +226,22 @@ public class DataManager {
 	
 	private ArrayList<LessonInformation> getLessonInformation (Integer dayNumber, Integer lessonNumber, Integer weekState){
 		ArrayList<LessonInformation> result = new ArrayList<LessonInformation>();
-		Cursor c = mDb.rawQuery(TextUtils.concat(
+		String query = TextUtils.concat(
 				"SELECT * FROM ",LessonTableModel.TABLE_NAME, " WHERE ",
 				LessonTableModel.GROUP_ID," ='",PreferenceManager.getInstance().getGroupId().toString(),"' AND ",
-				LessonTableModel.DAY,"=? AND ",LessonTableModel.WEEK_STATE,"=?"//LessonTableModel.NUMBER,"=?" //AND ",
-				).toString(), new String[]{
-			
-			dayNumber.toString(), weekState.toString()});
+				LessonTableModel.DAY,"='",dayNumber.toString(),"' AND ",
+				LessonTableModel.NUMBER,"='",lessonNumber.toString(),"' ",
+				" AND (",LessonTableModel.WEEK_STATE,"='",weekState.toString(),"' OR ",LessonTableModel.WEEK_STATE,"='2')" 
+				).toString();
+		
+		Log.e("getLessonInformation", query);
+		Cursor c = mDb.rawQuery(query, new String[]{ });
 		LessonInformation inf;
+		
 		while(c.moveToNext()){
+			Log.e("getLessonInformation",c.getInt(c.getColumnIndex(LessonTableModel.NUMBER))+" "+c.getString(c.getColumnIndex(LessonTableModel.LESSON_TITLE))
+					+" "+c.getString(c.getColumnIndex(LessonTableModel.WEEK_STATE)));
+
 			inf = new LessonInformation();
 			inf.setTitle(c.getString(c.getColumnIndex(LessonTableModel.LESSON_TITLE)));
 			inf.setTeacher(c.getString(c.getColumnIndex(LessonTableModel.TEACHER_NAME)));

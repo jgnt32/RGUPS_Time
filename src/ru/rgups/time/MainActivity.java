@@ -38,7 +38,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mDrawerList.setOnItemClickListener(this);
 		mDrawerList.setAdapter(new DrawerListAdapter(this));
-		DataManager.getInstance().getAllLessons();
+	//	DataManager.getInstance().getAllLessons();
 		initActionBar();
 		initDrawer();
 		initFragmenets();
