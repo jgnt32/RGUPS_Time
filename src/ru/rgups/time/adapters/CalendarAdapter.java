@@ -10,6 +10,7 @@ import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.ConstUtils;
 import android.content.Context;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class CalendarAdapter extends BaseAdapter{
 	public final static int DAY_OFFSET = getDayOffset(); 
 	
 	public final static boolean UPARITY_WEEK_IS_OVERLINE = getPointOfReference();
+	
 	public final static String DAY_OF_WEEK_FORMAT = "EE";
 	private GregorianCalendar mCalendar;
 	private LayoutInflater mInflater;
@@ -48,6 +50,8 @@ public class CalendarAdapter extends BaseAdapter{
 		mGreenColor = context.getResources().getColor(R.color.theme_green);
 		mBlueColor = context.getResources().getColor(R.color.theme_blue);
 		mCalendar = new GregorianCalendar();
+		mCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
+		mCalendar.setMinimalDaysInFirstWeek(4);
 		mCalendar.setTime(Calendar.getInstance().getTime());
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -64,8 +68,10 @@ public class CalendarAdapter extends BaseAdapter{
 	@Override
 	public GregorianCalendar getItem(int position) {
 		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setMinimalDaysInFirstWeek(4);
+		calendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
 		calendar.setTime(Calendar.getInstance().getTime());
-		calendar.set(Calendar.DAY_OF_YEAR, position);
+		calendar.set(Calendar.DAY_OF_YEAR, (int) getItemId(position));
 		return calendar;
 	}
 	
@@ -81,17 +87,12 @@ public class CalendarAdapter extends BaseAdapter{
 //		mView = convertView;
 //		if(mView == null){
 			mView = mInflater.inflate(R.layout.calendar_element, null);
-			 mView.setTag(999);
 /*			mHolder = new ViewHolder(mView);
 			mView.setTag(mHolder);
 		}else{
 			mHolder = (ViewHolder) mView.getTag();
 		}*/
-			 if(mLastSelected == position){
-				 mView.setSelected(true);
-			 }else{
-				 mView.setSelected(false);
-			 }
+			
 		  TextView text = (TextView) mView.findViewById(R.id.calendar_element_text);
 		  TextView dayOfWeek = (TextView) mView.findViewById(R.id.calendar_element_day_of_week);
 		  leftIndicator = mView.findViewById(R.id.calendar_left_indicator);
@@ -159,7 +160,9 @@ public class CalendarAdapter extends BaseAdapter{
 	
 	private static int getDayOffset(){
 		if(CURRENS_SEMESTR == ConstUtils.FIRST_SEMESTR){
-			Calendar calendar = Calendar.getInstance();
+			GregorianCalendar calendar = new GregorianCalendar();
+					
+			calendar.setTime(Calendar.getInstance().getTime());
 			int dayOffset = calendar.getMaximum(Calendar.DAY_OF_YEAR)-DAY_COUNT;
 			return dayOffset;
 		}else{
@@ -169,7 +172,10 @@ public class CalendarAdapter extends BaseAdapter{
 	}
 	
 	private static boolean getPointOfReference(){
-		Calendar calendar = Calendar.getInstance();
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setTime(Calendar.getInstance().getTime());
+		calendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
+		calendar.setMinimalDaysInFirstWeek(4);
 		calendar.set(Calendar.MONTH, Calendar.SEPTEMBER);
 		calendar.set(Calendar.DAY_OF_MONTH, 1);
 		
@@ -200,33 +206,31 @@ public class CalendarAdapter extends BaseAdapter{
 		}
 	}
 	
-	private boolean isOverLine(Date date){
+	private boolean isOverLine(final Date date){
 		GregorianCalendar calendar = new GregorianCalendar();
-		calendar.setMinimalDaysInFirstWeek(4);
 		calendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
+		calendar.setMinimalDaysInFirstWeek(4);
 		calendar.setTime(date);
 		int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);	
 		boolean currentWeekIsParity = (weekOfYear%2)==0;
-	//	Log.e("huy",""+currentWeekIsParity);
+		Log.e("huy",""+currentWeekIsParity);
 		if(UPARITY_WEEK_IS_OVERLINE){
 			if(currentWeekIsParity){
 				return false;
-			
 			}else{
 				return true;
 			}
-			
 		}else{
 			if(currentWeekIsParity){
 				return true;
 			}else{
 				return false;
 			}
-			
 		}
 	}
 	
-	public int getWeekState(int position){
+	
+	public int getWeekState(int position){		
 		if(this.isOverLine(getItem(position).getTime())){
 			return OverLine.WEEK_STATE;
 		}else{
@@ -235,7 +239,12 @@ public class CalendarAdapter extends BaseAdapter{
 	}
 	
 	public int getDayNumber(int position){
-		return getItem(position).get(GregorianCalendar.DAY_OF_WEEK);
+		Log.e("getDayNumber",""+ getItem(position).getTime().toString());
+		if(getItem(position).get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.SUNDAY){
+			return 7;
+		}else{
+			return getItem(position).get(GregorianCalendar.DAY_OF_WEEK)-1;
+		}
 	}
 	
 	private class ViewHolder{

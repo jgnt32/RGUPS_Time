@@ -8,6 +8,7 @@ import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.DoubleLine;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class LessonAdapter extends BaseAdapter{
+public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapter{
 	public static final int OVER_LINE = 0;
 	public static final int UNDER_LINE = 1;
 	private Context mContext;
@@ -28,9 +29,11 @@ public class LessonAdapter extends BaseAdapter{
 	private int mWeekIndicator;
 	private View mView;
 	private View headerView;
+	private String[] timePeriods;
 	public LessonAdapter(Context context, Collection<LessonListElement> list){
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
 		mLessonList = new ArrayList<LessonListElement>(list);
+		timePeriods = context.getResources().getStringArray(R.array.lessons_time_periods);
 	}
 	
 
@@ -60,11 +63,11 @@ public class LessonAdapter extends BaseAdapter{
 			mHolder = (ViewHolder) mView.getTag();
 		}
 		
+		mHolder.time.setText(timePeriods[getItem(position).getLessonNumber()-1]);
 		if(getItem(position).getInformation().size()>0){
 			mHolder.title.setText(getItem(position).getInformation().get(0).getTitle());
 			mHolder.room.setText(getItem(position).getInformation().get(0).getRoom());
 			mHolder.teacher.setText(getItem(position).getInformation().get(0).getTeacher());
-
 		}else{
 			mHolder.getTitle().setText("--");
 			mHolder.getRoom().setText("");
@@ -72,50 +75,7 @@ public class LessonAdapter extends BaseAdapter{
 		//	mHolder.getType().setText("");
 		}
 		
-	//	mHolder.getNumber().setText(Integer.toString(this.getItem(position).getNumber()));
-//		mHolder.getTime().setText(this.getItem(position).getTime());
-		
-/*		if(!this.getItem(position).getDoubleLine().isEmpty()){
-			mDouble = new ArrayList<DoubleLine>(this.getItem(position).getDoubleLine());
-			mHolder.getTitle().setText(mDouble.get(0).getTitle());
-			mHolder.getRoom().setText(mDouble.get(0).getRoom());
-			mHolder.getTeacher().setText(mDouble.get(0).getTeacher());
-		//	mHolder.getType().setText(mDouble.get(0).getType());
-		}else{
-			switch(this.mWeekIndicator){
-			case OVER_LINE:
-				mOver = new ArrayList<OverLine>(this.getItem(position).getOverLine());
-				if(!mOver.isEmpty()){
-					mHolder.getTitle().setText(mOver.get(0).getTitle());
-					mHolder.getRoom().setText(mOver.get(0).getRoom());
-					mHolder.getTeacher().setText(mOver.get(0).getTeacher());
-	//				mHolder.getType().setText(mOver.get(0).getType());
-				}else{
-					mHolder.getTitle().setText("--");
-					mHolder.getTitle().setText("");
-					mHolder.getRoom().setText("");
-					mHolder.getTeacher().setText("");
-			//		mHolder.getType().setText("");
-				}
-				break;	
-			case UNDER_LINE:
-				mUnder = new ArrayList<UnderLine>(this.getItem(position).getUnderLine());
-				if(!mUnder.isEmpty()){
-					mHolder.getTitle().setText(mUnder.get(0).getTitle());
-					mHolder.getRoom().setText(mUnder.get(0).getRoom());
-					mHolder.getTeacher().setText(mUnder.get(0).getTeacher());
-//					mHolder.getType().setText(mUnder.get(0).getType());
-				}else{
-					mHolder.getTitle().setText("--");
-					mHolder.getTitle().setText("");
-					mHolder.getRoom().setText("");
-					mHolder.getTeacher().setText("");
-	//				mHolder.getType().setText("");
-				}
-				break;
-			}
-			
-		}*/
+
 
 		return mView;
 	}
@@ -174,6 +134,21 @@ public class LessonAdapter extends BaseAdapter{
 		}
 
 		
+	}
+
+
+	@Override
+	public View getHeaderView(int position, View convertView, ViewGroup parent) {
+		View v = mInflater.inflate(R.layout.group_list_divier, null);
+		TextView text = (TextView) v.findViewById(R.id.levelTitle);
+		text.setText(getItem(position).getLessonNumber()+"-я пара");
+		return v;
+	}
+
+
+	@Override
+	public long getHeaderId(int position) {
+		return 	getItem(position).getLessonNumber();
 	}
 	
 

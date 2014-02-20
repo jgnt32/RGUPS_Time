@@ -45,8 +45,6 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.frameLayout, mTimeTableFragment, null);
 		ft.commit();
-		
-		openWelcomeActivity();
 	}
 
 	private void openWelcomeActivity(){
@@ -59,6 +57,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	@Override
 	protected void onResume() {
 		super.onResume();
+		openWelcomeActivity();
 	}
 
 	

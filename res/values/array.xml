@@ -6,4 +6,16 @@
         <item >Домашнии задания</item>
         <item >Настройки</item>
     </string-array>
+    
+    <string-array name="lessons_time_periods">
+        <item >8.20 - 9.50</item>
+        <item >10.05 - 11.35</item>
+        <item >12.05 - 13.35</item>
+        <item >13.50 - 15.20</item>
+        <item >15.30 - 17.00</item>
+        <item >17.10 - 18.40</item>
+        <item >18.50 - 20.20</item>
+        <item >20.30 - 22.00</item>
+        
+    </string-array>
 </resources>

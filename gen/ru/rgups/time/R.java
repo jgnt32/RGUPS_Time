@@ -18,6 +18,7 @@ public final class R {
     }
     public static final class array {
         public static final int drawer_titles=0x7f0c0000;
+        public static final int lessons_time_periods=0x7f0c0001;
     }
     public static final class attr {
         /**  Custom divider drawable to use for elements in the action bar. 
@@ -1125,7 +1126,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int LinearLayout1=0x7f050056;
-        public static final int RelativeLayout1=0x7f050060;
+        public static final int RelativeLayout1=0x7f050061;
         public static final int action_bar=0x7f05001e;
         public static final int action_bar_activity_content=0x7f050017;
         public static final int action_bar_container=0x7f05001d;
@@ -1137,7 +1138,7 @@ containing a value of this type.
         public static final int action_menu_divider=0x7f050018;
         public static final int action_menu_presenter=0x7f050019;
         public static final int action_mode_close_button=0x7f050026;
-        public static final int action_scroll_to_today=0x7f050062;
+        public static final int action_scroll_to_today=0x7f050063;
         public static final int activity_chooser_view_content=0x7f050027;
         public static final int always=0x7f05000d;
         public static final int alwaysScroll=0x7f050002;
@@ -1181,7 +1182,7 @@ containing a value of this type.
         public static final int image=0x7f050029;
         public static final int left_drawer=0x7f050040;
         public static final int lesseon_divider_text=0x7f050054;
-        public static final int lesson_epty_view=0x7f05005f;
+        public static final int lesson_epty_view=0x7f050060;
         public static final int lesson_layout=0x7f05004a;
         public static final int lesson_list=0x7f05005b;
         public static final int lesson_room=0x7f050058;
@@ -1191,7 +1192,7 @@ containing a value of this type.
         public static final int levelTitle=0x7f050051;
         public static final int listMode=0x7f050003;
         public static final int list_item=0x7f05002b;
-        public static final int login_button=0x7f050061;
+        public static final int login_button=0x7f050062;
         public static final int middle=0x7f050014;
         public static final int name=0x7f05004f;
         public static final int never=0x7f05000b;
@@ -1222,6 +1223,7 @@ containing a value of this type.
         public static final int top_action_bar=0x7f050022;
         public static final int up=0x7f050023;
         public static final int useLogo=0x7f050005;
+        public static final int view1=0x7f05005f;
         public static final int withText=0x7f05000e;
     }
     public static final class integer {

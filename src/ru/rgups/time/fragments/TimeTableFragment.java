@@ -7,6 +7,7 @@ import it.sephiroth.android.library.widget.HListView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
@@ -17,6 +18,7 @@ import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.views.CalendarHint;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +27,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -36,7 +37,7 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 	public static final String DAY_OF_WEEK_DATE_FORMAT = "EEEE";
 	
 	private HListView mCalendarList;
-	private ListView mLessonList;
+	private StickyListHeadersListView mLessonList;
 	private ArrayList<LessonListElement> mLessons = new ArrayList<LessonListElement>();
 	private CalendarAdapter mCalendarAdapter;
 	private LessonAdapter mLessonAdapter;
@@ -108,7 +109,7 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.timetable_fragment, null);
 
-		mLessonList = (ListView) v.findViewById(R.id.lesson_list);
+		mLessonList = (StickyListHeadersListView) v.findViewById(R.id.lesson_list);
 		mEmptyView = v.findViewById(R.id.lesson_epty_view);
 		mCalendarHint = (CalendarHint) v.findViewById(R.id.calendar_list_hint);
 		
@@ -124,8 +125,11 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 	}
 
 
-	private boolean isOverLine(Calendar c){
-		Calendar calendar = c;
+	private boolean isOverLine(final Calendar c){
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
+		calendar.setMinimalDaysInFirstWeek(4);
+		calendar.setTime(c.getTime());
 		int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);	
 		boolean currentWeekIsParity = (weekOfYear%2)==0;
 		Log.e("huy",""+currentWeekIsParity);
