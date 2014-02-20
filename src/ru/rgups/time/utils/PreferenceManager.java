@@ -7,6 +7,8 @@ public class PreferenceManager {
 	private final static String PLACE = "ru.rgups.time";
 	private final static String FACULTET_ID = "facultet_id";
 	private final static String GROUP_ID = "group_id";
+	private final static String GROUP_TITLE = "group_title";
+
 	private final String DEFAULT_VALUE = "";
 	
 	private Context mContext;
@@ -49,5 +51,13 @@ public class PreferenceManager {
 		return mPreference.getLong(GROUP_ID, -1);
 	}
 	
+	public void saveGroupTitle(String title){
+		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
+		mPreference.edit().putString(GROUP_TITLE, title).commit();			
+	}
 	
+	public String getGroupTitle(){
+		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
+		return mPreference.getString(GROUP_TITLE, null);
+	}
 }

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
 
     <TextView 
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/setting_staff"
+        android:textSize="17sp"
         android:layout_gravity="center_horizontal" 
         android:layout_marginBottom="5dp"/>
     
@@ -19,9 +20,10 @@
         android:orientation="vertical" >
         
         <TextView 
+            android:id="@+id/setting_group_title"
             android:layout_height="wrap_content"
 			android:layout_width="match_parent"
-			android:text="АВМ-5-024"
+			android:textSize="17sp"
 			android:layout_margin="5dp"
 			android:textColor="@color/white" />
         
@@ -32,7 +34,6 @@
         style="@style/AppButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
         android:layout_marginTop="5dp"
         android:text="@string/setting_logout" />
 

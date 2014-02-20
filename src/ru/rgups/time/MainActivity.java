@@ -90,7 +90,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	        mDrawerToggle = new RTDrawerToggle(this,mDrawerLayout, R.drawable.ic_drawer, R.string.draw_open,
 	        		R.string.draw_close);	   
 	    }
-	    mDrawerLayout.setDrawerListener(mDrawerToggle);		
+	    mDrawerLayout.setDrawerListener(mDrawerToggle);	
 	 }
 	
 	private class RTDrawerToggle extends ActionBarDrawerToggle{
@@ -102,10 +102,25 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 					closeDrawerContentDescRes);
 		}
 		
+		 @Override
+	        public void onDrawerClosed(View drawerView) {
+	            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+	        }
+
+	        @Override
+	        public void onDrawerOpened(View drawerView) {
+	            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+	        }
+		
 		
 	}
 	
-	
+	 @Override
+	 protected void onPostCreate(Bundle savedInstanceState) {
+		 super.onPostCreate(savedInstanceState);
+	     mDrawerToggle.syncState();
+	     
+	 }
 
 	@Override
 	public void onClick(View v) {

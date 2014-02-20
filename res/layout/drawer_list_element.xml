@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" 
-    android:padding="5dp"  >
+    android:padding="10dp"  >
    
     
     <ImageView 
@@ -17,6 +17,7 @@
         android:id="@+id/drawer_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="17sp"
         android:text="TextView" />
 
 </LinearLayout>

@@ -91,7 +91,8 @@ public class GroupListFragment extends BaseFragment implements OnItemClickListen
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
 		Log.d("GroupListFragment","group id:"+id);
 		PreferenceManager.getInstance().saveGroupId(id);
-		
+		PreferenceManager.getInstance().saveGroupTitle(adapter.getItem(position).getTitle());
+
 		mAuthListener.finishAuthActivity();
 	}
 
