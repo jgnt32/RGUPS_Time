@@ -9,7 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 public class DrawerListAdapter extends BaseAdapter{
-	
+	public static enum FRAGMENTS {
+		TIME_FRAGMENT,
+		SETTING_FRAGMENT
+	}
 	public static final int TIME_FRAGMENT = 0;
 	public static final int SETTING_FRAGMENT = 3;
 

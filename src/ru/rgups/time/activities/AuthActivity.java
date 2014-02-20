@@ -3,6 +3,7 @@ package ru.rgups.time.activities;
 import ru.rgups.time.R;
 import ru.rgups.time.fragments.FacultetListFragment;
 import ru.rgups.time.fragments.GroupListFragment;
+import ru.rgups.time.fragments.WelcomeActivity;
 import ru.rgups.time.interfaces.AuthListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -50,7 +51,8 @@ public class AuthActivity extends ActionBarActivity implements AuthListener{
 	@Override
 	public void finishAuthActivity() {
 		setResult(RESULT_OK);
-		finish();
+		finishActivity(WelcomeActivity.AUTH_REQUEST_CODE);
+		AuthActivity.this.finish();
 	}
 	
 	

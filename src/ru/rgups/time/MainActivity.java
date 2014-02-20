@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	private ActionBarDrawerToggle mDrawerToggle;
 	private TimeTableFragment mTimeTableFragment;
 	private SettingFragment mSettingFragment;
-	
+	private boolean mReplaceFlag = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,9 +58,16 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	protected void onResume() {
 		super.onResume();
 		openWelcomeActivity();
+		openTimeTableFragment();
 	}
 
-	
+	private void openTimeTableFragment(){
+		if(PreferenceManager.getInstance().getGroupId() == -1 &&
+				mReplaceFlag == true){
+			changeFragment(DrawerListAdapter.TIME_FRAGMENT);
+			mReplaceFlag = false;
+		}
+	}
 
 	 @Override
 	 public void onConfigurationChanged(Configuration newConfig) {
@@ -161,7 +168,9 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	public void logOut() {
 		PreferenceManager.getInstance().saveGroupId((long) -1);
 		this.openWelcomeActivity();
+		mReplaceFlag = true;
 	}
+	
 	
 	
 }
