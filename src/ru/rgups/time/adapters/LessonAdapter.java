@@ -6,6 +6,7 @@ import java.util.Collection;
 import ru.rgups.time.R;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.DoubleLine;
+import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
@@ -65,9 +66,26 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 		
 		mHolder.time.setText(timePeriods[getItem(position).getLessonNumber()-1]);
 		if(getItem(position).getInformation().size()>0){
-			mHolder.title.setText(getItem(position).getInformation().get(0).getTitle());
-			mHolder.room.setText(getItem(position).getInformation().get(0).getRoom());
-			mHolder.teacher.setText(getItem(position).getInformation().get(0).getTeacher());
+			StringBuffer roomBuffer = new StringBuffer();
+			StringBuffer teacherBuffer = new StringBuffer();
+			for(LessonInformation lesson : getItem(position).getInformation()){
+				
+				if(lesson.getRoom() != null || !lesson.getRoom().isEmpty()){
+					roomBuffer.append(lesson.getRoom()).append(", ");
+				}
+				
+				if(lesson.getTeacher() != null || !lesson.getTeacher().isEmpty()){
+					teacherBuffer.append(lesson.getTeacher()).append(", ");
+				}
+				
+				mHolder.title.setText(lesson.getTitle());
+			}
+			this.setText(mHolder.roomContainer, mHolder.room, roomBuffer.substring(0,roomBuffer.length()-2));
+			this.setText(mHolder.teacherContainer, mHolder.teacher, teacherBuffer.substring(0,teacherBuffer.length()-2));
+	//		mHolder.room.setText(roomBuffer.substring(0,roomBuffer.length()-1));
+	//		mHolder.teacher.setText(teacherBuffer.substring(0,teacherBuffer.length()-1));
+
+		
 		}else{
 			mHolder.getTitle().setText("--");
 			mHolder.getRoom().setText("");
@@ -83,6 +101,8 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 
 	private class ViewHolder{
 		private TextView title;
+		private View teacherContainer;
+		private View roomContainer;
 //		private TextView number;
 		private TextView room;
 //		private TextView type;
@@ -97,6 +117,8 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 		//	this.setType((TextView) view.findViewById(R.id.lesson_type));
 			this.setTeacher((TextView) view.findViewById(R.id.lesson_teacher));
 			this.setTime((TextView) view.findViewById(R.id.lesson_time));
+			this.roomContainer = view.findViewById(R.id.lesson_room_container);
+			this.teacherContainer = view.findViewById(R.id.lesson_teacher_container);
 		}
 		
 		
@@ -151,5 +173,17 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 		return 	getItem(position).getLessonNumber();
 	}
 	
-
+	private void setText(View container, TextView text, final String value){
+		if(value != null){
+			if(!value.isEmpty()){
+				container.setVisibility(View.VISIBLE);
+				text.setText(value);
+			}else{
+				container.setVisibility(View.GONE);
+			}
+		}else{
+			container.setVisibility(View.GONE);			
+		}
+			
+	}
 }
