@@ -29,7 +29,7 @@
         android:textSize="17sp" />
 
     <LinearLayout
-        android:id="@+id/lesson_lessons_container"
+        android:id="@+id/single_information_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -38,20 +38,12 @@
  
     </LinearLayout>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/single_lesson_hw_button"
+        android:text="Домашнее задание"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/white_background"
-        android:orientation="vertical" >
-
-        <EditText
-            android:id="@+id/single_lesson_homework"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:hint="Домашнее задание"
-            android:padding="10dp"
-            android:textSize="20sp" />
-
-    </LinearLayout>
+        style="@style/AppButton"
+		android:orientation="vertical" />
 
 </LinearLayout>

@@ -269,8 +269,8 @@ public class DataManager {
 		LessonListElement result = new LessonListElement();
 		Cursor c = mDb.rawQuery(TextUtils.concat(
 				"SELECT * FROM ",LessonTableModel.TABLE_NAME," WHERE ",
-				LessonTableModel.ID,"='",leesonId.toString(),"'"
-				).toString(), new String[]{});
+				LessonTableModel.ID,"=?"
+				).toString(), new String[]{leesonId.toString()});
 		Log.e("getLesson","id = "+leesonId.toString()+"; cursor count = "+c.getCount());
 		c.moveToFirst();
 		if(c.getCount() != 0){
