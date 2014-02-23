@@ -212,6 +212,8 @@ public class DataManager {
 		LessonListElement lesson;
 		while(c.moveToNext()){
 				lesson = new LessonListElement();
+				lesson.setId(c.getLong(c.getColumnIndex(LessonTableModel.ID)));		
+				Log.w("setId","id = "+c.getLong(c.getColumnIndex(LessonTableModel.ID)));
 				lesson.setDayNumber(c.getInt(c.getColumnIndex(LessonTableModel.DAY)));
 				lesson.setLessonNumber(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)));	
 				lesson.setInformation(getLessonInformation(dayNumber, c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)), weekState));
@@ -260,6 +262,27 @@ public class DataManager {
 			Log.e("getAllLessons", " "+c.getString(0)+" "+c.getString(1)+" "+c.getString(2)+" "+c.getString(3)+" "+c.getString(4)
 					+" "+c.getString(5)+" "+c.getString(6)+" "+c.getString(7)+" "+c.getString(8));
 		}
+	}
+	
+	public LessonListElement getLesson(Long leesonId){
+		
+		LessonListElement result = new LessonListElement();
+		Cursor c = mDb.rawQuery(TextUtils.concat(
+				"SELECT * FROM ",LessonTableModel.TABLE_NAME," WHERE ",
+				LessonTableModel.ID,"='",leesonId.toString(),"'"
+				).toString(), new String[]{});
+		Log.e("getLesson","id = "+leesonId.toString()+"; cursor count = "+c.getCount());
+		c.moveToFirst();
+		if(c.getCount() != 0){
+			result.setDayNumber(c.getInt(c.getColumnIndex(LessonTableModel.DAY)));
+			result.setLessonNumber(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)));
+			result.setInformation(getLessonInformation(c.getInt(c.getColumnIndex(LessonTableModel.DAY)),
+					c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)),
+					c.getInt(c.getColumnIndex(LessonTableModel.WEEK_STATE))));
+
+		}
+			
+		return result;
 	}
 
 }

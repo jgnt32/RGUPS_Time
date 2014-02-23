@@ -50,7 +50,7 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 
 	@Override
 	public long getItemId(int position) {
-		return position;//mLessonList.get(position).getLesson_id();
+		return getItem(position).getId();//mLessonList.get(position).getLesson_id();
 	}
 
 	@Override

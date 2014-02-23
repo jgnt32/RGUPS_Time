@@ -8,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "lesson_information_table")
 public class LessonInformation {
 	
-	@DatabaseField(generatedId = true)
+	@DatabaseField(id = true)
 	private int id;
 
 	
@@ -23,6 +23,10 @@ public class LessonInformation {
 	
 	@Element(name = "kab")
 	private String room;
+	
+	private int weekState;
+		
+	private long lessonId;
 
 	public String getTitle() {
 		return title;

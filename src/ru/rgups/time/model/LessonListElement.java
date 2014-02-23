@@ -6,6 +6,8 @@ import ru.rgups.time.model.entity.LessonInformation;
 
 public class LessonListElement {
 	
+	private long id;
+	
 	private int dayNumber;
 	
 	private int lessonNumber;
@@ -34,6 +36,14 @@ public class LessonListElement {
 
 	public void setInformation(ArrayList<LessonInformation> information) {
 		this.information = information;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	

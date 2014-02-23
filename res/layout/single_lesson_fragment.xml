@@ -2,7 +2,56 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
+    android:background="@color/theme_blue"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="20dp" >
+
+    <TextView
+        android:id="@+id/single_lesson_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Информатика"
+        android:textColor="@color/theme_green"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/single_lesson_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/theme_green"
+        android:text="8.20 - 9.50"
+        android:textSize="17sp" />
+
+    <LinearLayout
+        android:id="@+id/lesson_lessons_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical" >
+ 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_background"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/single_lesson_homework"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:hint="Домашнее задание"
+            android:padding="10dp"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
 </LinearLayout>
