@@ -65,9 +65,8 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-//		DataManager.getInstance().timeTableRequest(null);
-		mLessons = DataManager.getInstance().getLessonList(1, 1);
-		this.mLessonAdapter = new LessonAdapter(getActivity(), mLessons);
+	//	mLessons = DataManager.getInstance().getLessonList(1, 1);
+	//	this.mLessonAdapter = new LessonAdapter(getActivity(), mLessons);
 	}
 	
 	@Override
@@ -84,7 +83,8 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 //		mCalendarList.setSelection(CalendarManager.getInstance().getCurrentDatOfTheYear());
 //		mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDatOfTheYear(), 0);//		getGroupList();
 		DataManager.getInstance().setSpiceManager(getSpiceManager());
-//		
+		DataManager.getInstance().timeTableRequest(new GetTimeListener());
+
 		
 	}
 
@@ -113,7 +113,7 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 		@Override
 		public void onRequestSuccess(LessonList list) {
 			Log.e("list",""+list.getDays().size());
-			}
+		}
 	}
 
 

@@ -1,10 +1,16 @@
 package ru.rgups.time.model;
 
+import ru.rgups.time.utils.PreferenceManager;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "lesson_table")
 public class LessonTableModel {
+	
+	public LessonTableModel() {
+		this.setId(PreferenceManager.getInstance().getGroupId());
+	}
 	
 	public static final String TABLE_NAME = "lesson_table";
 	public static final String ID = "id";
@@ -17,8 +23,8 @@ public class LessonTableModel {
 	public static final String TEACHER_NAME = "teacherName";
 	public static final String ROOM = "room";
 	
-	@DatabaseField(generatedId = true)
-	private int id;
+	@DatabaseField(id = true)
+	private long id;
 	
 	@DatabaseField
 	private int day;
@@ -27,28 +33,17 @@ public class LessonTableModel {
 	private int number;
 	
 	@DatabaseField
-	private int groupId;
+	private long groupId;
 	
 	@DatabaseField
 	private int weekState;
 	
-	@DatabaseField
-	private String lessonTitle;
 	
-	@DatabaseField
-	private String lessonType;
-	
-	@DatabaseField
-	private String teacherName;
-	
-	@DatabaseField
-	private String room;
-
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -68,11 +63,11 @@ public class LessonTableModel {
 		this.number = number;
 	}
 
-	public int getGroupId() {
+	public long getGroupId() {
 		return groupId;
 	}
 
-	public void setGroupId(int groupId) {
+	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 	}
 
@@ -84,38 +79,5 @@ public class LessonTableModel {
 		this.weekState = weekState;
 	}
 
-	public String getLessonTitle() {
-		return lessonTitle;
-	}
-
-	public void setLessonTitle(String lessonTitle) {
-		this.lessonTitle = lessonTitle;
-	}
-
-	public String getLessonType() {
-		return lessonType;
-	}
-
-	public void setLessonType(String lessonType) {
-		this.lessonType = lessonType;
-	}
-
-	public String getTeacherName() {
-		return teacherName;
-	}
-
-	public void setTeacherName(String teacherName) {
-		this.teacherName = teacherName;
-	}
-
-	public String getRoom() {
-		return room;
-	}
-
-	public void setRoom(String room) {
-		this.room = room;
-	}
 	
-	
-
 }

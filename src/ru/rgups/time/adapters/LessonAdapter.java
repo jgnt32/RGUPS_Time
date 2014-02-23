@@ -70,18 +70,23 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 			StringBuffer teacherBuffer = new StringBuffer();
 			for(LessonInformation lesson : getItem(position).getInformation()){
 				
-				if(lesson.getRoom() != null || !lesson.getRoom().isEmpty()){
-					roomBuffer.append(lesson.getRoom()).append(", ");
+				if(lesson.getRoom() != null){
+					if(lesson.getRoom().isEmpty()){
+						roomBuffer.append(lesson.getRoom()).append(", ");
+					}
 				}
+			
 				
-				if(lesson.getTeacher() != null || !lesson.getTeacher().isEmpty()){
-					teacherBuffer.append(lesson.getTeacher()).append(", ");
+				if(lesson.getTeacher() != null){
+					if(!lesson.getTeacher().isEmpty()){
+						teacherBuffer.append(lesson.getTeacher()).append(", ");
+					}
 				}
 				
 				mHolder.title.setText(lesson.getTitle());
 			}
-			this.setText(mHolder.roomContainer, mHolder.room, roomBuffer.substring(0,roomBuffer.length()-2));
-			this.setText(mHolder.teacherContainer, mHolder.teacher, teacherBuffer.substring(0,teacherBuffer.length()-2));
+			this.setText(mHolder.roomContainer, mHolder.room, roomBuffer);
+			this.setText(mHolder.teacherContainer, mHolder.teacher, teacherBuffer);
 	//		mHolder.room.setText(roomBuffer.substring(0,roomBuffer.length()-1));
 	//		mHolder.teacher.setText(teacherBuffer.substring(0,teacherBuffer.length()-1));
 
@@ -173,11 +178,12 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 		return 	getItem(position).getLessonNumber();
 	}
 	
-	private void setText(View container, TextView text, final String value){
+	private void setText(View container, TextView text, StringBuffer buffer){
+		String value = buffer.toString();
 		if(value != null){
-			if(!value.isEmpty()){
+			if(!value.replace("", "").trim().isEmpty()){
 				container.setVisibility(View.VISIBLE);
-				text.setText(value);
+				text.setText(value.substring(0,value.lastIndexOf(",")));
 			}else{
 				container.setVisibility(View.GONE);
 			}

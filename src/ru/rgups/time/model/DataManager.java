@@ -23,8 +23,11 @@ import com.octo.android.robospice.request.listener.RequestListener;
 public class DataManager {
 	
 	private SQLiteStatement mSaveLessonStatement;
+	private SQLiteStatement mSaveInformationStatement;
 	private SQLiteDatabase mDb;
 	private SQLiteStatement mDeleteStatement;
+	private SQLiteStatement mDeleteInformationStatement;
+	
 	public DataManager() {
 		mDb = HelperManager.getHelper().getWritableDatabase();
 		
@@ -34,17 +37,30 @@ public class DataManager {
 				LessonTableModel.DAY,",",			//1
 				LessonTableModel.NUMBER,",",		//2
 				LessonTableModel.GROUP_ID,",",		//3
-				LessonTableModel.WEEK_STATE,",",	//4
-				LessonTableModel.LESSON_TITLE,",",	//5
-				LessonTableModel.LESSON_TYPE,",",	//6
-				LessonTableModel.TEACHER_NAME,", ",	//7
-				LessonTableModel.ROOM,
-				") VALUES (?,?,?,?,?,?,?,?)"
+				LessonTableModel.WEEK_STATE,", ",	//4
+				LessonTableModel.ID,				//5
+				") VALUES (?,?,?,?,?)"
 						).toString());
 		mDeleteStatement = mDb.compileStatement(TextUtils.concat(
 				"DELETE FROM ",LessonTableModel.TABLE_NAME,
 				" WHERE ",LessonTableModel.GROUP_ID,"=?").toString());
+		
+		mSaveInformationStatement = mDb.compileStatement(TextUtils.concat(
+				"INSERT OR REPLACE INTO ", LessonInformation.TABLE_NAME, "(",
+				LessonInformation.GROUP_ID,", ",	//1
+				LessonInformation.LESSON_ID,", ",	//2
+				LessonInformation.LESSON_TITLE,", ",//3
+				LessonInformation.LESSON_TYPE,", ",	//4
+				LessonInformation.TEACHER_NAME,", ",//5
+				LessonInformation.ROOM,				//6
+				") VALUES (?,?,?,?,?,?)"
+
+				).toString());
+		mDeleteInformationStatement = mDb.compileStatement(TextUtils.concat(
+				"DELETE FROM ",LessonInformation.TABLE_NAME," WHERE ",LessonInformation.GROUP_ID,"=?"
+				).toString());
 	}
+	
 	
 	private SpiceManager mSpiceManager;
 	
@@ -76,6 +92,8 @@ public class DataManager {
 			mDb.beginTransaction();
 			mDeleteStatement.bindLong(1, groupId);
 			mDeleteStatement.execute();
+			mDeleteInformationStatement.bindLong(1, groupId);
+			mDeleteInformationStatement.execute();
 			mDb.setTransactionSuccessful();
 		} catch (Exception e){			
 		}
@@ -92,92 +110,38 @@ public class DataManager {
 			mDb.beginTransaction();
 			for(Day day : lessonList.getDays()){
 				for(Lesson lesson : day.getLessons()){
+					mSaveLessonStatement.clearBindings();
+					mSaveLessonStatement.bindLong(1, day.getNumber());
+					mSaveLessonStatement.bindLong(2, lesson.getNumber());
+					mSaveLessonStatement.bindLong(3, groupId);
+					
 					if(lesson.getDoubleLine() != null){
-						for(DoubleLine doubleLine : lesson.getDoubleLine()){
-							Log.e("saveLessons", " doubleLine "+doubleLine.getTitle());
-							mSaveLessonStatement.clearBindings();
-							mSaveLessonStatement.bindLong(1, day.getNumber());
-							mSaveLessonStatement.bindLong(2, lesson.getNumber());
-							mSaveLessonStatement.bindLong(3, groupId);
-							mSaveLessonStatement.bindLong(4, doubleLine.WEEK_STATE);
-							
-						
-							if(doubleLine.getTitle() != null){
-								mSaveLessonStatement.bindString(5, doubleLine.getTitle());
-							}							
-							if(doubleLine.getType() != null){
-								mSaveLessonStatement.bindString(6, doubleLine.getType());
-							}
+					
+						mSaveLessonStatement.bindLong(4, DoubleLine.WEEK_STATE);
+						mSaveLessonStatement.bindLong(5, buildLessonId(day, lesson, DoubleLine.WEEK_STATE, groupId));
 
-							if(doubleLine.getTeacher() != null){
-								mSaveLessonStatement.bindString(7, doubleLine.getTeacher());
-							}							
-							
-							if(doubleLine.getRoom() != null){
-								mSaveLessonStatement.bindString(8, doubleLine.getRoom());
-							}
-							
-							mSaveLessonStatement.execute();
+						mSaveLessonStatement.execute();
+						for(DoubleLine doubleLine : lesson.getDoubleLine()){
+							saveLessonInformation(doubleLine, buildLessonId(day, lesson, DoubleLine.WEEK_STATE, groupId), groupId);
 						}
 					}
 					
 					if(lesson.getUnderLine() != null){
+						mSaveLessonStatement.bindLong(4, UnderLine.WEEK_STATE);
+						mSaveLessonStatement.bindLong(5, buildLessonId(day, lesson, UnderLine.WEEK_STATE, groupId));
 
-						for(UnderLine underLine : lesson.getUnderLine()){
-							Log.e("saveLessons", " underLine "+underLine.getTitle());
-	
-							mSaveLessonStatement.clearBindings();
-							mSaveLessonStatement.bindLong(1, day.getNumber());
-							mSaveLessonStatement.bindLong(2, lesson.getNumber());
-							mSaveLessonStatement.bindLong(3, groupId);
-							mSaveLessonStatement.bindLong(4, underLine.WEEK_STATE);
-							if(underLine.getTitle() != null){
-								mSaveLessonStatement.bindString(5, underLine.getTitle());
-							}							
-							if(underLine.getType() != null){
-								mSaveLessonStatement.bindString(6, underLine.getType());
-							}
-
-							if(underLine.getTeacher() != null){
-								mSaveLessonStatement.bindString(7, underLine.getTeacher());
-							}	
-						
-							if(underLine.getRoom() != null){
-								mSaveLessonStatement.bindString(8, underLine.getRoom());
-							}
-							
-							
+						for(UnderLine underLine : lesson.getUnderLine()){	
+							saveLessonInformation(underLine, buildLessonId(day, lesson, UnderLine.WEEK_STATE, groupId), groupId);
 							mSaveLessonStatement.execute();
 						}
 					}
 					
 					if(lesson.getOverLine() != null){
-						for(OverLine overLine : lesson.getOverLine()){
-							Log.e("saveLessons", " overLine "+overLine.getTitle());
-							
-							mSaveLessonStatement.clearBindings();
-							
-							mSaveLessonStatement.bindLong(1, day.getNumber());
-							mSaveLessonStatement.bindLong(2, lesson.getNumber());
-							mSaveLessonStatement.bindLong(3, groupId);
-							mSaveLessonStatement.bindLong(4, overLine.WEEK_STATE);
-							
-							if(overLine.getTitle() != null){
-								mSaveLessonStatement.bindString(5, overLine.getTitle());
-							}							
-							if(overLine.getType() != null){
-								mSaveLessonStatement.bindString(6, overLine.getType());
-							}
+						mSaveLessonStatement.bindLong(4, OverLine.WEEK_STATE);
+						mSaveLessonStatement.bindLong(5, buildLessonId(day, lesson, OverLine.WEEK_STATE, groupId));
 
-							if(overLine.getTeacher() != null){
-								mSaveLessonStatement.bindString(7, overLine.getTeacher());
-							}	
-						
-							if(overLine.getRoom() != null){
-								mSaveLessonStatement.bindString(8, overLine.getRoom());
-							}
-							
-							
+						for(OverLine overLine : lesson.getOverLine()){
+							saveLessonInformation(overLine, buildLessonId(day, lesson, OverLine.WEEK_STATE, groupId), groupId);
 							mSaveLessonStatement.execute();
 						}
 					}
@@ -191,6 +155,99 @@ public class DataManager {
 			mDb.endTransaction();
 		}
 		
+	}
+	
+	private Long buildLessonId(Day day, Lesson lesson, int weekState, long groupId ){
+		long lessonId = Long.parseLong(TextUtils.concat(
+				Integer.toString(day.getNumber()),
+				Integer.toString(lesson.getNumber()),
+				Integer.toString(weekState),
+				Long.toString(groupId)
+				).toString());
+		return lessonId;
+	}
+	
+	private void saveLessonInformation(Object information, long lessonId, long groupId){
+		mSaveInformationStatement.clearBindings();
+
+		if(information instanceof OverLine){
+			OverLine over = (OverLine) information;
+			mSaveInformationStatement.bindLong(1, groupId);
+			mSaveInformationStatement.bindLong(2, lessonId);
+			if(over.getTitle() != null){
+				mSaveInformationStatement.bindString(3, over.getTitle());
+			}
+			
+			if(over.getType() != null){
+				mSaveInformationStatement.bindString(4, over.getType());
+			}
+			
+			if(over.getTeacher() != null){
+				mSaveInformationStatement.bindString(5, over.getTeacher());
+			}
+			
+			if(over.getRoom() != null){
+				mSaveInformationStatement.bindString(6, over.getRoom());
+			}
+			
+			mSaveInformationStatement.execute();
+			
+		}else{
+			if(information instanceof UnderLine){
+				UnderLine under = (UnderLine) information;
+				
+				mSaveInformationStatement.clearBindings();
+				mSaveInformationStatement.bindLong(1, groupId);
+				mSaveInformationStatement.bindLong(2, lessonId);
+				
+				if(under.getTitle() != null){
+					mSaveInformationStatement.bindString(3, under.getTitle());
+				}
+
+				if(under.getType() != null){
+					mSaveInformationStatement.bindString(4, under.getType());
+				}
+
+				if(under.getTeacher() != null){
+					mSaveInformationStatement.bindString(5, under.getTeacher());
+				}
+
+				if(under.getRoom() != null){
+					mSaveInformationStatement.bindString(6, under.getRoom());
+				}
+				
+				
+				mSaveInformationStatement.execute();
+			}else{
+				if(information instanceof DoubleLine){
+					DoubleLine doubleLine = (DoubleLine) information;
+					mSaveInformationStatement.clearBindings();
+					mSaveInformationStatement.bindLong(1, groupId);
+					mSaveInformationStatement.bindLong(2, lessonId);
+					
+					if(doubleLine.getTitle() != null){
+						mSaveInformationStatement.bindString(3, doubleLine.getTitle());
+					}
+					
+					
+					if(doubleLine.getType() != null){
+						mSaveInformationStatement.bindString(4, doubleLine.getType());
+					}
+					
+					
+					if(doubleLine.getTeacher() != null){
+						mSaveInformationStatement.bindString(5, doubleLine.getTeacher());
+					}
+					
+					
+					if(doubleLine.getRoom() != null){
+						mSaveInformationStatement.bindString(6, doubleLine.getRoom());
+					}
+					
+					mSaveInformationStatement.execute();
+				}
+			}
+		}
 	}
 	
 	public ArrayList<LessonListElement> getLessonList(final Integer dayNumber, final Integer weekState){
@@ -215,40 +272,32 @@ public class DataManager {
 				lesson.setId(c.getLong(c.getColumnIndex(LessonTableModel.ID)));		
 				Log.w("setId","id = "+c.getLong(c.getColumnIndex(LessonTableModel.ID)));
 				lesson.setDayNumber(c.getInt(c.getColumnIndex(LessonTableModel.DAY)));
-				lesson.setLessonNumber(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)));	
-				lesson.setInformation(getLessonInformation(dayNumber, c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)), weekState));
+				lesson.setLessonNumber(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)));
+				lesson.setInformation(getLessonInformation(c.getLong(c.getColumnIndex(LessonTableModel.ID))));
 				result.add(lesson);
-				Log.e("getLessonList",c.getInt(c.getColumnIndex(LessonTableModel.NUMBER))+" "+c.getString(c.getColumnIndex(LessonTableModel.LESSON_TITLE))
-						+" "+c.getString(c.getColumnIndex(LessonTableModel.WEEK_STATE)));
-
+			
 		}
 
 		return result;
 	}
 	
-	private ArrayList<LessonInformation> getLessonInformation (Integer dayNumber, Integer lessonNumber, Integer weekState){
+	private ArrayList<LessonInformation> getLessonInformation (Long lessonId){
 		ArrayList<LessonInformation> result = new ArrayList<LessonInformation>();
 		String query = TextUtils.concat(
-				"SELECT * FROM ",LessonTableModel.TABLE_NAME, " WHERE ",
-				LessonTableModel.GROUP_ID," ='",PreferenceManager.getInstance().getGroupId().toString(),"' AND ",
-				LessonTableModel.DAY,"='",dayNumber.toString(),"' AND ",
-				LessonTableModel.NUMBER,"='",lessonNumber.toString(),"' ",
-				" AND (",LessonTableModel.WEEK_STATE,"='",weekState.toString(),"' OR ",LessonTableModel.WEEK_STATE,"='2')" 
-				).toString();
+				"SELECT * FROM ",LessonInformation.TABLE_NAME, " WHERE ",
+				LessonInformation.LESSON_ID,"=?").toString();
 		
 		Log.e("getLessonInformation", query);
-		Cursor c = mDb.rawQuery(query, new String[]{ });
+		Cursor c = mDb.rawQuery(query, new String[]{lessonId.toString()});
 		LessonInformation inf;
 		
 		while(c.moveToNext()){
-			Log.e("getLessonInformation",c.getInt(c.getColumnIndex(LessonTableModel.NUMBER))+" "+c.getString(c.getColumnIndex(LessonTableModel.LESSON_TITLE))
-					+" "+c.getString(c.getColumnIndex(LessonTableModel.WEEK_STATE)));
-
+		
 			inf = new LessonInformation();
-			inf.setTitle(c.getString(c.getColumnIndex(LessonTableModel.LESSON_TITLE)));
-			inf.setTeacher(c.getString(c.getColumnIndex(LessonTableModel.TEACHER_NAME)));
-			inf.setRoom(c.getString(c.getColumnIndex(LessonTableModel.ROOM)));
-			inf.setType(c.getString(c.getColumnIndex(LessonTableModel.LESSON_TYPE)));
+			inf.setTitle(c.getString(c.getColumnIndex(LessonInformation.LESSON_TITLE)));
+			inf.setTeacher(c.getString(c.getColumnIndex(LessonInformation.TEACHER_NAME)));
+			inf.setRoom(c.getString(c.getColumnIndex(LessonInformation.ROOM)));
+			inf.setType(c.getString(c.getColumnIndex(LessonInformation.LESSON_TYPE)));
 			result.add(inf);
 		}
 		
@@ -256,29 +305,27 @@ public class DataManager {
 		return result;
 	}
 	
-	public void getAllLessons(){
+	/*public void getAllLessons(){
 		Cursor c = mDb.rawQuery("SELECT * FROM "+LessonTableModel.TABLE_NAME, new String[]{});
 		while(c.moveToNext()){
 			Log.e("getAllLessons", " "+c.getString(0)+" "+c.getString(1)+" "+c.getString(2)+" "+c.getString(3)+" "+c.getString(4)
 					+" "+c.getString(5)+" "+c.getString(6)+" "+c.getString(7)+" "+c.getString(8));
 		}
-	}
+	}*/
 	
-	public LessonListElement getLesson(Long leesonId){
+	public LessonListElement getLesson(Long lesonId){
 		
 		LessonListElement result = new LessonListElement();
 		Cursor c = mDb.rawQuery(TextUtils.concat(
-				"SELECT * FROM ",LessonTableModel.TABLE_NAME," WHERE ",
-				LessonTableModel.ID,"=?"
-				).toString(), new String[]{leesonId.toString()});
-		Log.e("getLesson","id = "+leesonId.toString()+"; cursor count = "+c.getCount());
+				"SELECT * FROM ",LessonTableModel.TABLE_NAME, " WHERE ",
+				LessonTableModel.ID,"=?").toString(), new String[]{lesonId.toString()});
+		
+		Log.e("getLesson","id = "+lesonId.toString()+"; cursor count = "+c.getCount());
 		c.moveToFirst();
 		if(c.getCount() != 0){
 			result.setDayNumber(c.getInt(c.getColumnIndex(LessonTableModel.DAY)));
 			result.setLessonNumber(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)));
-			result.setInformation(getLessonInformation(c.getInt(c.getColumnIndex(LessonTableModel.DAY)),
-					c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)),
-					c.getInt(c.getColumnIndex(LessonTableModel.WEEK_STATE))));
+			result.setInformation(getLessonInformation(lesonId));
 
 		}
 			
