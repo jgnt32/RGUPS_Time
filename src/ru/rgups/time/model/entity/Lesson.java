@@ -20,33 +20,27 @@ public class Lesson {
 	public static final String ID = "id";
 	
 	public Lesson() {
+		
 	}
 	
-	@DatabaseField(foreign = true, columnName = "day_id", foreignAutoRefresh = true)
 	private Day day;
 	
-	@DatabaseField(generatedId = true)
-	private int id;
+	private long id;
 	
 
 	@Element(name = "para_n")
-	@DatabaseField
 	private int number;
 	
 	@Element(name = "vrem")
-	@DatabaseField
 	private String time;	
 	
 	@ElementList(inline = true, type = DoubleLine.class,required = false, empty = true)
-	@ForeignCollectionField(eager = true)
 	private Collection<DoubleLine> doubleLine;
 	
 	@ElementList(inline = true,required = false, empty = true,type = UnderLine.class )
-	@ForeignCollectionField(eager = true)	
 	private Collection<UnderLine> underLine;
 	
 	@ElementList(inline = true,required = false, empty = true,type = OverLine.class )
-	@ForeignCollectionField(eager = true)
 	private Collection<OverLine> overLine;
 	
 	
@@ -74,7 +68,7 @@ public class Lesson {
 		this.day = day;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 

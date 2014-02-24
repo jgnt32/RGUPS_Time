@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import ru.rgups.time.model.HelperManager;
 import ru.rgups.time.model.LessonTableModel;
+import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Application;
 import android.util.Log;
@@ -30,6 +31,8 @@ public class RTApplication extends Application{
 		ConnectionSource connectionSource = HelperManager.getHelper().getConnectionSource();
 		try {
 			TableUtils.createTableIfNotExists(connectionSource, LessonTableModel.class);
+			TableUtils.createTableIfNotExists(connectionSource, LessonInformation.class);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

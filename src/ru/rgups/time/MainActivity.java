@@ -2,10 +2,11 @@ package ru.rgups.time;
 
 import ru.rgups.time.adapters.DrawerListAdapter;
 import ru.rgups.time.fragments.SettingFragment;
+import ru.rgups.time.fragments.SingleLessonFragment;
 import ru.rgups.time.fragments.TimeTableFragment;
 import ru.rgups.time.fragments.WelcomeActivity;
+import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.interfaces.SettingListener;
-import ru.rgups.time.model.DataManager;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +24,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class MainActivity extends ActionBarActivity implements  SettingListener, OnClickListener, OnItemClickListener{
+public class MainActivity extends ActionBarActivity implements  SettingListener, OnClickListener, OnItemClickListener, LessonListener{
 
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
@@ -169,6 +170,18 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		PreferenceManager.getInstance().saveGroupId((long) -1);
 		this.openWelcomeActivity();
 		mReplaceFlag = true;
+	}
+
+	@Override
+	public void OnLessonListElementClick(long lessonId) {
+		SingleLessonFragment fragment = new SingleLessonFragment();
+		Bundle args = new Bundle();
+		args.putLong(SingleLessonFragment.LESSON_ID, lessonId);
+		fragment.setArguments(args);
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.addToBackStack(null);
+		ft.replace(R.id.frameLayout, fragment);
+		ft.commit();
 	}
 	
 	

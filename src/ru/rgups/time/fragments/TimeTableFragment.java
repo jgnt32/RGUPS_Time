@@ -13,12 +13,14 @@ import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.CalendarAdapter;
 import ru.rgups.time.adapters.LessonAdapter;
+import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.views.CalendarHint;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,11 +29,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-public class TimeTableFragment extends BaseFragment implements OnScrollListener,OnItemClickListener{
+public class TimeTableFragment extends BaseFragment implements OnScrollListener,OnItemClickListener, android.widget.AdapterView.OnItemClickListener{
 	
 	public final static String DAY_MONTH_DATE_FORMAT = "d MMMM";
 	public static final String DAY_OF_WEEK_DATE_FORMAT = "EEEE";
@@ -48,14 +51,22 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 
 	private CalendarHint mCalendarHint;
 	private View mCalendarListelement;
-	
+	private LessonListener mLessonListener;
 
+
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mLessonListener = (LessonListener) activity;
+
+	}
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		mLessons = DataManager.getInstance().getLessonList(1, 1);
-		this.mLessonAdapter = new LessonAdapter(getActivity(), mLessons);
+	//	mLessons = DataManager.getInstance().getLessonList(1, 1);
+	//	this.mLessonAdapter = new LessonAdapter(getActivity(), mLessons);
 	}
 	
 	@Override
@@ -73,6 +84,7 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 //		mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDatOfTheYear(), 0);//		getGroupList();
 		DataManager.getInstance().setSpiceManager(getSpiceManager());
 		DataManager.getInstance().timeTableRequest(new GetTimeListener());
+
 		
 	}
 
@@ -101,7 +113,7 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 		@Override
 		public void onRequestSuccess(LessonList list) {
 			Log.e("list",""+list.getDays().size());
-			}
+		}
 	}
 
 
@@ -115,6 +127,7 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 		
 		mLessonList.setEmptyView(mEmptyView);
 		mLessonList.setAdapter(mLessonAdapter);
+		mLessonList.setOnItemClickListener(this);
 		mCalendarList = (HListView) v.findViewById(R.id.calendar_list);
 		mCalendarAdapter = new CalendarAdapter(getActivity());
 		mCalendarList.setAdapter(mCalendarAdapter);
@@ -175,6 +188,12 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 			mCalendarHint.showHint();
 		}
 		
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+		Log.w("onItemClick","id = "+id);
+		mLessonListener.OnLessonListElementClick(id);
 	}
 
 		
