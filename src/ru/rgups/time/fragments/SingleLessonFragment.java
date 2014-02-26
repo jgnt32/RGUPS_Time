@@ -28,6 +28,7 @@ public class SingleLessonFragment extends Fragment implements OnClickListener{
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		mLessonListener = (LessonListener) activity;
 	}
 	
 	@Override
@@ -63,11 +64,10 @@ public class SingleLessonFragment extends Fragment implements OnClickListener{
 
 	private void showHomeWorkFragment(){
 		HomeWorkFragment fragment = new HomeWorkFragment();
-		fragment.show(getFragmentManager(), null);
 	}
 	
 	@Override
 	public void onClick(View v) {
-		showHomeWorkFragment();		
+		mLessonListener.OnHomeWorkClick();	
 	}
 }
