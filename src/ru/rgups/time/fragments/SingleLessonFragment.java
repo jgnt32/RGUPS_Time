@@ -1,5 +1,7 @@
 package ru.rgups.time.fragments;
 
+import java.util.Date;
+
 import ru.rgups.time.R;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.model.DataManager;
@@ -10,10 +12,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,29 +28,58 @@ public class SingleLessonFragment extends Fragment implements OnClickListener{
 	private LessonListElement mLesson;
 	private LessonListener mLessonListener;
 	private LinearLayout mInformationContainer;
-	private Button mHwButton;
+	private TextView mTitle;
+	private TextView mTime;
+
+	private String[] mTimePeriods;
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		mLessonListener = (LessonListener) activity;
 	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setHasOptionsMenu(true);
 		mLesson = DataManager.getInstance().getLesson(getArguments().getLong(LESSON_ID));
+		mTimePeriods = getActivity().getResources().getStringArray(R.array.lessons_time_periods);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.single_lesson_fragment, null);
+		mTime = (TextView) v.findViewById(R.id.single_lesson_time);
+		mTitle = (TextView) v.findViewById(R.id.single_lesson_title);
 		mInformationContainer = (LinearLayout) v.findViewById(R.id.single_information_container);
 		for(LessonInformation lesson : mLesson.getInformation()){
 			mInformationContainer.addView(getLesson(lesson));
 		}
-		mHwButton = (Button) v.findViewById(R.id.single_lesson_hw_button);
-		mHwButton.setOnClickListener(this);
-	
+
+		mTitle.setText(mLesson.getInformation().get(0).getTitle());
+		mTime.setText(mTimePeriods[mLesson.getLessonNumber()-1]);
 		return v;
+	}
+	
+	@Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		inflater.inflate(R.menu.main, menu);
+		menu.findItem(R.id.action_add).setVisible(true);
+		
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+
+		switch (item.getItemId()){
+		case R.id.action_add:
+			mLessonListener.OnAddHomeWorkClick(mLesson.getId(), new Date());
+			return true;
+			
+		default: return super.onOptionsItemSelected(item);
+
+		}
+		
 	}
 	
 	private View getLesson(LessonInformation lesson){
@@ -63,7 +96,7 @@ public class SingleLessonFragment extends Fragment implements OnClickListener{
 
 	private void showHomeWorkFragment(){
 		HomeWorkFragment fragment = new HomeWorkFragment();
-		fragment.show(getFragmentManager(), null);
+		
 	}
 	
 	@Override

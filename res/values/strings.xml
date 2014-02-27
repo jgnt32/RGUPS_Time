@@ -7,7 +7,11 @@
 
     <!-- ACTION MENUS -->
     <string name="action_scroll_to_today">Сегодня</string>
-    
+    <string name="action_done">Готово</string>
+	<string name="action_add_homework">Добаваить ДЗ</string>    
+	<string name="action_add_image">Добаваить изображение</string>    
+	
+	
     <!-- DRAWER -->
     <string name="draw_open">Меню</string>
     <string name="draw_close">Расписание</string>

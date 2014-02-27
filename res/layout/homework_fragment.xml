@@ -4,33 +4,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <EditText
-        android:id="@+id/editText1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:ems="10" >
+        android:layout_marginBottom="10dp"
+        android:background="@android:color/white"
+        android:orientation="vertical" >
 
-        <requestFocus />
-    </EditText>
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:minHeight="30dp"
         android:orientation="vertical" >
 
-        <Button
-            android:id="@+id/button1"
-            style="@style/AppButton"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableRight="@drawable/ic_content_new_attachment"
-            android:text="Добавить изображения" />
+            android:minHeight="100dp" >
 
-        <GridView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </GridView>
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:text="Фотографии:" />
 
+        </LinearLayout>
+        
     </LinearLayout>
+
 
 </LinearLayout>

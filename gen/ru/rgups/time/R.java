@@ -1112,24 +1112,30 @@ containing a value of this type.
         public static final int header_bg=0x7f020062;
         public static final int hlv_overscroll_edge=0x7f020063;
         public static final int hlv_overscroll_glow=0x7f020064;
-        public static final int ic_content_new_attachment=0x7f020065;
-        public static final int ic_drawer=0x7f020066;
-        public static final int ic_launcher=0x7f020067;
-        public static final int ic_pencil=0x7f020068;
-        public static final int ic_person=0x7f020069;
-        public static final int ic_place=0x7f02006a;
-        public static final int ic_time=0x7f02006b;
-        public static final int lc_person=0x7f02006c;
-        public static final int lesson=0x7f02006d;
-        public static final int right_arrow=0x7f02006e;
-        public static final int right_arrow2x=0x7f02006f;
-        public static final int right_arrow_blue=0x7f020070;
-        public static final int shape=0x7f020071;
-        public static final int white_background=0x7f020072;
+        public static final int ic_content_new=0x7f020065;
+        public static final int ic_content_new_attachment=0x7f020066;
+        public static final int ic_content_new_attachment_light=0x7f020067;
+        public static final int ic_drawer=0x7f020068;
+        public static final int ic_launcher=0x7f020069;
+        public static final int ic_navigation_accept=0x7f02006a;
+        public static final int ic_navigation_cancel=0x7f02006b;
+        public static final int ic_pencil=0x7f02006c;
+        public static final int ic_person=0x7f02006d;
+        public static final int ic_place=0x7f02006e;
+        public static final int ic_time=0x7f02006f;
+        public static final int lc_person=0x7f020070;
+        public static final int lesson=0x7f020071;
+        public static final int right_arrow=0x7f020072;
+        public static final int right_arrow2x=0x7f020073;
+        public static final int right_arrow_blue=0x7f020074;
+        public static final int shape=0x7f020075;
+        public static final int white_background=0x7f020076;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f050058;
         public static final int RelativeLayout1=0x7f05006e;
+        public static final int action_add=0x7f050071;
+        public static final int action_add_image=0x7f050073;
         public static final int action_bar=0x7f05001e;
         public static final int action_bar_activity_content=0x7f050017;
         public static final int action_bar_container=0x7f05001d;
@@ -1138,6 +1144,7 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f050025;
         public static final int action_bar_title=0x7f050024;
         public static final int action_context_bar=0x7f05001f;
+        public static final int action_done=0x7f050072;
         public static final int action_menu_divider=0x7f050018;
         public static final int action_menu_presenter=0x7f050019;
         public static final int action_mode_close_button=0x7f050026;
@@ -1147,7 +1154,6 @@ containing a value of this type.
         public static final int alwaysScroll=0x7f050002;
         public static final int auth_frame_layout=0x7f050041;
         public static final int beginning=0x7f050013;
-        public static final int button1=0x7f050055;
         public static final int calendar_bottom_indicator=0x7f050045;
         public static final int calendar_divider_text=0x7f050048;
         public static final int calendar_element_day_of_week=0x7f050047;
@@ -1228,13 +1234,14 @@ containing a value of this type.
         public static final int single_information_room=0x7f050069;
         public static final int single_information_teacher=0x7f050066;
         public static final int single_information_type=0x7f050068;
-        public static final int single_lesson_hw_button=0x7f050065;
+        public static final int single_lesson_home_work_list=0x7f050065;
         public static final int single_lesson_information_type_icon=0x7f050067;
         public static final int single_lesson_time=0x7f050063;
         public static final int single_lesson_title=0x7f050062;
         public static final int split_action_bar=0x7f050020;
         public static final int submit_area=0x7f05003b;
         public static final int tabMode=0x7f050004;
+        public static final int textView1=0x7f050055;
         public static final int title=0x7f05002d;
         public static final int top_action_bar=0x7f050022;
         public static final int up=0x7f050023;
@@ -1359,23 +1366,26 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
+        public static final int action_add_homework=0x7f0a0012;
+        public static final int action_add_image=0x7f0a0013;
+        public static final int action_done=0x7f0a0011;
         /**  ACTION MENUS 
          */
         public static final int action_scroll_to_today=0x7f0a0010;
         public static final int action_settings=0x7f0a000e;
         public static final int app_name=0x7f0a000d;
-        public static final int draw_close=0x7f0a0012;
+        public static final int draw_close=0x7f0a0015;
         /**  DRAWER 
          */
-        public static final int draw_open=0x7f0a0011;
+        public static final int draw_open=0x7f0a0014;
         public static final int hello_world=0x7f0a000f;
         /**  Captions 
          */
-        public static final int login_button_caption=0x7f0a0013;
-        public static final int login_facultet_caption=0x7f0a0014;
-        public static final int login_group_caption=0x7f0a0015;
-        public static final int setting_logout=0x7f0a0016;
-        public static final int setting_staff=0x7f0a0017;
+        public static final int login_button_caption=0x7f0a0016;
+        public static final int login_facultet_caption=0x7f0a0017;
+        public static final int login_group_caption=0x7f0a0018;
+        public static final int setting_logout=0x7f0a0019;
+        public static final int setting_staff=0x7f0a001a;
     }
     public static final class style {
         /** 

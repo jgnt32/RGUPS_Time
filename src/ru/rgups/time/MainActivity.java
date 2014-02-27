@@ -1,6 +1,9 @@
 package ru.rgups.time;
 
+import java.util.Date;
+
 import ru.rgups.time.adapters.DrawerListAdapter;
+import ru.rgups.time.fragments.HomeWorkFragment;
 import ru.rgups.time.fragments.SettingFragment;
 import ru.rgups.time.fragments.SingleLessonFragment;
 import ru.rgups.time.fragments.TimeTableFragment;
@@ -178,6 +181,15 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		Bundle args = new Bundle();
 		args.putLong(SingleLessonFragment.LESSON_ID, lessonId);
 		fragment.setArguments(args);
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.addToBackStack(null);
+		ft.replace(R.id.frameLayout, fragment);
+		ft.commit();
+	}
+
+	@Override
+	public void OnAddHomeWorkClick(long lessonId, Date date) {
+		HomeWorkFragment fragment = new HomeWorkFragment();
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.addToBackStack(null);
 		ft.replace(R.id.frameLayout, fragment);

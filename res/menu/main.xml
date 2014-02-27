@@ -6,5 +6,25 @@
         android:title="@string/action_scroll_to_today"
         android:visible="false"
         sabd:showAsAction="always|withText"/>
+    
+    <item android:id="@+id/action_add"
+        android:title="@string/action_add_homework"
+        android:icon="@drawable/ic_content_new"
+        android:visible="false"
+		sabd:showAsAction="always"/>
+    
+    <item 
+        android:id="@+id/action_done"
+		android:icon="@drawable/ic_navigation_accept"
+        android:visible="false"
+        android:title="@string/action_done"
+        sabd:showAsAction="always"/>
+    <item 
+        android:id="@+id/action_add_image"
+        android:icon="@drawable/ic_content_new_attachment_light"
+        android:visible="false"
+		android:title="@string/action_add_image"    
+		sabd:showAsAction="always"/>
+     
 
 </menu>
