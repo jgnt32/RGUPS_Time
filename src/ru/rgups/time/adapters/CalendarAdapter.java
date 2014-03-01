@@ -19,6 +19,8 @@ import android.widget.TextView;
 
 public class CalendarAdapter extends BaseAdapter{
 	
+	public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
+	
 	public final static int CURRENS_SEMESTR = spotSemestr();//
 
 	public final static int DAY_COUNT = getCorrectDayCount();
@@ -45,6 +47,8 @@ public class CalendarAdapter extends BaseAdapter{
 	private View bootomIndicator;
 
 	private int mLastSelected = -1;
+
+	private GregorianCalendar mTimestampCalendar;
 	
 	public CalendarAdapter(Context context){
 		mGreenColor = context.getResources().getColor(R.color.theme_green);
@@ -54,6 +58,15 @@ public class CalendarAdapter extends BaseAdapter{
 		mCalendar.setMinimalDaysInFirstWeek(4);
 		mCalendar.setTime(Calendar.getInstance().getTime());
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		mTimestampCalendar = new GregorianCalendar();
+		
+		mTimestampCalendar.setTime(Calendar.getInstance().getTime());
+		mTimestampCalendar.set(GregorianCalendar.HOUR, 0);
+		mTimestampCalendar.set(GregorianCalendar.MINUTE, 0);
+		mTimestampCalendar.set(GregorianCalendar.SECOND, 0);
+		mTimestampCalendar.set(GregorianCalendar.MILLISECOND, 0);
+		
+		
 	}
 	
 	@Override
@@ -81,6 +94,17 @@ public class CalendarAdapter extends BaseAdapter{
 		return position+DAY_OFFSET;
 	}
 	
+	public long getTimestamp(int position){
+		mTimestampCalendar.set(GregorianCalendar.DAY_OF_YEAR, (int) getItemId(position));
+		
+		return mTimestampCalendar.getTimeInMillis();
+	}
+	
+	public String getDateInString(int position){
+		mTimestampCalendar.set(GregorianCalendar.DAY_OF_YEAR, (int) getItemId(position));
+		
+		return DateFormat.format(HW_DATE_FORMAT, mTimestampCalendar.getTime()).toString();
+	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent){

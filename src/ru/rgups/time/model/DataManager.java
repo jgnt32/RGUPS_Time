@@ -67,7 +67,7 @@ public class DataManager {
 				HomeWork.MESSAGE,", ",	//3
 				HomeWork.IMAGES,", ",	//4
 				HomeWork.COMPLITE,		//5
-				") (?,?,?,?,?)"
+				") VALUES (?,?,?,?,?)"
 				).toString());
 		
 		mDeleteInformationStatement = mDb.compileStatement(TextUtils.concat(
@@ -340,6 +340,7 @@ public class DataManager {
 		Log.e("getLesson","id = "+lesonId.toString()+"; cursor count = "+c.getCount());
 		c.moveToFirst();
 		if(c.getCount() != 0){
+			result.setId(c.getLong(c.getColumnIndex(LessonTableModel.ID)));
 			result.setDayNumber(c.getInt(c.getColumnIndex(LessonTableModel.DAY)));
 			result.setLessonNumber(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)));
 			result.setInformation(getLessonInformation(lesonId));
@@ -376,6 +377,7 @@ public class DataManager {
 			}
 
 			homeWork.setId(mSaveHomeWorkStatement.executeInsert());
+			Log.e("saveHomeWork","id = "+ homeWork.getId());
 			mDb.setTransactionSuccessful();
 		}catch(Exception e){
 			e.printStackTrace();
@@ -385,13 +387,13 @@ public class DataManager {
 		}
 	}
 	
-	public HomeWork getHomeWork(Long date, Long lessonId){
+	public HomeWork getHomeWork(Long id){
 		HomeWork result = null;
 		Cursor c = mDb.rawQuery(TextUtils.concat(
 				"SELECT * FROM ",HomeWork.TABLE_NAME," WHERE ",
-				HomeWork.DATE,"=? AND ",HomeWork.LESSON_ID,"=?"
+				HomeWork.DATE,"=? AND ",HomeWork.ID,"=?"
 				).toString(), 
-				new String[]{date.toString(), lessonId.toString()});
+				new String[]{id.toString()});
 		if(c.moveToFirst()){
 			result = new HomeWork();
 			result.setId(c.getLong(c.getColumnIndex(HomeWork.ID)));
@@ -401,6 +403,28 @@ public class DataManager {
 			result.setImages(Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES))));
 			result.setComplite(c.getInt(c.getColumnIndex(HomeWork.COMPLITE))>0);
 
+		}
+		return result;
+	}
+
+	public ArrayList<HomeWork> getHomeWorkList(Long date, Long lessonId){
+		ArrayList<HomeWork> result = new ArrayList<HomeWork>();
+		String query = TextUtils.concat(
+				"SELECT * FROM ",HomeWork.TABLE_NAME," WHERE ",
+				HomeWork.DATE,"='",date.toString(),"' AND ",HomeWork.LESSON_ID,"='",lessonId.toString(),"'"
+				).toString();
+		Cursor c = mDb.rawQuery(query, 
+				new String[]{});
+		while(c.moveToNext()){
+
+			HomeWork hw = new HomeWork();
+			hw.setId(c.getLong(c.getColumnIndex(HomeWork.ID)));
+			hw.setDate(new Date(c.getLong(c.getColumnIndex(HomeWork.DATE))));
+			hw.setLessonId(c.getLong(c.getColumnIndex(HomeWork.LESSON_ID)));
+			hw.setMessage(c.getString(c.getColumnIndex(HomeWork.MESSAGE)));
+			hw.setImages(Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES))));
+			hw.setComplite(c.getInt(c.getColumnIndex(HomeWork.COMPLITE))>0);
+			result.add(hw);
 		}
 		return result;
 	}

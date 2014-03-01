@@ -1,5 +1,7 @@
 package ru.rgups.time.fragments;
 
+import java.util.Date;
+
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.PhotoGalleryAdapter;
 import ru.rgups.time.model.DataManager;
@@ -19,6 +21,10 @@ import android.widget.EditText;
 import android.widget.GridView;
 
 public class HomeWorkFragment extends Fragment implements MultiChoiceModeListener{
+	
+	public static final String LESSON_ID = "lesson_id";
+	public static final String DATE = "date";
+	
 	private GridView mPhotoGridView;
 	private PhotoGalleryAdapter mAdapter;
 	private EditText mText;
@@ -28,6 +34,8 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
+		Log.d("qwerrqeq",""+getArguments().getLong(LESSON_ID)+" tm "+ getArguments().getLong(DATE));
+
 	}
 	
 	
@@ -55,6 +63,7 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 		switch(item.getItemId()){
 		
 		case R.id.action_save: 
+			saveHomeWork();
 			return true;
 			
 			
@@ -66,9 +75,14 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 
 	
 	private void saveHomeWork(){
-		mHomeWork = new HomeWork();
-		mHomeWork.setMessage(mText.getText().toString());
-		DataManager.getInstance().saveHomeWork(mHomeWork);
+		if(!mText.getText().toString().isEmpty()){
+			Log.e("tm ="+getArguments().getLong(DATE),"lessonid = "+getArguments().getLong(LESSON_ID));
+			mHomeWork = new HomeWork();
+			mHomeWork.setDate(new Date(getArguments().getLong(DATE)));
+			mHomeWork.setLessonId(getArguments().getLong(LESSON_ID));
+			mHomeWork.setMessage(mText.getText().toString());
+			DataManager.getInstance().saveHomeWork(mHomeWork);			
+		}
 	}
 
 	@Override

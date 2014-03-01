@@ -3,6 +3,7 @@ package ru.rgups.time;
 import java.sql.SQLException;
 
 import ru.rgups.time.model.HelperManager;
+import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.LessonTableModel;
 import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.utils.PreferenceManager;
@@ -32,6 +33,7 @@ public class RTApplication extends Application{
 		try {
 			TableUtils.createTableIfNotExists(connectionSource, LessonTableModel.class);
 			TableUtils.createTableIfNotExists(connectionSource, LessonInformation.class);
+			TableUtils.createTableIfNotExists(connectionSource, HomeWork.class);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

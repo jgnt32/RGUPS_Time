@@ -1,16 +1,16 @@
 package ru.rgups.time.fragments;
 
-import java.util.Date;
-
 import ru.rgups.time.R;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.model.DataManager;
+import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonInformation;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,16 +18,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SingleLessonFragment extends Fragment implements OnClickListener{
 	
+	public static final String TIMESTAMP = "timestamp";
 	public static final String LESSON_ID = "lesson_id";
 
 	private LessonListElement mLesson;
 	private LessonListener mLessonListener;
 	private LinearLayout mInformationContainer;
+	private LinearLayout mHomeWorkContainer;
 	private TextView mTitle;
 	private TextView mTime;
 
@@ -52,12 +55,19 @@ public class SingleLessonFragment extends Fragment implements OnClickListener{
 		mTime = (TextView) v.findViewById(R.id.single_lesson_time);
 		mTitle = (TextView) v.findViewById(R.id.single_lesson_title);
 		mInformationContainer = (LinearLayout) v.findViewById(R.id.single_information_container);
+		mHomeWorkContainer = (LinearLayout) v.findViewById(R.id.home_work_container);
 		for(LessonInformation lesson : mLesson.getInformation()){
 			mInformationContainer.addView(getLesson(lesson));
 		}
+		long timestamp = getArguments().getLong(TIMESTAMP);
 
+		for(HomeWork homeWork : DataManager.getInstance().getHomeWorkList(timestamp, mLesson.getId())){
+			mHomeWorkContainer.addView(getHomeWorkListElement(homeWork));
+		}
+		
 		mTitle.setText(mLesson.getInformation().get(0).getTitle());
 		mTime.setText(mTimePeriods[mLesson.getLessonNumber()-1]);
+
 		return v;
 	}
 	
@@ -73,7 +83,7 @@ public class SingleLessonFragment extends Fragment implements OnClickListener{
 
 		switch (item.getItemId()){
 		case R.id.action_add:
-			mLessonListener.OnAddHomeWorkClick(mLesson.getId(), new Date());
+			mLessonListener.OnAddHomeWorkClick(mLesson.getId(), getArguments().getLong(TIMESTAMP));
 			return true;
 			
 		default: return super.onOptionsItemSelected(item);
@@ -93,14 +103,22 @@ public class SingleLessonFragment extends Fragment implements OnClickListener{
 		room.setText(lesson.getRoom());
 		return v;
 	}
-
-	private void showHomeWorkFragment(){
-		HomeWorkFragment fragment = new HomeWorkFragment();
+	
+	private View getHomeWorkListElement(HomeWork homeWork){
+		final LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View v = (View) inflater.inflate(R.layout.home_work_list_element, null);
+		TextView message = (TextView) v.findViewById(R.id.home_work_list_element_text);
+		CheckBox checkBox = (CheckBox) v.findViewById(R.id.home_work_list_element_check_box);
+		message.setText(homeWork.getMessage());
+		checkBox.setChecked(homeWork.isComplite());
 		
+		return v;
 	}
+
+	
 	
 	@Override
 	public void onClick(View v) {
-		showHomeWorkFragment();		
+
 	}
 }

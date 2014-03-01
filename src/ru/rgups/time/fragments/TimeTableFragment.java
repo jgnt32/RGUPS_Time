@@ -7,6 +7,7 @@ import it.sephiroth.android.library.widget.HListView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ru.rgups.time.BaseFragment;
@@ -166,6 +167,9 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 	@Override
 	public void onItemClick(it.sephiroth.android.library.widget.AdapterView<?> parent,
 			View view, int position, long id) {
+		Log.d("tiemestamp ","tm = "+mCalendarAdapter.getTimestamp(position)+ " date = "+new Date(mCalendarAdapter.getTimestamp(position)).toString());
+		Log.d("tiemestamp ","tm = "+mCalendarAdapter.getTimestamp(mCalendarList.getCheckedItemPosition())+ " date = "+new Date(mCalendarAdapter.getTimestamp(mCalendarList.getCheckedItemPosition())).toString());
+
 		mLessons.clear();
 		mLessons.addAll(DataManager.getInstance().getLessonList(mCalendarAdapter.getDayNumber(position), mCalendarAdapter.getWeekState(position)));
 		mLessonAdapter = new LessonAdapter(getActivity(), mLessons);
@@ -175,7 +179,6 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 	
 	@Override
 	public void onScrollStateChanged(AbsHListView view, int scrollState) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -193,7 +196,7 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
 		Log.w("onItemClick","id = "+id);
-		mLessonListener.OnLessonListElementClick(id);
+		mLessonListener.OnLessonListElementClick(id, mCalendarAdapter.getTimestamp(mCalendarList.getCheckedItemPosition()));
 	}
 
 		

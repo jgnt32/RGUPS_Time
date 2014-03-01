@@ -51,16 +51,11 @@
         android:textStyle="bold" />
 
     <LinearLayout
+        android:id="@+id/home_work_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:orientation="vertical" >
-
-        <ListView
-            android:id="@+id/single_lesson_home_work_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-        </ListView>
 
     </LinearLayout>
 

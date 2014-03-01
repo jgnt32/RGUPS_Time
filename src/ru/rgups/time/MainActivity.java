@@ -176,10 +176,11 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	}
 
 	@Override
-	public void OnLessonListElementClick(long lessonId) {
+	public void OnLessonListElementClick(long lessonId, Long date) {
 		SingleLessonFragment fragment = new SingleLessonFragment();
 		Bundle args = new Bundle();
 		args.putLong(SingleLessonFragment.LESSON_ID, lessonId);
+		args.putLong(SingleLessonFragment.TIMESTAMP, date);
 		fragment.setArguments(args);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.addToBackStack(null);
@@ -188,8 +189,12 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	}
 
 	@Override
-	public void OnAddHomeWorkClick(long lessonId, Date date) {
+	public void OnAddHomeWorkClick(long lessonId, Long date) {
 		HomeWorkFragment fragment = new HomeWorkFragment();
+		Bundle args = new Bundle();
+		args.putLong(HomeWorkFragment.LESSON_ID, lessonId);
+		args.putLong(HomeWorkFragment.DATE, date);
+		fragment.setArguments(args);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.addToBackStack(null);
 		ft.replace(R.id.frameLayout, fragment);

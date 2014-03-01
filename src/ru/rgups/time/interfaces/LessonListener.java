@@ -4,6 +4,6 @@ import java.util.Date;
 
 public interface LessonListener {
 	
-	public void OnLessonListElementClick(long lessonId);
-	public void OnAddHomeWorkClick(long lessonId, Date date);
+	public void OnLessonListElementClick(long lessonId, Long date);
+	public void OnAddHomeWorkClick(long lessonId, Long date);
 }
