@@ -19,10 +19,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class SingleLessonFragment extends Fragment implements OnClickListener{
+public class SingleLessonFragment extends Fragment implements OnClickListener, OnCheckedChangeListener{
 	
 	public static final String TIMESTAMP = "timestamp";
 	public static final String LESSON_ID = "lesson_id";
@@ -111,7 +113,10 @@ public class SingleLessonFragment extends Fragment implements OnClickListener{
 		CheckBox checkBox = (CheckBox) v.findViewById(R.id.home_work_list_element_check_box);
 		message.setText(homeWork.getMessage());
 		checkBox.setChecked(homeWork.isComplite());
-		
+		v.setTag(homeWork.getId());
+		v.setOnClickListener(this);
+		checkBox.setTag(homeWork.getId());
+		checkBox.setOnCheckedChangeListener(this);
 		return v;
 	}
 
@@ -119,6 +124,12 @@ public class SingleLessonFragment extends Fragment implements OnClickListener{
 	
 	@Override
 	public void onClick(View v) {
+		Log.e("v.getTag()",""+(Long) v.getTag());
+		mLessonListener.OnHomeWorkListElementClick((Long) v.getTag());
+	}
 
+	@Override
+	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+		
 	}
 }

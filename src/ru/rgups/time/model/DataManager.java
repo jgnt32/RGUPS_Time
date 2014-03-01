@@ -31,6 +31,7 @@ public class DataManager {
 	private SQLiteStatement mDeleteStatement;
 	private SQLiteStatement mDeleteInformationStatement;
 	private SQLiteStatement mDeleteHomeWorkStatement;
+	private SQLiteStatement mUpdateHomeWorkStatement;
 	
 	public DataManager() {
 		mDb = HelperManager.getHelper().getWritableDatabase();
@@ -68,6 +69,13 @@ public class DataManager {
 				HomeWork.IMAGES,", ",	//4
 				HomeWork.COMPLITE,		//5
 				") VALUES (?,?,?,?,?)"
+				).toString());
+		
+		mUpdateHomeWorkStatement = mDb.compileStatement(TextUtils.concat(
+				"UPDATE OR IGNORE ",HomeWork.TABLE_NAME," SET ",
+				HomeWork.COMPLITE, " = ?, ",	//1
+				HomeWork.MESSAGE, " = ? ",		//2
+				" WHERE ",HomeWork.ID, " = ? "	//3
 				).toString());
 		
 		mDeleteInformationStatement = mDb.compileStatement(TextUtils.concat(
@@ -387,11 +395,12 @@ public class DataManager {
 		}
 	}
 	
+	
+	
 	public HomeWork getHomeWork(Long id){
 		HomeWork result = null;
 		Cursor c = mDb.rawQuery(TextUtils.concat(
-				"SELECT * FROM ",HomeWork.TABLE_NAME," WHERE ",
-				HomeWork.DATE,"=? AND ",HomeWork.ID,"=?"
+				"SELECT * FROM ",HomeWork.TABLE_NAME," WHERE ",HomeWork.ID,"=?"
 				).toString(), 
 				new String[]{id.toString()});
 		if(c.moveToFirst()){
@@ -427,6 +436,35 @@ public class DataManager {
 			result.add(hw);
 		}
 		return result;
+	}
+	
+	public void updateHomeWork(HomeWork hw){
+		try{
+			mDb.beginTransaction();
+			if(hw != null){
+				
+				mUpdateHomeWorkStatement.clearBindings();
+				if(hw.isComplite()){
+					mUpdateHomeWorkStatement.bindLong(1, 1);
+				}else{
+					mUpdateHomeWorkStatement.bindLong(1, 0);
+				}
+				
+				if(hw.getMessage() != null){
+					mUpdateHomeWorkStatement.bindString(2, hw.getMessage());
+				}
+				
+				mUpdateHomeWorkStatement.bindLong(3, hw.getId());
+				mUpdateHomeWorkStatement.execute();
+			}
+			mDb.setTransactionSuccessful();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			mDb.endTransaction();
+		}
+
 	}
 
 }
