@@ -1,6 +1,7 @@
 package ru.rgups.time.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import ru.rgups.time.model.entity.Day;
 import ru.rgups.time.model.entity.DoubleLine;
@@ -11,6 +12,7 @@ import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.spice.TimeTableRequest;
 import ru.rgups.time.utils.PreferenceManager;
+import ru.rgups.time.utils.Slipper;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -24,9 +26,11 @@ public class DataManager {
 	
 	private SQLiteStatement mSaveLessonStatement;
 	private SQLiteStatement mSaveInformationStatement;
+	private SQLiteStatement mSaveHomeWorkStatement;
 	private SQLiteDatabase mDb;
 	private SQLiteStatement mDeleteStatement;
 	private SQLiteStatement mDeleteInformationStatement;
+	private SQLiteStatement mDeleteHomeWorkStatement;
 	
 	public DataManager() {
 		mDb = HelperManager.getHelper().getWritableDatabase();
@@ -54,10 +58,23 @@ public class DataManager {
 				LessonInformation.TEACHER_NAME,", ",//5
 				LessonInformation.ROOM,				//6
 				") VALUES (?,?,?,?,?,?)"
-
 				).toString());
+
+		mSaveHomeWorkStatement = mDb.compileStatement(TextUtils.concat(
+				"INSERT OR REPLACE INTO ", HomeWork.TABLE_NAME, " (",
+				HomeWork.DATE,", ",		//1
+				HomeWork.LESSON_ID,", ",//2
+				HomeWork.MESSAGE,", ",	//3
+				HomeWork.IMAGES,", ",	//4
+				HomeWork.COMPLITE,		//5
+				") (?,?,?,?,?)"
+				).toString());
+		
 		mDeleteInformationStatement = mDb.compileStatement(TextUtils.concat(
 				"DELETE FROM ",LessonInformation.TABLE_NAME," WHERE ",LessonInformation.GROUP_ID,"=?"
+				).toString());
+		mDeleteHomeWorkStatement = mDb.compileStatement(TextUtils.concat(
+				"DELETE FROM ", HomeWork.TABLE_NAME, " WHERE ", HomeWork.ID ," = ?"
 				).toString());
 	}
 	
@@ -329,6 +346,52 @@ public class DataManager {
 
 		}
 			
+		return result;
+	}
+	
+	public void saveHomeWork(HomeWork homeWork){
+		
+		mDb.beginTransaction();
+		try{
+			mSaveHomeWorkStatement.clearBindings();
+			mSaveHomeWorkStatement.bindLong(1, homeWork.getDate().getTime());
+			mSaveHomeWorkStatement.bindLong(2, homeWork.getLessonId());
+			mSaveHomeWorkStatement.bindString(3, homeWork.getMessage());
+			mSaveHomeWorkStatement.bindBlob(4, Slipper.serializeObject(homeWork.getImages()));
+	
+			if(homeWork.isComplite()){
+				mSaveHomeWorkStatement.bindLong(5, 1);				
+			}else{
+				mSaveHomeWorkStatement.bindLong(5, 0);
+			}
+
+			homeWork.setId(mSaveHomeWorkStatement.executeInsert());
+			mDb.setTransactionSuccessful();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			mDb.endTransaction();
+		}
+	}
+	
+	public HomeWork getHomeWork(Long date, Long lessonId){
+		HomeWork result = null;
+		Cursor c = mDb.rawQuery(TextUtils.concat(
+				"SELECT * FROM ",HomeWork.TABLE_NAME," WHERE ",
+				HomeWork.DATE,"=? AND ",HomeWork.LESSON_ID,"=?"
+				).toString(), 
+				new String[]{date.toString(), lessonId.toString()});
+		if(c.moveToFirst()){
+			result = new HomeWork();
+			result.setId(c.getLong(c.getColumnIndex(HomeWork.ID)));
+			result.setDate(new Date(c.getLong(c.getColumnIndex(HomeWork.DATE))));
+			result.setLessonId(c.getLong(c.getColumnIndex(HomeWork.LESSON_ID)));
+			result.setMessage(c.getString(c.getColumnIndex(HomeWork.MESSAGE)));
+			result.setImages(Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES))));
+			result.setComplite(c.getInt(c.getColumnIndex(HomeWork.COMPLITE))>0);
+
+		}
 		return result;
 	}
 

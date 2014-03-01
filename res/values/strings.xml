@@ -10,6 +10,7 @@
     <string name="action_done">Готово</string>
 	<string name="action_add_homework">Добаваить ДЗ</string>    
 	<string name="action_add_image">Добаваить изображение</string>    
+	<string name="action_save">Сохранить</string>    
 	
 	
     <!-- DRAWER -->

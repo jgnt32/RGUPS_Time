@@ -3,6 +3,8 @@ package ru.rgups.time.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "home_work_table")
@@ -15,17 +17,22 @@ public class HomeWork {
 	public static String COMPLITE = "complite";
 	public static String IMAGES = "images";
 
-
+	@DatabaseField(generatedId = true)
 	private long id;
 	
+	@DatabaseField
 	private Date date;
 	
+	@DatabaseField
 	private long lessonId;
 	
+	@DatabaseField
 	private String message;
 	
+	@DatabaseField
 	private boolean complite;
 	
+	@DatabaseField(dataType = DataType.SERIALIZABLE)
 	private ArrayList<String> images;
 
 	public long getId() {
