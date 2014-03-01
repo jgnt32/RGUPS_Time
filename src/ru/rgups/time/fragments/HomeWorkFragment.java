@@ -4,8 +4,10 @@ import java.util.Date;
 
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.PhotoGalleryAdapter;
+import ru.rgups.time.interfaces.HomeWorkListener;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HomeWork;
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -29,6 +31,13 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 	private PhotoGalleryAdapter mAdapter;
 	private EditText mText;
 	private HomeWork mHomeWork;
+	private HomeWorkListener mHomeWorkListener;
+	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mHomeWorkListener = (HomeWorkListener) activity;
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,7 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 		
 		case R.id.action_save: 
 			saveHomeWork();
+			mHomeWorkListener.finisActivity();
 			return true;
 			
 			

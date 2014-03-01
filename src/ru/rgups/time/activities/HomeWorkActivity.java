@@ -7,6 +7,7 @@ import ru.rgups.time.interfaces.HomeWorkListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
 public class HomeWorkActivity extends ActionBarActivity implements HomeWorkListener{
 
@@ -23,7 +24,7 @@ public class HomeWorkActivity extends ActionBarActivity implements HomeWorkListe
 		
 		case ADD:
 			AddHomeWork(getIntent().getExtras().getLong(HomeWorkFragment.LESSON_ID), 
-					getIntent().getExtras().getLong(HomeWorkFragment.LESSON_ID));
+					getIntent().getExtras().getLong(HomeWorkFragment.DATE));
 			break;
 		case EDIT:
 			EditHomeWork(getIntent().getExtras().getLong(HomeWorkEditFragment.HOMEWORK_ID));
@@ -36,6 +37,16 @@ public class HomeWorkActivity extends ActionBarActivity implements HomeWorkListe
 		 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+		case android.R.id.home:
+			this.finisActivity();
+			return true;
+		default:return super.onOptionsItemSelected(item);
+		}
+	}
+	
 	@Override
 	public void AddHomeWork(long lessonId, Long date) {
 		HomeWorkFragment fragment = new HomeWorkFragment();
@@ -57,6 +68,11 @@ public class HomeWorkActivity extends ActionBarActivity implements HomeWorkListe
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.homework_activity_frame, fragment);
 		ft.commit();		
+	}
+
+	@Override
+	public void finisActivity() {
+		this.finish();
 	}
 	
 }

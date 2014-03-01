@@ -61,16 +61,29 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 		for(LessonInformation lesson : mLesson.getInformation()){
 			mInformationContainer.addView(getLesson(lesson));
 		}
-		long timestamp = getArguments().getLong(TIMESTAMP);
 
-		for(HomeWork homeWork : DataManager.getInstance().getHomeWorkList(timestamp, mLesson.getId())){
-			mHomeWorkContainer.addView(getHomeWorkListElement(homeWork));
-		}
+		
 		
 		mTitle.setText(mLesson.getInformation().get(0).getTitle());
 		mTime.setText(mTimePeriods[mLesson.getLessonNumber()-1]);
 
 		return v;
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		long timestamp = getArguments().getLong(TIMESTAMP);
+
+		for(HomeWork homeWork : DataManager.getInstance().getHomeWorkList(timestamp, mLesson.getId())){
+			mHomeWorkContainer.addView(getHomeWorkListElement(homeWork));
+		}
+	}
+	
+	@Override
+	public void onStop() {
+		super.onStop();
+		mHomeWorkContainer.removeAllViews();
 	}
 	
 	@Override
@@ -86,6 +99,7 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 		switch (item.getItemId()){
 		case R.id.action_add:
 			mLessonListener.OnAddHomeWorkClick(mLesson.getId(), getArguments().getLong(TIMESTAMP));
+			
 			return true;
 			
 		default: return super.onOptionsItemSelected(item);
