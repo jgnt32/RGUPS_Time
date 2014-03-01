@@ -1,5 +1,6 @@
 package ru.rgups.time;
 
+import ru.rgups.time.activities.HomeWorkActivity;
 import ru.rgups.time.adapters.DrawerListAdapter;
 import ru.rgups.time.fragments.HomeWorkEditFragment;
 import ru.rgups.time.fragments.HomeWorkFragment;
@@ -89,7 +90,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	 
 	 private void initActionBar(){
 		 getSupportActionBar().setDisplayShowTitleEnabled(true); 
-		 getSupportActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+	//	 getSupportActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 		 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	 }
 	
@@ -189,28 +190,19 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 
 	@Override
 	public void OnAddHomeWorkClick(long lessonId, Long date) {
-		HomeWorkFragment fragment = new HomeWorkFragment();
-		Bundle args = new Bundle();
-		args.putLong(HomeWorkFragment.LESSON_ID, lessonId);
-		args.putLong(HomeWorkFragment.DATE, date);
-		fragment.setArguments(args);
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.addToBackStack(null);
-		ft.replace(R.id.frameLayout, fragment);
-		ft.commit();
+		Intent i = new Intent(this, HomeWorkActivity.class);
+		i.putExtra(HomeWorkActivity.LAUNCH_TYPE, HomeWorkActivity.ADD);
+		i.putExtra(HomeWorkFragment.DATE, date);
+		i.putExtra(HomeWorkFragment.LESSON_ID, lessonId);
+		startActivity(i);
 	}
 
 	@Override
 	public void OnHomeWorkListElementClick(long hwId) {
-		HomeWorkEditFragment fragment = new HomeWorkEditFragment();
-		Bundle args = new Bundle();
-		args.putLong(HomeWorkEditFragment.HOMEWORK_ID, hwId);
-		fragment.setArguments(args);
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.addToBackStack(null);
-		ft.replace(R.id.frameLayout, fragment);
-		ft.commit();
-	
+		Intent i = new Intent(this, HomeWorkActivity.class);
+		i.putExtra(HomeWorkActivity.LAUNCH_TYPE, HomeWorkActivity.EDIT);
+		i.putExtra(HomeWorkEditFragment.HOMEWORK_ID, hwId);
+		startActivity(i);
 		
 	}
 	

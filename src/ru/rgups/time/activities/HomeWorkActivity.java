@@ -1,0 +1,62 @@
+package ru.rgups.time.activities;
+
+import ru.rgups.time.R;
+import ru.rgups.time.fragments.HomeWorkEditFragment;
+import ru.rgups.time.fragments.HomeWorkFragment;
+import ru.rgups.time.interfaces.HomeWorkListener;
+import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
+
+public class HomeWorkActivity extends ActionBarActivity implements HomeWorkListener{
+
+	public static final String LAUNCH_TYPE = "launch_type";
+	public static final int EDIT = 0;
+	public static final int ADD = 1;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.homework_activity);
+		initActionBar();
+		switch(getIntent().getExtras().getInt(LAUNCH_TYPE)){
+		
+		case ADD:
+			AddHomeWork(getIntent().getExtras().getLong(HomeWorkFragment.LESSON_ID), 
+					getIntent().getExtras().getLong(HomeWorkFragment.LESSON_ID));
+			break;
+		case EDIT:
+			EditHomeWork(getIntent().getExtras().getLong(HomeWorkEditFragment.HOMEWORK_ID));
+			break;
+		}
+	}
+	
+	private void initActionBar(){
+		 getSupportActionBar().setDisplayShowTitleEnabled(true); 
+		 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+
+	@Override
+	public void AddHomeWork(long lessonId, Long date) {
+		HomeWorkFragment fragment = new HomeWorkFragment();
+		Bundle args = new Bundle();
+		args.putLong(HomeWorkFragment.LESSON_ID, lessonId);
+		args.putLong(HomeWorkFragment.DATE, date);
+		fragment.setArguments(args);
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.replace(R.id.homework_activity_frame, fragment);
+		ft.commit();		
+	}
+
+	@Override
+	public void EditHomeWork(Long hwId) {
+		HomeWorkEditFragment fragment = new HomeWorkEditFragment();
+		Bundle args = new Bundle();
+		args.putLong(HomeWorkEditFragment.HOMEWORK_ID, hwId);
+		fragment.setArguments(args);
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.replace(R.id.homework_activity_frame, fragment);
+		ft.commit();		
+	}
+	
+}
