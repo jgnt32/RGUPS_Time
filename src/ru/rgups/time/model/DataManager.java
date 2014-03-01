@@ -466,5 +466,22 @@ public class DataManager {
 		}
 
 	}
+	
+	public void deleteHomeWork(HomeWork hw){
+		try{
+			mDb.beginTransaction();
+			if(hw != null){
+				mDeleteHomeWorkStatement.bindLong(1, hw.getId());
+				mDeleteHomeWorkStatement.execute();
+			}
+			
+			mDb.setTransactionSuccessful();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			mDb.endTransaction();
+		}
+	}
 
 }

@@ -63,7 +63,7 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.main, menu);
+		inflater.inflate(R.menu.homework, menu);
 		menu.findItem(R.id.action_save).setVisible(true);
 	}
 	

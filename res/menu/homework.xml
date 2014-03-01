@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:sabd="http://schemas.android.com/apk/res-auto" >
+     <item 
+        android:id="@+id/action_add_image"
+        android:icon="@drawable/ic_content_new_attachment_light"
+        android:visible="false"
+		android:title="@string/action_add_image"    
+		sabd:showAsAction="always"/>
+    
+    <item 
+        android:id="@+id/action_save"
+        android:title="@string/action_save"
+        android:visible="false"
+        android:orderInCategory="1"
+        sabd:showAsAction="always"/>
+     <item
+        android:id="@+id/action_delete"
+        android:title="@string/action_delete"
+        android:visible="true"
+        android:orderInCategory="3"
+        android:icon="@drawable/ic_content_discard"
+        sabd:showAsAction="always"/>
+
+</menu>

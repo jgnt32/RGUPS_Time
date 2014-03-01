@@ -11,8 +11,13 @@
 	<string name="action_add_homework">Добаваить ДЗ</string>    
 	<string name="action_add_image">Добаваить изображение</string>    
 	<string name="action_save">Сохранить</string>    
+	<string name="action_delete">Удалить</string>
 	
-	
+	<!-- DIALOGs -->
+	<string name="ok_caption">Ок</string>
+	<string name="positive_caption">Да</string>	
+	<string name="negative_caption">Нет</string>
+	<string name="homework_delete_message">Вы действительно хотите удалить это домашнее задание?</string>
     <!-- DRAWER -->
     <string name="draw_open">Меню</string>
     <string name="draw_close">Расписание</string>

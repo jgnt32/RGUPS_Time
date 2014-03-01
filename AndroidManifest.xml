@@ -29,7 +29,9 @@
         </activity>
         <activity android:name=".fragments.WelcomeActivity"></activity><service android:name=".spice.SampleSpiceService"></service>
         <activity android:name=".activities.AuthActivity"></activity>
-        <activity android:name=".activities.HomeWorkActivity">
+        <activity 
+            android:name=".activities.HomeWorkActivity"
+           	android:uiOptions="splitActionBarWhenNarrow">
             
         </activity>
         

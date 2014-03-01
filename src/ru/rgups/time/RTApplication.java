@@ -6,6 +6,7 @@ import ru.rgups.time.model.HelperManager;
 import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.LessonTableModel;
 import ru.rgups.time.model.entity.LessonInformation;
+import ru.rgups.time.utils.DialogManager;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Application;
 import android.util.Log;
@@ -20,6 +21,7 @@ public class RTApplication extends Application{
 	public void onCreate() {
 		super.onCreate();
 		PreferenceManager.initalize(getApplicationContext());
+		DialogManager.initInstatnce(getApplicationContext());
 		if (HelperManager.getHelper() == null) {
 			RoboSpiceDatabaseHelper databaseHelper = new RoboSpiceDatabaseHelper(this, HelperManager.DB_NAME, HelperManager.DB_VERSION);
 			HelperManager.setHelper(databaseHelper);

@@ -1,13 +1,14 @@
 package ru.rgups.time.fragments;
 
-import java.util.Date;
-
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.PhotoGalleryAdapter;
 import ru.rgups.time.interfaces.HomeWorkListener;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HomeWork;
+import ru.rgups.time.utils.DialogManager;
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -67,7 +68,7 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.main, menu);
+		inflater.inflate(R.menu.homework, menu);
 		menu.findItem(R.id.action_save).setVisible(true);
 	}
 	
@@ -79,14 +80,29 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 			saveHomeWork();
 			mHomeWorkListener.finisActivity();
 			return true;
+		case R.id.action_delete:
+			deleteHomeWork();
 			
-			
+			return true;
+		
 		default : return super.onOptionsItemSelected(item);
 
 		}
 
 	}
 
+	private void deleteHomeWork(){
+		DialogManager.showPositiveDialog(getActivity(), R.string.homework_delete_message, new OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				DataManager.getInstance().deleteHomeWork(mHomeWork);
+				mHomeWorkListener.finisActivity();
+			}
+		});
+	}
+	
+	
 	
 	private void saveHomeWork(){
 		if(!mText.getText().toString().isEmpty() && mHomeWork != null){
