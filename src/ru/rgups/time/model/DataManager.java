@@ -354,10 +354,20 @@ public class DataManager {
 		mDb.beginTransaction();
 		try{
 			mSaveHomeWorkStatement.clearBindings();
-			mSaveHomeWorkStatement.bindLong(1, homeWork.getDate().getTime());
+			if(homeWork.getDate() != null){
+				mSaveHomeWorkStatement.bindLong(1, homeWork.getDate().getTime());
+			}
+			
 			mSaveHomeWorkStatement.bindLong(2, homeWork.getLessonId());
-			mSaveHomeWorkStatement.bindString(3, homeWork.getMessage());
-			mSaveHomeWorkStatement.bindBlob(4, Slipper.serializeObject(homeWork.getImages()));
+			
+			if(homeWork.getMessage() != null){
+				mSaveHomeWorkStatement.bindString(3, homeWork.getMessage());
+			}
+			
+			if(homeWork.getImages() != null){
+				mSaveHomeWorkStatement.bindBlob(4, Slipper.serializeObject(homeWork.getImages()));
+			}
+			
 	
 			if(homeWork.isComplite()){
 				mSaveHomeWorkStatement.bindLong(5, 1);				

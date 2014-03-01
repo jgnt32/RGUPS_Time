@@ -2,6 +2,7 @@ package ru.rgups.time.fragments;
 
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.PhotoGalleryAdapter;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HomeWork;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,7 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 	private GridView mPhotoGridView;
 	private PhotoGalleryAdapter mAdapter;
 	private EditText mText;
+	private HomeWork mHomeWork;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -64,8 +66,9 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 
 	
 	private void saveHomeWork(){
-		HomeWork work = new HomeWork();
-		work.setMessage(mText.getText().toString());
+		mHomeWork = new HomeWork();
+		mHomeWork.setMessage(mText.getText().toString());
+		DataManager.getInstance().saveHomeWork(mHomeWork);
 	}
 
 	@Override
