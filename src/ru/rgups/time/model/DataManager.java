@@ -570,5 +570,25 @@ public class DataManager {
 			mDb.endTransaction();
 		}
 	}
+	
+	public boolean dayHasHomeWork(Long timestamp){
+		Cursor c = mDb.rawQuery(TextUtils.concat(
+				"SELECT * FROM ",HomeWork.TABLE_NAME,
+				" WHERE ",
+				HomeWork.DATE,"=? AND ",
+				HomeWork.GROUP_ID,"=?" 
+				).toString(), new String[]{timestamp.toString(), PreferenceManager.getInstance().getGroupId().toString()});
+		return c.getCount()>0;
+	}
+	
+	public boolean lessonHasHomeWork(Long lessonId){
+		Cursor c = mDb.rawQuery(TextUtils.concat(
+				"SELECT * FROM ",HomeWork.TABLE_NAME,
+				" WHERE ",
+				HomeWork.LESSON_ID,"=? AND ",
+				HomeWork.GROUP_ID,"=?" 
+				).toString(), new String[]{lessonId.toString(), PreferenceManager.getInstance().getGroupId().toString()});
+		return c.getCount()>0;
+	}
 
 }

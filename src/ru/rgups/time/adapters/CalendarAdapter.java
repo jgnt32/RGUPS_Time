@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ru.rgups.time.R;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.ConstUtils;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class CalendarAdapter extends BaseAdapter{
@@ -37,7 +39,7 @@ public class CalendarAdapter extends BaseAdapter{
 	private int mSelectedItem;
 	private int mBlueColor;
 	private int mGreenColor;
-
+	
 	private View leftIndicator;
 
 	private View rightIndicator;
@@ -45,6 +47,8 @@ public class CalendarAdapter extends BaseAdapter{
 	private View topIndicator;
 
 	private View bootomIndicator;
+	
+	private ImageView mHWIndicator;
 
 	private int mLastSelected = -1;
 
@@ -123,7 +127,7 @@ public class CalendarAdapter extends BaseAdapter{
 		  rightIndicator = mView.findViewById(R.id.calendar_right_indicator);
 		  topIndicator = mView.findViewById(R.id.calendar_top_indicator);
 		  bootomIndicator = mView.findViewById(R.id.calendar_bottom_indicator);
-
+		  mHWIndicator = (ImageView) mView.findViewById(R.id.calendar_element_homework_indicator);
 		  mCalendar.set(Calendar.DAY_OF_YEAR, position+DAY_OFFSET);
 		  text.setText(Integer.toString(mCalendar.get(Calendar.DAY_OF_MONTH)));
 		  dayOfWeek.setText(DateFormat.format(DAY_OF_WEEK_FORMAT, mCalendar.getTime()).toString().toUpperCase());
@@ -148,6 +152,11 @@ public class CalendarAdapter extends BaseAdapter{
 				  leftIndicator.setVisibility(View.INVISIBLE);
 
 			  }
+		  }
+		  if(DataManager.getInstance().dayHasHomeWork(getTimestamp(position))){
+			  mHWIndicator.setVisibility(View.VISIBLE);
+		  }else{
+			  mHWIndicator.setVisibility(View.GONE);
 		  }
 //		  mView.setTag(999);
 		

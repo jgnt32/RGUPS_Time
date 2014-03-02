@@ -1,103 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/LinearLayout1"
+<RelativeLayout 
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp" >
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:padding="10dp" >
+	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	
+	        <ImageView
+	            android:layout_width="21dp"
+	            android:layout_height="21dp"
+	            android:layout_gravity="center_vertical"
+	            android:src="@drawable/ic_time" />
+	
+	        <TextView
+	            android:id="@+id/lesson_time"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="0"
+	            android:layout_gravity="center_vertical"
+	            android:text="8.20-9.50"
+	            android:padding="3dp"
+	            android:textSize="10dp" />
+	
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:id="@+id/lesson_room_container"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	
+	        <ImageView
+	            android:layout_width="21dp"
+	            android:layout_height="21dp"
+	            android:layout_weight="0"
+	            android:layout_gravity="center_vertical"
+	            android:src="@drawable/ic_place" />
+	
+	        <TextView
+	            android:id="@+id/lesson_room"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="0.3"
+	            android:padding="3dp"
+	            android:layout_gravity="center_vertical"
+	            android:text="Д412"
+	            android:textSize="17dp" />
+	
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:id="@+id/lesson_teacher_container"
+	        
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	
+	        <ImageView
+	            android:layout_width="21dp"
+	            android:layout_height="21dp"
+	            android:layout_weight="0"
+	            android:layout_gravity="center_vertical"
+	            android:src="@drawable/ic_person" />
+	
+	        <TextView
+	            android:id="@+id/lesson_teacher"
+	            android:layout_width="200dp"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:padding="3dp"
+	            android:layout_gravity="center_vertical"
+	            android:text="Жуков В.В."
+	            android:textSize="17dp" />
+	
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	
+	        <ImageView
+	            android:layout_width="21dp"
+	            android:layout_height="21dp"
+	            android:layout_gravity="center_vertical"
+	            android:layout_weight="0"
+	            android:src="@drawable/ic_pencil" />
+	
+	        <TextView
+	            android:id="@+id/lesson_title"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:layout_gravity="center_vertical"
+	            android:padding="3dp"
+	            android:text="Операционные системы"
+	            android:textSize="17dp" />
+	
+	    </LinearLayout>
+	
+	</LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    <ImageView
+        android:id="@+id/lesson_list_element_homework_indicator"
+        android:layout_width="30dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="15dp"
+        android:src="@drawable/bookmark" />
 
-        <ImageView
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_time" />
+</RelativeLayout>
 
-        <TextView
-            android:id="@+id/lesson_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:layout_gravity="center_vertical"
-            android:text="8.20-9.50"
-            android:padding="3dp"
-            android:textSize="10dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lesson_room_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <ImageView
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_weight="0"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_place" />
-
-        <TextView
-            android:id="@+id/lesson_room"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            android:padding="3dp"
-            android:layout_gravity="center_vertical"
-            android:text="Д412"
-            android:textSize="17dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/lesson_teacher_container"
-        
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <ImageView
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_weight="0"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_person" />
-
-        <TextView
-            android:id="@+id/lesson_teacher"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:padding="3dp"
-            android:layout_gravity="center_vertical"
-            android:text="Жуков В.В."
-            android:textSize="17dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-        <ImageView
-            android:layout_width="21dp"
-            android:layout_height="21dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0"
-            android:src="@drawable/ic_pencil" />
-
-        <TextView
-            android:id="@+id/lesson_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center_vertical"
-            android:padding="3dp"
-            android:text="Операционные системы"
-            android:textSize="17dp" />
-
-    </LinearLayout>
-
-</LinearLayout>

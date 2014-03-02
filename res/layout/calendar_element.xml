@@ -59,4 +59,12 @@
         android:textColor="@color/theme_blue"
         android:textSize="10sp" />
 
+    <ImageView
+        android:id="@+id/calendar_element_homework_indicator"
+        android:layout_width="15dp"
+        android:layout_height="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/bookmark" />
+
 </RelativeLayout>

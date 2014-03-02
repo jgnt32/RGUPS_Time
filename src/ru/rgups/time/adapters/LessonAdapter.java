@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import ru.rgups.time.R;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.DoubleLine;
 import ru.rgups.time.model.entity.LessonInformation;
@@ -15,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapter{
@@ -64,6 +66,11 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 			mHolder = (ViewHolder) mView.getTag();
 		}
 		
+		if(DataManager.getInstance().lessonHasHomeWork(getItemId(position))){
+			mHolder.hwIndicator.setVisibility(View.VISIBLE);
+		}else{
+			mHolder.hwIndicator.setVisibility(View.GONE);
+		}
 		mHolder.time.setText(timePeriods[getItem(position).getLessonNumber()-1]);
 		if(getItem(position).getInformation().size()>0){
 			StringBuffer roomBuffer = new StringBuffer();
@@ -113,7 +120,7 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 //		private TextView type;
 		private TextView teacher;
 		private TextView time;
-
+		private ImageView hwIndicator;
 
 		public ViewHolder(View view){
 			this.setTitle((TextView) view.findViewById(R.id.lesson_title));
@@ -124,6 +131,7 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 			this.setTime((TextView) view.findViewById(R.id.lesson_time));
 			this.roomContainer = view.findViewById(R.id.lesson_room_container);
 			this.teacherContainer = view.findViewById(R.id.lesson_teacher_container);
+			hwIndicator = (ImageView) view.findViewById(R.id.lesson_list_element_homework_indicator);
 		}
 		
 		
