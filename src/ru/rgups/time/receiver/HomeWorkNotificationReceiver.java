@@ -28,24 +28,28 @@ public class HomeWorkNotificationReceiver extends BroadcastReceiver{
 				" wh gr id = "+hw.getGroupId());
 		if(hw != null){
 			if(hw.getGroupId() == PreferenceManager.getInstance().getGroupId()){
-				LessonListElement lesson = DataManager.getInstance().getLesson(hw.getLessonId());
-				
-				Intent i = new Intent(context, HomeWorkActivity.class);
-				i.putExtra(HomeWorkActivity.LAUNCH_TYPE, HomeWorkActivity.EDIT);
-				i.putExtra(HomeWorkEditFragment.HOMEWORK_ID, hw.getId());
-				
-			    PendingIntent pIntent = PendingIntent.getActivity(context, (int) hw.getId(), i, 0);
-				
-				mBuilder = new NotificationCompat.Builder(context)
-					    .setSmallIcon(R.drawable.ic_launcher)
-					    .setContentTitle(lesson.getInformation().get(0).getTitle())
-					    .setContentIntent(pIntent)
-					    .setContentText(hw.getMessage());
-						
-				Notification n = mBuilder.build();
-				
-				NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-				nm.notify((int) hw.getId(), n);
+				if(!hw.isComplite()){
+					LessonListElement lesson = DataManager.getInstance().getLesson(hw.getLessonId());
+					
+					Intent i = new Intent(context, HomeWorkActivity.class);
+					i.putExtra(HomeWorkActivity.LAUNCH_TYPE, HomeWorkActivity.EDIT);
+					i.putExtra(HomeWorkEditFragment.HOMEWORK_ID, hw.getId());
+					
+				    PendingIntent pIntent = PendingIntent.getActivity(context, (int) hw.getId(), i, 0);
+					
+					mBuilder = new NotificationCompat.Builder(context)
+						    .setSmallIcon(R.drawable.ic_launcher)
+						    .setContentTitle(lesson.getInformation().get(0).getTitle())
+						    .setContentIntent(pIntent)
+						    
+						    .setContentText(hw.getMessage());
+							
+					Notification n = mBuilder.build();
+					
+					NotificationManager nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+					nm.notify((int) hw.getId(), n);
+				}
+			
 			}
 		}
 		

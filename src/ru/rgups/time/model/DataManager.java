@@ -1,6 +1,7 @@
 package ru.rgups.time.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import ru.rgups.time.model.entity.Day;
@@ -33,6 +34,7 @@ public class DataManager {
 	private SQLiteStatement mDeleteInformationStatement;
 	private SQLiteStatement mDeleteHomeWorkStatement;
 	private SQLiteStatement mUpdateHomeWorkStatement;
+	private SQLiteStatement mSetHomeWorkChecked;
 	
 	public DataManager() {
 		mDb = HelperManager.getHelper().getWritableDatabase();
@@ -78,6 +80,12 @@ public class DataManager {
 				HomeWork.COMPLITE, " = ?, ",	//1
 				HomeWork.MESSAGE, " = ? ",		//2
 				" WHERE ",HomeWork.ID, " = ? "	//3
+				).toString());
+		
+		mSetHomeWorkChecked = mDb.compileStatement(TextUtils.concat(
+				"UPDATE OR IGNORE ",HomeWork.TABLE_NAME," SET ",
+				HomeWork.COMPLITE, " = ? ",	//1
+				" WHERE ",HomeWork.ID, " = ? "	//2
 				).toString());
 		
 		mDeleteInformationStatement = mDb.compileStatement(TextUtils.concat(
@@ -447,7 +455,8 @@ public class DataManager {
 		return result;
 	}
 	
-	public ArrayList<HomeWork> getAllHomeWorks(Long groupId){
+	public ArrayList<HomeWork> getAllHomeWorks(){
+		Long groupId = PreferenceManager.getInstance().getGroupId();
 		ArrayList<HomeWork> result = new ArrayList<HomeWork>();
 		String query = TextUtils.concat(
 				"SELECT * FROM ",HomeWork.TABLE_NAME," WHERE ",
@@ -476,11 +485,12 @@ public class DataManager {
 		
 		String query = TextUtils.concat(
 				"SELECT * FROM ",HomeWork.TABLE_NAME," WHERE ",
-				HomeWork.GROUP_ID,"=? ORDER BY ",HomeWork.DATE
+				HomeWork.GROUP_ID,"=? AND ",HomeWork.DATE,">=? AND ",HomeWork.COMPLITE,"='0' ORDER BY ",HomeWork.DATE
 				).toString();
 		
 		Cursor c = mDb.rawQuery(query, 
-				new String[]{PreferenceManager.getInstance().getGroupId().toString()});
+				new String[]{PreferenceManager.getInstance().getGroupId().toString(),
+				Long.toString(Calendar.getInstance().getTimeInMillis())});
 		
 		while(c.moveToNext()){
 			result.add(c.getLong(c.getColumnIndex(HomeWork.ID)));
@@ -498,8 +508,12 @@ public class DataManager {
 				mUpdateHomeWorkStatement.clearBindings();
 				if(hw.isComplite()){
 					mUpdateHomeWorkStatement.bindLong(1, 1);
+					NotificationManager.getInstance().removeNotification(hw);
+
 				}else{
 					mUpdateHomeWorkStatement.bindLong(1, 0);
+					NotificationManager.getInstance().addNewNotification(hw);
+
 				}
 				
 				if(hw.getMessage() != null){
@@ -530,6 +544,26 @@ public class DataManager {
 			mDb.setTransactionSuccessful();
 			NotificationManager.getInstance().removeNotification(hw);
 		}catch (Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			mDb.endTransaction();
+		}
+	}
+	
+	public void setHomeWorkChecked(Long homeWorkId, boolean checked){
+		try{
+			mDb.beginTransaction();
+			if(checked){
+				mSetHomeWorkChecked.bindLong(1, 1);
+			}else{
+				mSetHomeWorkChecked.bindLong(1, 0);
+			}
+			
+			mSetHomeWorkChecked.bindLong(2, homeWorkId);
+			mSetHomeWorkChecked.execute();
+			mDb.setTransactionSuccessful();
+		} catch (Exception e){
 			e.printStackTrace();
 		}
 		finally{

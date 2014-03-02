@@ -148,7 +148,6 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 		checkBox.setOnCheckedChangeListener(this);
 		return v;
 	}
-
 	
 	
 	@Override
@@ -159,6 +158,8 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 
 	@Override
 	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		
+		HomeWork hw = DataManager.getInstance().getHomeWork((Long) buttonView.getTag());
+		hw.setComplite(isChecked);
+		DataManager.getInstance().updateHomeWork(hw);
 	}
 }

@@ -11,8 +11,11 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 public class NotificationManager {
+	
+	private final int HOURS_SHIFT = 18;
 	
 	private static NotificationManager mInstance;
 	private Context mContext;
@@ -36,33 +39,35 @@ public class NotificationManager {
 		
 		 mAlarmManager = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
 		 
-		 for(long hwId : DataManager.getInstance().getTopicalHomeWorksIds()){
-			 Intent intent = new Intent(mContext, HomeWorkNotificationReceiver.class);
-			 intent.putExtra(HomeWorkEditFragment.HOMEWORK_ID, hwId);
-			 PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, (int) hwId,
-			 intent, PendingIntent.FLAG_CANCEL_CURRENT );			 
-			 calendar.add(GregorianCalendar.SECOND, 30);
-			 mAlarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+		 for(HomeWork hw : DataManager.getInstance().getAllHomeWorks()){
+			addNewNotification(hw);
 		 }
 	}
 	
 	
 	public void addNewNotification(HomeWork hw){
-		 Intent intent = new Intent(mContext, HomeWorkNotificationReceiver.class);
-		 intent.putExtra(HomeWorkEditFragment.HOMEWORK_ID, hw.getId());
-		 PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, (int) hw.getId(),
-		 intent, PendingIntent.FLAG_CANCEL_CURRENT );			 
-		 calendar.add(GregorianCalendar.SECOND, 30);
-		 mAlarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+		if(calendar.getInstance().getTimeInMillis()<hw.getDate().getTime()){
+			Intent intent = new Intent(mContext, HomeWorkNotificationReceiver.class);
+			intent.putExtra(HomeWorkEditFragment.HOMEWORK_ID, hw.getId());
+			PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, (int) hw.getId(),
+			intent, PendingIntent.FLAG_CANCEL_CURRENT );			 
+			calendar.setTime(hw.getDate());
+	
+			calendar.add(GregorianCalendar.HOUR, -HOURS_SHIFT);
+			Log.e("addNewNotification","date "+calendar.getTime().toString());
+	
+			mAlarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+
+		}
 	}
 	
 	public void removeNotification(HomeWork hw){
+		Log.e("removeNotification",hw.getDate().toString());
 		Intent intent = new Intent(mContext, HomeWorkNotificationReceiver.class);
-		 intent.putExtra(HomeWorkEditFragment.HOMEWORK_ID, hw.getId());
-		 PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, (int) hw.getId(),
-		 intent, PendingIntent.FLAG_CANCEL_CURRENT );			 
-		 calendar.add(GregorianCalendar.SECOND, 30);
-		 mAlarmManager.cancel(pendingIntent);
+		intent.putExtra(HomeWorkEditFragment.HOMEWORK_ID, hw.getId());
+		PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, (int) hw.getId(),
+		intent, PendingIntent.FLAG_CANCEL_CURRENT );			 
+		mAlarmManager.cancel(pendingIntent);
 	}
 	
 }
