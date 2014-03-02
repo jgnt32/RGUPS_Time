@@ -11,6 +11,7 @@ import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.spice.TimeTableRequest;
+import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;
 import ru.rgups.time.utils.Slipper;
 import android.database.Cursor;
@@ -67,8 +68,9 @@ public class DataManager {
 				HomeWork.LESSON_ID,", ",//2
 				HomeWork.MESSAGE,", ",	//3
 				HomeWork.IMAGES,", ",	//4
-				HomeWork.COMPLITE,		//5
-				") VALUES (?,?,?,?,?)"
+				HomeWork.COMPLITE,", ",	//5
+				HomeWork.GROUP_ID,
+				") VALUES (?,?,?,?,?,?)"
 				).toString());
 		
 		mUpdateHomeWorkStatement = mDb.compileStatement(TextUtils.concat(
@@ -384,9 +386,13 @@ public class DataManager {
 				mSaveHomeWorkStatement.bindLong(5, 0);
 			}
 
+			mSaveHomeWorkStatement.bindLong(6, PreferenceManager.getInstance().getGroupId());
+			Log.e("saveHomeWork","group id = "+PreferenceManager.getInstance().getGroupId());
+			
 			homeWork.setId(mSaveHomeWorkStatement.executeInsert());
 			Log.e("saveHomeWork","id = "+ homeWork.getId());
 			mDb.setTransactionSuccessful();
+			NotificationManager.getInstance().addNewNotification(homeWork);
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -411,6 +417,7 @@ public class DataManager {
 			result.setMessage(c.getString(c.getColumnIndex(HomeWork.MESSAGE)));
 			result.setImages(Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES))));
 			result.setComplite(c.getInt(c.getColumnIndex(HomeWork.COMPLITE))>0);
+			result.setGroupId(c.getLong(c.getColumnIndex(HomeWork.GROUP_ID)));
 
 		}
 		return result;
@@ -433,10 +440,55 @@ public class DataManager {
 			hw.setMessage(c.getString(c.getColumnIndex(HomeWork.MESSAGE)));
 			hw.setImages(Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES))));
 			hw.setComplite(c.getInt(c.getColumnIndex(HomeWork.COMPLITE))>0);
+			hw.setGroupId(c.getLong(c.getColumnIndex(HomeWork.GROUP_ID)));
+
 			result.add(hw);
 		}
 		return result;
 	}
+	
+	public ArrayList<HomeWork> getAllHomeWorks(Long groupId){
+		ArrayList<HomeWork> result = new ArrayList<HomeWork>();
+		String query = TextUtils.concat(
+				"SELECT * FROM ",HomeWork.TABLE_NAME," WHERE ",
+				HomeWork.GROUP_ID,"=?"
+				).toString();
+		Cursor c = mDb.rawQuery(query, 
+				new String[]{groupId.toString()});
+		while(c.moveToNext()){
+
+			HomeWork hw = new HomeWork();
+			hw.setId(c.getLong(c.getColumnIndex(HomeWork.ID)));
+			hw.setDate(new Date(c.getLong(c.getColumnIndex(HomeWork.DATE))));
+			hw.setLessonId(c.getLong(c.getColumnIndex(HomeWork.LESSON_ID)));
+			hw.setMessage(c.getString(c.getColumnIndex(HomeWork.MESSAGE)));
+			hw.setImages(Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES))));
+			hw.setComplite(c.getInt(c.getColumnIndex(HomeWork.COMPLITE))>0);
+			hw.setGroupId(c.getLong(c.getColumnIndex(HomeWork.GROUP_ID)));
+			result.add(hw);
+		}
+		return result;
+	}
+	
+	
+	public ArrayList<Long> getTopicalHomeWorksIds(){
+		ArrayList<Long> result = new ArrayList<Long>();
+		
+		String query = TextUtils.concat(
+				"SELECT * FROM ",HomeWork.TABLE_NAME," WHERE ",
+				HomeWork.GROUP_ID,"=? ORDER BY ",HomeWork.DATE
+				).toString();
+		
+		Cursor c = mDb.rawQuery(query, 
+				new String[]{PreferenceManager.getInstance().getGroupId().toString()});
+		
+		while(c.moveToNext()){
+			result.add(c.getLong(c.getColumnIndex(HomeWork.ID)));
+		}
+		
+		
+		return result;
+ 	}
 	
 	public void updateHomeWork(HomeWork hw){
 		try{
@@ -476,6 +528,7 @@ public class DataManager {
 			}
 			
 			mDb.setTransactionSuccessful();
+			NotificationManager.getInstance().removeNotification(hw);
 		}catch (Exception e){
 			e.printStackTrace();
 		}

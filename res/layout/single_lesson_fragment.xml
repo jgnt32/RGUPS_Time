@@ -1,63 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@color/theme_blue"
-    android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="20dp" >
-
-    <TextView
-        android:id="@+id/single_lesson_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Информатика"
-        android:gravity="center_horizontal"
-        android:textColor="@color/theme_green"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/single_lesson_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/theme_green"
-        android:text="8.20 - 9.50"
-        android:textSize="17sp" />
+    
+    android:layout_height="match_parent" >
 
     <LinearLayout
-        android:id="@+id/single_information_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical" >
+        android:layout_height="match_parent"
+        android:background="@color/theme_blue"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp" >
+	
+	    <TextView
+	        android:id="@+id/single_lesson_title"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
+	        android:text="Информатика"
+	        android:gravity="center_horizontal"
+	        android:textColor="@color/theme_green"
+	        android:textSize="25sp"
+	        android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/single_lesson_time"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
+	        android:gravity="center_horizontal"
+	        android:layout_marginTop="10dp"
+	        android:textColor="@color/theme_green"
+	        android:text="8.20 - 9.50"
+	        android:textSize="17sp" />
+	
+	    <LinearLayout
+	        android:id="@+id/single_information_container"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="20dp"
+	        android:layout_marginTop="10dp"
+	        android:orientation="vertical" >
+	
+	</LinearLayout>
+	
+	   <TextView
+	       	android:id="@+id/single_lesson_homework_label"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_horizontal"
+	        android:text="Домашнии задания"
+	        android:gravity="center_horizontal"
+	        android:textColor="@color/theme_green"
+	        android:textSize="25sp"
+	        android:textStyle="bold" />
+	
+	    <LinearLayout
+	        android:id="@+id/home_work_container"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:background="@android:color/white"
+	        android:orientation="vertical" >
+	
+	    </LinearLayout>
+	
+	</LinearLayout>
+    
+</ScrollView>
 
-</LinearLayout>
-
-   <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Домашнии задания"
-        android:gravity="center_horizontal"
-        android:textColor="@color/theme_green"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:id="@+id/home_work_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="vertical" >
-
-    </LinearLayout>
-
-</LinearLayout>
     

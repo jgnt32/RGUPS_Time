@@ -1,5 +1,7 @@
 package ru.rgups.time.fragments;
 
+import java.util.ArrayList;
+
 import ru.rgups.time.R;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.model.DataManager;
@@ -35,8 +37,9 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 	private LinearLayout mHomeWorkContainer;
 	private TextView mTitle;
 	private TextView mTime;
-
+	private TextView mHWLabel;
 	private String[] mTimePeriods;
+	private long timestamp;
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -49,6 +52,8 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 		setHasOptionsMenu(true);
 		mLesson = DataManager.getInstance().getLesson(getArguments().getLong(LESSON_ID));
 		mTimePeriods = getActivity().getResources().getStringArray(R.array.lessons_time_periods);
+		timestamp = getArguments().getLong(TIMESTAMP);
+
 	}
 
 	@Override
@@ -56,8 +61,12 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 		View v = inflater.inflate(R.layout.single_lesson_fragment, null);
 		mTime = (TextView) v.findViewById(R.id.single_lesson_time);
 		mTitle = (TextView) v.findViewById(R.id.single_lesson_title);
+		mHWLabel = (TextView) v.findViewById(R.id.single_lesson_homework_label);
 		mInformationContainer = (LinearLayout) v.findViewById(R.id.single_information_container);
 		mHomeWorkContainer = (LinearLayout) v.findViewById(R.id.home_work_container);
+		if(DataManager.getInstance().getHomeWorkList(timestamp, mLesson.getId()).size() == 0){
+			mHWLabel.setVisibility(View.GONE);
+		}
 		for(LessonInformation lesson : mLesson.getInformation()){
 			mInformationContainer.addView(getLesson(lesson));
 		}
@@ -73,9 +82,15 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 	@Override
 	public void onStart() {
 		super.onStart();
-		long timestamp = getArguments().getLong(TIMESTAMP);
-
-		for(HomeWork homeWork : DataManager.getInstance().getHomeWorkList(timestamp, mLesson.getId())){
+		ArrayList<HomeWork> list = DataManager.getInstance().getHomeWorkList(timestamp, mLesson.getId());
+		
+		if(list.size() == 0){
+			mHWLabel.setVisibility(View.GONE);
+		}else{
+			mHWLabel.setVisibility(View.VISIBLE);
+		}
+		
+		for(HomeWork homeWork : list){
 			mHomeWorkContainer.addView(getHomeWorkListElement(homeWork));
 		}
 	}

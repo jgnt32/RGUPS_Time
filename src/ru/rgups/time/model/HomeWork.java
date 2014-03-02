@@ -9,20 +9,24 @@ import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "home_work_table")
 public class HomeWork {
-	public static String TABLE_NAME = "home_work_table";
-	public static String ID = "id";
-	public static String DATE = "date";
-	public static String LESSON_ID = "lessonId";
-	public static String MESSAGE = "message";
-	public static String COMPLITE = "complite";
-	public static String IMAGES = "images";
-
+	public static final String TABLE_NAME = "home_work_table";
+	public static final String ID = "id";
+	public static final String DATE = "date";
+	public static final String LESSON_ID = "lessonId";
+	public static final String MESSAGE = "message";
+	public static final String COMPLITE = "complite";
+	public static final String IMAGES = "images";
+	public static final String GROUP_ID = "groupId";
+	
 	@DatabaseField(generatedId = true)
 	private long id;
 	
 	@DatabaseField
 	private Date date;
 	
+	@DatabaseField
+	private long groupId;
+
 	@DatabaseField
 	private long lessonId;
 	
@@ -59,7 +63,6 @@ public class HomeWork {
 		this.lessonId = lessonId;
 	}
 
-
 	public String getMessage() {
 		return message;
 	}
@@ -83,7 +86,13 @@ public class HomeWork {
 	public void setComplite(boolean complite) {
 		this.complite = complite;
 	}
-	
-	
+
+	public long getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		this.groupId = groupId;
+	}
 
 }

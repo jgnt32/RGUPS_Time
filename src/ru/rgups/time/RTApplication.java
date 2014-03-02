@@ -7,6 +7,7 @@ import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.LessonTableModel;
 import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.utils.DialogManager;
+import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Application;
 import android.util.Log;
@@ -28,6 +29,7 @@ public class RTApplication extends Application{
 
 		}
 		createTables();
+		NotificationManager.initInstance(getApplicationContext());
 	}
 	
 	private void createTables(){

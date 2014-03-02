@@ -1,5 +1,8 @@
 package ru.rgups.time;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import ru.rgups.time.activities.HomeWorkActivity;
 import ru.rgups.time.adapters.DrawerListAdapter;
 import ru.rgups.time.fragments.HomeWorkEditFragment;
@@ -10,11 +13,15 @@ import ru.rgups.time.fragments.TimeTableFragment;
 import ru.rgups.time.fragments.WelcomeActivity;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.interfaces.SettingListener;
+import ru.rgups.time.model.DataManager;
+import ru.rgups.time.receiver.HomeWorkNotificationReceiver;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentTransaction;
@@ -87,6 +94,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 			 return super.onOptionsItemSelected(item);
 		 }
 	 }
+	 
 	 
 	 private void initActionBar(){
 		 getSupportActionBar().setDisplayShowTitleEnabled(true); 
