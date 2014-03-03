@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -37,6 +38,7 @@ import android.widget.ListView;
 
 public class MainActivity extends ActionBarActivity implements  SettingListener, OnClickListener, OnItemClickListener, LessonListener{
 
+	public static final String OVER_DRAWER_TRANSACTION = "over_drawer_transaction";
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -161,6 +163,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	}
 	
 	private void changeFragment(int id){
+		getSupportFragmentManager().popBackStackImmediate(OVER_DRAWER_TRANSACTION, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		
 		switch (id) {
@@ -203,7 +206,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		fragment.setArguments(args);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.addToBackStack(null);
-		ft.replace(R.id.frameLayout, fragment);
+		ft.replace(R.id.frameLayout, fragment, OVER_DRAWER_TRANSACTION);
 		ft.commit();
 	}
 

@@ -580,7 +580,7 @@ public class DataManager {
 				"SELECT * FROM ",HomeWork.TABLE_NAME,
 				" WHERE ",
 				HomeWork.DATE,"=? AND ",
-				HomeWork.GROUP_ID,"=?" 
+				HomeWork.GROUP_ID,"=? AND ",HomeWork.COMPLITE,"='0'" 
 				).toString(), new String[]{timestamp.toString(), PreferenceManager.getInstance().getGroupId().toString()});
 		return c.getCount()>0;
 	}
@@ -590,7 +590,7 @@ public class DataManager {
 				"SELECT * FROM ",HomeWork.TABLE_NAME,
 				" WHERE ",
 				HomeWork.LESSON_ID,"=? AND ",
-				HomeWork.GROUP_ID,"=?" 
+				HomeWork.GROUP_ID,"=? AND ",HomeWork.COMPLITE,"='0'" 
 				).toString(), new String[]{lessonId.toString(), PreferenceManager.getInstance().getGroupId().toString()});
 		return c.getCount()>0;
 	}
