@@ -36,6 +36,8 @@ public class HomeWork {
 	@DatabaseField
 	private boolean complite;
 	
+	private String lessonTitle;
+	
 	@DatabaseField(dataType = DataType.SERIALIZABLE)
 	private ArrayList<String> images;
 
@@ -93,6 +95,14 @@ public class HomeWork {
 
 	public void setGroupId(long groupId) {
 		this.groupId = groupId;
+	}
+
+	public String getLessonTitle() {
+		return lessonTitle;
+	}
+
+	public void setLessonTitle(String lessonTitle) {
+		this.lessonTitle = lessonTitle;
 	}
 
 }

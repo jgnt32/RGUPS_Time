@@ -459,11 +459,14 @@ public class DataManager {
 		Long groupId = PreferenceManager.getInstance().getGroupId();
 		ArrayList<HomeWork> result = new ArrayList<HomeWork>();
 		String query = TextUtils.concat(
-				"SELECT * FROM ",HomeWork.TABLE_NAME," WHERE ",
-				HomeWork.GROUP_ID,"=?"
+				"SELECT h.*,l.* FROM ",HomeWork.TABLE_NAME," as h ",
+				"INNER JOIN ",LessonInformation.TABLE_NAME," as l ON ",
+				" h.",HomeWork.LESSON_ID,"=l.",LessonInformation.LESSON_ID,
+				" WHERE h.",
+				HomeWork.GROUP_ID,"=? AND h.",HomeWork.DATE,">=? AND h.",HomeWork.COMPLITE,"='0' ORDER BY h.",HomeWork.DATE
 				).toString();
 		Cursor c = mDb.rawQuery(query, 
-				new String[]{groupId.toString()});
+				new String[]{groupId.toString(), Long.toString(Calendar.getInstance().getTimeInMillis())});
 		while(c.moveToNext()){
 
 			HomeWork hw = new HomeWork();
@@ -474,6 +477,7 @@ public class DataManager {
 			hw.setImages(Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES))));
 			hw.setComplite(c.getInt(c.getColumnIndex(HomeWork.COMPLITE))>0);
 			hw.setGroupId(c.getLong(c.getColumnIndex(HomeWork.GROUP_ID)));
+			hw.setLessonTitle(c.getString(c.getColumnIndex(LessonInformation.LESSON_TITLE)));
 			result.add(hw);
 		}
 		return result;

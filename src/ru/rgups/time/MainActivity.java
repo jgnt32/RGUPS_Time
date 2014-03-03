@@ -7,6 +7,7 @@ import ru.rgups.time.activities.HomeWorkActivity;
 import ru.rgups.time.adapters.DrawerListAdapter;
 import ru.rgups.time.fragments.HomeWorkEditFragment;
 import ru.rgups.time.fragments.HomeWorkFragment;
+import ru.rgups.time.fragments.HomeWorkListFragment;
 import ru.rgups.time.fragments.SettingFragment;
 import ru.rgups.time.fragments.SingleLessonFragment;
 import ru.rgups.time.fragments.TimeTableFragment;
@@ -40,6 +41,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private TimeTableFragment mTimeTableFragment;
+	private HomeWorkListFragment mHomeWorkListFragment;
 	private SettingFragment mSettingFragment;
 	private boolean mReplaceFlag = false;
 	@Override
@@ -49,6 +51,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mDrawerList.setOnItemClickListener(this);
 		mDrawerList.setAdapter(new DrawerListAdapter(this));
+		mHomeWorkListFragment = new HomeWorkListFragment();
 	//	DataManager.getInstance().getAllLessons();
 		initActionBar();
 		initDrawer();
@@ -163,15 +166,23 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		switch (id) {
 		case DrawerListAdapter.TIME_FRAGMENT:
 			ft.replace(R.id.frameLayout, mTimeTableFragment);
-			ft.commit();
 			break;
-			
+		
+		case DrawerListAdapter.HOME_WORK_LIST_FRAGMENT:
+			ft.replace(R.id.frameLayout, mHomeWorkListFragment);
+			break;
+		
 		case DrawerListAdapter.SETTING_FRAGMENT:
 			ft.replace(R.id.frameLayout, mSettingFragment);
-			ft.commit();
-		default:
 			break;
+			
+		default:
+			
+			break;
+			
 		}
+		ft.commit();
+
 		mDrawerLayout.closeDrawers();
 		
 	}
