@@ -21,19 +21,19 @@ public class OverLine{
 	private int id;
 	
 	
-	@Element(name = "predmet")
+	@Element(name = "predmet", data = false ,required = false )
 	@DatabaseField
 	private String title;
 	
-	@Element(name = "tip")
+	@Element(name = "tip", data = false ,required = false)
 	@DatabaseField
 	private String type;
 	
-	@Element(name = "name_p")
+	@Element(name = "name_p", data = false ,required = false)
 	@DatabaseField
 	private String teacher;
 	
-	@Element(name = "kab")
+	@Element(name = "kab", data = false ,required = false)
 	@DatabaseField
 	private String room;
 

@@ -1,8 +1,5 @@
 package ru.rgups.time;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import ru.rgups.time.activities.HomeWorkActivity;
 import ru.rgups.time.adapters.DrawerListAdapter;
 import ru.rgups.time.fragments.HomeWorkEditFragment;
@@ -10,17 +7,14 @@ import ru.rgups.time.fragments.HomeWorkFragment;
 import ru.rgups.time.fragments.HomeWorkListFragment;
 import ru.rgups.time.fragments.SettingFragment;
 import ru.rgups.time.fragments.SingleLessonFragment;
+import ru.rgups.time.fragments.TeachersListFragment;
 import ru.rgups.time.fragments.TimeTableFragment;
 import ru.rgups.time.fragments.WelcomeActivity;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.interfaces.SettingListener;
 import ru.rgups.time.model.DataManager;
-import ru.rgups.time.receiver.HomeWorkNotificationReceiver;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -28,7 +22,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,7 +30,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-public class MainActivity extends ActionBarActivity implements  SettingListener, OnClickListener, OnItemClickListener, LessonListener{
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
+
+public class MainActivity extends BaseDrawerActivity implements  SettingListener, OnClickListener, OnItemClickListener, LessonListener{
 
 	public static final String OVER_DRAWER_TRANSACTION = "over_drawer_transaction";
 	private DrawerLayout mDrawerLayout;
@@ -46,6 +43,7 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	private HomeWorkListFragment mHomeWorkListFragment;
 	private SettingFragment mSettingFragment;
 	private boolean mReplaceFlag = false;
+	private TeachersListFragment mTeachersFrament;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,14 +51,17 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mDrawerList.setOnItemClickListener(this);
 		mDrawerList.setAdapter(new DrawerListAdapter(this));
-		mHomeWorkListFragment = new HomeWorkListFragment();
 	//	DataManager.getInstance().getAllLessons();
 		initActionBar();
 		initDrawer();
 		initFragmenets();
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.replace(R.id.frameLayout, mTimeTableFragment, null);
-		ft.commit();
+//		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//		ft.replace(R.id.frameLayout, mTimeTableFragment, null);
+//		ft.commit();
+		if(savedInstanceState == null){
+	//		openTimeTableFragment();
+
+		}
 	}
 
 	private void openWelcomeActivity(){
@@ -71,15 +72,21 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	}
 	
 	@Override
+	protected void onStart() {
+		super.onStart();
+		openWelcomeActivity();
+
+	}
+	
+	@Override
 	protected void onResume() {
 		super.onResume();
-		openWelcomeActivity();
-		openTimeTableFragment();
-	}
+		DataManager.getInstance().setSpiceManager(getSpiceManager());
+	//	DataManager.getInstance().fullTimeRequest(new FullTimeRequestListener());
+		}
 
 	private void openTimeTableFragment(){
-		if(PreferenceManager.getInstance().getGroupId() == -1 &&
-				mReplaceFlag == true){
+		if(PreferenceManager.getInstance().getGroupId() != -1){
 			changeFragment(DrawerListAdapter.TIME_FRAGMENT);
 			mReplaceFlag = false;
 		}
@@ -128,12 +135,12 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		
 		 @Override
 	        public void onDrawerClosed(View drawerView) {
-	            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+//	            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
 	        }
 
 	        @Override
 	        public void onDrawerOpened(View drawerView) {
-	            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+	//            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
 	        }
 		
 		
@@ -160,6 +167,9 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 	private void initFragmenets(){
 		mSettingFragment = new SettingFragment();
 		mTimeTableFragment = new TimeTableFragment();
+		mTeachersFrament = new TeachersListFragment();
+		mHomeWorkListFragment = new HomeWorkListFragment();
+
 	}
 	
 	private void changeFragment(int id){
@@ -169,6 +179,10 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		switch (id) {
 		case DrawerListAdapter.TIME_FRAGMENT:
 			ft.replace(R.id.frameLayout, mTimeTableFragment);
+			break;
+			
+		case DrawerListAdapter.TEACHERS_FRAGMENT:
+			ft.replace(R.id.frameLayout, mTeachersFrament);
 			break;
 		
 		case DrawerListAdapter.HOME_WORK_LIST_FRAGMENT:
@@ -228,6 +242,19 @@ public class MainActivity extends ActionBarActivity implements  SettingListener,
 		
 	}
 	
-	
+	private class FullTimeRequestListener implements RequestListener<Boolean>{
+
+		@Override
+		public void onRequestFailure(SpiceException e) {
+			e.printStackTrace();
+			
+		}
+
+		@Override
+		public void onRequestSuccess(Boolean response) {
+			Log.e(getClass().getSimpleName(), "onRequestSuccess");
+		}
+		
+	}
 	
 }

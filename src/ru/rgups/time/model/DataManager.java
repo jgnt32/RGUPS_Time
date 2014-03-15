@@ -11,6 +11,7 @@ import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
+import ru.rgups.time.spice.FullTimeTableRequest;
 import ru.rgups.time.spice.TimeTableRequest;
 import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;
@@ -218,7 +219,7 @@ public class DataManager {
 			}
 			
 			if(over.getTeacher() != null){
-				mSaveInformationStatement.bindString(5, over.getTeacher());
+				mSaveInformationStatement.bindString(5, over.getTeacher().trim());
 			}
 			
 			if(over.getRoom() != null){
@@ -244,7 +245,7 @@ public class DataManager {
 				}
 
 				if(under.getTeacher() != null){
-					mSaveInformationStatement.bindString(5, under.getTeacher());
+					mSaveInformationStatement.bindString(5, under.getTeacher().trim());
 				}
 
 				if(under.getRoom() != null){
@@ -271,7 +272,7 @@ public class DataManager {
 					
 					
 					if(doubleLine.getTeacher() != null){
-						mSaveInformationStatement.bindString(5, doubleLine.getTeacher());
+						mSaveInformationStatement.bindString(5, doubleLine.getTeacher().trim());
 					}
 					
 					
@@ -595,4 +596,31 @@ public class DataManager {
 		return c.getCount()>0;
 	}
 
+	public void fullTimeRequest(RequestListener<Boolean> listener){
+		this.getSpiceManager().execute(new FullTimeTableRequest(Boolean.class), listener);
+	}
+	
+	public Cursor getAllTeachersCursor(){
+		String query = TextUtils.concat(
+				"SELECT ",LessonInformation.ID," as _id,",LessonInformation.TABLE_NAME,".* FROM ",LessonInformation.TABLE_NAME,
+				" WHERE ",LessonInformation.TEACHER_NAME,"<>'' AND ",LessonInformation.TEACHER_NAME,"<>'..'",
+				
+				" GROUP BY ",LessonInformation.TEACHER_NAME,
+				" ORDER BY ",LessonInformation.TEACHER_NAME
+				).toString();
+		return mDb.rawQuery(query, new String[]{});
+	}
+	
+	public Cursor getFiltredTeachersCursor(String name){
+		String query = TextUtils.concat(
+				"SELECT ",LessonInformation.ID," as _id,",LessonInformation.TABLE_NAME,".* FROM ",LessonInformation.TABLE_NAME,
+				" WHERE ",LessonInformation.TEACHER_NAME,"<>'' AND ",LessonInformation.TEACHER_NAME,"<>'..' AND ",
+				LessonInformation.TEACHER_NAME," LIKE '%",name.toUpperCase(),"%'",
+				" GROUP BY ",LessonInformation.TEACHER_NAME,
+				" ORDER BY ",LessonInformation.TEACHER_NAME
+				).toString();
+		return mDb.rawQuery(query, new String[]{});
+	}
+	
+	
 }

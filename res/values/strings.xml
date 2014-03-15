@@ -12,13 +12,16 @@
 	<string name="action_add_image">Добаваить изображение</string>    
 	<string name="action_save">Сохранить</string>    
 	<string name="action_delete">Удалить</string>
+	<string name="search_view_title">Преподаватель</string>
+	<string name="search_view_hint">Введите фамилию преподавателя</string>
 	
 	<!-- DIALOGs -->
 	<string name="ok_caption">Ок</string>
 	<string name="positive_caption">Да</string>	
 	<string name="negative_caption">Нет</string>
 	<string name="homework_delete_message">Вы действительно хотите удалить это домашнее задание?</string>
-    <!-- DRAWER -->
+ 
+	<!-- DRAWER -->
     <string name="draw_open">Меню</string>
     <string name="draw_close">Расписание</string>
     
@@ -31,4 +34,5 @@
     <string name="setting_logout">Выйти</string>
     
     <string name="setting_staff">Общее</string>
+    <string name="hw_empty">Домашних заданий нет</string>
 </resources>

@@ -14,7 +14,7 @@ public class DrawerListAdapter extends BaseAdapter{
 		SETTING_FRAGMENT
 	}
 	public static final int TIME_FRAGMENT = 0;
-	
+	public static final int TEACHERS_FRAGMENT = 1;
 	public static final int HOME_WORK_LIST_FRAGMENT = 2;
 	public static final int SETTING_FRAGMENT = 3;
 

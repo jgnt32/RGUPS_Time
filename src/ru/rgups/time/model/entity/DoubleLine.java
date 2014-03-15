@@ -22,19 +22,19 @@ public class DoubleLine {
 	private int id;
 	
 	
-	@Element(name = "predmet")
+	@Element(name = "predmet",  required = false, data = false)
 	@DatabaseField
 	private String title;
 	
-	@Element(required = false, name = "tip")
+	@Element( name = "tip", data = false ,required = false)
 	@DatabaseField
 	private String type;
 	
-	@Element(required = false, name = "name_p")
+	@Element(required = false, name = "name_p", data = false)
 	@DatabaseField
 	private String teacher;
 	
-	@Element(required = false, name = "kab")
+	@Element(required = false, name = "kab", data = false)
 	@DatabaseField
 	private String room;
 

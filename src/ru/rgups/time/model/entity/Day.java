@@ -27,7 +27,7 @@ public class Day {
 	@DatabaseField(id = true)
 	private int number;
 	
-	@ElementList(inline = true, type = Lesson.class )
+	@ElementList(inline = true, type = Lesson.class, required = false, empty = true)
 	@ForeignCollectionField(eager = true)
 	private Collection<Lesson> lessons;
 

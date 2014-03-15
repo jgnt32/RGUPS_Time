@@ -24,8 +24,6 @@ public class HomeWorkNotificationReceiver extends BroadcastReceiver{
 	public void onReceive(Context context, Intent intent) {
 		HomeWork hw = DataManager.getInstance().getHomeWork(intent.getExtras().getLong(HomeWorkEditFragment.HOMEWORK_ID));
 
-		Log.e("HomeWorkNotificationReciver onReceive", "hwId "+intent.getExtras().getLong(HomeWorkEditFragment.HOMEWORK_ID)+
-				" wh gr id = "+hw.getGroupId());
 		if(hw != null){
 			if(hw.getGroupId() == PreferenceManager.getInstance().getGroupId()){
 				if(!hw.isComplite()){

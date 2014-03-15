@@ -20,10 +20,10 @@ public class LessonList {
 	@DatabaseField(id = true)
 	private int groupId;
 	
-	@Element(name = "nazvanie")
+	@Element(name = "nazvanie", required = false, type = String.class)
 	private String title;
 	
-	@ElementList(inline = true, type = Day.class)
+	@ElementList(inline = true, type = Day.class, required = false, empty = true)
 	@ForeignCollectionField(eager = true)
 	private Collection<Day> days;
 

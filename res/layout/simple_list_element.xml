@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginRight="3dp"
+    android:layout_height="match_parent"
+    android:padding="7dp"
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/groupName"
+        android:id="@+id/list_element_text"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="@color/theme_blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_weight="1"
-        android:text="TextView"
-        android:textSize="20dp" />
+        android:text="TextView" />
 
 </LinearLayout>

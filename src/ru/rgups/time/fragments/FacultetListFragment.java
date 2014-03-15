@@ -10,7 +10,6 @@ import ru.rgups.time.model.entity.Facultet;
 import ru.rgups.time.model.entity.FacultetList;
 import ru.rgups.time.spice.SampleXmlRequest;
 import android.app.Activity;
-import android.net.wifi.p2p.WifiP2pManager.ActionListener;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;

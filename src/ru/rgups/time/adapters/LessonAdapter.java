@@ -1,7 +1,6 @@
 package ru.rgups.time.adapters;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import ru.rgups.time.R;
 import ru.rgups.time.model.DataManager;
@@ -33,9 +32,9 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 	private View mView;
 	private View headerView;
 	private String[] timePeriods;
-	public LessonAdapter(Context context, Collection<LessonListElement> list){
+	public LessonAdapter(Context context, ArrayList<LessonListElement> list){
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
-		mLessonList = new ArrayList<LessonListElement>(list);
+		mLessonList = list;
 		timePeriods = context.getResources().getStringArray(R.array.lessons_time_periods);
 	}
 	
@@ -174,9 +173,11 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 
 	@Override
 	public View getHeaderView(int position, View convertView, ViewGroup parent) {
-		View v = mInflater.inflate(R.layout.group_list_divier, null);
-		TextView text = (TextView) v.findViewById(R.id.levelTitle);
+		View v = mInflater.inflate(R.layout.lesson_list_divier, null);
+		TextView text = (TextView) v.findViewById(R.id.divider_text);
 		text.setText(getItem(position).getLessonNumber()+"-я пара");
+		TextView time = (TextView) v.findViewById(R.id.lesson_divider_time);
+		time.setText(timePeriods[getItem(position).getLessonNumber()]);
 		return v;
 	}
 

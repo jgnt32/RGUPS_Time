@@ -43,7 +43,6 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
-		Log.d("qwerrqeq",""+getArguments().getLong(LESSON_ID)+" tm "+ getArguments().getLong(DATE));
 
 	}
 	

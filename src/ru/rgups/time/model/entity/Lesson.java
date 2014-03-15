@@ -34,7 +34,7 @@ public class Lesson {
 	@Element(name = "vrem")
 	private String time;	
 	
-	@ElementList(inline = true, type = DoubleLine.class,required = false, empty = true)
+	@ElementList(inline = true, type = DoubleLine.class, required = false, empty = true)
 	private Collection<DoubleLine> doubleLine;
 	
 	@ElementList(inline = true,required = false, empty = true,type = UnderLine.class )

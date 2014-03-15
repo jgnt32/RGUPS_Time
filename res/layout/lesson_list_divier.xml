@@ -2,16 +2,34 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/theme_blue"
+    android:background="#CC34495E"
     android:orientation="vertical"
-    android:padding="5dp" >
+    android:padding="10dp" >
 
-    <TextView
-        android:id="@+id/divider_text"
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/theme_green"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/divider_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/theme_green"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/lesson_divider_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+			android:layout_alignParentRight="true"
+			android:textColor="@color/theme_green"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
 
 </LinearLayout>

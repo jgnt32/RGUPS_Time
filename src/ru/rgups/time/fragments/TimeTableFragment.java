@@ -7,7 +7,6 @@ import it.sephiroth.android.library.widget.HListView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ru.rgups.time.BaseFragment;
@@ -65,7 +64,10 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setRetainInstance(true);
 		setHasOptionsMenu(true);
+		mLessons = new ArrayList<LessonListElement>();
+		mLessonAdapter = new LessonAdapter(getActivity(), mLessons);
 	//	mLessons = DataManager.getInstance().getLessonList(1, 1);
 	//	this.mLessonAdapter = new LessonAdapter(getActivity(), mLessons);
 	}
@@ -167,13 +169,9 @@ public class TimeTableFragment extends BaseFragment implements OnScrollListener,
 	@Override
 	public void onItemClick(it.sephiroth.android.library.widget.AdapterView<?> parent,
 			View view, int position, long id) {
-		Log.d("tiemestamp ","tm = "+mCalendarAdapter.getTimestamp(position)+ " date = "+new Date(mCalendarAdapter.getTimestamp(position)).toString());
-		Log.d("tiemestamp ","tm = "+mCalendarAdapter.getTimestamp(mCalendarList.getCheckedItemPosition())+ " date = "+new Date(mCalendarAdapter.getTimestamp(mCalendarList.getCheckedItemPosition())).toString());
-
 		mLessons.clear();
 		mLessons.addAll(DataManager.getInstance().getLessonList(mCalendarAdapter.getDayNumber(position), mCalendarAdapter.getWeekState(position)));
-		mLessonAdapter = new LessonAdapter(getActivity(), mLessons);
-		mLessonList.setAdapter(mLessonAdapter);
+		mLessonAdapter.notifyDataSetChanged();
 	}
 
 	
