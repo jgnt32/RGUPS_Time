@@ -2,14 +2,18 @@ package ru.rgups.time.fragments;
 
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.TeacherCursorAdapter;
+import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.loaders.RTCursorLoader;
 import ru.rgups.time.model.DataManager;
+import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +32,13 @@ public class TeachersListFragment extends Fragment implements OnItemClickListene
 	private RTCursorLoader mLoader;
 	private MenuItem mSearchItem;
 	private SearchView mSearchView;
+	private LessonListener mLessonListener;
 	
+	@Override
+	public void onAttach(Activity activity) {
+		super.onAttach(activity);
+		mLessonListener = (LessonListener) activity;
+	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -36,7 +46,7 @@ public class TeachersListFragment extends Fragment implements OnItemClickListene
 		setHasOptionsMenu(true);
 		setRetainInstance(true);
 
-		mAdapter = new TeacherCursorAdapter(getActivity(), null, true);
+		mAdapter = new TeacherCursorAdapter(getActivity(), DataManager.getInstance().getAllTeachersCursor(), true);
 		mAdapter.setFilterQueryProvider(this);
 		
 	}
@@ -44,19 +54,19 @@ public class TeachersListFragment extends Fragment implements OnItemClickListene
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		getLoaderManager().initLoader(0, null, this);
+	//	getLoaderManager().initLoader(0, null, this);
 	}
 	
 	@Override
 	public void onStart() {
 		super.onStart();
-		mLoader.forceLoad();
+	//	mLoader.forceLoad();
 	}
 	
 	@Override
 	public void onStop() {
 		super.onStop();
-		mLoader.stopLoading();
+	//	mLoader.stopLoading();
 	}
 	
 	@Override
@@ -65,6 +75,7 @@ public class TeachersListFragment extends Fragment implements OnItemClickListene
 		View v = inflater.inflate(R.layout.simple_list_fragment, null);
 		mListView = (ListView) v.findViewById(R.id.list_fragment_listview);
 		mListView.setAdapter(mAdapter);
+		mListView.setOnItemClickListener(this);
 		return v;
 	}
 	
@@ -74,14 +85,15 @@ public class TeachersListFragment extends Fragment implements OnItemClickListene
 		
 		mSearchItem = menu.findItem(R.id.action_search);
 		mSearchItem.setVisible(true);
-	    mSearchView = (SearchView) mSearchItem.getActionView();
-	    mSearchView.setQueryHint(getString(R.string.search_view_hint));
-	    mSearchView.setOnQueryTextListener(this);	
+	    mSearchView = (SearchView) MenuItemCompat.getActionView(mSearchItem);
+	 /*   mSearchView.setQueryHint(getString(R.string.search_view_hint));
+	    mSearchView.setOnQueryTextListener(this);*/
 	}
 	
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		
+	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+		Log.i("qwert", ""+mAdapter.getTeacherName());
+		mLessonListener.onTeacherClick(mAdapter.getTeacherName());
 	}
 
 	@Override

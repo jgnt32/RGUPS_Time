@@ -8,4 +8,5 @@ public interface LessonListener {
 	public void OnAddHomeWorkClick(long lessonId, Long date);
 	public void OnHomeWorkListElementClick(long hwId);
 //	public void onHomeWorkListFragmentClick(long hwId);
+	public void onTeacherClick(String teachersName);
 }

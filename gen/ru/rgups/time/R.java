@@ -1141,8 +1141,8 @@ containing a value of this type.
     }
     public static final class id {
         public static final int RelativeLayout1=0x7f050062;
-        public static final int action_add=0x7f050083;
-        public static final int action_add_image=0x7f05007f;
+        public static final int action_add=0x7f050085;
+        public static final int action_add_image=0x7f050081;
         public static final int action_bar=0x7f05001e;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05001d;
@@ -1151,14 +1151,14 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f050025;
         public static final int action_bar_title=0x7f050024;
         public static final int action_context_bar=0x7f05001f;
-        public static final int action_delete=0x7f050081;
-        public static final int action_done=0x7f050084;
+        public static final int action_delete=0x7f050083;
+        public static final int action_done=0x7f050086;
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050026;
-        public static final int action_save=0x7f050080;
-        public static final int action_scroll_to_today=0x7f050082;
-        public static final int action_search=0x7f050085;
+        public static final int action_save=0x7f050082;
+        public static final int action_scroll_to_today=0x7f050084;
+        public static final int action_search=0x7f050087;
         public static final int activity_chooser_view_content=0x7f050027;
         public static final int always=0x7f05000b;
         public static final int alwaysScroll=0x7f05001b;
@@ -1170,8 +1170,8 @@ containing a value of this type.
         public static final int calendar_element_homework_indicator=0x7f050048;
         public static final int calendar_element_text=0x7f050046;
         public static final int calendar_left_indicator=0x7f050042;
-        public static final int calendar_list=0x7f05007b;
-        public static final int calendar_list_hint=0x7f05007c;
+        public static final int calendar_list=0x7f05007d;
+        public static final int calendar_list_hint=0x7f05007e;
         public static final int calendar_right_indicator=0x7f050043;
         public static final int calendar_top_indicator=0x7f050044;
         public static final int checkbox=0x7f05002f;
@@ -1221,7 +1221,7 @@ containing a value of this type.
         public static final int lesson_list=0x7f05006c;
         public static final int lesson_list_element_checkbox=0x7f05005e;
         public static final int lesson_list_element_homework_indicator=0x7f05006b;
-        public static final int lesson_list_empty_view=0x7f05007d;
+        public static final int lesson_list_empty_view=0x7f05007f;
         public static final int lesson_room=0x7f050067;
         public static final int lesson_room_container=0x7f050066;
         public static final int lesson_teacher=0x7f050069;
@@ -1233,7 +1233,7 @@ containing a value of this type.
         public static final int list_element_text=0x7f050071;
         public static final int list_fragment_listview=0x7f05006d;
         public static final int list_item=0x7f05002b;
-        public static final int login_button=0x7f05007e;
+        public static final int login_button=0x7f050080;
         public static final int middle=0x7f050012;
         public static final int name=0x7f050051;
         public static final int never=0x7f050009;
@@ -1269,6 +1269,8 @@ containing a value of this type.
         public static final int split_action_bar=0x7f050020;
         public static final int submit_area=0x7f05003b;
         public static final int tabMode=0x7f050002;
+        public static final int teachers_lesson_room=0x7f05007b;
+        public static final int teachers_lesson_title=0x7f05007c;
         public static final int title=0x7f05002d;
         public static final int top_action_bar=0x7f050022;
         public static final int up=0x7f050023;
@@ -1353,8 +1355,9 @@ containing a value of this type.
         public static final int single_lesson_fragment=0x7f030031;
         public static final int single_lesson_information_element=0x7f030032;
         public static final int support_simple_spinner_dropdown_item=0x7f030033;
-        public static final int timetable_fragment=0x7f030034;
-        public static final int welcome_activity=0x7f030035;
+        public static final int teacher_lesson_list_element=0x7f030034;
+        public static final int timetable_fragment=0x7f030035;
+        public static final int welcome_activity=0x7f030036;
     }
     public static final class menu {
         public static final int homework=0x7f0d0000;

@@ -8,6 +8,7 @@ import ru.rgups.time.fragments.HomeWorkListFragment;
 import ru.rgups.time.fragments.SettingFragment;
 import ru.rgups.time.fragments.SingleLessonFragment;
 import ru.rgups.time.fragments.TeachersListFragment;
+import ru.rgups.time.fragments.TeachersTimeTable;
 import ru.rgups.time.fragments.TimeTableFragment;
 import ru.rgups.time.fragments.WelcomeActivity;
 import ru.rgups.time.interfaces.LessonListener;
@@ -254,6 +255,19 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		public void onRequestSuccess(Boolean response) {
 			Log.e(getClass().getSimpleName(), "onRequestSuccess");
 		}
+		
+	}
+
+	@Override
+	public void onTeacherClick(String teachersName) {
+		Bundle args = new Bundle();
+		args.putString(TeachersTimeTable.TEACHERS_NAME, teachersName);
+		TeachersTimeTable fragment = new TeachersTimeTable();
+		fragment.setArguments(args);
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.addToBackStack(null);
+		ft.replace(R.id.frameLayout, fragment);
+		ft.commit();
 		
 	}
 	

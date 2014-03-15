@@ -626,4 +626,21 @@ public class DataManager {
 	}
 	
 	
+	public Cursor getTeachersLessons(Integer dayNumber, Integer weekState, String teacherName){
+		String query = TextUtils.concat(
+				"SELECT l.",LessonTableModel.ID," as _id, l.*,i.*",
+				
+				" FROM ",LessonTableModel.TABLE_NAME," as l  ",
+				"INNER JOIN ",LessonInformation.TABLE_NAME," AS i ON ",
+				"l.",LessonTableModel.ID," = i.",LessonInformation.LESSON_ID,
+				" WHERE ",
+				LessonTableModel.DAY,"=?", " AND ",
+				LessonInformation.TEACHER_NAME,"=? AND ",
+				"(",LessonTableModel.WEEK_STATE,"= ? OR " ,
+				LessonTableModel.WEEK_STATE,"='2')",
+				" GROUP BY l.",LessonTableModel.NUMBER, " ORDER BY l.",LessonTableModel.NUMBER
+				).toString();
+		Cursor c = mDb.rawQuery(query, new String[]{dayNumber.toString(),teacherName, weekState.toString()});
+		return c;
+	}
 }

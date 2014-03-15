@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:padding="10dp" >
+	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:id="@+id/lesson_room_container"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	
+	        <ImageView
+	            android:layout_width="21dp"
+	            android:layout_height="21dp"
+	            android:layout_weight="0"
+	            android:layout_gravity="center_vertical"
+	            android:src="@drawable/ic_place" />
+	
+	        <TextView
+	            android:id="@+id/teachers_lesson_room"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="0.3"
+	            android:padding="3dp"
+	            android:layout_gravity="center_vertical"
+	            android:text="Д412"
+	            android:textSize="17dp" />
+	
+	    </LinearLayout>
+	
+	    <LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" >
+	
+	        <ImageView
+	            android:layout_width="21dp"
+	            android:layout_height="21dp"
+	            android:layout_gravity="center_vertical"
+	            android:layout_weight="0"
+	            android:src="@drawable/ic_pencil" />
+	
+	        <TextView
+	            android:id="@+id/teachers_lesson_title"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_weight="1"
+	            android:layout_gravity="center_vertical"
+	            android:padding="3dp"
+	            android:text="Операционные системы"
+	            android:textSize="17dp" />
+	
+	    </LinearLayout>
+	
+	</LinearLayout>
+
+</RelativeLayout>
+
