@@ -3,6 +3,7 @@ package ru.rgups.time.fragments;
 import ru.rgups.time.adapters.BaseCalendarAdapter;
 import ru.rgups.time.adapters.LessonCalendarAdapter;
 import ru.rgups.time.adapters.TeacherLessonListAdapter;
+import ru.rgups.time.adapters.TeachersCalendarAdapter;
 import ru.rgups.time.model.DataManager;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.os.Bundle;
@@ -34,7 +35,9 @@ public class TeachersTimeTable extends BaseTameTableFragment{
 
 	@Override
 	protected BaseCalendarAdapter createNewCalendarAdapter() {
-		return new LessonCalendarAdapter(getActivity());
+		TeachersCalendarAdapter adapter = new TeachersCalendarAdapter(getActivity());
+		adapter.setTeachersName(getArguments().getString(TEACHERS_NAME));
+		return adapter;
 	}
 
 }
