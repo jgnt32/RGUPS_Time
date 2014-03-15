@@ -50,6 +50,7 @@
             android:id="@+id/lesson_list_element_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:focusable="false"
             android:layout_centerInParent="true" />
 
     </RelativeLayout>

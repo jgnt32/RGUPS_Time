@@ -11,18 +11,16 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.EditText;
 import android.widget.GridView;
 
-public class HomeWorkFragment extends Fragment implements MultiChoiceModeListener{
+public class HomeWorkFragment extends Fragment{
 	
 	public static final String LESSON_ID = "lesson_id";
 	public static final String DATE = "date";
@@ -52,8 +50,8 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 
 		View v = inflater.inflate(R.layout.homework_fragment, null);
 		mPhotoGridView = (GridView) v.findViewById(R.id.home_work_grid_view);
-		mPhotoGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL); 
-		mPhotoGridView.setMultiChoiceModeListener(this);
+	//	mPhotoGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL); 
+	//	mPhotoGridView.setMultiChoiceModeListener(this);
 		mAdapter = new PhotoGalleryAdapter(getActivity());
 		mPhotoGridView.setAdapter(mAdapter);
 		mText = (EditText) v.findViewById(R.id.home_work_text);
@@ -94,7 +92,7 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 		}
 	}
 
-	@Override
+/*	@Override
 	public boolean onActionItemClicked(ActionMode arg0, MenuItem item) {
 
 		return false;
@@ -123,5 +121,5 @@ public class HomeWorkFragment extends Fragment implements MultiChoiceModeListene
 	public void onItemCheckedStateChanged(ActionMode arg0, int position, long id, boolean checked) {
 		Log.e("onItemCheckedStateChanged","position = "+position+"; count = "+mPhotoGridView.getCheckedItemCount());
 		
-	}
+	}*/
 }

@@ -35,7 +35,7 @@ public class CalendarManager {
 	
 	}
 	
-	public int getCurrentDatOfTheYear(){
+	public int getCurrentDayOfTheYear(){
 		mSemestrCalendar.setTime(Calendar.getInstance().getTime());
 		return mSemestrCalendar.get(GregorianCalendar.DAY_OF_YEAR)-getDayOffset();
 	}

@@ -48,7 +48,7 @@ public class CalendarAdapter extends BaseAdapter{
 
 	private View bootomIndicator;
 	
-	private ImageView mHWIndicator;
+	private View mHWIndicator;
 
 	private int mLastSelected = -1;
 
@@ -127,7 +127,8 @@ public class CalendarAdapter extends BaseAdapter{
 		  rightIndicator = mView.findViewById(R.id.calendar_right_indicator);
 		  topIndicator = mView.findViewById(R.id.calendar_top_indicator);
 		  bootomIndicator = mView.findViewById(R.id.calendar_bottom_indicator);
-		  mHWIndicator = (ImageView) mView.findViewById(R.id.calendar_element_homework_indicator);
+		  mHWIndicator = mView.findViewById(R.id.calendar_element_homework_indicator);
+		  TextView hwCount = (TextView) mView.findViewById(R.id.lesson_indicator_text);
 		  mCalendar.set(Calendar.DAY_OF_YEAR, position+DAY_OFFSET);
 		  text.setText(Integer.toString(mCalendar.get(Calendar.DAY_OF_MONTH)));
 		  dayOfWeek.setText(DateFormat.format(DAY_OF_WEEK_FORMAT, mCalendar.getTime()).toString().toUpperCase());
@@ -153,8 +154,10 @@ public class CalendarAdapter extends BaseAdapter{
 
 			  }
 		  }
-		  if(DataManager.getInstance().dayHasHomeWork(getTimestamp(position))){
+		  int homeworkCount = DataManager.getInstance().getHomeWorkCountAtDay(getTimestamp(position));
+		  if(homeworkCount>0){
 			  mHWIndicator.setVisibility(View.VISIBLE);
+			  hwCount.setText(Integer.toString(homeworkCount));
 		  }else{
 			  mHWIndicator.setVisibility(View.GONE);
 		  }

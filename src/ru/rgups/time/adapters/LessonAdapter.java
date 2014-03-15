@@ -32,6 +32,7 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 	private View mView;
 	private View headerView;
 	private String[] timePeriods;
+	private Long timestamp = (long) 0;
 	public LessonAdapter(Context context, ArrayList<LessonListElement> list){
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
 		mLessonList = list;
@@ -65,7 +66,7 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 			mHolder = (ViewHolder) mView.getTag();
 		}
 		
-		if(DataManager.getInstance().lessonHasHomeWork(getItemId(position))){
+		if(DataManager.getInstance().lessonHasHomeWork(getItemId(position), getTimestamp())){
 			mHolder.hwIndicator.setVisibility(View.VISIBLE);
 		}else{
 			mHolder.hwIndicator.setVisibility(View.GONE);
@@ -200,5 +201,15 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 			container.setVisibility(View.GONE);			
 		}
 			
+	}
+
+
+	public Long getTimestamp() {
+		return timestamp;
+	}
+
+
+	public void setTimestamp(Long timestamp) {
+		this.timestamp = timestamp;
 	}
 }

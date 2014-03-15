@@ -576,23 +576,26 @@ public class DataManager {
 		}
 	}
 	
-	public boolean dayHasHomeWork(Long timestamp){
+	public int getHomeWorkCountAtDay(Long timestamp){
 		Cursor c = mDb.rawQuery(TextUtils.concat(
 				"SELECT * FROM ",HomeWork.TABLE_NAME,
 				" WHERE ",
 				HomeWork.DATE,"=? AND ",
 				HomeWork.GROUP_ID,"=? AND ",HomeWork.COMPLITE,"='0'" 
 				).toString(), new String[]{timestamp.toString(), PreferenceManager.getInstance().getGroupId().toString()});
-		return c.getCount()>0;
+		return c.getCount();
 	}
 	
-	public boolean lessonHasHomeWork(Long lessonId){
+	public boolean lessonHasHomeWork(Long lessonId, Long timestamp){
 		Cursor c = mDb.rawQuery(TextUtils.concat(
 				"SELECT * FROM ",HomeWork.TABLE_NAME,
 				" WHERE ",
 				HomeWork.LESSON_ID,"=? AND ",
-				HomeWork.GROUP_ID,"=? AND ",HomeWork.COMPLITE,"='0'" 
-				).toString(), new String[]{lessonId.toString(), PreferenceManager.getInstance().getGroupId().toString()});
+				HomeWork.GROUP_ID,"=? AND ",HomeWork.COMPLITE,"='0' ",
+				" AND ",HomeWork.DATE,"=?"
+				).toString(), new String[]{lessonId.toString(), 
+			PreferenceManager.getInstance().getGroupId().toString(),
+			timestamp.toString()});
 		return c.getCount()>0;
 	}
 
