@@ -305,7 +305,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int dividerWidth=0x7f010070;
+        public static final int dividerWidth=0x7f010071;
         /**  ListPopupWindow comaptibility 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -325,7 +325,7 @@ containing a value of this type.
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int entries=0x7f01006f;
+        public static final int entries=0x7f010070;
         /**  The drawable to show in the button for expanding the activities overflow popup.
              <strong>Note:</strong> Clients would like to set this drawable
              as a clue about the action the chosen activity will perform. For
@@ -343,7 +343,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int footerDividersEnabled=0x7f010072;
+        public static final int footerDividersEnabled=0x7f010073;
         /**  StickyListHeaders attributes 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -352,7 +352,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int hasStickyHeaders=0x7f01006a;
+        public static final int hasStickyHeaders=0x7f01006b;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -360,7 +360,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int headerDividersEnabled=0x7f010071;
+        public static final int headerDividersEnabled=0x7f010072;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -417,7 +417,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int isDrawingListUnderStickyHeader=0x7f01006b;
+        public static final int isDrawingListUnderStickyHeader=0x7f01006c;
         /**  Specifies whether the theme is light, otherwise it is dark. 
          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
@@ -439,6 +439,14 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int itemPadding=0x7f010033;
+        /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int lesson_free_state=0x7f01006a;
         /**  Drawable used as a background for selected list items. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -520,7 +528,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int measureWithChild=0x7f010075;
+        public static final int measureWithChild=0x7f010076;
         /**  The type of navigation to use. 
          <p>Must be one of the following constant values.</p>
 <table>
@@ -539,13 +547,13 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int overScrollFooter=0x7f010074;
+        public static final int overScrollFooter=0x7f010075;
         /** <p>May be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
 <p>May be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
 "<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
          */
-        public static final int overScrollHeader=0x7f010073;
+        public static final int overScrollHeader=0x7f010074;
         /**  Sets the padding, in pixels, of the end edge; see {@link android.R.attr#padding}. 
          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
@@ -697,7 +705,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int sephiroth_absHListViewStyle=0x7f01006d;
+        public static final int sephiroth_absHListViewStyle=0x7f01006e;
         /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
 Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
 in (inches), mm (millimeters).
@@ -707,11 +715,11 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int sephiroth_listPreferredItemWidth=0x7f01006e;
+        public static final int sephiroth_listPreferredItemWidth=0x7f01006f;
         /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
          */
-        public static final int sephiroth_listViewStyle=0x7f01006c;
+        public static final int sephiroth_listViewStyle=0x7f01006d;
         /**  How this item should display in the Action Bar, if present. 
          <p>Must be one or more (separated by '|') of the following constant values.</p>
 <table>
@@ -780,7 +788,7 @@ theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
          */
-        public static final int stackFromRight=0x7f010076;
+        public static final int stackFromRight=0x7f010077;
         /**  Specifies subtitle text used for navigationMode="normal" 
          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
 <p>This may also be a reference to a resource (in the form
@@ -862,7 +870,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 <tr><td><code>alwaysScroll</code></td><td>2</td><td></td></tr>
 </table>
          */
-        public static final int transcriptMode=0x7f010077;
+        public static final int transcriptMode=0x7f010078;
         /** <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
 <p>This may also be a reference to a resource (in the form
 "<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
@@ -1132,12 +1140,13 @@ containing a value of this type.
         public static final int ic_timetable=0x7f020075;
         public static final int lc_person=0x7f020076;
         public static final int lesson=0x7f020077;
-        public static final int lesson_indicator_shape=0x7f020078;
-        public static final int right_arrow=0x7f020079;
-        public static final int right_arrow2x=0x7f02007a;
-        public static final int right_arrow_blue=0x7f02007b;
-        public static final int shape=0x7f02007c;
-        public static final int white_background=0x7f02007d;
+        public static final int lesson_free_calendar_list_selector=0x7f020078;
+        public static final int lesson_indicator_shape=0x7f020079;
+        public static final int right_arrow=0x7f02007a;
+        public static final int right_arrow2x=0x7f02007b;
+        public static final int right_arrow_blue=0x7f02007c;
+        public static final int shape=0x7f02007d;
+        public static final int white_background=0x7f02007e;
     }
     public static final class id {
         public static final int RelativeLayout1=0x7f050062;
@@ -1671,7 +1680,7 @@ containing a value of this type.
          */
         public static final int[] AbsHListView = {
             0x010100fb, 0x010100fc, 0x010100fe, 0x01010101,
-            0x0101012b, 0x01010231, 0x7f010076, 0x7f010077
+            0x0101012b, 0x01010231, 0x7f010077, 0x7f010078
         };
         /**
           <p>This symbol is the offset where the {@link android.R.attr#cacheColorHint}
@@ -2323,6 +2332,33 @@ containing a value of this type.
           @attr name ru.rgups.time:initialActivityCount
         */
         public static final int ActivityChooserView_initialActivityCount = 0;
+        /** Attributes that can be used with a CalendarAttr.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CalendarAttr_lesson_free_state ru.rgups.time:lesson_free_state}</code></td><td></td></tr>
+           </table>
+           @see #CalendarAttr_lesson_free_state
+         */
+        public static final int[] CalendarAttr = {
+            0x7f01006a
+        };
+        /**
+          <p>This symbol is the offset where the {@link ru.rgups.time.R.attr#lesson_free_state}
+          attribute's value can be found in the {@link #CalendarAttr} array.
+
+
+          <p>Must be a boolean value, either "<code>true</code>" or "<code>false</code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name ru.rgups.time:lesson_free_state
+        */
+        public static final int CalendarAttr_lesson_free_state = 0;
         /** Attributes that can be used with a CompatTextView.
            <p>Includes the following attributes:</p>
            <table>
@@ -2375,8 +2411,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
            @see #HListView_overScrollHeader
          */
         public static final int[] HListView = {
-            0x010100b2, 0x01010129, 0x7f010070, 0x7f010071,
-            0x7f010072, 0x7f010073, 0x7f010074, 0x7f010075
+            0x010100b2, 0x01010129, 0x7f010071, 0x7f010072,
+            0x7f010073, 0x7f010074, 0x7f010075, 0x7f010076
         };
         /**
           <p>This symbol is the offset where the {@link android.R.attr#divider}
@@ -3280,7 +3316,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
             0x010100eb, 0x010100fb, 0x010100fc, 0x010100fe,
             0x01010101, 0x01010129, 0x0101012a, 0x0101012b,
             0x01010226, 0x010102c1, 0x01010335, 0x010103a5,
-            0x7f01006a, 0x7f01006b
+            0x7f01006b, 0x7f01006c
         };
         /**
           <p>This symbol is the offset where the {@link android.R.attr#cacheColorHint}
@@ -4210,5 +4246,10 @@ containing a value of this type.
           @attr name ru.rgups.time:paddingStart
         */
         public static final int View_paddingStart = 1;
+        /** Attributes that can be used with a ru_rgups_time_views_CalendarListElement.
+         */
+        public static final int[] ru_rgups_time_views_CalendarListElement = {
+            
+        };
     };
 }

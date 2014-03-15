@@ -643,4 +643,41 @@ public class DataManager {
 		Cursor c = mDb.rawQuery(query, new String[]{dayNumber.toString(),teacherName, weekState.toString()});
 		return c;
 	}
+	
+	public boolean dayHasLesson(Integer dayNumber, Integer weekState, String teacherName){
+		String query = TextUtils.concat(
+				"SELECT l.",LessonTableModel.ID," as _id, l.*,i.*",
+				
+				" FROM ",LessonTableModel.TABLE_NAME," as l  ",
+				"INNER JOIN ",LessonInformation.TABLE_NAME," AS i ON ",
+				"l.",LessonTableModel.ID," = i.",LessonInformation.LESSON_ID,
+				" WHERE ",
+				LessonTableModel.DAY,"=?", " AND ",
+				LessonInformation.TEACHER_NAME,"=? AND ",
+				"(",LessonTableModel.WEEK_STATE,"= ? OR " ,
+				LessonTableModel.WEEK_STATE,"='2')",
+				" GROUP BY l.",LessonTableModel.NUMBER, " ORDER BY l.",LessonTableModel.NUMBER
+				).toString();
+		Cursor c = mDb.rawQuery(query, new String[]{dayNumber.toString(),teacherName, weekState.toString()});
+		return c.getCount()>1;
+	}
+	
+	public boolean dayHasLesson(Integer day, Integer weekState){
+		String query = TextUtils.concat(
+				"SELECT * FROM ",LessonTableModel.TABLE_NAME," WHERE ",
+				LessonTableModel.GROUP_ID," =? AND ",
+				LessonTableModel.DAY,"=?", " AND ",
+				"(",LessonTableModel.WEEK_STATE,"=? OR " ,
+				LessonTableModel.WEEK_STATE,"='2')",
+				" GROUP BY ",LessonTableModel.NUMBER, " ORDER BY ",LessonTableModel.NUMBER
+				).toString();
+		
+
+		Cursor c = mDb.rawQuery(query, new String[]{PreferenceManager.getInstance().getGroupId().toString(),
+				day.toString(), weekState.toString()});
+		return c.getCount()>0;
+		
+	}
+	
+	
 }

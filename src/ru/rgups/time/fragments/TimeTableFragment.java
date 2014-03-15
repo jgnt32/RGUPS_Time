@@ -2,7 +2,9 @@ package ru.rgups.time.fragments;
 
 import java.util.ArrayList;
 
+import ru.rgups.time.adapters.BaseCalendarAdapter;
 import ru.rgups.time.adapters.LessonAdapter;
+import ru.rgups.time.adapters.LessonCalendarAdapter;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonList;
@@ -65,6 +67,12 @@ public class TimeTableFragment extends BaseTameTableFragment {
 		mLessonAdapter.setTimestamp(getTimeStamp());
 		mLessons.addAll(DataManager.getInstance().getLessonList(day, weekState));
 		mLessonAdapter.notifyDataSetChanged();		
+	}
+
+
+	@Override
+	protected BaseCalendarAdapter createNewCalendarAdapter() {
+		return new LessonCalendarAdapter(getActivity());
 	}
 
 

@@ -7,7 +7,8 @@ import it.sephiroth.android.library.widget.AdapterView.OnItemClickListener;
 import it.sephiroth.android.library.widget.HListView;
 import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
-import ru.rgups.time.adapters.CalendarAdapter;
+import ru.rgups.time.adapters.BaseCalendarAdapter;
+import ru.rgups.time.adapters.LessonCalendarAdapter;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.views.CalendarHint;
@@ -26,7 +27,7 @@ public abstract class BaseTameTableFragment extends BaseFragment implements OnSc
 	private StickyListHeadersListView mLessonList;
 	private HListView mCalendarList;
 	private LessonListener mLessonListener;
-	private CalendarAdapter mCalendarAdapter;
+	private BaseCalendarAdapter mCalendarAdapter;
 	private int mLastSelectedDatePosition = -1;
 	private CalendarHint mCalendarHint;
 	@Override
@@ -39,7 +40,7 @@ public abstract class BaseTameTableFragment extends BaseFragment implements OnSc
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mCalendarAdapter = new CalendarAdapter(getActivity());
+		mCalendarAdapter = createNewCalendarAdapter();
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
 	}
@@ -82,6 +83,7 @@ public abstract class BaseTameTableFragment extends BaseFragment implements OnSc
 	protected abstract void setLessonAdapter(StickyListHeadersListView list);
 	
 	protected abstract void notifyAdapterSetChanged(int day, int weekState);
+	protected abstract BaseCalendarAdapter createNewCalendarAdapter();
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	

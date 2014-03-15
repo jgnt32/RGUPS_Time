@@ -1,5 +1,7 @@
 package ru.rgups.time.fragments;
 
+import ru.rgups.time.adapters.BaseCalendarAdapter;
+import ru.rgups.time.adapters.LessonCalendarAdapter;
 import ru.rgups.time.adapters.TeacherLessonListAdapter;
 import ru.rgups.time.model.DataManager;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
@@ -28,6 +30,11 @@ public class TeachersTimeTable extends BaseTameTableFragment{
 	protected void notifyAdapterSetChanged(int day, int weekState) {
 		mAdapter.changeCursor(DataManager.getInstance().getTeachersLessons(day, weekState, mTeachersName));
 		mAdapter.notifyDataSetChanged();
+	}
+
+	@Override
+	protected BaseCalendarAdapter createNewCalendarAdapter() {
+		return new LessonCalendarAdapter(getActivity());
 	}
 
 }

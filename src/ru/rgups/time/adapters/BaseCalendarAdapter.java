@@ -10,18 +10,18 @@ import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.ConstUtils;
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-public class CalendarAdapter extends BaseAdapter{
-	
-	public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
+public class BaseCalendarAdapter extends BaseAdapter{
+public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	
 	public final static int CURRENS_SEMESTR = spotSemestr();//
 
@@ -37,9 +37,9 @@ public class CalendarAdapter extends BaseAdapter{
 	private ViewHolder mHolder;
 	private View mView;
 	private int mSelectedItem;
-	private int mBlueColor;
-	private int mGreenColor;
-	
+	protected int mBlueColor;
+	protected int mRedColor;
+	protected Context mContext;
 	private View leftIndicator;
 
 	private View rightIndicator;
@@ -54,8 +54,13 @@ public class CalendarAdapter extends BaseAdapter{
 
 	private GregorianCalendar mTimestampCalendar;
 	
-	public CalendarAdapter(Context context){
-		mGreenColor = context.getResources().getColor(R.color.theme_green);
+	private Color mBlue;
+
+	
+	
+	public BaseCalendarAdapter(Context context){
+		mContext = context;
+		mRedColor = context.getResources().getColor(R.color.red);
 		mBlueColor = context.getResources().getColor(R.color.theme_blue);
 		mCalendar = new GregorianCalendar();
 		mCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
@@ -68,9 +73,7 @@ public class CalendarAdapter extends BaseAdapter{
 		mTimestampCalendar.set(GregorianCalendar.HOUR, 0);
 		mTimestampCalendar.set(GregorianCalendar.MINUTE, 0);
 		mTimestampCalendar.set(GregorianCalendar.SECOND, 0);
-		mTimestampCalendar.set(GregorianCalendar.MILLISECOND, 0);
-		
-		
+		mTimestampCalendar.set(GregorianCalendar.MILLISECOND, 0);		
 	}
 	
 	@Override
@@ -106,7 +109,6 @@ public class CalendarAdapter extends BaseAdapter{
 	
 	public String getDateInString(int position){
 		mTimestampCalendar.set(GregorianCalendar.DAY_OF_YEAR, (int) getItemId(position));
-		
 		return DateFormat.format(HW_DATE_FORMAT, mTimestampCalendar.getTime()).toString();
 	}
 
@@ -154,17 +156,7 @@ public class CalendarAdapter extends BaseAdapter{
 
 			  }
 		  }
-		  int homeworkCount = DataManager.getInstance().getHomeWorkCountAtDay(getTimestamp(position));
-		  if(homeworkCount>0){
-			  mHWIndicator.setVisibility(View.VISIBLE);
-			  hwCount.setText(Integer.toString(homeworkCount));
-		  }else{
-			  mHWIndicator.setVisibility(View.GONE);
-		  }
-//		  mView.setTag(999);
 		
-		//mHolder.calendar.set(Calendar.DAY_OF_YEAR, position+DAY_OFFSET);
-		//mHolder.text.setText(Integer.toString(mHolder.calendar.get(Calendar.DAY_OF_MONTH)));
 		return mView;
 	}
 	
