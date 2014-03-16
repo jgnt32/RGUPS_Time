@@ -3,7 +3,6 @@ package ru.rgups.time.fragments;
 import ru.rgups.time.R;
 import ru.rgups.time.interfaces.SettingListener;
 import ru.rgups.time.model.DataManager;
-import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

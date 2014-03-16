@@ -2,6 +2,7 @@ package ru.rgups.time;
 
 import ru.rgups.time.activities.HomeWorkActivity;
 import ru.rgups.time.adapters.DrawerListAdapter;
+import ru.rgups.time.fragments.ClapFragment;
 import ru.rgups.time.fragments.HomeWorkEditFragment;
 import ru.rgups.time.fragments.HomeWorkFragment;
 import ru.rgups.time.fragments.HomeWorkListFragment;
@@ -85,6 +86,8 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		}else{
 			if(mReplaceFlag = true){
 				openTimeTableFragment();
+			}else{
+				showClapFragment();
 			}
 		}
 	}
@@ -95,6 +98,15 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 			mReplaceFlag = false;
 		}
 	}
+	
+	
+	private void showClapFragment(){
+		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+		ft.replace(R.id.frameLayout, new ClapFragment());
+		ft.commit();
+	
+	}
+
 
 	 @Override
 	 public void onConfigurationChanged(Configuration newConfig) {
@@ -210,6 +222,8 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 
 	@Override
 	public void logOut() {
+		showClapFragment();
+		
 		PreferenceManager.getInstance().saveGroupId((long) -1);
 		PreferenceManager.getInstance().saveFacultetId((long) -1);
 		PreferenceManager.getInstance().setFucultetsTimeDownloaded(false);
@@ -225,8 +239,9 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		args.putLong(SingleLessonFragment.TIMESTAMP, date);
 		fragment.setArguments(args);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.addToBackStack(null);
 		ft.replace(R.id.frameLayout, fragment, OVER_DRAWER_TRANSACTION);
+		ft.addToBackStack(null);
+
 		ft.commit();
 	}
 
