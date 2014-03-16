@@ -2,17 +2,18 @@ package ru.rgups.time.model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 
 import ru.rgups.time.model.entity.Day;
 import ru.rgups.time.model.entity.DoubleLine;
+import ru.rgups.time.model.entity.Facultet;
+import ru.rgups.time.model.entity.Group;
 import ru.rgups.time.model.entity.Lesson;
 import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
-import ru.rgups.time.spice.FullTimeTableRequest;
-import ru.rgups.time.spice.TimeTableRequest;
 import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;
 import ru.rgups.time.utils.Slipper;
@@ -21,9 +22,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.text.TextUtils;
 import android.util.Log;
-
-import com.octo.android.robospice.SpiceManager;
-import com.octo.android.robospice.request.listener.RequestListener;
 
 public class DataManager {
 	
@@ -36,6 +34,8 @@ public class DataManager {
 	private SQLiteStatement mDeleteHomeWorkStatement;
 	private SQLiteStatement mUpdateHomeWorkStatement;
 	private SQLiteStatement mSetHomeWorkChecked;
+	private SQLiteStatement mSaveGroupStatement;
+	private SQLiteStatement mSaveFacultetStatement;
 	
 	public DataManager() {
 		mDb = HelperManager.getHelper().getWritableDatabase();
@@ -95,6 +95,21 @@ public class DataManager {
 		mDeleteHomeWorkStatement = mDb.compileStatement(TextUtils.concat(
 				"DELETE FROM ", HomeWork.TABLE_NAME, " WHERE ", HomeWork.ID ," = ?"
 				).toString());
+		
+		mSaveGroupStatement = mDb.compileStatement(TextUtils.concat(
+				"INSERT OR REPLACE INTO ",Group.TABLE_NAME," (",
+				Group.ID,", ",
+				Group.GROUP_TITLE,",",
+				Group.LEVEL,
+				") VALUES (?,?,?)"
+				).toString());
+		
+		mSaveFacultetStatement = mDb.compileStatement(TextUtils.concat(
+				"INSERT OR REPLACE INTO ",Facultet.TABLE_NAME," (",
+				Facultet.ID,",",
+				Facultet.TITLE,") VALUES (?,?)"
+				
+				).toString());
 	}
 	
 	
@@ -109,6 +124,50 @@ public class DataManager {
 		return mInstance;
 	}
 	
+	public void saveGroup(Collection<Group> list){
+		
+		try{
+			mDb.beginTransaction();
+			for(Group group : list){
+				mSaveGroupStatement.clearBindings();
+				mSaveGroupStatement.bindLong(1, group.getId());
+				mSaveGroupStatement.bindString(2, group.getTitle());
+				mSaveGroupStatement.bindLong(3, group.getLevel());
+				mSaveGroupStatement.execute();
+			}
+			mDb.setTransactionSuccessful();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			mDb.endTransaction();
+			
+		}
+		
+
+	}
+	
+	public void saveFacultet(Collection<Facultet> list){
+		
+		try{
+			mDb.beginTransaction();
+			for(Facultet facultet : list){
+				mSaveFacultetStatement.clearBindings();
+				mSaveFacultetStatement.bindLong(1, facultet.getId());
+				mSaveFacultetStatement.bindString(2, facultet.getName());
+				mSaveFacultetStatement.execute();
+			}
+			mDb.setTransactionSuccessful();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			mDb.endTransaction();
+			
+		}
+		
+
+	}
 
 	
 	private void deleteOldLessons(long groupId){
@@ -663,6 +722,30 @@ public class DataManager {
 				day.toString(), weekState.toString()});
 		return c.getCount()>0;
 		
+	}
+	
+	public String getCurrentGroupTitle(){
+		Cursor c = mDb.rawQuery(TextUtils.concat(
+				"SELECT * FROM ",Group.TABLE_NAME," WHERE ",Group.ID,"=?"
+				).toString(), new String[]{PreferenceManager.getInstance().getGroupId().toString()});
+		c.moveToFirst();
+		if(c.getCount()>0){
+			return c.getString(c.getColumnIndex(Group.GROUP_TITLE));
+		}else{
+			return "";
+		}
+	}
+	
+	public String getCurrentFacultetTitle(){
+		Cursor c = mDb.rawQuery(TextUtils.concat(
+				"SELECT * FROM ",Facultet.TABLE_NAME," WHERE ",Facultet.ID,"=?"
+				).toString(), new String[]{PreferenceManager.getInstance().getFacultetId().toString()});
+		c.moveToFirst();
+		if(c.getCount()>0){
+			return c.getString(c.getColumnIndex(Facultet.TITLE));
+		}else{
+			return "";
+		}
 	}
 	
 	

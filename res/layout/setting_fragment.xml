@@ -19,6 +19,14 @@
         android:background="@color/theme_blue"
         android:orientation="vertical" >
         
+         <TextView 
+            android:id="@+id/setting_facultet_title"
+            android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:textSize="17sp"
+			android:layout_margin="5dp"
+			android:textColor="@color/white" />
+        
         <TextView 
             android:id="@+id/setting_group_title"
             android:layout_height="wrap_content"

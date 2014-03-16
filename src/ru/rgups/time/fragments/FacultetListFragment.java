@@ -8,7 +8,7 @@ import ru.rgups.time.adapters.FacultetListAdapter;
 import ru.rgups.time.interfaces.AuthListener;
 import ru.rgups.time.model.entity.Facultet;
 import ru.rgups.time.model.entity.FacultetList;
-import ru.rgups.time.spice.SampleXmlRequest;
+import ru.rgups.time.spice.FacultetListRequest;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
 import android.os.Bundle;
@@ -74,7 +74,7 @@ public class FacultetListFragment extends BaseDialogFragment implements OnItemCl
 	
 	private void getFacultetList(){
 	
-		this.getSpiceManager().execute(new SampleXmlRequest(), new GetFacultetListener());
+		this.getSpiceManager().execute(new FacultetListRequest(), new GetFacultetListener());
 	}
 	
 	private class GetFacultetListener implements RequestListener< FacultetList >{

@@ -2,6 +2,7 @@ package ru.rgups.time.fragments;
 
 import ru.rgups.time.R;
 import ru.rgups.time.interfaces.SettingListener;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ public class SettingFragment extends Fragment implements OnClickListener{
 	private SettingListener mListener;
 	private View mLogoutButton;
 	private TextView mGroupTitle;
+	private TextView mFacultetTitle;
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -31,9 +33,9 @@ public class SettingFragment extends Fragment implements OnClickListener{
 		mLogoutButton = v.findViewById(R.id.setting_logout_button);
 		mLogoutButton.setOnClickListener(this);
 		mGroupTitle = (TextView) v.findViewById(R.id.setting_group_title);
-		if(PreferenceManager.getInstance().getGroupTitle() != null){
-			mGroupTitle.setText(PreferenceManager.getInstance().getGroupTitle());
-		}
+		mGroupTitle.setText(DataManager.getInstance().getCurrentGroupTitle());
+		mFacultetTitle = (TextView) v.findViewById(R.id.setting_facultet_title);
+		mFacultetTitle.setText(DataManager.getInstance().getCurrentFacultetTitle());
 		return v;
 	}
 

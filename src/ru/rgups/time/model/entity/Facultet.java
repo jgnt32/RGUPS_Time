@@ -9,7 +9,9 @@ import com.j256.ormlite.table.DatabaseTable;
 @Root(name = "blok")
 @DatabaseTable(tableName = "facultet_table")
 public class Facultet {
-	
+	public static final String TABLE_NAME = "facultet_table";
+	public static final String TITLE = "name";
+	public static final String ID = "id";
 	
 	@DatabaseField(foreign = true, columnName = "list_id")
 	private FacultetList list;

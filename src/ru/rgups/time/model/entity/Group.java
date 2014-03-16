@@ -9,6 +9,11 @@ import com.j256.ormlite.table.DatabaseTable;
 @Root(name = "blok")
 @DatabaseTable(tableName = "group_table")
 public class Group {
+	
+	public static String TABLE_NAME = "group_table";
+	public static String GROUP_TITLE = "title";
+	public static String ID = "id";
+	public static String LEVEL = "level";
 
 	@DatabaseField(foreign = true, columnName = "group_id")
 	private GroupList list;
