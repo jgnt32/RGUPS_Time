@@ -44,7 +44,7 @@
     
     <!-- Captions -->
     <string name="photo_count">Фотографий:</string>
-    <string name="login_button_caption">Войти</string>
+    <string name="login_button_caption">ВОЙТИ</string>
     <string name="login_facultet_caption">Выберите факултет</string>
     <string name="login_group_caption">Выберите группу</string>
     

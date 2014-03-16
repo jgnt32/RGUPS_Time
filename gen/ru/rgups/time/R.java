@@ -1142,11 +1142,12 @@ containing a value of this type.
         public static final int lesson=0x7f020077;
         public static final int lesson_free_calendar_list_selector=0x7f020078;
         public static final int lesson_indicator_shape=0x7f020079;
-        public static final int right_arrow=0x7f02007a;
-        public static final int right_arrow2x=0x7f02007b;
-        public static final int right_arrow_blue=0x7f02007c;
-        public static final int shape=0x7f02007d;
-        public static final int white_background=0x7f02007e;
+        public static final int login=0x7f02007a;
+        public static final int right_arrow=0x7f02007b;
+        public static final int right_arrow2x=0x7f02007c;
+        public static final int right_arrow_blue=0x7f02007d;
+        public static final int shape=0x7f02007e;
+        public static final int white_background=0x7f02007f;
     }
     public static final class id {
         public static final int RelativeLayout1=0x7f050065;
