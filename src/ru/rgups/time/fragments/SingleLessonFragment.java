@@ -152,7 +152,6 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 	
 	@Override
 	public void onClick(View v) {
-		Log.e("v.getTag()",""+(Long) v.getTag());
 		mLessonListener.OnHomeWorkListElementClick((Long) v.getTag());
 	}
 

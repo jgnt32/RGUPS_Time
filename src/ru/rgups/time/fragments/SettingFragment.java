@@ -1,20 +1,25 @@
 package ru.rgups.time.fragments;
 
+import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.interfaces.SettingListener;
 import ru.rgups.time.model.DataManager;
+import ru.rgups.time.rest.RestManager;
+import ru.rgups.time.utils.DialogManager;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class SettingFragment extends Fragment implements OnClickListener{
+public class SettingFragment extends BaseFragment implements OnClickListener{
 	private SettingListener mListener;
 	private View mLogoutButton;
+	private Button mFullDowloadButton;
 	private TextView mGroupTitle;
 	private TextView mFacultetTitle;
 	@Override
@@ -29,6 +34,8 @@ public class SettingFragment extends Fragment implements OnClickListener{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.setting_fragment, null);
+		mFullDowloadButton = (Button) v.findViewById(R.id.setting_full_time_button);
+		mFullDowloadButton.setOnClickListener(this);
 		mLogoutButton = v.findViewById(R.id.setting_logout_button);
 		mLogoutButton.setOnClickListener(this);
 		mGroupTitle = (TextView) v.findViewById(R.id.setting_group_title);
@@ -38,11 +45,31 @@ public class SettingFragment extends Fragment implements OnClickListener{
 		return v;
 	}
 
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		RestManager.getInstance().setSpiceManager(getSpiceManager());
+	}
 
 
 	@Override
 	public void onClick(View v) {
-		mListener.logOut();		
+		switch(v.getId()){
+		case R.id.setting_logout_button:
+			mListener.logOut();		
+			break;
+			
+		case R.id.setting_full_time_button:
+			DialogManager.showPositiveDialog(getActivity(), R.string.setting_full_download_message, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					RestManager.getInstance().fullTimeRequest(null);
+				}
+			});
+			break;
+		}
 	}
 
 }

@@ -29,6 +29,14 @@
  	    Вы желаете выполнить этот запрос?(запрос можно выполнить позже, в разделе "Настройки")
  	    
  	</string>
+ 	
+ 	<string name="setting_full_download_message">
+		Запрос всего расписания выполняется в фоне
+ 	    и может занять 
+ 	    несколько минут, рекомендуется наличие быстрого интернет-соединения. 
+ 	    Вы желаете выполнить этот запрос?
+ 	    
+ 	</string>
 	
 	<!-- DRAWER -->
     <string name="draw_open">Меню</string>
@@ -40,6 +48,7 @@
     <string name="login_facultet_caption">Выберите факултет</string>
     <string name="login_group_caption">Выберите группу</string>
     
+    <string name="setting_full_time_button">Скачать всё</string>
     <string name="setting_logout">Выйти</string>
     
     <string name="setting_staff">Общее</string>
