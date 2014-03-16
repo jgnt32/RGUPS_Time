@@ -14,13 +14,14 @@ public class Group {
 	public static String GROUP_TITLE = "title";
 	public static String ID = "id";
 	public static String LEVEL = "level";
+	public static String FACULTET_ID = "facultetId";
 
 	@DatabaseField(foreign = true, columnName = "group_id")
 	private GroupList list;
 	
 	@Element
 	@DatabaseField(id = true)
-	private int id;
+	private long id;
 	
 	@Element(name = "kurs")
 	@DatabaseField
@@ -29,6 +30,9 @@ public class Group {
 	@Element(name = "gruppa")
 	@DatabaseField
 	private String title;
+	
+	@DatabaseField
+	private Long facultetId;
 
 	public GroupList getList() {
 		return list;
@@ -38,11 +42,11 @@ public class Group {
 		this.list = list;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -61,5 +65,15 @@ public class Group {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
+	public Long getFacultetId() {
+		return facultetId;
+	}
+
+	public void setFacultetId(Long facultetId) {
+		this.facultetId = facultetId;
+	}
+	
+	
 	
 }

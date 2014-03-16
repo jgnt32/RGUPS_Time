@@ -33,7 +33,7 @@ public class FacultetTimeTableRequest extends SpringAndroidSpiceRequest< Boolean
 		GroupList groupList = getRestTemplate().getForObject( url, GroupList.class );
 	
 		for(Group group : groupList.getGroupList()){
-			url = TextUtils.concat(mTimeUrl,Integer.toString(group.getId())).toString();
+			url = TextUtils.concat(mTimeUrl, Long.toString(group.getId())).toString();
 			
 			LessonList list = getRestTemplate().getForObject( url, LessonList.class );
 			Log.e("LessonList ","title = "+list.getTitle()+"; id = "+group.getId());

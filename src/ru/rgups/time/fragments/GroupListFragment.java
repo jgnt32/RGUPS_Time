@@ -6,6 +6,7 @@ import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.GroupListAdapter;
 import ru.rgups.time.interfaces.AuthListener;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.entity.Group;
 import ru.rgups.time.model.entity.GroupList;
 import ru.rgups.time.spice.GroupListRequest;
@@ -13,7 +14,6 @@ import ru.rgups.time.utils.PreferenceManager;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,9 +29,9 @@ public class GroupListFragment extends BaseFragment implements OnItemClickListen
 	
 	public static final String FUCULTET_ID = "facultet_id";
 	
-	private ArrayList<Group> mGroupList;
+	private ArrayList<Group> mGroupList = new ArrayList<Group>();
 	private StickyListHeadersListView mListView;
-	private GroupListAdapter adapter;
+	private GroupListAdapter mAdapter;
 	private Long mFacultetId;
 	private AuthListener mAuthListener;
 	
@@ -47,6 +47,8 @@ public class GroupListFragment extends BaseFragment implements OnItemClickListen
 		mFacultetId = getArguments().getLong(FUCULTET_ID);
 		mGroupList = new ArrayList<Group>();
 		getGroupList();
+		
+		mAdapter = new GroupListAdapter(getActivity(), mGroupList);
 	}
 	
 	@Override
@@ -62,12 +64,13 @@ public class GroupListFragment extends BaseFragment implements OnItemClickListen
 		   mListView = (StickyListHeadersListView) v.findViewById(R.id.groupList);
 		   mListView.setOnItemClickListener(this);
 		   mListView.setEmptyView(v.findViewById(R.id.group_list_empty_view));
+		   mListView.setAdapter(mAdapter);
 		return  v;
 	}
 	
 	private void getGroupList(){
 		
-		this.getSpiceManager().execute(new GroupListRequest(mFacultetId.toString()), new GetGroupListListener());
+		this.getSpiceManager().execute(new GroupListRequest(mFacultetId), new GetGroupListListener());
 	}
 	
 	private class GetGroupListListener implements RequestListener< GroupList >{
@@ -80,19 +83,17 @@ public class GroupListFragment extends BaseFragment implements OnItemClickListen
 
 		@Override
 		public void onRequestSuccess(GroupList list) {
-			Log.e("list",""+list.getGroupList().size());
-			mGroupList = new ArrayList<Group>(list.getGroupList());
-			adapter = new GroupListAdapter(getActivity(), mGroupList);
-			mListView.setAdapter(adapter);
+			mGroupList.clear();
+			mGroupList.addAll(DataManager.getInstance().getGroupList(mFacultetId));
+			mAdapter.notifyDataSetChanged();
 		}
 		
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-		Log.d("GroupListFragment","group id:"+id);
 		PreferenceManager.getInstance().saveGroupId(id);
-		PreferenceManager.getInstance().saveGroupTitle(adapter.getItem(position).getTitle());
+		PreferenceManager.getInstance().saveGroupTitle(mAdapter.getItem(position).getTitle());
 
 		mAuthListener.finishAuthActivity();
 	}

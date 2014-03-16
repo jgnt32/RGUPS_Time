@@ -6,13 +6,13 @@ import ru.rgups.time.BaseDialogFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.FacultetListAdapter;
 import ru.rgups.time.interfaces.AuthListener;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.entity.Facultet;
 import ru.rgups.time.model.entity.FacultetList;
 import ru.rgups.time.spice.FacultetListRequest;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,16 +24,10 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 public class FacultetListFragment extends BaseDialogFragment implements OnItemClickListener{
-	private ArrayList<Facultet> mFacultetList = new ArrayList<Facultet>();
 	private ListView mListView;
-	private FacultetListAdapter adapter;
+	private FacultetListAdapter mAdapter;
 	private AuthListener mAuthListener;
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		
-	}
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -44,7 +38,7 @@ public class FacultetListFragment extends BaseDialogFragment implements OnItemCl
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		mAdapter = new FacultetListAdapter(getActivity(), DataManager.getInstance().getFacultetList(), true);
 	}
 
 	@Override
@@ -53,6 +47,7 @@ public class FacultetListFragment extends BaseDialogFragment implements OnItemCl
 		mListView = (ListView) v.findViewById(R.id.facultetList);
 		mListView.setOnItemClickListener(this);
 		mListView.setEmptyView(v.findViewById(R.id.facultet_list_empty_view));
+		mListView.setAdapter(mAdapter);
 		return  v;
 	}
 
@@ -88,11 +83,8 @@ public class FacultetListFragment extends BaseDialogFragment implements OnItemCl
 
 		@Override
 		public void onRequestSuccess(FacultetList list) {
-			Log.e("list",""+list.getFacultetList().size());
-			mFacultetList = new ArrayList<Facultet>(list.getFacultetList());
-			adapter = new FacultetListAdapter(getActivity(), mFacultetList);
-			mListView.setAdapter(adapter);
-		//	adapter.notifyDataSetChanged();
+			mAdapter.changeCursor(DataManager.getInstance().getFacultetList());
+			mAdapter.notifyDataSetChanged();
 		}
 		
 	}

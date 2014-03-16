@@ -100,8 +100,9 @@ public class DataManager {
 				"INSERT OR REPLACE INTO ",Group.TABLE_NAME," (",
 				Group.ID,", ",
 				Group.GROUP_TITLE,",",
-				Group.LEVEL,
-				") VALUES (?,?,?)"
+				Group.LEVEL,", ",
+				Group.FACULTET_ID,
+				") VALUES (?,?,?,?)"
 				).toString());
 		
 		mSaveFacultetStatement = mDb.compileStatement(TextUtils.concat(
@@ -124,15 +125,16 @@ public class DataManager {
 		return mInstance;
 	}
 	
-	public void saveGroup(Collection<Group> list){
+	public void saveGroup(Collection<Group> list, Long facultetId){
 		
 		try{
 			mDb.beginTransaction();
 			for(Group group : list){
 				mSaveGroupStatement.clearBindings();
 				mSaveGroupStatement.bindLong(1, group.getId());
-				mSaveGroupStatement.bindString(2, group.getTitle());
+				mSaveGroupStatement.bindString(2, group.getTitle().trim());
 				mSaveGroupStatement.bindLong(3, group.getLevel());
+				mSaveGroupStatement.bindLong(4, facultetId);
 				mSaveGroupStatement.execute();
 			}
 			mDb.setTransactionSuccessful();
@@ -154,7 +156,7 @@ public class DataManager {
 			for(Facultet facultet : list){
 				mSaveFacultetStatement.clearBindings();
 				mSaveFacultetStatement.bindLong(1, facultet.getId());
-				mSaveFacultetStatement.bindString(2, facultet.getName());
+				mSaveFacultetStatement.bindString(2, facultet.getName().trim());
 				mSaveFacultetStatement.execute();
 			}
 			mDb.setTransactionSuccessful();
@@ -748,5 +750,31 @@ public class DataManager {
 		}
 	}
 	
+	public Cursor getFacultetList(){
+		
+		return mDb.rawQuery(TextUtils.concat(
+				"SELECT ",Facultet.ID," as _id,* FROM ",Facultet.TABLE_NAME," WHERE ",
+				Facultet.TITLE,"<> 'Лицей' AND ",Facultet.TITLE,"<> 'Техникум РГУПС' ",
+				"ORDER BY ",Facultet.TITLE
+				).toString(), new String[]{});
+	}
+	
+	public ArrayList<Group> getGroupList(Long facultetId){
+		ArrayList<Group> result = new ArrayList<Group>();
+		Cursor c = mDb.rawQuery(TextUtils.concat(
+				"SELECT * FROM ",Group.TABLE_NAME," WHERE ",Group.FACULTET_ID,"=?",
+				" ORDER BY ",Group.LEVEL,", ",Group.GROUP_TITLE
+				).toString(), new String[]{facultetId.toString()});
+		Group group = null;
+		while(c.moveToNext()){
+			group = new Group();
+			group.setId(c.getLong(c.getColumnIndex(Group.ID)));
+			group.setTitle(c.getString(c.getColumnIndex(Group.GROUP_TITLE)));
+			group.setLevel(c.getInt(c.getColumnIndex(Group.LEVEL)));
+			group.setFacultetId(c.getLong(c.getColumnIndex(Group.FACULTET_ID)));
+			result.add(group);
+		}
+		return result;
+	}
 	
 }
