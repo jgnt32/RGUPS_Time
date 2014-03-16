@@ -5,12 +5,13 @@ import java.sql.SQLException;
 import ru.rgups.time.model.HelperManager;
 import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.LessonTableModel;
+import ru.rgups.time.model.entity.Facultet;
+import ru.rgups.time.model.entity.Group;
 import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.utils.DialogManager;
 import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Application;
-import android.util.Log;
 
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
@@ -38,6 +39,9 @@ public class RTApplication extends Application{
 			TableUtils.createTableIfNotExists(connectionSource, LessonTableModel.class);
 			TableUtils.createTableIfNotExists(connectionSource, LessonInformation.class);
 			TableUtils.createTableIfNotExists(connectionSource, HomeWork.class);
+			TableUtils.createTableIfNotExists(connectionSource, Facultet.class);
+			TableUtils.createTableIfNotExists(connectionSource, Group.class);
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();

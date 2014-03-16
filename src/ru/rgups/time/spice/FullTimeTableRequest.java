@@ -6,6 +6,7 @@ import ru.rgups.time.model.entity.FacultetList;
 import ru.rgups.time.model.entity.Group;
 import ru.rgups.time.model.entity.GroupList;
 import ru.rgups.time.model.entity.LessonList;
+import ru.rgups.time.utils.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -27,27 +28,38 @@ public class FullTimeTableRequest extends SpringAndroidSpiceRequest< Boolean > {
 
 	@Override
 	public Boolean loadDataFromNetwork() throws Exception {
-		
-		FacultetList facultetList = getRestTemplate().getForObject(mFacultetList, FacultetList.class);
-		for(Facultet facultet : facultetList.getFacultetList()){
-			Log.e("FullTimeTableRequest",""+facultet.getName());
-			url = TextUtils.concat(mGroupListUrl,Integer.toString(facultet.getId())).toString();
-			if(!facultet.getName().trim().equalsIgnoreCase("Лицей") && !facultet.getName().equalsIgnoreCase("Техникум РГУПС")){
-				GroupList groupList = getRestTemplate().getForObject( url, GroupList.class );
+		boolean result = false;
+		try{
+			
+			FacultetList facultetList = getRestTemplate().getForObject(mFacultetList, FacultetList.class);
+			for(Facultet facultet : facultetList.getFacultetList()){
+				Log.e("FullTimeTableRequest",""+facultet.getName());
+				url = TextUtils.concat(mGroupListUrl,Integer.toString(facultet.getId())).toString();
+				if(!facultet.getName().trim().equalsIgnoreCase("Лицей") && !facultet.getName().equalsIgnoreCase("Техникум РГУПС")){
+					GroupList groupList = getRestTemplate().getForObject( url, GroupList.class );
 
-				for(Group group : groupList.getGroupList()){
-					url = TextUtils.concat(mTimeUrl,Integer.toString(group.getId())).toString();
-					
-					LessonList list = getRestTemplate().getForObject( url, LessonList.class );
-					Log.e("LessonList ","title = "+list.getTitle()+"; id = "+group.getId());
-			    	DataManager.getInstance().saveLessons(list, group.getId());
-			    	
+					for(Group group : groupList.getGroupList()){
+						url = TextUtils.concat(mTimeUrl,Integer.toString(group.getId())).toString();
+						
+						LessonList list = getRestTemplate().getForObject( url, LessonList.class );
+						Log.e("LessonList ","title = "+list.getTitle()+"; id = "+group.getId());
+				    	DataManager.getInstance().saveLessons(list, group.getId());
+				    	
+					}
+			
 				}
-		
 			}
+			
+			PreferenceManager.getInstance().setFullTimeDownloaded(true);
+			result = true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			result = false;
 		}
+
 		
-		return null;
+		return result;
 	}
 
 }

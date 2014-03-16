@@ -178,7 +178,7 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 		TextView text = (TextView) v.findViewById(R.id.divider_text);
 		text.setText(getItem(position).getLessonNumber()+"-я пара");
 		TextView time = (TextView) v.findViewById(R.id.lesson_divider_time);
-		time.setText(timePeriods[getItem(position).getLessonNumber()]);
+		time.setText(timePeriods[getItem(position).getLessonNumber()-1]);
 		return v;
 	}
 

@@ -13,7 +13,7 @@ import ru.rgups.time.fragments.TimeTableFragment;
 import ru.rgups.time.fragments.WelcomeActivity;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.interfaces.SettingListener;
-import ru.rgups.time.model.DataManager;
+import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +23,6 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -48,19 +47,17 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		openWelcomeActivity();
+
 		setContentView(R.layout.activity_main);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mDrawerList.setOnItemClickListener(this);
 		mDrawerList.setAdapter(new DrawerListAdapter(this));
-	//	DataManager.getInstance().getAllLessons();
 		initActionBar();
 		initDrawer();
 		initFragmenets();
-//		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//		ft.replace(R.id.frameLayout, mTimeTableFragment, null);
-//		ft.commit();
-		if(savedInstanceState == null){
-	//		openTimeTableFragment();
+		if(savedInstanceState == null && PreferenceManager.getInstance().isFacultetsTimeDowloaded()){
+			openTimeTableFragment();
 
 		}
 	}
@@ -75,16 +72,22 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	@Override
 	protected void onStart() {
 		super.onStart();
-		openWelcomeActivity();
 
 	}
+
 	
 	@Override
 	protected void onResume() {
 		super.onResume();
-		DataManager.getInstance().setSpiceManager(getSpiceManager());
-	//	DataManager.getInstance().fullTimeRequest(new FullTimeRequestListener());
+		RestManager.getInstance().setSpiceManager(getSpiceManager());
+		if(!PreferenceManager.getInstance().isFacultetsTimeDowloaded() && PreferenceManager.getInstance().getFacultetId() != -1){
+			RestManager.getInstance().exucuteFacultetRequest(new FacultetTimeRequestListener());
+		}else{
+			if(mReplaceFlag = true){
+				openTimeTableFragment();
+			}
 		}
+	}
 
 	private void openTimeTableFragment(){
 		if(PreferenceManager.getInstance().getGroupId() != -1){
@@ -136,12 +139,12 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		
 		 @Override
 	        public void onDrawerClosed(View drawerView) {
-//	            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+	//            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
 	        }
 
 	        @Override
 	        public void onDrawerOpened(View drawerView) {
-	//            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+//	            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
 	        }
 		
 		
@@ -208,6 +211,8 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	@Override
 	public void logOut() {
 		PreferenceManager.getInstance().saveGroupId((long) -1);
+		PreferenceManager.getInstance().saveFacultetId((long) -1);
+		PreferenceManager.getInstance().setFucultetsTimeDownloaded(false);
 		this.openWelcomeActivity();
 		mReplaceFlag = true;
 	}
@@ -243,7 +248,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		
 	}
 	
-	private class FullTimeRequestListener implements RequestListener<Boolean>{
+	private class FacultetTimeRequestListener implements RequestListener<Boolean>{
 
 		@Override
 		public void onRequestFailure(SpiceException e) {
@@ -253,7 +258,8 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 
 		@Override
 		public void onRequestSuccess(Boolean response) {
-			Log.e(getClass().getSimpleName(), "onRequestSuccess");
+			openTimeTableFragment();
+			PreferenceManager.getInstance().setFucultetsTimeDownloaded(true);
 		}
 		
 	}

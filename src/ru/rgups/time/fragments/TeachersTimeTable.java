@@ -1,16 +1,15 @@
 package ru.rgups.time.fragments;
 
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
-
 import ru.rgups.time.adapters.BaseCalendarAdapter;
-import ru.rgups.time.adapters.LessonCalendarAdapter;
 import ru.rgups.time.adapters.TeacherLessonListAdapter;
 import ru.rgups.time.adapters.TeachersCalendarAdapter;
 import ru.rgups.time.model.DataManager;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
 
 public class TeachersTimeTable extends BaseTameTableFragment{
 

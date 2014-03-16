@@ -9,6 +9,7 @@ import ru.rgups.time.interfaces.AuthListener;
 import ru.rgups.time.model.entity.Facultet;
 import ru.rgups.time.model.entity.FacultetList;
 import ru.rgups.time.spice.SampleXmlRequest;
+import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,6 +66,7 @@ public class FacultetListFragment extends BaseDialogFragment implements OnItemCl
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
+		PreferenceManager.getInstance().saveFacultetId(id);
 		mAuthListener.OpenGroupList(id);
 	}
 	

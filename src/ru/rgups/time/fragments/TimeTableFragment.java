@@ -8,6 +8,7 @@ import ru.rgups.time.adapters.LessonCalendarAdapter;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonList;
+import ru.rgups.time.rest.RestManager;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,8 +36,8 @@ public class TimeTableFragment extends BaseTameTableFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		DataManager.getInstance().setSpiceManager(getSpiceManager());
-		DataManager.getInstance().timeTableRequest(new GetTimeListener());
+		RestManager.getInstance().setSpiceManager(getSpiceManager());
+		RestManager.getInstance().timeTableRequest(new GetTimeListener());
 	}
 
 

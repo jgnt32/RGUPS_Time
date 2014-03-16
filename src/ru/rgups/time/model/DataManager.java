@@ -98,7 +98,7 @@ public class DataManager {
 	}
 	
 	
-	private SpiceManager mSpiceManager;
+	
 	
 	private static DataManager mInstance;
 	
@@ -109,19 +109,7 @@ public class DataManager {
 		return mInstance;
 	}
 	
-	
 
-	public SpiceManager getSpiceManager() {
-		return mSpiceManager;
-	}
-
-	public void setSpiceManager(SpiceManager mSpiceManager) {
-		this.mSpiceManager = mSpiceManager;
-	}
-	
-	public void timeTableRequest(RequestListener<LessonList> listener){
-		this.getSpiceManager().execute(new TimeTableRequest(PreferenceManager.getInstance().getGroupId().toString()), listener);
-	}
 	
 	private void deleteOldLessons(long groupId){
 		try{
@@ -599,9 +587,7 @@ public class DataManager {
 		return c.getCount()>0;
 	}
 
-	public void fullTimeRequest(RequestListener<Boolean> listener){
-		this.getSpiceManager().execute(new FullTimeTableRequest(Boolean.class), listener);
-	}
+	
 	
 	public Cursor getAllTeachersCursor(){
 		String query = TextUtils.concat(
