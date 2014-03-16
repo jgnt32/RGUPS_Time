@@ -52,6 +52,7 @@ public class FacultetListFragment extends BaseDialogFragment implements OnItemCl
 		View v = getActivity().getLayoutInflater().inflate(R.layout.facultet_list_fragment, null);
 		mListView = (ListView) v.findViewById(R.id.facultetList);
 		mListView.setOnItemClickListener(this);
+		mListView.setEmptyView(v.findViewById(R.id.facultet_list_empty_view));
 		return  v;
 	}
 

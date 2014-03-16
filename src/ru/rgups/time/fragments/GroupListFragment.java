@@ -61,6 +61,7 @@ public class GroupListFragment extends BaseFragment implements OnItemClickListen
 		   View v = getActivity().getLayoutInflater().inflate(R.layout.group_list_fargment, null);
 		   mListView = (StickyListHeadersListView) v.findViewById(R.id.groupList);
 		   mListView.setOnItemClickListener(this);
+		   mListView.setEmptyView(v.findViewById(R.id.group_list_empty_view));
 		return  v;
 	}
 	
