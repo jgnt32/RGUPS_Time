@@ -35,11 +35,12 @@ public class HomeWorkListFragment extends Fragment implements OnItemClickListene
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.list_fragment, null);
+		View v = inflater.inflate(R.layout.homework_list_fragment, null);
 		mAdpter = new HomeWorkListAdapter(getActivity(), DataManager.getInstance().getAllHomeWorks());
-		mListView = (StickyListHeadersListView) v.findViewById(R.id.list_fragment_listview);
+		mListView = (StickyListHeadersListView) v.findViewById(R.id.homework_list_fragment_listview);
 		mListView.setOnItemClickListener(this);
 		mListView.setAdapter(mAdpter);
+		mListView.setEmptyView(v.findViewById(R.id.hw_empty_view));
 		return v;
 	}
 

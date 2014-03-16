@@ -1427,28 +1427,29 @@ containing a value of this type.
         public static final int action_scroll_to_today=0x7f0a0010;
         public static final int action_settings=0x7f0a000e;
         public static final int app_name=0x7f0a000d;
-        public static final int draw_close=0x7f0a001d;
+        public static final int draw_close=0x7f0a001e;
         /**  DRAWER 
          */
-        public static final int draw_open=0x7f0a001c;
+        public static final int draw_open=0x7f0a001d;
+        public static final int full_download_message=0x7f0a001c;
         public static final int hello_world=0x7f0a000f;
         public static final int homework_delete_message=0x7f0a001b;
-        public static final int hw_empty=0x7f0a0024;
-        public static final int login_button_caption=0x7f0a001f;
-        public static final int login_facultet_caption=0x7f0a0020;
-        public static final int login_group_caption=0x7f0a0021;
+        public static final int hw_empty=0x7f0a0025;
+        public static final int login_button_caption=0x7f0a0020;
+        public static final int login_facultet_caption=0x7f0a0021;
+        public static final int login_group_caption=0x7f0a0022;
         public static final int negative_caption=0x7f0a001a;
         /**  DIALOGs 
          */
         public static final int ok_caption=0x7f0a0018;
         /**  Captions 
          */
-        public static final int photo_count=0x7f0a001e;
+        public static final int photo_count=0x7f0a001f;
         public static final int positive_caption=0x7f0a0019;
         public static final int search_view_hint=0x7f0a0017;
         public static final int search_view_title=0x7f0a0016;
-        public static final int setting_logout=0x7f0a0022;
-        public static final int setting_staff=0x7f0a0023;
+        public static final int setting_logout=0x7f0a0023;
+        public static final int setting_staff=0x7f0a0024;
     }
     public static final class style {
         /** 

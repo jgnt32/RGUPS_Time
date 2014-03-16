@@ -34,8 +34,8 @@ public class RestManager {
 		this.getSpiceManager().execute(new TimeTableRequest(PreferenceManager.getInstance().getGroupId().toString()), listener);
 	}
 	
-	public void fullTimeRequest(){
-		this.getSpiceManager().execute(new FullTimeTableRequest(Boolean.class), null);
+	public void fullTimeRequest(RequestListener<Boolean> listener){
+		this.getSpiceManager().execute(new FullTimeTableRequest(Boolean.class), listener);
 	}
 
 	public void exucuteFacultetRequest(RequestListener<Boolean> listener){

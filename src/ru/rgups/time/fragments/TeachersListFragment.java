@@ -1,14 +1,19 @@
 package ru.rgups.time.fragments;
 
+import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.TeacherCursorAdapter;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.loaders.RTCursorLoader;
 import ru.rgups.time.model.DataManager;
+import ru.rgups.time.rest.RestManager;
+import ru.rgups.time.utils.DialogManager;
+import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
@@ -25,7 +30,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FilterQueryProvider;
 import android.widget.ListView;
 
-public class TeachersListFragment extends Fragment implements OnItemClickListener, LoaderCallbacks<Cursor>, 
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
+
+public class TeachersListFragment extends BaseFragment implements OnItemClickListener, LoaderCallbacks<Cursor>, 
 																SearchView.OnQueryTextListener, FilterQueryProvider{
 	private ListView mListView;
 	private TeacherCursorAdapter mAdapter;
@@ -45,7 +53,6 @@ public class TeachersListFragment extends Fragment implements OnItemClickListene
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		setRetainInstance(true);
-
 		mAdapter = new TeacherCursorAdapter(getActivity(), DataManager.getInstance().getAllTeachersCursor(), true);
 		mAdapter.setFilterQueryProvider(this);
 		
@@ -77,6 +84,24 @@ public class TeachersListFragment extends Fragment implements OnItemClickListene
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 		return v;
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		RestManager.getInstance().setSpiceManager(getSpiceManager());
+		if(!PreferenceManager.getInstance().isFullTimeDownloaded() &&
+				!PreferenceManager.getInstance().fullTimeDialoWasShowed()){
+			PreferenceManager.getInstance().setFullTimeDownloadingDialogShowed(true);
+			DialogManager.showPositiveDialog(getActivity(), R.string.full_download_message, new OnClickListener(){
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					RestManager.getInstance().fullTimeRequest(new FullTimeListener());
+				}
+				
+			});
+		}
 	}
 	
 	@Override
@@ -128,4 +153,20 @@ public class TeachersListFragment extends Fragment implements OnItemClickListene
 		return DataManager.getInstance().getFiltredTeachersCursor(constraint.toString());
 	}
 
+	private class FullTimeListener implements RequestListener<Boolean>{
+
+		@Override
+		public void onRequestFailure(SpiceException e) {
+			e.printStackTrace();
+			
+		}
+
+		@Override
+		public void onRequestSuccess(Boolean response) {
+			mAdapter.changeCursor( DataManager.getInstance().getAllTeachersCursor());
+			mAdapter.notifyDataSetChanged();
+		}
+		
+	}
+	
 }

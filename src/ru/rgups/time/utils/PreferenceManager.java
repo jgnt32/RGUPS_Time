@@ -9,6 +9,8 @@ public class PreferenceManager {
 	private final static String GROUP_ID = "group_id";
 	private final static String GROUP_TITLE = "group_title";
 	private final static String FULL_TIME_DOWNLOADED = "full_time_downloaded";
+	private final static String FULL_TIME_DOWNLOADING_DIALOG_SHOWED = "full_time_dowloding_showed";
+
 	private final static String FACULTETS_TIME_DOWNLOADED = "facultets_time_downloaded";
 
 	private final String DEFAULT_VALUE = "";
@@ -81,6 +83,17 @@ public class PreferenceManager {
 	public void setFucultetsTimeDownloaded(boolean value){
 		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
 		mPreference.edit().putBoolean(FACULTETS_TIME_DOWNLOADED, value).commit();		
+	}
+	
+	public void setFullTimeDownloadingDialogShowed(boolean value){
+		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
+		mPreference.edit().putBoolean(FULL_TIME_DOWNLOADING_DIALOG_SHOWED, value).commit();		
+	}
+	
+	public boolean fullTimeDialoWasShowed(){
+		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
+		return mPreference.getBoolean(FULL_TIME_DOWNLOADING_DIALOG_SHOWED, false);
+
 	}
 	
 	
