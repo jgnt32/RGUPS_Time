@@ -8,6 +8,8 @@ public class PreferenceManager {
 	private final static String FACULTET_ID = "facultet_id";
 	private final static String GROUP_ID = "group_id";
 	private final static String GROUP_TITLE = "group_title";
+	private final static String FULL_TIME_DOWNLOADED = "full_time_downloaded";
+	private final static String FACULTETS_TIME_DOWNLOADED = "facultets_time_downloaded";
 
 	private final String DEFAULT_VALUE = "";
 	
@@ -60,4 +62,26 @@ public class PreferenceManager {
 		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
 		return mPreference.getString(GROUP_TITLE, null);
 	}
+	
+	public boolean isFullTimeDownloaded(){
+		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
+		return mPreference.getBoolean(FULL_TIME_DOWNLOADED, false);
+	}
+	
+	public void setFullTimeDownloaded(boolean value){
+		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
+		mPreference.edit().putBoolean(FULL_TIME_DOWNLOADED, value).commit();		
+	}
+	
+	public boolean isFacultetsTimeDowloaded(){
+		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
+		return mPreference.getBoolean(FACULTETS_TIME_DOWNLOADED, false);
+	}
+	
+	public void setFucultetsTimeDownloaded(boolean value){
+		mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
+		mPreference.edit().putBoolean(FACULTETS_TIME_DOWNLOADED, value).commit();		
+	}
+	
+	
 }

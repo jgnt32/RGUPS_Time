@@ -1,5 +1,8 @@
 package ru.rgups.time.fragments;
 
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
+
 import ru.rgups.time.adapters.BaseCalendarAdapter;
 import ru.rgups.time.adapters.LessonCalendarAdapter;
 import ru.rgups.time.adapters.TeacherLessonListAdapter;
@@ -7,6 +10,7 @@ import ru.rgups.time.adapters.TeachersCalendarAdapter;
 import ru.rgups.time.model.DataManager;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.os.Bundle;
+import android.util.Log;
 
 public class TeachersTimeTable extends BaseTameTableFragment{
 
@@ -40,4 +44,18 @@ public class TeachersTimeTable extends BaseTameTableFragment{
 		return adapter;
 	}
 
+	private class FullTimeRequestListener implements RequestListener<Boolean>{
+
+		@Override
+		public void onRequestFailure(SpiceException e) {
+			e.printStackTrace();
+			
+		}
+
+		@Override
+		public void onRequestSuccess(Boolean response) {
+			Log.e(getClass().getSimpleName(), "onRequestSuccess");
+		}
+		
+	}
 }
