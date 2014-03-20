@@ -3,81 +3,65 @@ package ru.rgups.time.adapters;
 import ru.rgups.time.R;
 import ru.rgups.time.model.LessonTableModel;
 import ru.rgups.time.model.entity.LessonInformation;
-import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
+import se.emilsjolander.stickylistheaders.BaseCursorAdapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class TeacherLessonListAdapter extends BaseAdapter implements StickyListHeadersAdapter{
+public class TeacherLessonListAdapter extends BaseCursorAdapter{
 
+	
 	private LayoutInflater mInflater;
 	private Cursor mCursor;
 	
-	public TeacherLessonListAdapter(Context context, Cursor c) {
-		mCursor = c;
+	private String[] mTime;
+	
+	
+	public TeacherLessonListAdapter(Context context, Cursor c,
+			boolean autoRequery) {
+		super(context, c, autoRequery);
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		mTime = context.getResources().getStringArray(R.array.lessons_time_periods);
 	}
+
+
 
 
 	@Override
-	public View getHeaderView(int position, View convertView, ViewGroup parent) {
-		mCursor.move(position);
-
-		View v = mInflater.inflate(R.layout.lesson_list_divier, null);
-		return v;
-	}
-
-	@Override
-	public long getHeaderId(int position) {
-		mCursor.move(position);
-
-		return mCursor.getLong(mCursor.getColumnIndex(LessonTableModel.NUMBER));
-	}
-
-	@Override
-	public int getCount() {
-		if(mCursor == null){
-			return 0;
-		}else{
-			return mCursor.getCount();
-	
-		}
-	}
-
-	@Override
-	public Object getItem(int position) {
-		return null;
-	}
-
-	@Override
-	public long getItemId(int position) {
-		mCursor.move(position);
-		return mCursor.getLong(mCursor.getColumnIndex("_id"));
-	}
-
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		mCursor.move(position);
-
-		View v = mInflater.inflate(R.layout.teacher_lesson_list_element, null);
-		final TextView lessonTitle = (TextView) v.findViewById(R.id.teachers_lesson_title);
-		final TextView room = (TextView) v.findViewById(R.id.teachers_lesson_room);
-		mCursor.move(position);
-		lessonTitle.setText(mCursor.getString(mCursor.getColumnIndex(LessonInformation.LESSON_TITLE)));
-		room.setText(mCursor.getString(mCursor.getColumnIndex(LessonInformation.ROOM)));		
-		return v;
-	}
-
-	
-
-	public void changeCursor(Cursor c){
-		mCursor = c;
+	protected View newHeaderView(Context context, Cursor cursor, ViewGroup parent) {
+		return mInflater.inflate(R.layout.lesson_list_divier, null);
 	}
 	
+	@Override
+	protected void bindHeaderView(View v, Context context, Cursor c) {
+		final TextView number = (TextView) v.findViewById(R.id.divider_text);
+		final TextView time = (TextView) v.findViewById(R.id.lesson_divider_time);
 	
-
+		number.setText(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER))+"-я пара");
+		time.setText(mTime[c.getInt(c.getColumnIndex(LessonTableModel.NUMBER))-1]);
+		
+		
+	}
+	@Override
+	public View newView(Context context, Cursor cursor, ViewGroup parent) {
+		return  mInflater.inflate(R.layout.lesson_list_element, null);
+	}
+	@Override
+	public void bindView(View view, Context context, Cursor c) {
+		final TextView teacher = (TextView) view.findViewById(R.id.lesson_teacher);
+		final TextView room = (TextView) view.findViewById(R.id.lesson_room);
+		final TextView lessonTitle = (TextView) view.findViewById(R.id.lesson_title);
+		
+		teacher.setText(c.getString(c.getColumnIndex(LessonInformation.TEACHER_NAME)));
+		room.setText(c.getString(c.getColumnIndex(LessonInformation.ROOM)));
+		lessonTitle.setText(c.getString(c.getColumnIndex(LessonInformation.LESSON_TITLE)));
+	}
+	@Override
+	public long getHeaderId(Cursor c) {
+		return c.getLong(c.getColumnIndex(LessonTableModel.NUMBER));
+	}
+	
 }

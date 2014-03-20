@@ -21,7 +21,7 @@ public class TeachersTimeTable extends BaseTameTableFragment{
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mAdapter = new TeacherLessonListAdapter(getActivity(), null);
+		mAdapter = new TeacherLessonListAdapter(getActivity(), null, false);
 		mTeachersName = getArguments().getString(TEACHERS_NAME);
 	}
 	

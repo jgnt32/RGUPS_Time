@@ -12,7 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.FilterQueryProvider;
 import android.widget.Filterable;
 
-public abstract class BaseCursorAdapter extends BaseAdapter implements Filterable, StickyListHeadersAdapter{
+public abstract class BaseCursorAdapter extends BaseAdapter implements  StickyListHeadersAdapter{
 	/*
 	 * Copyright (C) 2006 The Android Open Source Project
 	 *
@@ -205,7 +205,7 @@ public abstract class BaseCursorAdapter extends BaseAdapter implements Filterabl
 	    /**
 	     * @see android.widget.ListAdapter#getItem(int)
 	     */
-	    public Object getItem(int position) {
+	    public Cursor getItem(int position) {
 	        if (mDataValid && mCursor != null) {
 	            mCursor.moveToPosition(position);
 	            return mCursor;
@@ -254,6 +254,8 @@ public abstract class BaseCursorAdapter extends BaseAdapter implements Filterabl
 	        return v;
 	    }
 	    
+	    protected abstract View newHeaderView(Context context, Cursor cursor, ViewGroup parent);
+	    
 	    @Override
 	    public View getHeaderView(int position, View convertView, ViewGroup parent) {
 	    	 if (!mDataValid) {
@@ -264,11 +266,11 @@ public abstract class BaseCursorAdapter extends BaseAdapter implements Filterabl
 		        }
 		        View v;
 		        if (convertView == null) {
-		            v = newView(mContext, mCursor, parent);
+		            v = newHeaderView(mContext, mCursor, parent);
 		        } else {
 		            v = convertView;
 		        }
-		        bindView(v, mContext, mCursor);
+		        bindHeaderView(v, mContext, mCursor);
 		        return v;
 	    }
 	    
@@ -325,6 +327,14 @@ public abstract class BaseCursorAdapter extends BaseAdapter implements Filterabl
 	    
 	    
 	    public abstract void bindView(View view, Context context, Cursor cursor);
+	    
+	    
+		public abstract long getHeaderId(Cursor c);
+
+		@Override
+		public long getHeaderId(int position) {
+			return getHeaderId(getItem(position));
+		}
 	    
 	    /**
 	     * Change the underlying cursor to a new cursor. If there is an existing cursor it will be
