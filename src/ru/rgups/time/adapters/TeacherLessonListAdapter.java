@@ -43,7 +43,11 @@ public class TeacherLessonListAdapter extends CursorAdapter implements StickyLis
 
 	@Override
 	public long getHeaderId(int position) {
-		return getCursor().getInt(getCursor().getColumnIndex(LessonTableModel.DAY));
+		Cursor c = getCursor();
+		c.move(position-1);
+		return c.getInt(getCursor().getColumnIndex(LessonTableModel.DAY));
 	}
+	
+	
 
 }

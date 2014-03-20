@@ -1143,11 +1143,12 @@ containing a value of this type.
         public static final int lesson_free_calendar_list_selector=0x7f020078;
         public static final int lesson_indicator_shape=0x7f020079;
         public static final int login=0x7f02007a;
-        public static final int right_arrow=0x7f02007b;
-        public static final int right_arrow2x=0x7f02007c;
-        public static final int right_arrow_blue=0x7f02007d;
-        public static final int shape=0x7f02007e;
-        public static final int white_background=0x7f02007f;
+        public static final int rgups_logo=0x7f02007b;
+        public static final int right_arrow=0x7f02007c;
+        public static final int right_arrow2x=0x7f02007d;
+        public static final int right_arrow_blue=0x7f02007e;
+        public static final int shape=0x7f02007f;
+        public static final int white_background=0x7f020080;
     }
     public static final class id {
         public static final int RelativeLayout1=0x7f050065;
@@ -1225,6 +1226,7 @@ containing a value of this type.
         public static final int icon=0x7f05002c;
         public static final int ifRoom=0x7f05000a;
         public static final int image=0x7f050029;
+        public static final int imageView1=0x7f05004b;
         public static final int left_drawer=0x7f050040;
         public static final int lesseon_divider_text=0x7f050064;
         public static final int lesson_divider_time=0x7f050067;
@@ -1286,7 +1288,6 @@ containing a value of this type.
         public static final int tabMode=0x7f050002;
         public static final int teachers_lesson_room=0x7f050081;
         public static final int teachers_lesson_title=0x7f050082;
-        public static final int textView1=0x7f05004b;
         public static final int title=0x7f05002d;
         public static final int top_action_bar=0x7f050022;
         public static final int up=0x7f050023;
