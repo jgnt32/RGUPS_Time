@@ -18,6 +18,10 @@
 
 
 <resources>
+    
+    <declare-styleable name="StickyListHeadersListView">
+        <attr name="areHeadersSticky" format="boolean" />
+    </declare-styleable>
             
     <declare-styleable name="CalendarAttr">
             <attr name="lesson_free_state" format="boolean"/>
