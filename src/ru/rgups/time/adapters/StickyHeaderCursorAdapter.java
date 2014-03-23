@@ -1,18 +1,18 @@
-package se.emilsjolander.stickylistheaders;
+package ru.rgups.time.adapters;
 
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DataSetObserver;
 import android.os.Handler;
+import android.support.v4.widget.CursorAdapter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.FilterQueryProvider;
-import android.widget.Filterable;
 
-public abstract class BaseCursorAdapter extends BaseAdapter implements  StickyListHeadersAdapter{
+public abstract class StickyHeaderCursorAdapter extends CursorAdapter implements StickyListHeadersAdapter{
 	/*
 	 * Copyright (C) 2006 The Android Open Source Project
 	 *
@@ -131,22 +131,7 @@ public abstract class BaseCursorAdapter extends BaseAdapter implements  StickyLi
 	     *                    cursor whenever it changes so the most recent
 	     *                    data is always displayed.  Using true here is discouraged.
 	     */
-	    public BaseCursorAdapter(Context context, Cursor c, boolean autoRequery) {
-	        init(context, c, autoRequery ? FLAG_AUTO_REQUERY : FLAG_REGISTER_CONTENT_OBSERVER);
-	    }
-
-	    /**
-	     * Recommended constructor.
-	     *
-	     * @param c The cursor from which to get the data.
-	     * @param context The context
-	     * @param flags Flags used to determine the behavior of the adapter; may
-	     * be any combination of {@link #FLAG_AUTO_REQUERY} and
-	     * {@link #FLAG_REGISTER_CONTENT_OBSERVER}.
-	     */
-	    public BaseCursorAdapter(Context context, Cursor c, int flags) {
-	        init(context, c, flags);
-	    }
+	   
 
 	    /**
 	     * @deprecated Don't use this, use the normal constructor.  This will
@@ -157,7 +142,17 @@ public abstract class BaseCursorAdapter extends BaseAdapter implements  StickyLi
 	        init(context, c, autoRequery ? FLAG_AUTO_REQUERY : FLAG_REGISTER_CONTENT_OBSERVER);
 	    }
 
-	    void init(Context context, Cursor c, int flags) {
+	    public StickyHeaderCursorAdapter(Context context, Cursor c, boolean autoRequery) {
+			super(context, c, autoRequery);
+			// TODO Auto-generated constructor stub
+		}
+
+		public StickyHeaderCursorAdapter(Context context, Cursor c, int flags) {
+			super(context, c, flags);
+			// TODO Auto-generated constructor stub
+		}
+
+		void init(Context context, Cursor c, int flags) {
 	        if ((flags & FLAG_AUTO_REQUERY) == FLAG_AUTO_REQUERY) {
 	            flags |= FLAG_REGISTER_CONTENT_OBSERVER;
 	            mAutoRequery = true;

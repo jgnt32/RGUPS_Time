@@ -38,7 +38,6 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 		mLessonList = list;
 		timePeriods = context.getResources().getStringArray(R.array.lessons_time_periods);
 	}
-	
 
 	@Override
 	public int getCount() {		

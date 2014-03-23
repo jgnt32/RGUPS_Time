@@ -9,6 +9,7 @@ import ru.rgups.time.model.DataManager;
 import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.DialogManager;
 import ru.rgups.time.utils.PreferenceManager;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -16,8 +17,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,14 +27,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FilterQueryProvider;
-import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 public class TeachersListFragment extends BaseFragment implements OnItemClickListener, LoaderCallbacks<Cursor>, 
 																SearchView.OnQueryTextListener, FilterQueryProvider{
-	private ListView mListView;
+	private StickyListHeadersListView  mListView;
 	private TeacherCursorAdapter mAdapter;
 	private RTCursorLoader mLoader;
 	private MenuItem mSearchItem;
@@ -80,7 +79,7 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.simple_list_fragment, null);
-		mListView = (ListView) v.findViewById(R.id.list_fragment_listview);
+		mListView = (StickyListHeadersListView) v.findViewById(R.id.list_fragment_listview);
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 		return v;
@@ -107,12 +106,11 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.teach, menu);
-		
 		mSearchItem = menu.findItem(R.id.action_search);
 		mSearchItem.setVisible(true);
-	    mSearchView = (SearchView) MenuItemCompat.getActionView(mSearchItem);
-	 /*   mSearchView.setQueryHint(getString(R.string.search_view_hint));
-	    mSearchView.setOnQueryTextListener(this);*/
+	    mSearchView = (SearchView) mSearchItem.getActionView();
+	    mSearchView.setQueryHint(getString(R.string.search_view_hint));
+	    mSearchView.setOnQueryTextListener(this);
 	}
 	
 	@Override

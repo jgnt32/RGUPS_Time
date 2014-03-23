@@ -5,12 +5,10 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ru.rgups.time.R;
-import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.ConstUtils;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.text.format.DateFormat;
 import android.util.Log;

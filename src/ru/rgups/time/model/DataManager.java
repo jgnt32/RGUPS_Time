@@ -706,7 +706,7 @@ public class DataManager {
 				" GROUP BY l.",LessonTableModel.NUMBER, " ORDER BY l.",LessonTableModel.NUMBER
 				).toString();
 		Cursor c = mDb.rawQuery(query, new String[]{dayNumber.toString(),teacherName, weekState.toString()});
-		return c.getCount()>1;
+		return c.getCount()>0;
 	}
 	
 	public boolean dayHasLesson(Integer day, Integer weekState){

@@ -17,7 +17,8 @@
     	android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-       	android:theme="@style/Theme.Base.AppCompat.Light" android:name="RTApplication">
+       	android:theme="@style/Theme.Base.AppCompat.Light"
+    	android:name="RTApplication">
         <activity
             android:name="ru.rgups.time.MainActivity"
             android:configChanges="orientation|keyboardHidden"

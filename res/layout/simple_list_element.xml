@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="7dp"
+    android:padding="10dp"
     android:orientation="vertical" >
 
     <TextView
         android:id="@+id/list_element_text"
-        android:textSize="17sp"
+        android:textSize="19sp"
         android:textStyle="bold"
         android:textColor="@color/theme_blue"
         android:layout_width="wrap_content"
