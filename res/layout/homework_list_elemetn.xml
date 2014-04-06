@@ -2,58 +2,74 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="10dp" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/homework_list_element_lesson_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:text="TextView"
-            android:textSize="17sp" />
-
-        <TextView
-            android:id="@+id/homework_list_element_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+        android:orientation="horizontal" >
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/photo_count" />
-
-            <TextView
-                android:id="@+id/homework_list_element_photo_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" >
-
-        <CheckBox
-            android:id="@+id/lesson_list_element_checkbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:focusable="false"
-            android:layout_centerInParent="true" />
+            android:layout_weight="1"
+            android:orientation="vertical" >
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/homework_list_element_lesson_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:text="TextView"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/homework_list_element_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/photo_count" />
+
+                <TextView
+                    android:id="@+id/homework_list_element_photo_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0" >
+
+            <CheckBox
+                android:id="@+id/lesson_list_element_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:focusable="false" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:background="@color/theme_blue" />
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
+import android.view.View;
 
 public class DialogManager {
 	
@@ -41,6 +42,16 @@ public class DialogManager {
 		mAlertDialog.setNeutralButton(context.getString(R.string.ok_caption), null);		
 		mAlertDialog.show();
 	}
+	
+	public static void showNeutralCustomDialog(Context context, View v){
+		AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(context);
+		mAlertDialog.setTitle(context.getString(R.string.app_name));
+		mAlertDialog.setNeutralButton(context.getString(R.string.ok_caption), null);	
+		mAlertDialog.setView(v);
+		mAlertDialog.show();
+	}
+	
+	
 	
 	public static void showNeutralDialog(Context context,int messageRes, OnClickListener onClick){
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);

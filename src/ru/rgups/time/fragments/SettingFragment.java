@@ -8,6 +8,7 @@ import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.DialogManager;
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +61,20 @@ public class SettingFragment extends BaseFragment implements OnClickListener{
 		switch(v.getId()){
 		
 		case R.id.setting_about:
-			DialogManager.showNeutralDialog(getActivity(), R.string.about_dialog_massage);
+			try {
+			
+				View view = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog, null);
+				
+				TextView version = (TextView) view.findViewById(R.id.about_dialog_version_caption);
+				String versionCaption = getResources().getString(R.string.version_caption);
+			
+				String versionInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName;
+				version.setText(versionCaption.replace("#", versionInfo));
+				DialogManager.showNeutralCustomDialog(getActivity(), view);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
 			break;
 		
