@@ -8,6 +8,8 @@
 	    android:layout_height="wrap_content"
 	    android:orientation="vertical"
 	    android:padding="10dp" >
+	    
+        <include layout="@layout/lesson_list_divier"/>
 	
 	    <LinearLayout
 	        android:id="@+id/lesson_room_container"

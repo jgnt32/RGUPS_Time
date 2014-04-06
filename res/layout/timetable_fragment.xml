@@ -38,12 +38,12 @@
         
     </RelativeLayout>
 
-    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+    <ListView
         android:id="@+id/lesson_list"
         android:scrollbarStyle="outsideOverlay"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
-    </se.emilsjolander.stickylistheaders.StickyListHeadersListView>
+    </ListView>
     
     <RelativeLayout 
         android:id="@+id/lesson_list_empty_view"

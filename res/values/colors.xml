@@ -5,4 +5,5 @@
 	<color name="theme_blue">#34495E</color>
 	<color name="bg_grey">#E5E5E5</color>
 	<color name="red">#FF0000</color>
+	<color name="lesson_free">#808080</color>
 </resources>

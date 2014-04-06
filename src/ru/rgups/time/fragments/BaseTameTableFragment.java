@@ -20,10 +20,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 public abstract class BaseTameTableFragment extends BaseFragment implements OnScrollListener, OnItemClickListener, android.widget.AdapterView.OnItemClickListener{
 	
-	private StickyListHeadersListView mLessonList;
+	private ListView mLessonList;
 	private HListView mCalendarList;
 	private LessonListener mLessonListener;
 	private BaseCalendarAdapter mCalendarAdapter;
@@ -49,7 +50,7 @@ public abstract class BaseTameTableFragment extends BaseFragment implements OnSc
 		View v = inflater.inflate(R.layout.timetable_fragment, null);
 		mCalendarList = (HListView) v.findViewById(R.id.calendar_list);
 		
-		mLessonList = (StickyListHeadersListView) v.findViewById(R.id.lesson_list);
+		mLessonList = (ListView) v.findViewById(R.id.lesson_list);
 		mLessonList.setOnItemClickListener(this);
 		mLessonList.setEmptyView(v.findViewById(R.id.lesson_list_empty_view));
 		setLessonAdapter(mLessonList);
@@ -80,7 +81,7 @@ public abstract class BaseTameTableFragment extends BaseFragment implements OnSc
 		mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDayOfTheYear(), 0);
 	}
 
-	protected abstract void setLessonAdapter(StickyListHeadersListView list);
+	protected abstract void setLessonAdapter(ListView list);
 	
 	protected abstract void notifyAdapterSetChanged(int day, int weekState);
 	protected abstract BaseCalendarAdapter createNewCalendarAdapter();

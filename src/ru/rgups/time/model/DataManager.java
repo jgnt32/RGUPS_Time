@@ -1,5 +1,10 @@
 package ru.rgups.time.model;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -17,9 +22,11 @@ import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;
 import ru.rgups.time.utils.Slipper;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -181,6 +188,7 @@ public class DataManager {
 			mDeleteInformationStatement.execute();
 			mDb.setTransactionSuccessful();
 		} catch (Exception e){			
+			e.printStackTrace();
 		}
 		finally{
 			mDb.endTransaction();
@@ -195,53 +203,85 @@ public class DataManager {
 			mDb.beginTransaction();
 			for(Day day : lessonList.getDays()){
 				for(Lesson lesson : day.getLessons()){
-					mSaveLessonStatement.clearBindings();
-					mSaveLessonStatement.bindLong(1, day.getNumber());
-					mSaveLessonStatement.bindLong(2, lesson.getNumber());
-					mSaveLessonStatement.bindLong(3, groupId);
+				
 					
 					if(lesson.getDoubleLine() != null){
-					
+						mSaveLessonStatement.bindLong(1, day.getNumber());
+						mSaveLessonStatement.bindLong(2, lesson.getNumber());
+						mSaveLessonStatement.bindLong(3, groupId);
 						mSaveLessonStatement.bindLong(4, DoubleLine.WEEK_STATE);
 						mSaveLessonStatement.bindLong(5, buildLessonId(day, lesson, DoubleLine.WEEK_STATE, groupId));
-
 						mSaveLessonStatement.execute();
+
 						for(DoubleLine doubleLine : lesson.getDoubleLine()){
 							saveLessonInformation(doubleLine, buildLessonId(day, lesson, DoubleLine.WEEK_STATE, groupId), groupId);
 						}
+					}else{
+				
+			
+						if(lesson.getUnderLine() != null){
+							mSaveLessonStatement.bindLong(1, day.getNumber());
+							mSaveLessonStatement.bindLong(2, lesson.getNumber());
+							mSaveLessonStatement.bindLong(3, groupId);
+							mSaveLessonStatement.bindLong(4, UnderLine.WEEK_STATE);
+							mSaveLessonStatement.bindLong(5, buildLessonId(day, lesson, UnderLine.WEEK_STATE, groupId));
+							mSaveLessonStatement.execute();
+
+							for(UnderLine underLine : lesson.getUnderLine()){	
+								saveLessonInformation(underLine, buildLessonId(day, lesson, UnderLine.WEEK_STATE, groupId), groupId);
+							}
+						}
+						
+						if(lesson.getOverLine() != null){
+							mSaveLessonStatement.bindLong(1, day.getNumber());
+							mSaveLessonStatement.bindLong(2, lesson.getNumber());
+							mSaveLessonStatement.bindLong(3, groupId);
+							mSaveLessonStatement.bindLong(4, OverLine.WEEK_STATE);
+							mSaveLessonStatement.bindLong(5, buildLessonId(day, lesson, OverLine.WEEK_STATE, groupId));
+							mSaveLessonStatement.execute();
+
+							for(OverLine overLine : lesson.getOverLine()){
+								saveLessonInformation(overLine, buildLessonId(day, lesson, OverLine.WEEK_STATE, groupId), groupId);
+							}
+						}
+
 					}
 					
-					if(lesson.getUnderLine() != null){
-						mSaveLessonStatement.bindLong(4, UnderLine.WEEK_STATE);
-						mSaveLessonStatement.bindLong(5, buildLessonId(day, lesson, UnderLine.WEEK_STATE, groupId));
-
-						for(UnderLine underLine : lesson.getUnderLine()){	
-							saveLessonInformation(underLine, buildLessonId(day, lesson, UnderLine.WEEK_STATE, groupId), groupId);
-							mSaveLessonStatement.execute();
-						}
-					}
-					
-					if(lesson.getOverLine() != null){
-						mSaveLessonStatement.bindLong(4, OverLine.WEEK_STATE);
-						mSaveLessonStatement.bindLong(5, buildLessonId(day, lesson, OverLine.WEEK_STATE, groupId));
-
-						for(OverLine overLine : lesson.getOverLine()){
-							saveLessonInformation(overLine, buildLessonId(day, lesson, OverLine.WEEK_STATE, groupId), groupId);
-							mSaveLessonStatement.execute();
-						}
-					}
 				}
 			}
 			mDb.setTransactionSuccessful();
+
 		}catch(Exception e){
 			e.printStackTrace();
+			
 		}
 		finally{
 			mDb.endTransaction();
+			
 		}
 		
 	}
 	
+	
+	public void writeToSD(Context context) throws IOException {
+	    File sd = Environment.getExternalStorageDirectory();
+
+	    if (sd.canWrite()) {
+	        String currentDBPath = HelperManager.DB_NAME;
+	        String backupDBPath = "backupname.db";
+			File dbFile = context.getApplicationContext().getDatabasePath(HelperManager.DB_NAME);
+	        File backupDB = new File(sd, backupDBPath);
+
+	        if (dbFile.exists()) {
+	            FileChannel src = new FileInputStream(dbFile).getChannel();
+	            FileChannel dst = new FileOutputStream(backupDB).getChannel();
+	            dst.transferFrom(src, 0, src.size());
+	            src.close();
+	            dst.close();
+	        }
+	    }
+	    Log.e("write to SD","writeToSD");
+	}
 	private Long buildLessonId(Day day, Lesson lesson, int weekState, long groupId ){
 		long lessonId = Long.parseLong(TextUtils.concat(
 				Integer.toString(day.getNumber()),
@@ -336,7 +376,6 @@ public class DataManager {
 	}
 	
 	public ArrayList<LessonListElement> getLessonList(final Integer dayNumber, final Integer weekState){
-		Log.e("getLessonList","weekState  ="+weekState);
 		ArrayList<LessonListElement> result = new ArrayList<LessonListElement>();
 		
 		String query = TextUtils.concat(
@@ -345,10 +384,36 @@ public class DataManager {
 				LessonTableModel.DAY,"='",dayNumber.toString(),"'", " AND ",
 				"(",LessonTableModel.WEEK_STATE,"='",weekState.toString(),"' OR " ,
 				LessonTableModel.WEEK_STATE,"='2')",
-				" GROUP BY ",LessonTableModel.NUMBER, " ORDER BY ",LessonTableModel.NUMBER
+				" GROUP BY ",LessonTableModel.NUMBER," ORDER BY ",LessonTableModel.NUMBER
 				).toString();
 		
 		Log.e("getLessonList", query);
+
+		Cursor c = mDb.rawQuery(query, new String[]{});
+		LessonListElement lesson;
+		while(c.moveToNext()){
+				lesson = new LessonListElement();
+				lesson.setId(c.getLong(c.getColumnIndex(LessonTableModel.ID)));		
+
+				lesson.setDayNumber(c.getInt(c.getColumnIndex(LessonTableModel.DAY)));
+				lesson.setLessonNumber(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)));
+				lesson.setInformation(getLessonInformation(c.getLong(c.getColumnIndex(LessonTableModel.ID))));
+				result.add(lesson);
+			
+		}
+
+		return result;
+	}
+	
+	public ArrayList<LessonListElement> getLessonList(){
+		ArrayList<LessonListElement> result = new ArrayList<LessonListElement>();
+		
+		String query = TextUtils.concat(
+				"SELECT * FROM ",LessonTableModel.TABLE_NAME," WHERE ",
+				LessonTableModel.GROUP_ID," ='",PreferenceManager.getInstance().getGroupId().toString(),
+				"' ORDER BY ",LessonTableModel.NUMBER
+				).toString();
+		
 
 		Cursor c = mDb.rawQuery(query, new String[]{});
 		LessonListElement lesson;

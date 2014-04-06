@@ -36,7 +36,7 @@ public class LessonCalendarAdapter extends BaseCalendarAdapter{
 			dayOfWeek.setTextColor(mBlueColor);
 		}else{
 			v.setBackgroundResource(R.drawable.lesson_free_calendar_list_selector);
-			dayOfWeek.setTextColor(mRedColor);
+			dayOfWeek.setTextColor(mLessonFreeColor);
 			
 		}
 		

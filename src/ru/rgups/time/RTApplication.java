@@ -22,6 +22,7 @@ public class RTApplication extends Application{
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		HelperManager.setDbPath(getApplicationContext());
 		PreferenceManager.initalize(getApplicationContext());
 		DialogManager.initInstatnce(getApplicationContext());
 		if (HelperManager.getHelper() == null) {

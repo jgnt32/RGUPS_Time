@@ -187,7 +187,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	private void initFragmenets(){
 		mSettingFragment = new SettingFragment();
 		mTimeTableFragment = new TimeTableFragment();
-		mTeachersFrament = new TeachersListFragment();
+//		mTeachersFrament = new TeachersListFragment();
 		mHomeWorkListFragment = new HomeWorkListFragment();
 
 	}
@@ -201,9 +201,9 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 			ft.replace(R.id.frameLayout, mTimeTableFragment);
 			break;
 			
-		case DrawerListAdapter.TEACHERS_FRAGMENT:
+/*		case DrawerListAdapter.TEACHERS_FRAGMENT:
 			ft.replace(R.id.frameLayout, mTeachersFrament);
-			break;
+			break;*/
 		
 		case DrawerListAdapter.HOME_WORK_LIST_FRAGMENT:
 			ft.replace(R.id.frameLayout, mHomeWorkListFragment);

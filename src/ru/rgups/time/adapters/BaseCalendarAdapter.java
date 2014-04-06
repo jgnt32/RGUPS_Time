@@ -36,7 +36,7 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	private View mView;
 	private int mSelectedItem;
 	protected int mBlueColor;
-	protected int mRedColor;
+	protected int mLessonFreeColor;
 	protected Context mContext;
 	private View leftIndicator;
 
@@ -58,7 +58,7 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	
 	public BaseCalendarAdapter(Context context){
 		mContext = context;
-		mRedColor = context.getResources().getColor(R.color.red);
+		mLessonFreeColor = context.getResources().getColor(R.color.lesson_free);
 		mBlueColor = context.getResources().getColor(R.color.theme_blue);
 		mCalendar = new GregorianCalendar();
 		mCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);

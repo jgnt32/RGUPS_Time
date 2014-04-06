@@ -1,5 +1,6 @@
 package ru.rgups.time.fragments;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import ru.rgups.time.adapters.BaseCalendarAdapter;
@@ -9,9 +10,9 @@ import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.rest.RestManager;
-import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -51,13 +52,18 @@ public class TimeTableFragment extends BaseTameTableFragment {
 
 		@Override
 		public void onRequestSuccess(LessonList list) {
-			Log.e("list",""+list.getDays().size());
+			try {
+				DataManager.getInstance().writeToSD(getActivity());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
 
 	@Override
-	protected void setLessonAdapter(StickyListHeadersListView list) {
+	protected void setLessonAdapter(ListView list) {
 		list.setAdapter(mLessonAdapter);
 	}
 

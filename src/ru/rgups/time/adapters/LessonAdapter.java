@@ -18,7 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapter{
+public class LessonAdapter extends BaseAdapter{
 	public static final int OVER_LINE = 0;
 	public static final int UNDER_LINE = 1;
 	private Context mContext;
@@ -33,10 +33,13 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 	private View headerView;
 	private String[] timePeriods;
 	private Long timestamp = (long) 0;
+	private String mHeaderNumber;
+	
 	public LessonAdapter(Context context, ArrayList<LessonListElement> list){
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
 		mLessonList = list;
 		timePeriods = context.getResources().getStringArray(R.array.lessons_time_periods);
+		mHeaderNumber = context.getResources().getString(R.string.lesson_list_divider);
 	}
 
 	@Override
@@ -92,6 +95,9 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 			}
 			this.setText(mHolder.roomContainer, mHolder.room, roomBuffer);
 			this.setText(mHolder.teacherContainer, mHolder.teacher, teacherBuffer);
+			mHolder.number.setText(mHeaderNumber.replace("#", Integer.toString(getItem(position).getLessonNumber())));
+			mHolder.time.setText(timePeriods[getItem(position).getLessonNumber()]);
+			
 	//		mHolder.room.setText(roomBuffer.substring(0,roomBuffer.length()-1));
 	//		mHolder.teacher.setText(teacherBuffer.substring(0,teacherBuffer.length()-1));
 
@@ -113,7 +119,8 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 		private TextView title;
 		private View teacherContainer;
 		private View roomContainer;
-//		private TextView number;
+		private TextView number;
+		private TextView time;
 		private TextView room;
 //		private TextView type;
 		private TextView teacher;
@@ -121,9 +128,9 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 
 		public ViewHolder(View view){
 			this.setTitle((TextView) view.findViewById(R.id.lesson_title));
-		//	this.setNumber((TextView) view.findViewById(R.id.lesson_number));
+			number = (TextView) view.findViewById(R.id.divider_text);
 			this.setRoom((TextView) view.findViewById(R.id.lesson_room));
-		//	this.setType((TextView) view.findViewById(R.id.lesson_type));
+			time = (TextView) view.findViewById(R.id.lesson_divider_time);
 			this.setTeacher((TextView) view.findViewById(R.id.lesson_teacher));
 			this.roomContainer = view.findViewById(R.id.lesson_room_container);
 			this.teacherContainer = view.findViewById(R.id.lesson_teacher_container);
@@ -159,22 +166,6 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 		
 	}
 
-
-	@Override
-	public View getHeaderView(int position, View convertView, ViewGroup parent) {
-		View v = mInflater.inflate(R.layout.lesson_list_divier, null);
-		TextView text = (TextView) v.findViewById(R.id.divider_text);
-		text.setText(getItem(position).getLessonNumber()+"-я пара");
-		TextView time = (TextView) v.findViewById(R.id.lesson_divider_time);
-		time.setText(timePeriods[getItem(position).getLessonNumber()-1]);
-		return v;
-	}
-
-
-	@Override
-	public long getHeaderId(int position) {
-		return 	getItem(position).getLessonNumber();
-	}
 	
 	private void setText(View container, TextView text, StringBuffer buffer){
 		String value = buffer.toString();

@@ -3,6 +3,7 @@ package ru.rgups.time.model;
 import java.sql.SQLException;
 
 import ru.rgups.time.model.entity.Day;
+import android.content.Context;
 
 import com.octo.android.robospice.persistence.ormlite.RoboSpiceDatabaseHelper;
 
@@ -12,8 +13,12 @@ public class HelperManager {
 	
 	private static RoboSpiceDatabaseHelper mHelper;
 	private static DayDAO mDayDAO;
+	public static String DB_PATH;
 
+	public static void setDbPath(Context context){
+		DB_PATH = context.getFilesDir().getPath() + context.getPackageName();
 
+	}
 	
 	public static RoboSpiceDatabaseHelper getHelper() {
 		return mHelper;

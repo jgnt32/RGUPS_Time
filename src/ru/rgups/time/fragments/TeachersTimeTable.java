@@ -1,12 +1,13 @@
 package ru.rgups.time.fragments;
 
+import ru.rgups.time.R;
 import ru.rgups.time.adapters.BaseCalendarAdapter;
 import ru.rgups.time.adapters.TeacherLessonListAdapter;
 import ru.rgups.time.adapters.TeachersCalendarAdapter;
 import ru.rgups.time.model.DataManager;
-import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ListView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -17,16 +18,17 @@ public class TeachersTimeTable extends BaseTameTableFragment{
 	
 	private TeacherLessonListAdapter mAdapter;
 	private String mTeachersName;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mAdapter = new TeacherLessonListAdapter(getActivity(), null, false);
 		mTeachersName = getArguments().getString(TEACHERS_NAME);
+
 	}
 	
 	@Override
-	protected void setLessonAdapter(StickyListHeadersListView list) {
+	protected void setLessonAdapter(ListView list) {
 		list.setAdapter(mAdapter);
 	}
 
