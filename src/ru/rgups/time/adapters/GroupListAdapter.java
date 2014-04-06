@@ -23,7 +23,7 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 	private LayoutInflater mInflater;
 	private ViewHolder mHolder;
 	private DividerHolder dividerHolder;
-	
+	private String mHeaderString;
 	
 	public GroupListAdapter(Context context, ArrayList<Group> groupList ){
 		this.mContext = context;
@@ -31,6 +31,7 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 		Collections.sort(mGroupList, new GroupComparator());
 		mInflater = (LayoutInflater) mContext
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
+		mHeaderString = context.getResources().getString(R.string.group_list_divider);
 	}
 	
 	
@@ -130,7 +131,7 @@ public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAd
 	public View getHeaderView(int position, View convertView, ViewGroup parent) {
 		View v = mInflater.inflate(R.layout.group_list_divier,null);
 		TextView text = (TextView) v.findViewById(R.id.levelTitle);
-		text.setText(getItem(position).getLevel()+"-й курс");
+		text.setText(mHeaderString.replace("#", Integer.toString(getItem(position).getLevel())));
 		return v;
 	}
 

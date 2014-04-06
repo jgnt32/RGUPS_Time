@@ -52,7 +52,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_gravity="center_horizontal"
-	        android:text="Домашнии задания"
+	        android:text="@string/home_work_caption"
 	        android:gravity="center_horizontal"
 	        android:textColor="@color/theme_green"
 	        android:textSize="25sp"

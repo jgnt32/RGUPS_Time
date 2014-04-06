@@ -52,8 +52,8 @@ public class HomeWorkFragment extends Fragment{
 		mPhotoGridView = (GridView) v.findViewById(R.id.home_work_grid_view);
 	//	mPhotoGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL); 
 	//	mPhotoGridView.setMultiChoiceModeListener(this);
-		mAdapter = new PhotoGalleryAdapter(getActivity());
-		mPhotoGridView.setAdapter(mAdapter);
+/*		mAdapter = new PhotoGalleryAdapter(getActivity());
+		mPhotoGridView.setAdapter(mAdapter);*/
 		mText = (EditText) v.findViewById(R.id.home_work_text);
 		return v;
 	}

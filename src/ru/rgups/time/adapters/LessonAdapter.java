@@ -70,14 +70,13 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 		}else{
 			mHolder.hwIndicator.setVisibility(View.GONE);
 		}
-		mHolder.time.setText(timePeriods[getItem(position).getLessonNumber()-1]);
 		if(getItem(position).getInformation().size()>0){
 			StringBuffer roomBuffer = new StringBuffer();
 			StringBuffer teacherBuffer = new StringBuffer();
 			for(LessonInformation lesson : getItem(position).getInformation()){
 				
 				if(lesson.getRoom() != null){
-					if(lesson.getRoom().isEmpty()){
+					if(!lesson.getRoom().trim().isEmpty()){
 						roomBuffer.append(lesson.getRoom()).append(", ");
 					}
 				}
@@ -118,7 +117,6 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 		private TextView room;
 //		private TextView type;
 		private TextView teacher;
-		private TextView time;
 		private ImageView hwIndicator;
 
 		public ViewHolder(View view){
@@ -127,20 +125,11 @@ public class LessonAdapter extends BaseAdapter implements StickyListHeadersAdapt
 			this.setRoom((TextView) view.findViewById(R.id.lesson_room));
 		//	this.setType((TextView) view.findViewById(R.id.lesson_type));
 			this.setTeacher((TextView) view.findViewById(R.id.lesson_teacher));
-			this.setTime((TextView) view.findViewById(R.id.lesson_time));
 			this.roomContainer = view.findViewById(R.id.lesson_room_container);
 			this.teacherContainer = view.findViewById(R.id.lesson_teacher_container);
 			hwIndicator = (ImageView) view.findViewById(R.id.lesson_list_element_homework_indicator);
 		}
 		
-		
-		public TextView getTime() {
-			return time;
-		}
-
-		public void setTime(TextView time) {
-			this.time = time;
-		}
 
 		public TextView getTitle() {
 			return title;

@@ -8,6 +8,7 @@ import ru.rgups.time.interfaces.AuthListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 
 public class AuthActivity extends ActionBarActivity implements AuthListener{
 
@@ -54,6 +55,13 @@ public class AuthActivity extends ActionBarActivity implements AuthListener{
 		finishActivity(WelcomeActivity.AUTH_REQUEST_CODE);
 		AuthActivity.this.finish();
 	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		this.onBackPressed();
+		return super.onOptionsItemSelected(item);
+	}
+	
 	
 	
 }

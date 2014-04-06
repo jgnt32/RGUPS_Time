@@ -35,12 +35,12 @@ public class TeacherCursorAdapter extends StickyHeaderCursorAdapter{
 
 	@Override
 	protected View newHeaderView(Context context, Cursor cursor, ViewGroup parent) {
-		return mInflater.inflate(R.layout.lesson_list_divier, null);
+		return mInflater.inflate(R.layout.group_list_divier, null);
 	}
 
 	@Override
 	protected void bindHeaderView(View v, Context context, Cursor c) {
-		final TextView text = (TextView) v.findViewById(R.id.divider_text);
+		final TextView text = (TextView) v.findViewById(R.id.levelTitle);
 		text.setText(c.getString(c.getColumnIndex(LessonInformation.TEACHER_NAME)).substring(0, 1));
 	}
 

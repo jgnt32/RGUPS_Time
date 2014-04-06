@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Расписание</string>
+    <string name="app_name">Расписание РГУПС</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
@@ -16,6 +16,8 @@
 	<string name="search_view_hint">Введите фамилию преподавателя</string>
 	
 	<!-- DIALOGs -->
+	
+	<string name="progress_message">Подождите</string>
 	<string name="ok_caption">Ок</string>
 	<string name="positive_caption">Да</string>	
 	<string name="negative_caption">Нет</string>
@@ -37,20 +39,43 @@
  	    Вы желаете выполнить этот запрос?
  	    
  	</string>
+ 	
+ 	<string name="about_dialog_massage">
+ 	    Данное приложение было разработано Ткаченко Артёмом, 
+ 	    студентом группы АВМ-4-024, в рамках дипломной работы. \n
+ 	    
+ 	    Благодарности: Хлопину Константину, Жижанову Андрею.
+ 	</string>
+ 	
+ 	<string name="logout_dialog_message">
+ 	    Вы уверены, что хотите сменить группу?
+ 	</string>
+ 	
 	
 	<!-- DRAWER -->
     <string name="draw_open">Меню</string>
     <string name="draw_close">Расписание</string>
     
     <!-- Captions -->
+    
+    <string name="group_list_divider">#-й курс</string>
+    <string name="lesson_list_divider">#-ая пара</string>
+    
+    <string name="welcome_screen_caption">
+        Настоящий органайзер для студента РУПС
+    </string>
     <string name="photo_count">Фотографий:</string>
-    <string name="login_button_caption">ВОЙТИ</string>
+    <string name="about">О приложении</string>
+    <string name="login_button_caption">Начать работу</string>
     <string name="login_facultet_caption">Выберите факултет</string>
     <string name="login_group_caption">Выберите группу</string>
     
     <string name="setting_full_time_button">Скачать всё</string>
-    <string name="setting_logout">Выйти</string>
+    <string name="setting_logout">Сменить группу</string>
     
     <string name="setting_staff">Общее</string>
     <string name="hw_empty">Домашних заданий нет</string>
+    <string name="home_work_hint">Домашнее задание</string>
+    <string name="home_work_caption">Домашние задание</string>
+    
 </resources>

@@ -15,8 +15,10 @@ import ru.rgups.time.fragments.WelcomeActivity;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.interfaces.SettingListener;
 import ru.rgups.time.rest.RestManager;
+import ru.rgups.time.utils.DialogManager;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -45,12 +47,15 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	private SettingFragment mSettingFragment;
 	private boolean mReplaceFlag = false;
 	private TeachersListFragment mTeachersFrament;
+	private ProgressDialog mProgressDialog;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);		
+		setContentView(R.layout.activity_main);
 		openWelcomeActivity();
 
-		setContentView(R.layout.activity_main);
+		mProgressDialog = DialogManager.getNewProgressDialog(this, R.string.progress_message);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mDrawerList.setOnItemClickListener(this);
 		mDrawerList.setAdapter(new DrawerListAdapter(this));
@@ -83,11 +88,10 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		RestManager.getInstance().setSpiceManager(getSpiceManager());
 		if(!PreferenceManager.getInstance().isFacultetsTimeDowloaded() && PreferenceManager.getInstance().getFacultetId() != -1){
 			RestManager.getInstance().exucuteFacultetRequest(new FacultetTimeRequestListener());
+			mProgressDialog.show();
 		}else{
-			if(mReplaceFlag = true){
+			if(mReplaceFlag){
 				openTimeTableFragment();
-			}else{
-				showClapFragment();
 			}
 		}
 	}
@@ -189,7 +193,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	}
 	
 	private void changeFragment(int id){
-		getSupportFragmentManager().popBackStackImmediate(OVER_DRAWER_TRANSACTION, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		
 		switch (id) {
@@ -268,6 +272,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		@Override
 		public void onRequestFailure(SpiceException e) {
 			e.printStackTrace();
+			mProgressDialog.cancel();
 			
 		}
 
@@ -275,6 +280,8 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		public void onRequestSuccess(Boolean response) {
 			openTimeTableFragment();
 			PreferenceManager.getInstance().setFucultetsTimeDownloaded(true);
+			mProgressDialog.cancel();
+
 		}
 		
 	}

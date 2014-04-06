@@ -22,12 +22,12 @@ public class SettingFragment extends BaseFragment implements OnClickListener{
 	private Button mFullDowloadButton;
 	private TextView mGroupTitle;
 	private TextView mFacultetTitle;
+	private Button mAboutButton;
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		mListener = (SettingListener) activity;
 	}
-	
 	
 	
 	@Override
@@ -42,6 +42,8 @@ public class SettingFragment extends BaseFragment implements OnClickListener{
 		mGroupTitle.setText(DataManager.getInstance().getCurrentGroupTitle());
 		mFacultetTitle = (TextView) v.findViewById(R.id.setting_facultet_title);
 		mFacultetTitle.setText(DataManager.getInstance().getCurrentFacultetTitle());
+		mAboutButton = (Button) v.findViewById(R.id.setting_about);
+		mAboutButton.setOnClickListener(this);
 		return v;
 	}
 
@@ -56,8 +58,21 @@ public class SettingFragment extends BaseFragment implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
+		
+		case R.id.setting_about:
+			DialogManager.showNeutralDialog(getActivity(), R.string.about_dialog_massage);
+			
+			break;
+		
 		case R.id.setting_logout_button:
-			mListener.logOut();		
+			DialogManager.showPositiveDialog(getActivity(), R.string.logout_dialog_message, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					mListener.logOut();						
+				}
+			});
+			
 			break;
 			
 		case R.id.setting_full_time_button:

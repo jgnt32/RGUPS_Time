@@ -2,8 +2,8 @@
 <resources>
     <string-array name="drawer_titles">
         <item >Расписание</item>
-        <item >Преподователи</item>
-        <item >Домашнии задания</item>
+        <item >Преподаватели</item>
+        <item >Домашние задания</item>
         <item >Настройки</item>
     </string-array>
     

@@ -8,7 +8,6 @@ import it.sephiroth.android.library.widget.HListView;
 import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.BaseCalendarAdapter;
-import ru.rgups.time.adapters.LessonCalendarAdapter;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.views.CalendarHint;
@@ -56,6 +55,7 @@ public abstract class BaseTameTableFragment extends BaseFragment implements OnSc
 		setLessonAdapter(mLessonList);
 		mCalendarList.setAdapter(mCalendarAdapter);
 		mCalendarList.setSelection(getLastSelectedDatePosition());
+		mCalendarList.setItemChecked(getLastSelectedDatePosition(), true);
 		mCalendarList.setOnItemClickListener(this);
 		notifyAdapterSetChanged(mCalendarAdapter.getDayNumber(getLastSelectedDatePosition()), 
 				mCalendarAdapter.getWeekState(getLastSelectedDatePosition()));

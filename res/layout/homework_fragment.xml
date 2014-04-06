@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="10dp" >
 
     <EditText
         android:id="@+id/home_work_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="@string/home_work_hint"
         android:ems="10" >
 
         <requestFocus />
@@ -16,7 +18,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="gone" >
 
         <GridView
             android:id="@+id/home_work_grid_view"
