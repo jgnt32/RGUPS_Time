@@ -96,7 +96,7 @@ public class LessonAdapter extends BaseAdapter{
 			this.setText(mHolder.roomContainer, mHolder.room, roomBuffer);
 			this.setText(mHolder.teacherContainer, mHolder.teacher, teacherBuffer);
 			mHolder.number.setText(mHeaderNumber.replace("#", Integer.toString(getItem(position).getLessonNumber())));
-			mHolder.time.setText(timePeriods[getItem(position).getLessonNumber()]);
+			mHolder.time.setText(timePeriods[getItem(position).getLessonNumber()-1]);
 			
 	//		mHolder.room.setText(roomBuffer.substring(0,roomBuffer.length()-1));
 	//		mHolder.teacher.setText(teacherBuffer.substring(0,teacherBuffer.length()-1));
