@@ -1,5 +1,6 @@
 package ru.rgups.time;
 
+import com.crashlytics.android.Crashlytics;
 import ru.rgups.time.activities.HomeWorkActivity;
 import ru.rgups.time.adapters.DrawerListAdapter;
 import ru.rgups.time.fragments.ClapFragment;
@@ -52,6 +53,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
+		Crashlytics.start(this);
 		setContentView(R.layout.activity_main);
 		openWelcomeActivity();
 

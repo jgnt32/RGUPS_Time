@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class TeacherCursorAdapter extends StickyHeaderCursorAdapter{
+public class TeacherCursorAdapter extends StickyListHeadersCursorAdapter{
 	
 	private LayoutInflater mInflater;
 	
