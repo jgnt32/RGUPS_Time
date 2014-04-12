@@ -6,6 +6,6 @@
     	android:title="@string/search_view_title"
         android:icon="@drawable/action_search"
         sabd:showAsAction="always|collapseActionView"
-        sabd:actionViewClass="android.widget.SearchView" />
+        sabd:actionViewClass="android.support.v7.widget.SearchView" />
     
 </menu>

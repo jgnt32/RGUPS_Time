@@ -7,6 +7,7 @@
     android:paddingTop="30dp" >
 
     <LinearLayout
+        android:id="@+id/drawer_timetable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -27,6 +28,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/drawer_homework"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -47,6 +49,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/drawer_teachers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
@@ -67,6 +70,7 @@
     </LinearLayout>
 
     <LinearLayout
+       	android:id="@+id/drawer_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"

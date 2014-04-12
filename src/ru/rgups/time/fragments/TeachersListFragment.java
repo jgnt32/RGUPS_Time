@@ -17,6 +17,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,7 +29,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FilterQueryProvider;
-import android.widget.SearchView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -108,7 +109,7 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 		inflater.inflate(R.menu.teach, menu);
 		mSearchItem = menu.findItem(R.id.action_search);
 		mSearchItem.setVisible(true);
-	    mSearchView = (SearchView) mSearchItem.getActionView();
+	    mSearchView = (SearchView) MenuItemCompat.getActionView(mSearchItem);
 	    mSearchView.setQueryHint(getString(R.string.search_view_hint));
 	    mSearchView.setOnQueryTextListener(this);
 	}

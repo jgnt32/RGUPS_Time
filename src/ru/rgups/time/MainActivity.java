@@ -50,7 +50,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	private HomeWorkListFragment mHomeWorkListFragment;
 	private SettingFragment mSettingFragment;
 	private boolean mReplaceFlag = false;
-//	private TeachersListFragment mTeachersFrament;
+	private TeachersListFragment mTeachersFrament;
 	private ProgressDialog mProgressDialog;
 	private MenuDrawer mDrawer;
 	
@@ -61,9 +61,13 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		mDrawer = MenuDrawer.attach(this, MenuDrawer.Type.BEHIND, Position.LEFT, MenuDrawer.MENU_DRAG_WINDOW);
         mDrawer.setContentView(R.layout.activity_main);
         mDrawer.setMenuView(R.layout.menu_drawer);		
+				
+        findViewById(R.id.drawer_homework).setOnClickListener(this);
+        findViewById(R.id.drawer_teachers).setOnClickListener(this);
+        findViewById(R.id.drawer_timetable).setOnClickListener(this);
+        findViewById(R.id.drawer_setting).setOnClickListener(this);
+        openWelcomeActivity();
 		
-		openWelcomeActivity();
-
 		mProgressDialog = DialogManager.getNewProgressDialog(this, R.string.progress_message);
 /*		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mDrawerList.setOnItemClickListener(this);
@@ -192,7 +196,27 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	 
 	@Override
 	public void onClick(View v) {
+		switch(v.getId()){
 		
+		case R.id.drawer_timetable:
+			changeFragment(DrawerListAdapter.TIME_FRAGMENT);
+			break;
+			
+		case R.id.drawer_homework:
+			changeFragment(DrawerListAdapter.HOME_WORK_LIST_FRAGMENT);
+
+			break;
+					
+		case R.id.drawer_teachers:
+			changeFragment(DrawerListAdapter.TEACHERS_FRAGMENT);
+
+			break;
+			
+		case R.id.drawer_setting:
+			changeFragment(DrawerListAdapter.SETTING_FRAGMENT);
+
+			break;
+		}
 	}
 
 	@Override
@@ -204,7 +228,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	private void initFragmenets(){
 		mSettingFragment = new SettingFragment();
 		mTimeTableFragment = new TimeTableFragment();
-	//	mTeachersFrament = new TeachersListFragment();
+		mTeachersFrament = new TeachersListFragment();
 		mHomeWorkListFragment = new HomeWorkListFragment();
 
 	}
@@ -219,7 +243,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 			break;
 			
 		case DrawerListAdapter.TEACHERS_FRAGMENT:
-		//	ft.replace(R.id.frameLayout, mTeachersFrament);
+			ft.replace(R.id.frameLayout, mTeachersFrament);
 			break;
 		
 		case DrawerListAdapter.HOME_WORK_LIST_FRAGMENT:

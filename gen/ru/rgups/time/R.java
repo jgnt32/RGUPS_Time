@@ -1406,8 +1406,8 @@ containing a value of this type.
     public static final class id {
         public static final int RelativeLayout1=0x7f050067;
         public static final int about_dialog_version_caption=0x7f050059;
-        public static final int action_add=0x7f05009b;
-        public static final int action_add_image=0x7f050097;
+        public static final int action_add=0x7f05009f;
+        public static final int action_add_image=0x7f05009b;
         public static final int action_bar=0x7f05002b;
         public static final int action_bar_activity_content=0x7f050022;
         public static final int action_bar_container=0x7f05002a;
@@ -1416,14 +1416,14 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f050032;
         public static final int action_bar_title=0x7f050031;
         public static final int action_context_bar=0x7f05002c;
-        public static final int action_delete=0x7f050099;
-        public static final int action_done=0x7f05009c;
+        public static final int action_delete=0x7f05009d;
+        public static final int action_done=0x7f0500a0;
         public static final int action_menu_divider=0x7f050023;
         public static final int action_menu_presenter=0x7f050024;
         public static final int action_mode_close_button=0x7f050033;
-        public static final int action_save=0x7f050098;
-        public static final int action_scroll_to_today=0x7f05009a;
-        public static final int action_search=0x7f05009d;
+        public static final int action_save=0x7f05009c;
+        public static final int action_scroll_to_today=0x7f05009e;
+        public static final int action_search=0x7f0500a1;
         public static final int activity_chooser_view_content=0x7f050034;
         public static final int always=0x7f050019;
         public static final int alwaysScroll=0x7f050028;
@@ -1436,8 +1436,8 @@ containing a value of this type.
         public static final int calendar_element_homework_indicator=0x7f050055;
         public static final int calendar_element_text=0x7f050053;
         public static final int calendar_left_indicator=0x7f05004f;
-        public static final int calendar_list=0x7f050093;
-        public static final int calendar_list_hint=0x7f050094;
+        public static final int calendar_list=0x7f050097;
+        public static final int calendar_list_hint=0x7f050098;
         public static final int calendar_right_indicator=0x7f050050;
         public static final int calendar_top_indicator=0x7f050051;
         public static final int checkbox=0x7f05003c;
@@ -1448,9 +1448,13 @@ containing a value of this type.
         public static final int disableHome=0x7f050016;
         public static final int disabled=0x7f050027;
         public static final int divider_text=0x7f050068;
+        public static final int drawer_homework=0x7f050080;
         public static final int drawer_image=0x7f05005c;
         public static final int drawer_layout=0x7f05004b;
+        public static final int drawer_setting=0x7f050082;
+        public static final int drawer_teachers=0x7f050081;
         public static final int drawer_text=0x7f05005d;
+        public static final int drawer_timetable=0x7f05007f;
         public static final int dropdown=0x7f05001d;
         public static final int edit_query=0x7f05003f;
         public static final int end=0x7f050005;
@@ -1461,13 +1465,13 @@ containing a value of this type.
         public static final int facultet_list_empty_view=0x7f050060;
         public static final int fakid=0x7f050062;
         public static final int frameLayout=0x7f05004c;
-        public static final int galery_element=0x7f05007f;
+        public static final int galery_element=0x7f050083;
         public static final int groupList=0x7f050065;
         public static final int groupName=0x7f050064;
         public static final int group_list_empty_view=0x7f050066;
         public static final int home=0x7f050021;
         public static final int homeAsUp=0x7f050013;
-        public static final int home_work_container=0x7f05008c;
+        public static final int home_work_container=0x7f050090;
         public static final int home_work_grid_view=0x7f05006e;
         public static final int home_work_list_element_check_box=0x7f05006b;
         public static final int home_work_list_element_text=0x7f05006a;
@@ -1491,7 +1495,7 @@ containing a value of this type.
         public static final int lesson_list=0x7f05007d;
         public static final int lesson_list_element_checkbox=0x7f050072;
         public static final int lesson_list_element_homework_indicator=0x7f05007c;
-        public static final int lesson_list_empty_view=0x7f050095;
+        public static final int lesson_list_empty_view=0x7f050099;
         public static final int lesson_room=0x7f050078;
         public static final int lesson_room_container=0x7f050077;
         public static final int lesson_teacher=0x7f05007a;
@@ -1499,11 +1503,11 @@ containing a value of this type.
         public static final int lesson_title=0x7f05007b;
         public static final int levelTitle=0x7f050063;
         public static final int listMode=0x7f05000f;
-        public static final int list_element_text=0x7f050087;
+        public static final int list_element_text=0x7f05008b;
         public static final int list_fragment_listview=0x7f05007e;
         public static final int list_item=0x7f050038;
-        public static final int loading_progress_bar=0x7f050080;
-        public static final int login_button=0x7f050096;
+        public static final int loading_progress_bar=0x7f050084;
+        public static final int login_button=0x7f05009a;
         /**  Used with View#setTag(int) to specify a position for the active view. 
          */
         public static final int mdActiveViewPosition=0x7f05000b;
@@ -1543,30 +1547,30 @@ containing a value of this type.
         public static final int search_plate=0x7f050045;
         public static final int search_src_text=0x7f050046;
         public static final int search_voice_btn=0x7f05004a;
-        public static final int setting_about=0x7f050083;
-        public static final int setting_facultet_title=0x7f050081;
-        public static final int setting_full_time_button=0x7f050085;
-        public static final int setting_group_title=0x7f050082;
-        public static final int setting_logout_button=0x7f050086;
+        public static final int setting_about=0x7f050087;
+        public static final int setting_facultet_title=0x7f050085;
+        public static final int setting_full_time_button=0x7f050089;
+        public static final int setting_group_title=0x7f050086;
+        public static final int setting_logout_button=0x7f05008a;
         public static final int shortcut=0x7f05003d;
         public static final int showCustom=0x7f050015;
         public static final int showHome=0x7f050012;
         public static final int showTitle=0x7f050014;
-        public static final int single_information_container=0x7f05008a;
-        public static final int single_information_room=0x7f050090;
-        public static final int single_information_teacher=0x7f05008d;
-        public static final int single_information_type=0x7f05008f;
-        public static final int single_lesson_homework_label=0x7f05008b;
-        public static final int single_lesson_information_type_icon=0x7f05008e;
-        public static final int single_lesson_time=0x7f050089;
-        public static final int single_lesson_title=0x7f050088;
+        public static final int single_information_container=0x7f05008e;
+        public static final int single_information_room=0x7f050094;
+        public static final int single_information_teacher=0x7f050091;
+        public static final int single_information_type=0x7f050093;
+        public static final int single_lesson_homework_label=0x7f05008f;
+        public static final int single_lesson_information_type_icon=0x7f050092;
+        public static final int single_lesson_time=0x7f05008d;
+        public static final int single_lesson_title=0x7f05008c;
         public static final int split_action_bar=0x7f05002d;
         public static final int start=0x7f050004;
         public static final int submit_area=0x7f050048;
         public static final int tabMode=0x7f050010;
-        public static final int teachers_lesson_room=0x7f050091;
-        public static final int teachers_lesson_title=0x7f050092;
-        public static final int textView1=0x7f050084;
+        public static final int teachers_lesson_room=0x7f050095;
+        public static final int teachers_lesson_title=0x7f050096;
+        public static final int textView1=0x7f050088;
         public static final int title=0x7f05003a;
         public static final int top=0x7f050001;
         public static final int top_action_bar=0x7f05002f;
@@ -1770,14 +1774,10 @@ containing a value of this type.
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     
-
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        
          */
         public static final int AppBaseTheme=0x7f08008d;
-        public static final int AppButton=0x7f08008e;
+        public static final int AppButton=0x7f08008f;
+        public static final int RTActionBar=0x7f08008e;
         /**  Mimic text appearance in select_dialog_item.xml 
          */
         public static final int TextAppearance_AppCompat_Base_CompactMenu_Dialog=0x7f080065;
