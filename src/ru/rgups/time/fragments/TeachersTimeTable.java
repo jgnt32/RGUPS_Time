@@ -1,6 +1,5 @@
 package ru.rgups.time.fragments;
 
-import ru.rgups.time.R;
 import ru.rgups.time.adapters.BaseCalendarAdapter;
 import ru.rgups.time.adapters.TeacherLessonListAdapter;
 import ru.rgups.time.adapters.TeachersCalendarAdapter;

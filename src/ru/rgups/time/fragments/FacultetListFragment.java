@@ -1,13 +1,10 @@
 package ru.rgups.time.fragments;
 
-import java.util.ArrayList;
-
 import ru.rgups.time.BaseDialogFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.FacultetListAdapter;
 import ru.rgups.time.interfaces.AuthListener;
 import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.entity.Facultet;
 import ru.rgups.time.model.entity.FacultetList;
 import ru.rgups.time.spice.FacultetListRequest;
 import ru.rgups.time.utils.PreferenceManager;

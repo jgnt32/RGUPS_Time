@@ -1,8 +1,6 @@
 package ru.rgups.time.spice;
 
 import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.entity.Facultet;
-import ru.rgups.time.model.entity.FacultetList;
 import ru.rgups.time.model.entity.Group;
 import ru.rgups.time.model.entity.GroupList;
 import ru.rgups.time.model.entity.LessonList;

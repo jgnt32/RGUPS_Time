@@ -1,7 +1,6 @@
 package ru.rgups.time.model.entity;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;

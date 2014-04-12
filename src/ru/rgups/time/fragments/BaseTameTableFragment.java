@@ -11,7 +11,6 @@ import ru.rgups.time.adapters.BaseCalendarAdapter;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.views.CalendarHint;
-import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;

@@ -11,7 +11,6 @@ import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.rest.RestManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;

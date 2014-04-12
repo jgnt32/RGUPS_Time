@@ -1,6 +1,5 @@
 package ru.rgups.time.interfaces;
 
-import java.util.Date;
 
 public interface LessonListener {
 	

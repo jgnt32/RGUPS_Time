@@ -5,7 +5,7 @@
     android:versionName="0.4" >
 
     <uses-sdk
-        android:minSdkVersion="14"
+        android:minSdkVersion="9"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -49,7 +49,7 @@
     
     
     
-    <meta-data android:name="com.crashlytics.ApiKey" android:value="472c7baa247af5f7dd9c26db04dfe7c9477a58be"/>
+    <meta-data android:name="com.crashlytics.ApiKey" android:value="5a2cc6ac6ddc499c700c758436da20104f4d181a"/>
         
     </application>
 

@@ -9,7 +9,6 @@ import ru.rgups.time.model.entity.DoubleLine;
 import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
-import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

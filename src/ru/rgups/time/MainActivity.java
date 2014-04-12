@@ -1,6 +1,7 @@
 package ru.rgups.time;
 
-import com.crashlytics.android.Crashlytics;
+import net.simonvt.menudrawer.MenuDrawer;
+import net.simonvt.menudrawer.Position;
 import ru.rgups.time.activities.HomeWorkActivity;
 import ru.rgups.time.adapters.DrawerListAdapter;
 import ru.rgups.time.fragments.ClapFragment;
@@ -37,6 +38,8 @@ import android.widget.ListView;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+
 public class MainActivity extends BaseDrawerActivity implements  SettingListener, OnClickListener, OnItemClickListener, LessonListener{
 
 	public static final String OVER_DRAWER_TRANSACTION = "over_drawer_transaction";
@@ -47,22 +50,26 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	private HomeWorkListFragment mHomeWorkListFragment;
 	private SettingFragment mSettingFragment;
 	private boolean mReplaceFlag = false;
-	private TeachersListFragment mTeachersFrament;
+//	private TeachersListFragment mTeachersFrament;
 	private ProgressDialog mProgressDialog;
+	private MenuDrawer mDrawer;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
-		Crashlytics.start(this);
-		setContentView(R.layout.activity_main);
+//		Crashlytics.start(this);
+		mDrawer = MenuDrawer.attach(this, MenuDrawer.Type.BEHIND, Position.LEFT, MenuDrawer.MENU_DRAG_WINDOW);
+        mDrawer.setContentView(R.layout.activity_main);
+        mDrawer.setMenuView(R.layout.menu_drawer);		
+		
 		openWelcomeActivity();
 
 		mProgressDialog = DialogManager.getNewProgressDialog(this, R.string.progress_message);
-		mDrawerList = (ListView) findViewById(R.id.left_drawer);
+/*		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mDrawerList.setOnItemClickListener(this);
-		mDrawerList.setAdapter(new DrawerListAdapter(this));
+		mDrawerList.setAdapter(new DrawerListAdapter(this));*/
 		initActionBar();
-		initDrawer();
+//		initDrawer();
 		initFragmenets();
 		if(savedInstanceState == null && PreferenceManager.getInstance().isFacultetsTimeDowloaded()){
 			openTimeTableFragment();
@@ -117,16 +124,18 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	 @Override
 	 public void onConfigurationChanged(Configuration newConfig) {
 		 super.onConfigurationChanged(newConfig);
-	     mDrawerToggle.onConfigurationChanged(newConfig);
+	 //    mDrawerToggle.onConfigurationChanged(newConfig);
 	 } 
 	
 	 @Override
 	 public boolean onOptionsItemSelected(MenuItem item) {
-		 if (mDrawerToggle.onOptionsItemSelected(item)) {
-			 return true;
-		 }else{
-			 return super.onOptionsItemSelected(item);
-		 }
+		 switch (item.getItemId()) {
+         case android.R.id.home:
+             mDrawer.toggleMenu();
+             return true;
+     }
+
+     return super.onOptionsItemSelected(item);
 	 }
 	 
 	 
@@ -171,10 +180,16 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	 @Override
 	 protected void onPostCreate(Bundle savedInstanceState) {
 		 super.onPostCreate(savedInstanceState);
-	     mDrawerToggle.syncState();
+	//     mDrawerToggle.syncState();
 	     
 	 }
 
+	 @Override
+	 protected void onDestroy() {
+		 super.onDestroy();
+		 Crouton.cancelAllCroutons();
+	 }
+	 
 	@Override
 	public void onClick(View v) {
 		
@@ -189,7 +204,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	private void initFragmenets(){
 		mSettingFragment = new SettingFragment();
 		mTimeTableFragment = new TimeTableFragment();
-		mTeachersFrament = new TeachersListFragment();
+	//	mTeachersFrament = new TeachersListFragment();
 		mHomeWorkListFragment = new HomeWorkListFragment();
 
 	}
@@ -204,7 +219,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 			break;
 			
 		case DrawerListAdapter.TEACHERS_FRAGMENT:
-			ft.replace(R.id.frameLayout, mTeachersFrament);
+		//	ft.replace(R.id.frameLayout, mTeachersFrament);
 			break;
 		
 		case DrawerListAdapter.HOME_WORK_LIST_FRAGMENT:
@@ -222,7 +237,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		}
 		ft.commit();
 
-		mDrawerLayout.closeDrawers();
+//		mDrawerLayout.closeDrawers();
 		
 	}
 

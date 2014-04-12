@@ -2,7 +2,6 @@ package ru.rgups.time.spice;
 
 import org.springframework.web.client.RestClientException;
 
-import roboguice.util.temp.Ln;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.utils.PreferenceManager;

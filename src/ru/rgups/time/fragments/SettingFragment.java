@@ -8,7 +8,6 @@ import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.DialogManager;
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
