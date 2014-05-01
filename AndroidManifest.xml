@@ -31,10 +31,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".fragments.WelcomeActivity"
+        <activity 
+            android:name=".fragments.WelcomeActivity"
+            android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"></activity>
         <service android:name=".spice.SampleSpiceService"></service>
-        <activity android:name=".activities.AuthActivity"></activity>
+        
+        <activity android:name=".activities.AuthActivity"
+                  android:screenOrientation="portrait">
+            
+        </activity>
+        
+        
         <activity 
             android:name=".activities.HomeWorkActivity"
            	android:uiOptions="splitActionBarWhenNarrow">

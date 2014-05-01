@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_grey"
+    android:background="#303030"
     android:orientation="vertical"
     android:paddingTop="30dp" >
 
@@ -11,83 +11,101 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:background="@drawable/calendar_list_selector"
         android:padding="10dp" >
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="30dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/ic_timetable" />
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_timetable_dark" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="TextView"
+            android:text="@string/drawer_time"
+            android:textColor="@color/bg_grey"
             android:textSize="17sp" />
+
     </LinearLayout>
+    
+    <include layout="@layout/drawer_divider" />
 
     <LinearLayout
         android:id="@+id/drawer_homework"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:background="@drawable/calendar_list_selector"
         android:padding="10dp" >
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="30dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/ic_homerk" />
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_homer_dark" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="TextView"
+            android:text="@string/drawer_homework"
+            android:textColor="@color/bg_grey"
             android:textSize="17sp" />
+
     </LinearLayout>
+
+    <include layout="@layout/drawer_divider" />
 
     <LinearLayout
         android:id="@+id/drawer_teachers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:background="@drawable/calendar_list_selector"        
         android:padding="10dp" >
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="30dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/ic_teachers" />
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_teachers_dark" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="TextView"
+            android:text="@string/drawer_teachers"
+            android:textColor="@color/bg_grey"
             android:textSize="17sp" />
+
     </LinearLayout>
+
+    <include layout="@layout/drawer_divider" />
 
     <LinearLayout
        	android:id="@+id/drawer_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:background="@drawable/calendar_list_selector"        
         android:padding="10dp" >
 
         <ImageView
             android:layout_width="25dp"
             android:layout_height="30dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/ic_settings" />
+            android:layout_marginRight="10dp"
+            android:src="@drawable/ic_setting_dark" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="TextView"
+            android:text="@string/drawer_setting"
+            android:textColor="@color/bg_grey"
             android:textSize="17sp" />
+
     </LinearLayout>
 
 </LinearLayout>

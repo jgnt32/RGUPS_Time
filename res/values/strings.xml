@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    
+    
     <string name="app_name">Расписание РГУПС</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
+    
+    <!-- DRAWER -->
+    <string name="drawer_time">Расписание</string>
+    <string name="drawer_homework">Домашнии задания</string>
+    <string name="drawer_teachers">Преподаватели</string>
+    <string name="drawer_setting">Настройки</string>
     <!-- ACTION MENUS -->
     <string name="action_scroll_to_today">Сегодня</string>
     <string name="action_done">Готово</string>

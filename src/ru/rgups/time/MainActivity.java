@@ -260,7 +260,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 			
 		}
 		ft.commit();
-
+		mDrawer.closeMenu();
 //		mDrawerLayout.closeDrawers();
 		
 	}

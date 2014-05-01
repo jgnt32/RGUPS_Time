@@ -6,4 +6,5 @@
 	<color name="bg_grey">#E5E5E5</color>
 	<color name="red">#FF0000</color>
 	<color name="lesson_free">#808080</color>
+	<color name="drawer_background">#303030</color>
 </resources>
