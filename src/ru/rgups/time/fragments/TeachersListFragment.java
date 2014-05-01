@@ -171,14 +171,14 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 
 	@Override
 	public boolean onMenuItemActionCollapse(MenuItem arg0) {
-		mAdapter.getFilter().filter("");
-		return false;
+		mSearchView.setQuery("", true);
+		return true;
 	}
 
 	@Override
 	public boolean onMenuItemActionExpand(MenuItem arg0) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 	
 }
