@@ -34,7 +34,7 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 public class TeachersListFragment extends BaseFragment implements OnItemClickListener, LoaderCallbacks<Cursor>, 
-																SearchView.OnQueryTextListener, FilterQueryProvider{
+																SearchView.OnQueryTextListener, FilterQueryProvider, MenuItemCompat.OnActionExpandListener{
 	private StickyListHeadersListView  mListView;
 	private TeacherCursorAdapter mAdapter;
 	private RTCursorLoader mLoader;
@@ -112,6 +112,7 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	    mSearchView = (SearchView) MenuItemCompat.getActionView(mSearchItem);
 	    mSearchView.setQueryHint(getString(R.string.search_view_hint));
 	    mSearchView.setOnQueryTextListener(this);
+	    MenuItemCompat.setOnActionExpandListener(mSearchItem, this);
 	}
 	
 	@Override
@@ -166,6 +167,18 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 			mAdapter.notifyDataSetChanged();
 		}
 		
+	}
+
+	@Override
+	public boolean onMenuItemActionCollapse(MenuItem arg0) {
+		mAdapter.getFilter().filter("");
+		return false;
+	}
+
+	@Override
+	public boolean onMenuItemActionExpand(MenuItem arg0) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 }
