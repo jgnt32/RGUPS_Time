@@ -37,4 +37,10 @@ public class TeachersCalendarAdapter extends BaseCalendarAdapter{
 		this.mTeachersName = mTeachersName;
 	}
 
+	@Override
+	protected boolean[][] getLessonMatrix() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -1411,8 +1411,8 @@ containing a value of this type.
     public static final class id {
         public static final int RelativeLayout1=0x7f050067;
         public static final int about_dialog_version_caption=0x7f050059;
-        public static final int action_add=0x7f05009f;
-        public static final int action_add_image=0x7f05009b;
+        public static final int action_add=0x7f0500a0;
+        public static final int action_add_image=0x7f05009c;
         public static final int action_bar=0x7f05002b;
         public static final int action_bar_activity_content=0x7f050015;
         public static final int action_bar_container=0x7f05002a;
@@ -1421,14 +1421,14 @@ containing a value of this type.
         public static final int action_bar_subtitle=0x7f050032;
         public static final int action_bar_title=0x7f050031;
         public static final int action_context_bar=0x7f05002c;
-        public static final int action_delete=0x7f05009d;
-        public static final int action_done=0x7f0500a0;
+        public static final int action_delete=0x7f05009e;
+        public static final int action_done=0x7f0500a1;
         public static final int action_menu_divider=0x7f050016;
         public static final int action_menu_presenter=0x7f050017;
         public static final int action_mode_close_button=0x7f050033;
-        public static final int action_save=0x7f05009c;
-        public static final int action_scroll_to_today=0x7f05009e;
-        public static final int action_search=0x7f0500a1;
+        public static final int action_save=0x7f05009d;
+        public static final int action_scroll_to_today=0x7f05009f;
+        public static final int action_search=0x7f0500a2;
         public static final int activity_chooser_view_content=0x7f050034;
         public static final int always=0x7f05000b;
         public static final int alwaysScroll=0x7f050028;
@@ -1500,19 +1500,20 @@ containing a value of this type.
         public static final int lesson_list=0x7f05007d;
         public static final int lesson_list_element_checkbox=0x7f050072;
         public static final int lesson_list_element_homework_indicator=0x7f05007c;
-        public static final int lesson_list_empty_view=0x7f050099;
+        public static final int lesson_list_empty_view=0x7f05009a;
         public static final int lesson_room=0x7f050078;
         public static final int lesson_room_container=0x7f050077;
         public static final int lesson_teacher=0x7f05007a;
         public static final int lesson_teacher_container=0x7f050079;
         public static final int lesson_title=0x7f05007b;
+        public static final int lesson_view_pager=0x7f050099;
         public static final int levelTitle=0x7f050063;
         public static final int listMode=0x7f050001;
         public static final int list_element_text=0x7f05008b;
         public static final int list_fragment_listview=0x7f05007e;
         public static final int list_item=0x7f050038;
         public static final int loading_progress_bar=0x7f050084;
-        public static final int login_button=0x7f05009a;
+        public static final int login_button=0x7f05009b;
         /**  Used with View#setTag(int) to specify a position for the active view. 
          */
         public static final int mdActiveViewPosition=0x7f050024;
@@ -1719,16 +1720,16 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int about=0x7f0a002f;
-        public static final int about_dialog_massage=0x7f0a0026;
-        public static final int action_add_homework=0x7f0a0019;
-        public static final int action_add_image=0x7f0a001a;
-        public static final int action_delete=0x7f0a001c;
-        public static final int action_done=0x7f0a0018;
-        public static final int action_save=0x7f0a001b;
+        public static final int about=0x7f0a0032;
+        public static final int about_dialog_massage=0x7f0a0029;
+        public static final int action_add_homework=0x7f0a001c;
+        public static final int action_add_image=0x7f0a001d;
+        public static final int action_delete=0x7f0a001f;
+        public static final int action_done=0x7f0a001b;
+        public static final int action_save=0x7f0a001e;
         /**  ACTION MENUS 
          */
-        public static final int action_scroll_to_today=0x7f0a0017;
+        public static final int action_scroll_to_today=0x7f0a001a;
         public static final int action_settings=0x7f0a0011;
         public static final int app_name=0x7f0a0010;
         /** 
@@ -1739,47 +1740,52 @@ containing a value of this type.
 
          */
         public static final int com_crashlytics_android_build_id=0x7f0a000f;
-        public static final int draw_close=0x7f0a002a;
+        public static final int draw_close=0x7f0a002d;
         /**  DRAWER 
          */
-        public static final int draw_open=0x7f0a0029;
-        public static final int drawer_homework=0x7f0a0014;
-        public static final int drawer_setting=0x7f0a0016;
-        public static final int drawer_teachers=0x7f0a0015;
+        public static final int draw_open=0x7f0a002c;
+        public static final int drawer_homework=0x7f0a0017;
+        public static final int drawer_setting=0x7f0a0019;
+        public static final int drawer_teachers=0x7f0a0018;
         /**  DRAWER 
          */
-        public static final int drawer_time=0x7f0a0013;
-        public static final int full_download_message=0x7f0a0024;
+        public static final int drawer_time=0x7f0a0016;
+        public static final int full_download_message=0x7f0a0027;
         /**  Captions 
          */
-        public static final int group_list_divider=0x7f0a002b;
+        public static final int group_list_divider=0x7f0a002e;
         public static final int hello_world=0x7f0a0012;
-        public static final int home_work_caption=0x7f0a0038;
-        public static final int home_work_hint=0x7f0a0037;
-        public static final int homework_delete_message=0x7f0a0023;
-        public static final int hw_empty=0x7f0a0036;
-        public static final int lesson_list_divider=0x7f0a002c;
-        public static final int login_button_caption=0x7f0a0030;
-        public static final int login_facultet_caption=0x7f0a0031;
-        public static final int login_group_caption=0x7f0a0032;
-        public static final int logout_dialog_message=0x7f0a0028;
+        public static final int home_work_caption=0x7f0a003b;
+        public static final int home_work_hint=0x7f0a003a;
+        public static final int homework_delete_message=0x7f0a0026;
+        public static final int hw_empty=0x7f0a0039;
+        public static final int lesson_list_divider=0x7f0a002f;
+        public static final int login_button_caption=0x7f0a0033;
+        public static final int login_facultet_caption=0x7f0a0034;
+        public static final int login_group_caption=0x7f0a0035;
+        public static final int logout_dialog_message=0x7f0a002b;
+        /**  TOASTS 
+         */
+        public static final int main_loading_begin=0x7f0a0013;
+        public static final int main_loading_fail=0x7f0a0015;
+        public static final int main_loading_sucses=0x7f0a0014;
         public static final int md__drawerClosedIndicatorDesc=0x7f0a000e;
         public static final int md__drawerOpenIndicatorDesc=0x7f0a000d;
-        public static final int negative_caption=0x7f0a0022;
-        public static final int ok_caption=0x7f0a0020;
-        public static final int photo_count=0x7f0a002e;
-        public static final int positive_caption=0x7f0a0021;
+        public static final int negative_caption=0x7f0a0025;
+        public static final int ok_caption=0x7f0a0023;
+        public static final int photo_count=0x7f0a0031;
+        public static final int positive_caption=0x7f0a0024;
         /**  DIALOGs 
          */
-        public static final int progress_message=0x7f0a001f;
-        public static final int search_view_hint=0x7f0a001e;
-        public static final int search_view_title=0x7f0a001d;
-        public static final int setting_full_download_message=0x7f0a0025;
-        public static final int setting_full_time_button=0x7f0a0033;
-        public static final int setting_logout=0x7f0a0034;
-        public static final int setting_staff=0x7f0a0035;
-        public static final int version_caption=0x7f0a0027;
-        public static final int welcome_screen_caption=0x7f0a002d;
+        public static final int progress_message=0x7f0a0022;
+        public static final int search_view_hint=0x7f0a0021;
+        public static final int search_view_title=0x7f0a0020;
+        public static final int setting_full_download_message=0x7f0a0028;
+        public static final int setting_full_time_button=0x7f0a0036;
+        public static final int setting_logout=0x7f0a0037;
+        public static final int setting_staff=0x7f0a0038;
+        public static final int version_caption=0x7f0a002a;
+        public static final int welcome_screen_caption=0x7f0a0030;
     }
     public static final class style {
         /** 

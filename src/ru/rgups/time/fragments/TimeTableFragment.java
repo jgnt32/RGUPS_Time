@@ -39,8 +39,6 @@ public class TimeTableFragment extends BaseTameTableFragment {
 		RestManager.getInstance().setSpiceManager(getSpiceManager());
 		RestManager.getInstance().timeTableRequest(new GetTimeListener());
 	}
-
-
 	
 	private class GetTimeListener implements RequestListener< LessonList >{
 		

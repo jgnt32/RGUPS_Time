@@ -33,6 +33,9 @@ import android.widget.FilterQueryProvider;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
 public class TeachersListFragment extends BaseFragment implements OnItemClickListener, LoaderCallbacks<Cursor>, 
 																SearchView.OnQueryTextListener, FilterQueryProvider, MenuItemCompat.OnActionExpandListener{
 	private StickyListHeadersListView  mListView;
@@ -98,6 +101,7 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					RestManager.getInstance().fullTimeRequest(new FullTimeListener());
+					Crouton.showText(getActivity(), getString(R.string.main_loading_begin), Style.INFO);
 				}
 				
 			});
@@ -117,7 +121,6 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-		Log.i("qwert", ""+mAdapter.getTeacherName());
 		mLessonListener.onTeacherClick(mAdapter.getTeacherName());
 	}
 

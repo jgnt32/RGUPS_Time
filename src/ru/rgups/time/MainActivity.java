@@ -264,6 +264,8 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 //		mDrawerLayout.closeDrawers();
 		
 	}
+	
+	
 
 	@Override
 	public void logOut() {

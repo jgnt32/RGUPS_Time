@@ -8,11 +8,14 @@ import it.sephiroth.android.library.widget.HListView;
 import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.BaseCalendarAdapter;
+import ru.rgups.time.adapters.LessonListPagerAdapter;
+import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.views.CalendarHint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,7 +24,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-public abstract class BaseTameTableFragment extends BaseFragment implements OnScrollListener, OnItemClickListener, android.widget.AdapterView.OnItemClickListener{
+public abstract class BaseTameTableFragment extends BaseFragment implements OnScrollListener, 
+OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.OnPageChangeListener{
 	
 	private ListView mLessonList;
 	private HListView mCalendarList;
@@ -29,6 +33,9 @@ public abstract class BaseTameTableFragment extends BaseFragment implements OnSc
 	private BaseCalendarAdapter mCalendarAdapter;
 	private int mLastSelectedDatePosition = -1;
 	private CalendarHint mCalendarHint;
+	private ViewPager mPager;
+	private LessonListPagerAdapter mPagerAdapter;
+	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -42,13 +49,19 @@ public abstract class BaseTameTableFragment extends BaseFragment implements OnSc
 		mCalendarAdapter = createNewCalendarAdapter();
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
+		mPagerAdapter = new LessonListPagerAdapter(getChildFragmentManager(), LessonManager.DAY_COUNT);
+		
 	}
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.timetable_fragment, null);
 		mCalendarList = (HListView) v.findViewById(R.id.calendar_list);
-		
+		mPager = (ViewPager) v.findViewById(R.id.lesson_view_pager);
+		mPager.setAdapter(mPagerAdapter);
+		mPager.setCurrentItem(getLastSelectedDatePosition());
+		mPager.setOnPageChangeListener(this);
 		mLessonList = (ListView) v.findViewById(R.id.lesson_list);
 		mLessonList.setOnItemClickListener(this);
 		mLessonList.setEmptyView(v.findViewById(R.id.lesson_list_empty_view));
@@ -87,12 +100,14 @@ public abstract class BaseTameTableFragment extends BaseFragment implements OnSc
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	
-		setLastSelectedDatePosition(position);
-		notifyAdapterSetChanged(mCalendarAdapter.getDayNumber(position), mCalendarAdapter.getWeekState(position));
+		mPager.setCurrentItem(position, true);
+	//	setLastSelectedDatePosition(position);
+//		notifyAdapterSetChanged(mCalendarAdapter.getDayNumber(position), mCalendarAdapter.getWeekState(position));
 	}
 	
 	@Override
 	public void onItemClick(android.widget.AdapterView<?> arg0, View v, int position, long id) {
+		
 		mLessonListener.OnLessonListElementClick(id, mCalendarAdapter.getTimestamp(getLastSelectedDatePosition()));
 	}
 
@@ -128,4 +143,24 @@ public abstract class BaseTameTableFragment extends BaseFragment implements OnSc
 	protected long getTimeStamp(){
 		return mCalendarAdapter.getTimestamp(getLastSelectedDatePosition());
 	}
+	
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void onPageSelected(int position) {
+		mCalendarList.setOnItemClickListener(null);
+		mCalendarList.setItemChecked(position, true);
+		mCalendarList.setOnItemClickListener(this);		
+	}
+	
 }

@@ -5,11 +5,13 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ru.rgups.time.R;
+import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.ConstUtils;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +20,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class BaseCalendarAdapter extends BaseAdapter{
+public abstract class BaseCalendarAdapter extends BaseAdapter{
 public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	
 	public final static int CURRENS_SEMESTR = spotSemestr();//
@@ -32,7 +34,7 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	public final static String DAY_OF_WEEK_FORMAT = "EE";
 	private GregorianCalendar mCalendar;
 	private LayoutInflater mInflater;
-	private ViewHolder mHolder;
+	protected ViewHolder mHolder;
 	private View mView;
 	private int mSelectedItem;
 	protected int mBlueColor;
@@ -53,8 +55,10 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	private GregorianCalendar mTimestampCalendar;
 	
 	private Color mBlue;
-
 	
+	protected boolean mLessonMatrix[][];
+
+	protected LoadLessonInfo mAsyncLoad;
 	
 	public BaseCalendarAdapter(Context context){
 		mContext = context;
@@ -71,7 +75,9 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		mTimestampCalendar.set(GregorianCalendar.HOUR, 0);
 		mTimestampCalendar.set(GregorianCalendar.MINUTE, 0);
 		mTimestampCalendar.set(GregorianCalendar.SECOND, 0);
-		mTimestampCalendar.set(GregorianCalendar.MILLISECOND, 0);		
+		mTimestampCalendar.set(GregorianCalendar.MILLISECOND, 0);
+		mAsyncLoad = new LoadLessonInfo();
+		mAsyncLoad.execute();
 	}
 	
 	@Override
@@ -112,45 +118,45 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent){
-//		mView = convertView;
-//		if(mView == null){
+		mView = convertView;
+		if(mView == null){
 			mView = mInflater.inflate(R.layout.calendar_element, null);
-/*			mHolder = new ViewHolder(mView);
+			mHolder = new ViewHolder(mView);
 			mView.setTag(mHolder);
 		}else{
 			mHolder = (ViewHolder) mView.getTag();
-		}*/
+		}
 			
-		  TextView text = (TextView) mView.findViewById(R.id.calendar_element_text);
+		/*  TextView text = (TextView) mView.findViewById(R.id.calendar_element_text);
 		  TextView dayOfWeek = (TextView) mView.findViewById(R.id.calendar_element_day_of_week);
 		  leftIndicator = mView.findViewById(R.id.calendar_left_indicator);
 		  rightIndicator = mView.findViewById(R.id.calendar_right_indicator);
 		  topIndicator = mView.findViewById(R.id.calendar_top_indicator);
-		  bootomIndicator = mView.findViewById(R.id.calendar_bottom_indicator);
-		  mHWIndicator = mView.findViewById(R.id.calendar_element_homework_indicator);
-		  TextView hwCount = (TextView) mView.findViewById(R.id.lesson_indicator_text);
+		  bootomIndicator = mView.findViewById(R.id.calendar_bottom_indicator);*/
+	//	  mHWIndicator = mView.findViewById(R.id.calendar_element_homework_indicator);
+		/*  TextView hwCount = (TextView) mView.findViewById(R.id.lesson_indicator_text);*/
 		  mCalendar.set(Calendar.DAY_OF_YEAR, position+DAY_OFFSET);
-		  text.setText(Integer.toString(mCalendar.get(Calendar.DAY_OF_MONTH)));
-		  dayOfWeek.setText(DateFormat.format(DAY_OF_WEEK_FORMAT, mCalendar.getTime()).toString().toUpperCase());
+		  mHolder.text.setText(Integer.toString(mCalendar.get(Calendar.DAY_OF_MONTH)));
+		  mHolder.dayOfWeek.setText(DateFormat.format(DAY_OF_WEEK_FORMAT, mCalendar.getTime()).toString().toUpperCase());
 		  if(this.isOverLine(mCalendar.getTime())){
-			  bootomIndicator.setVisibility(View.VISIBLE);
-			  topIndicator.setVisibility(View.INVISIBLE);
+			  mHolder.bootomIndicator.setVisibility(View.VISIBLE);
+			  mHolder.topIndicator.setVisibility(View.INVISIBLE);
 		  }else{
-			  bootomIndicator.setVisibility(View.INVISIBLE);
-			  topIndicator.setVisibility(View.VISIBLE);
+			  mHolder.bootomIndicator.setVisibility(View.INVISIBLE);
+			  mHolder.topIndicator.setVisibility(View.VISIBLE);
 		  }
 		  
 		  if(mCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY){
-			  leftIndicator.setVisibility(View.VISIBLE);
-			  rightIndicator.setVisibility(View.INVISIBLE);
+			  mHolder.leftIndicator.setVisibility(View.VISIBLE);
+			  mHolder.rightIndicator.setVisibility(View.INVISIBLE);
 
 		  }else{
 			  if(mCalendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
-				  rightIndicator.setVisibility(View.VISIBLE);
-				  leftIndicator.setVisibility(View.INVISIBLE);
+				  mHolder.rightIndicator.setVisibility(View.VISIBLE);
+				  mHolder.leftIndicator.setVisibility(View.INVISIBLE);
 			  }else{
-				  rightIndicator.setVisibility(View.INVISIBLE);
-				  leftIndicator.setVisibility(View.INVISIBLE);
+				  mHolder.rightIndicator.setVisibility(View.INVISIBLE);
+				  mHolder.leftIndicator.setVisibility(View.INVISIBLE);
 
 			  }
 		  }
@@ -273,13 +279,15 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		}
 	}
 	
-	private class ViewHolder{
+	protected class ViewHolder{
 		private View leftIndicator;
 		private View rightIndicator;
 		private View topIndicator;
 		private View bootomIndicator;
 		private TextView dayOfWeek;
 		private TextView text;
+		
+		
 		public ViewHolder(View v) {
 			text = (TextView) v.findViewById(R.id.calendar_element_text);
 			dayOfWeek = (TextView) v.findViewById(R.id.calendar_element_day_of_week);
@@ -288,9 +296,90 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 			topIndicator = v.findViewById(R.id.calendar_top_indicator);
 			bootomIndicator = v.findViewById(R.id.calendar_bottom_indicator);
 		}
+
+
+		public View getLeftIndicator() {
+			return leftIndicator;
+		}
+
+
+		public void setLeftIndicator(View leftIndicator) {
+			this.leftIndicator = leftIndicator;
+		}
+
+
+		public View getRightIndicator() {
+			return rightIndicator;
+		}
+
+
+		public void setRightIndicator(View rightIndicator) {
+			this.rightIndicator = rightIndicator;
+		}
+
+
+		public View getTopIndicator() {
+			return topIndicator;
+		}
+
+
+		public void setTopIndicator(View topIndicator) {
+			this.topIndicator = topIndicator;
+		}
+
+
+		public View getBootomIndicator() {
+			return bootomIndicator;
+		}
+
+
+		public void setBootomIndicator(View bootomIndicator) {
+			this.bootomIndicator = bootomIndicator;
+		}
+
+
+		public TextView getDayOfWeek() {
+			return dayOfWeek;
+		}
+
+
+		public void setDayOfWeek(TextView dayOfWeek) {
+			this.dayOfWeek = dayOfWeek;
+		}
+
+
+		public TextView getText() {
+			return text;
+		}
+
+
+		public void setText(TextView text) {
+			this.text = text;
+		}
+		
+		
 	}
 	
 	public void setSelected(int last){
 		mLastSelected  = last;
 	}
+	
+	protected abstract boolean [][] getLessonMatrix();
+	
+	private class LoadLessonInfo extends AsyncTask<Void, Void, Void>{
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			mLessonMatrix = getLessonMatrix();
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			BaseCalendarAdapter.this.notifyDataSetChanged();
+		}
+		
+	}
+	
 }

@@ -1,5 +1,7 @@
 package ru.rgups.time.fragments;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
 import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.interfaces.SettingListener;
@@ -83,6 +85,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener{
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					mListener.logOut();						
+
 				}
 			});
 			
@@ -94,6 +97,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener{
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					RestManager.getInstance().fullTimeRequest(null);
+					Crouton.showText(getActivity(), getString(R.string.main_loading_begin), Style.INFO);
 				}
 			});
 			break;

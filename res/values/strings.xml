@@ -8,6 +8,14 @@
     <string name="hello_world">Hello world!</string>
 
     
+    <!-- TOASTS -->
+    
+    <string name="main_loading_begin">Загрузка начата</string>
+    <string name="main_loading_sucses">Загрузка выполнена успешно</string>
+    <string name="main_loading_fail">Загрузка неудалась</string>
+        
+    
+    
     <!-- DRAWER -->
     <string name="drawer_time">Расписание</string>
     <string name="drawer_homework">Домашнии задания</string>

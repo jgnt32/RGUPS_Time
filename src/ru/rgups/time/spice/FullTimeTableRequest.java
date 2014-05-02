@@ -7,6 +7,8 @@ import ru.rgups.time.model.entity.Group;
 import ru.rgups.time.model.entity.GroupList;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.utils.PreferenceManager;
+import android.app.Activity;
+import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -19,11 +21,12 @@ public class FullTimeTableRequest extends SpringAndroidSpiceRequest< Boolean > {
 	private final String mGroupListUrl = "http://rgups.ru/time/xml/?faculty=";
 	
 	private String url;
+	private Activity mActivity;
 	
 	public FullTimeTableRequest(Class<Boolean> clazz) {
 		super(Boolean.class);
 		 url =  mFacultetList+1;
-		
+		 
 	}
 
 	@Override
@@ -53,6 +56,7 @@ public class FullTimeTableRequest extends SpringAndroidSpiceRequest< Boolean > {
 			PreferenceManager.getInstance().setFullTimeDownloaded(true);
 			result = true;
 			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 			result = false;
@@ -60,6 +64,15 @@ public class FullTimeTableRequest extends SpringAndroidSpiceRequest< Boolean > {
 
 		
 		return result;
+	}
+	
+	private class UpdateProgressThred extends Thread{
+	
+		@Override
+		public void run() {
+			
+			
+		}
 	}
 
 }
