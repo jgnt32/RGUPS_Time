@@ -3,6 +3,8 @@ package ru.rgups.time.fragments;
 import ru.rgups.time.adapters.LessonAdapter;
 import ru.rgups.time.datamanagers.LessonManager;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 public class StudentLessonFragment extends LessonListFragment{
@@ -34,6 +36,13 @@ public class StudentLessonFragment extends LessonListFragment{
 	@Override
 	protected void notifyAdtapter() {
 		mAdapter.notifyDataSetChanged();			
+	}
+
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		mLessonListener.OnLessonListElementClick(id, LessonManager.getInstance().getTimeStampBySemestrDayNumber(mDayNumber));
 	}
 
 }

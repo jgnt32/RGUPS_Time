@@ -196,7 +196,6 @@ public class DataManager {
 	}
 	
 	public void saveLessons(LessonList lessonList, long groupId){
-		Log.e("saveLessons", " lessonList "+lessonList.getDays().size());
 		deleteOldLessons(groupId);
 	
 		try{
@@ -387,7 +386,6 @@ public class DataManager {
 				" GROUP BY ",LessonTableModel.NUMBER," ORDER BY ",LessonTableModel.NUMBER
 				).toString();
 		
-		Log.e("getLessonList", query);
 
 		Cursor c = mDb.rawQuery(query, new String[]{});
 		LessonListElement lesson;
@@ -420,7 +418,6 @@ public class DataManager {
 		while(c.moveToNext()){
 				lesson = new LessonListElement();
 				lesson.setId(c.getLong(c.getColumnIndex(LessonTableModel.ID)));		
-				Log.w("setId","id = "+c.getLong(c.getColumnIndex(LessonTableModel.ID)));
 				lesson.setDayNumber(c.getInt(c.getColumnIndex(LessonTableModel.DAY)));
 				lesson.setLessonNumber(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)));
 				lesson.setInformation(getLessonInformation(c.getLong(c.getColumnIndex(LessonTableModel.ID))));
@@ -437,7 +434,6 @@ public class DataManager {
 				"SELECT * FROM ",LessonInformation.TABLE_NAME, " WHERE ",
 				LessonInformation.LESSON_ID,"=?").toString();
 		
-		Log.e("getLessonInformation", query);
 		Cursor c = mDb.rawQuery(query, new String[]{lessonId.toString()});
 		LessonInformation inf;
 		
@@ -451,7 +447,6 @@ public class DataManager {
 			result.add(inf);
 		}
 		
-		Log.e("getLessonInformation",""+result.size());
 		return result;
 	}
 	
@@ -470,7 +465,6 @@ public class DataManager {
 				"SELECT * FROM ",LessonTableModel.TABLE_NAME, " WHERE ",
 				LessonTableModel.ID,"=?").toString(), new String[]{lesonId.toString()});
 		
-		Log.e("getLesson","id = "+lesonId.toString()+"; cursor count = "+c.getCount());
 		c.moveToFirst();
 		if(c.getCount() != 0){
 			result.setId(c.getLong(c.getColumnIndex(LessonTableModel.ID)));
@@ -510,10 +504,8 @@ public class DataManager {
 			}
 
 			mSaveHomeWorkStatement.bindLong(6, PreferenceManager.getInstance().getGroupId());
-			Log.e("saveHomeWork","group id = "+PreferenceManager.getInstance().getGroupId());
 			
 			homeWork.setId(mSaveHomeWorkStatement.executeInsert());
-			Log.e("saveHomeWork","id = "+ homeWork.getId());
 			mDb.setTransactionSuccessful();
 			NotificationManager.getInstance().addNewNotification(homeWork);
 		}catch(Exception e){

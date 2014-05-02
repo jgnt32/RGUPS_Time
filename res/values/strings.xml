@@ -75,7 +75,7 @@
     <string name="draw_close">Расписание</string>
     
     <!-- Captions -->
-    
+    <string name="lesson_empty_view">Пар нет</string>
     <string name="group_list_divider">#-й курс</string>
     <string name="lesson_list_divider">#-ая пара</string>
     

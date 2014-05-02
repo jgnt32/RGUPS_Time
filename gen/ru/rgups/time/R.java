@@ -1720,7 +1720,7 @@ containing a value of this type.
         /**  Description of a share target (both in the list of such or the default share button) in a ShareActionProvider (share UI). [CHAR LIMIT=NONE] 
          */
         public static final int abc_shareactionprovider_share_with_application=0x7f0a000b;
-        public static final int about=0x7f0a0032;
+        public static final int about=0x7f0a0033;
         public static final int about_dialog_massage=0x7f0a0029;
         public static final int action_add_homework=0x7f0a001c;
         public static final int action_add_image=0x7f0a001d;
@@ -1751,18 +1751,19 @@ containing a value of this type.
          */
         public static final int drawer_time=0x7f0a0016;
         public static final int full_download_message=0x7f0a0027;
+        public static final int group_list_divider=0x7f0a002f;
+        public static final int hello_world=0x7f0a0012;
+        public static final int home_work_caption=0x7f0a003c;
+        public static final int home_work_hint=0x7f0a003b;
+        public static final int homework_delete_message=0x7f0a0026;
+        public static final int hw_empty=0x7f0a003a;
         /**  Captions 
          */
-        public static final int group_list_divider=0x7f0a002e;
-        public static final int hello_world=0x7f0a0012;
-        public static final int home_work_caption=0x7f0a003b;
-        public static final int home_work_hint=0x7f0a003a;
-        public static final int homework_delete_message=0x7f0a0026;
-        public static final int hw_empty=0x7f0a0039;
-        public static final int lesson_list_divider=0x7f0a002f;
-        public static final int login_button_caption=0x7f0a0033;
-        public static final int login_facultet_caption=0x7f0a0034;
-        public static final int login_group_caption=0x7f0a0035;
+        public static final int lesson_empty_view=0x7f0a002e;
+        public static final int lesson_list_divider=0x7f0a0030;
+        public static final int login_button_caption=0x7f0a0034;
+        public static final int login_facultet_caption=0x7f0a0035;
+        public static final int login_group_caption=0x7f0a0036;
         public static final int logout_dialog_message=0x7f0a002b;
         /**  TOASTS 
          */
@@ -1773,7 +1774,7 @@ containing a value of this type.
         public static final int md__drawerOpenIndicatorDesc=0x7f0a000d;
         public static final int negative_caption=0x7f0a0025;
         public static final int ok_caption=0x7f0a0023;
-        public static final int photo_count=0x7f0a0031;
+        public static final int photo_count=0x7f0a0032;
         public static final int positive_caption=0x7f0a0024;
         /**  DIALOGs 
          */
@@ -1781,11 +1782,11 @@ containing a value of this type.
         public static final int search_view_hint=0x7f0a0021;
         public static final int search_view_title=0x7f0a0020;
         public static final int setting_full_download_message=0x7f0a0028;
-        public static final int setting_full_time_button=0x7f0a0036;
-        public static final int setting_logout=0x7f0a0037;
-        public static final int setting_staff=0x7f0a0038;
+        public static final int setting_full_time_button=0x7f0a0037;
+        public static final int setting_logout=0x7f0a0038;
+        public static final int setting_staff=0x7f0a0039;
         public static final int version_caption=0x7f0a002a;
-        public static final int welcome_screen_caption=0x7f0a0030;
+        public static final int welcome_screen_caption=0x7f0a0031;
     }
     public static final class style {
         /** 

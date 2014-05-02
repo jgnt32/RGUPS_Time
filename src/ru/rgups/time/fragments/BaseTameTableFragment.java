@@ -5,6 +5,9 @@ import it.sephiroth.android.library.widget.AbsHListView.OnScrollListener;
 import it.sephiroth.android.library.widget.AdapterView;
 import it.sephiroth.android.library.widget.AdapterView.OnItemClickListener;
 import it.sephiroth.android.library.widget.HListView;
+
+import java.lang.reflect.Field;
+
 import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.BaseCalendarAdapter;
@@ -15,6 +18,7 @@ import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.views.CalendarHint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,7 +31,6 @@ import android.widget.ListView;
 public abstract class BaseTameTableFragment extends BaseFragment implements OnScrollListener, 
 OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.OnPageChangeListener{
 	
-	private ListView mLessonList;
 	private HListView mCalendarList;
 	private LessonListener mLessonListener;
 	private BaseCalendarAdapter mCalendarAdapter;
@@ -62,10 +65,7 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 		mPager.setAdapter(mPagerAdapter);
 		mPager.setCurrentItem(getLastSelectedDatePosition());
 		mPager.setOnPageChangeListener(this);
-		mLessonList = (ListView) v.findViewById(R.id.lesson_list);
-		mLessonList.setOnItemClickListener(this);
-		mLessonList.setEmptyView(v.findViewById(R.id.lesson_list_empty_view));
-		setLessonAdapter(mLessonList);
+	
 		mCalendarList.setAdapter(mCalendarAdapter);
 		mCalendarList.setSelection(getLastSelectedDatePosition());
 		mCalendarList.setItemChecked(getLastSelectedDatePosition(), true);
@@ -82,6 +82,24 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 		menu.findItem(R.id.action_scroll_to_today).setVisible(true);
 	}
 	
+	
+	@Override
+	public void onDetach() {
+	    super.onDetach();
+
+	    try {
+	        Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
+	        childFragmentManager.setAccessible(true);
+	        childFragmentManager.set(this, null);
+
+	    } catch (NoSuchFieldException e) {
+	        throw new RuntimeException(e);
+	    } catch (IllegalAccessException e) {
+	        throw new RuntimeException(e);
+	    }
+	}
+
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		calendarListItemClick();
@@ -89,8 +107,19 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	}
 	
 	private void calendarListItemClick(){
-		mCalendarList.smoothScrollToPosition(CalendarManager.getInstance().getCurrentDayOfTheYear());
-		mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDayOfTheYear(), 0);
+		int first = mCalendarList.getFirstVisiblePosition();
+		int last = mCalendarList.getLastVisiblePosition();
+		int current = CalendarManager.getInstance().getCurrentDayOfTheYear();
+		if((first > current && first - current >= 10) || 
+				(last < current && current - last >= 10)){
+		
+			mCalendarList.setSelection(CalendarManager.getInstance().getCurrentDayOfTheYear());
+
+		} else {
+			mCalendarList.smoothScrollToPosition(CalendarManager.getInstance().getCurrentDayOfTheYear());
+			mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDayOfTheYear(), 0);
+			
+		}
 	}
 
 	protected abstract void setLessonAdapter(ListView list);
@@ -100,9 +129,8 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	
-		mPager.setCurrentItem(position, true);
-	//	setLastSelectedDatePosition(position);
-//		notifyAdapterSetChanged(mCalendarAdapter.getDayNumber(position), mCalendarAdapter.getWeekState(position));
+		mPager.setCurrentItem(position);
+		setLastSelectedDatePosition(position);
 	}
 	
 	@Override

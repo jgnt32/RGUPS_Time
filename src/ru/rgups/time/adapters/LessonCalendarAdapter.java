@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 public class LessonCalendarAdapter extends BaseCalendarAdapter{
 	
+	private int [] mHomeWorksVector = new int[LessonManager.DAY_COUNT];
+	
 	public LessonCalendarAdapter(Context context) {
 		super(context);
 		context.getResources().getColor(R.color.red);
@@ -20,16 +22,14 @@ public class LessonCalendarAdapter extends BaseCalendarAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		
 		View v = super.getView(position, convertView, parent);
-	/*	View mHWIndicator = v.findViewById(R.id.calendar_element_homework_indicator);
-		TextView hwCount = (TextView) v.findViewById(R.id.lesson_indicator_text);
-		
-		int homeworkCount = DataManager.getInstance().getHomeWorkCountAtDay(getTimestamp(position));
-		if(homeworkCount > 0){
-			mHWIndicator.setVisibility(View.VISIBLE);
-			hwCount.setText(Integer.toString(homeworkCount));
+
+		if(mHomeWorksVector[position] > 0){
+			mHolder.getmHWIndicator().setVisibility(View.VISIBLE);
+			mHolder.getHwCount().setText(Integer.toString(mHomeWorksVector[position]));
 		} else {
-			mHWIndicator.setVisibility(View.GONE);
-		} */
+			mHolder.getmHWIndicator().setVisibility(View.GONE);
+		} 
+		
 		if(mLessonMatrix[getDayNumber(position)-1] [ getWeekState(position)]){
 			
 			v.setBackgroundResource(R.drawable.calendar_list_selector);
@@ -41,6 +41,11 @@ public class LessonCalendarAdapter extends BaseCalendarAdapter{
 		}
 		
 		return v;
+	}
+	
+	@Override
+	protected void loadHomeWorkInf() {
+		mHomeWorksVector = LessonManager.getInstance().getHomeWorkVector();
 	}
 
 	@Override

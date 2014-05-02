@@ -7,14 +7,16 @@ import java.util.GregorianCalendar;
 
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HelperManager;
+import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.ConstUtils;
+import ru.rgups.time.utils.PreferenceManager;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.text.TextUtils;
-import android.util.Log;
 
 public class LessonManager {
 	private SQLiteDatabase mDb;
@@ -184,4 +186,37 @@ public class LessonManager {
 		
 		return result;
 	}
+	
+	
+	public int [] getHomeWorkVector(){
+		int [] result = new int [DAY_COUNT];
+		Cursor c = getHomeWorkCursor();
+		
+		while(c.moveToNext()){
+			mCalendar.setTimeInMillis(c.getLong(c.getColumnIndex(HomeWork.DATE)));
+			result[mCalendar.get(GregorianCalendar.DAY_OF_YEAR)-DAY_OFFSET] = c.getInt(c.getColumnIndex("cnt"));
+		}
+
+		return result;
+	}
+	
+	public Cursor getHomeWorkCursor(){
+		Cursor c = mDb.rawQuery(TextUtils.concat(
+				"SELECT COUNT(*) cnt, h.* FROM ",HomeWork.TABLE_NAME," as h WHERE h.", HomeWork.GROUP_ID," = ? "
+				," AND h.",HomeWork.COMPLITE," = '0' GROUP BY ", HomeWork.DATE 
+				).toString(), new String[]{Long.toString(getCurrentGroupId())});
+		return c;
+	}
+	
+	public long getCurrentGroupId(){
+		return PreferenceManager.getInstance().getGroupId();
+	}
+	
+	public long getTimeStampBySemestrDayNumber(int dayNumber){
+		mCalendar.setTime(new Date(0));
+		mCalendar.set(GregorianCalendar.YEAR, Calendar.getInstance().get(Calendar.YEAR));
+		mCalendar.set(GregorianCalendar.DAY_OF_YEAR, dayNumber + DAY_OFFSET);
+		return mCalendar.getTimeInMillis();
+	}
+	
 }

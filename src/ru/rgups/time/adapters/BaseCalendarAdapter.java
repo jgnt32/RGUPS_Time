@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ru.rgups.time.R;
-import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.ConstUtils;
@@ -13,7 +12,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,15 +38,7 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	protected int mBlueColor;
 	protected int mLessonFreeColor;
 	protected Context mContext;
-	private View leftIndicator;
-
-	private View rightIndicator;
-
-	private View topIndicator;
-
-	private View bootomIndicator;
 	
-	private View mHWIndicator;
 
 	private int mLastSelected = -1;
 
@@ -56,7 +46,7 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	
 	private Color mBlue;
 	
-	protected boolean mLessonMatrix[][];
+	protected boolean mLessonMatrix[][] = new boolean [7][2];
 
 	protected LoadLessonInfo mAsyncLoad;
 	
@@ -245,7 +235,6 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		calendar.setTime(date);
 		int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);	
 		boolean currentWeekIsParity = (weekOfYear%2)==0;
-		Log.e("huy",""+currentWeekIsParity);
 		if(UPARITY_WEEK_IS_OVERLINE){
 			if(currentWeekIsParity){
 				return false;
@@ -271,7 +260,6 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	}
 	
 	public int getDayNumber(int position){
-		Log.e("getDayNumber",""+ getItem(position).getTime().toString());
 		if(getItem(position).get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.SUNDAY){
 			return 7;
 		}else{
@@ -286,6 +274,8 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		private View bootomIndicator;
 		private TextView dayOfWeek;
 		private TextView text;
+		private TextView hwCount;
+		private View mHWIndicator;
 		
 		
 		public ViewHolder(View v) {
@@ -295,6 +285,29 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 			rightIndicator = v.findViewById(R.id.calendar_right_indicator);
 			topIndicator = v.findViewById(R.id.calendar_top_indicator);
 			bootomIndicator = v.findViewById(R.id.calendar_bottom_indicator);
+			
+			mHWIndicator = v.findViewById(R.id.calendar_element_homework_indicator);
+			hwCount = (TextView) mView.findViewById(R.id.lesson_indicator_text);
+		}
+
+
+		public TextView getHwCount() {
+			return hwCount;
+		}
+
+
+		public void setHwCount(TextView hwCount) {
+			this.hwCount = hwCount;
+		}
+
+
+		public View getmHWIndicator() {
+			return mHWIndicator;
+		}
+
+
+		public void setmHWIndicator(View mHWIndicator) {
+			this.mHWIndicator = mHWIndicator;
 		}
 
 
@@ -364,6 +377,10 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		mLastSelected  = last;
 	}
 	
+	protected void loadHomeWorkInf(){
+		
+	}
+	
 	protected abstract boolean [][] getLessonMatrix();
 	
 	private class LoadLessonInfo extends AsyncTask<Void, Void, Void>{
@@ -371,6 +388,7 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		@Override
 		protected Void doInBackground(Void... params) {
 			mLessonMatrix = getLessonMatrix();
+			loadHomeWorkInf();
 			return null;
 		}
 		
