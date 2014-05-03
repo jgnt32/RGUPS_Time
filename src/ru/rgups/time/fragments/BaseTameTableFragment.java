@@ -28,7 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-public abstract class BaseTameTableFragment extends BaseFragment implements OnScrollListener, 
+public abstract class BaseTameTableFragment extends BaseFragment implements it.sephiroth.android.library.widget.AbsHListView.OnScrollListener, 
 OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.OnPageChangeListener{
 	
 	private HListView mCalendarList;
@@ -49,7 +49,9 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mCalendarAdapter = createNewCalendarAdapter();
+	//	if(mCalendarList == null | mCalendarList.getAdapter() == null){
+			mCalendarAdapter = createNewCalendarAdapter();
+	//	}
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
 		mPagerAdapter = new LessonListPagerAdapter(getChildFragmentManager(), LessonManager.DAY_COUNT);
@@ -70,8 +72,10 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 		mCalendarList.setSelection(getLastSelectedDatePosition());
 		mCalendarList.setItemChecked(getLastSelectedDatePosition(), true);
 		mCalendarList.setOnItemClickListener(this);
-		notifyAdapterSetChanged(mCalendarAdapter.getDayNumber(getLastSelectedDatePosition()), 
-				mCalendarAdapter.getWeekState(getLastSelectedDatePosition()));
+//		mCalendarList.setOnScrollListener(this);
+
+		mCalendarHint = (CalendarHint) v.findViewById(R.id.calendar_list_hint);
+		
 		return v;
 	}
 	
@@ -102,23 +106,30 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		calendarListItemClick();
+		calendarListItemClick(CalendarManager.getInstance().getCurrentDayOfTheYear());
 		return true;
 	}
 	
-	private void calendarListItemClick(){
+	private void calendarListItemClick(int targetPosition){
+		
+		
+		mCalendarList.performItemClick(null, targetPosition, 0);
+		scrollToPosition(targetPosition);
+	}
+	
+	protected void scrollToPosition(int targetPosition){
 		int first = mCalendarList.getFirstVisiblePosition();
 		int last = mCalendarList.getLastVisiblePosition();
-		int current = CalendarManager.getInstance().getCurrentDayOfTheYear();
-		if((first > current && first - current >= 10) || 
-				(last < current && current - last >= 10)){
 		
-			mCalendarList.setSelection(CalendarManager.getInstance().getCurrentDayOfTheYear());
+
+		if((first > targetPosition && first - targetPosition >= 10) || 
+				(last < targetPosition && targetPosition - last >= 10)){
+			
+			mCalendarList.setSelection(targetPosition);
 
 		} else {
-			mCalendarList.smoothScrollToPosition(CalendarManager.getInstance().getCurrentDayOfTheYear());
-			mCalendarList.performItemClick(null, CalendarManager.getInstance().getCurrentDayOfTheYear(), 0);
-			
+			mCalendarList.smoothScrollToPosition(targetPosition);
+
 		}
 	}
 
@@ -129,7 +140,7 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	
-		mPager.setCurrentItem(position);
+		mPager.setCurrentItem(position, false);
 		setLastSelectedDatePosition(position);
 	}
 	
@@ -186,9 +197,13 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	
 	@Override
 	public void onPageSelected(int position) {
+		setLastSelectedDatePosition(position);
 		mCalendarList.setOnItemClickListener(null);
 		mCalendarList.setItemChecked(position, true);
+		scrollToPosition(position);
 		mCalendarList.setOnItemClickListener(this);		
 	}
+	
+	
 	
 }

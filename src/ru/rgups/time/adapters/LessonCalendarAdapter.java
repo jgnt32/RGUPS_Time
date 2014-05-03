@@ -4,6 +4,7 @@ import ru.rgups.time.R;
 import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.DataManager;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -51,6 +52,29 @@ public class LessonCalendarAdapter extends BaseCalendarAdapter{
 	@Override
 	protected boolean[][] getLessonMatrix() {
 		return LessonManager.getInstance().getStudentLessonMatrix();
+	}
+	
+	
+	public void refreshHomwWorkInfo(){
+		HomeWorkVectorAsyncTask asyncTask = new HomeWorkVectorAsyncTask();
+		asyncTask.execute();
+	}
+	
+	
+	private class HomeWorkVectorAsyncTask extends AsyncTask<Void, Void, Void>{
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			loadHomeWorkInf();
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			LessonCalendarAdapter.this.notifyDataSetChanged();
+		}
+		
 	}
 	
 	

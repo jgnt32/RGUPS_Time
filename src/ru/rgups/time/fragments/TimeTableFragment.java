@@ -21,23 +21,17 @@ public class TimeTableFragment extends BaseTameTableFragment {
 	public final static String DAY_MONTH_DATE_FORMAT = "d MMMM";
 	public static final String DAY_OF_WEEK_DATE_FORMAT = "EEEE";
 	
-	private ArrayList<LessonListElement> mLessons = new ArrayList<LessonListElement>();
-	private LessonAdapter mLessonAdapter;
+	private LessonCalendarAdapter mCalendarAdapter;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {	
-		super.onCreate(savedInstanceState);
-		mLessons = new ArrayList<LessonListElement>();
-		mLessonAdapter = new LessonAdapter(getActivity(), mLessons);
-		mLessonAdapter.setTimestamp(getTimeStamp());
-	}
-	
+
 		
 	@Override
 	public void onResume() {
 		super.onResume();
-		RestManager.getInstance().setSpiceManager(getSpiceManager());
-		RestManager.getInstance().timeTableRequest(new GetTimeListener());
+//		RestManager.getInstance().setSpiceManager(getSpiceManager());
+//		RestManager.getInstance().timeTableRequest(new GetTimeListener());
+		mCalendarAdapter.refreshHomwWorkInfo();
+
 	}
 	
 	private class GetTimeListener implements RequestListener< LessonList >{
@@ -61,22 +55,19 @@ public class TimeTableFragment extends BaseTameTableFragment {
 
 	@Override
 	protected void setLessonAdapter(ListView list) {
-		list.setAdapter(mLessonAdapter);
 	}
 
 
 	@Override
 	protected void notifyAdapterSetChanged(int day, int weekState) {
-		mLessons.clear();
-		mLessonAdapter.setTimestamp(getTimeStamp());
-		mLessons.addAll(DataManager.getInstance().getLessonList(day, weekState));
-		mLessonAdapter.notifyDataSetChanged();		
+	
 	}
 
 
 	@Override
 	protected BaseCalendarAdapter createNewCalendarAdapter() {
-		return new LessonCalendarAdapter(getActivity());
+		mCalendarAdapter = new LessonCalendarAdapter(getActivity());
+		return mCalendarAdapter;
 	}
 
 
