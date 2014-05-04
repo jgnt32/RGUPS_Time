@@ -21,7 +21,7 @@ public class TeachersCalendarAdapter extends BaseCalendarAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v =  super.getView(position, convertView, parent);
-		if(mLessonMatrix[getDayNumber(position)-1] [ getWeekState(position)]){
+		if(mLessonMatrix[LessonManager.getInstance().getDayOfWeek(position)-1] [ LessonManager.getInstance().getWeekState(position+LessonManager.DAY_OFFSET)]){
 			
 			v.setBackgroundResource(R.drawable.calendar_list_selector);
 			mHolder.getDayOfWeek().setTextColor(mBlueColor);

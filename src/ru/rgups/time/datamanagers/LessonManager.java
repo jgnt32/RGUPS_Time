@@ -153,9 +153,7 @@ public class LessonManager {
 	
 	public LessonManager() {
 		mDb = HelperManager.getHelper().getWritableDatabase();
-		
-
-		
+				
 	}
 	
 	
@@ -176,7 +174,7 @@ public class LessonManager {
 				" GROUP BY l.",LessonTableModel.NUMBER, " ORDER BY l.",LessonTableModel.NUMBER
 				).toString();
 		Cursor c = mDb.rawQuery(query, new String[]{Integer.toString(getDayOfWeek(dayNumber)), teacherName, 
-					Integer.toString(getWeekState(dayNumber))});
+					Integer.toString(getWeekState(dayNumber + DAY_OFFSET))});
 		return c;
 	}
 	
@@ -216,8 +214,8 @@ public class LessonManager {
 		boolean [][] result = new boolean [7][2];
 		
 		for(int i = 0; i < 2; i++){
-			for(int j = 0; j < 7; j++){
-				result[j][i] = DataManager.getInstance().dayHasLesson(j, i, teacheName);
+			for(int j = 1; j < 8; j++){
+				result[j-1][i] = DataManager.getInstance().dayHasLesson(j, i, teacheName);
 			}
 		}
 		
