@@ -1,6 +1,7 @@
 package ru.rgups.time.adapters;
 
 import ru.rgups.time.R;
+import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.DataManager;
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -12,26 +13,27 @@ public class TeachersCalendarAdapter extends BaseCalendarAdapter{
 	private String mTeachersName;
 	private ColorStateList mLessonFreeBg;
 	
-	public TeachersCalendarAdapter(Context context) {
+	public TeachersCalendarAdapter(Context context, String teacherName) {
 		super(context);
+		mTeachersName = teacherName;
 	}
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View v = super.getView(position, convertView, parent); 
-		TextView dayOfWeek = (TextView) v.findViewById(R.id.calendar_element_day_of_week);
-
-		if(DataManager.getInstance().dayHasLesson(getDayNumber(position), getWeekState(position), mTeachersName)){
+		View v =  super.getView(position, convertView, parent);
+		if(mLessonMatrix[getDayNumber(position)-1] [ getWeekState(position)]){
 			
 			v.setBackgroundResource(R.drawable.calendar_list_selector);
-			dayOfWeek.setTextColor(mBlueColor);
-		}else{
+			mHolder.getDayOfWeek().setTextColor(mBlueColor);
+		} else {
 			v.setBackgroundResource(R.drawable.lesson_free_calendar_list_selector);
-			dayOfWeek.setTextColor(mLessonFreeColor);
+			mHolder.getDayOfWeek().setTextColor(mLessonFreeColor);
 			
-		}	
+		}
 		return v;
 	}
+	
+	
 	
 	public void setTeachersName(String mTeachersName) {
 		this.mTeachersName = mTeachersName;
@@ -39,8 +41,7 @@ public class TeachersCalendarAdapter extends BaseCalendarAdapter{
 
 	@Override
 	protected boolean[][] getLessonMatrix() {
-		// TODO Auto-generated method stub
-		return null;
+		return LessonManager.getInstance().getTeacherLessonMatrix(mTeachersName);
 	}
 
 }

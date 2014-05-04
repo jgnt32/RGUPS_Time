@@ -9,6 +9,8 @@ import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HelperManager;
 import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.LessonListElement;
+import ru.rgups.time.model.LessonTableModel;
+import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.ConstUtils;
@@ -156,9 +158,31 @@ public class LessonManager {
 		
 	}
 	
+	
+	
+	public Cursor getTeachersLessonsBySemestrDay(Integer dayNumber, String teacherName){
+		
+		String query = TextUtils.concat(
+				"SELECT l.",LessonTableModel.ID," as _id, l.*,i.*",
+				
+				" FROM ",LessonTableModel.TABLE_NAME," as l  ",
+				"INNER JOIN ",LessonInformation.TABLE_NAME," AS i ON ",
+				"l.",LessonTableModel.ID," = i.",LessonInformation.LESSON_ID,
+				" WHERE l.",
+				LessonTableModel.DAY,"=?", " AND i.",
+				LessonInformation.TEACHER_NAME,"=? AND ",
+				"(l.",LessonTableModel.WEEK_STATE,"= ? OR l." ,
+				LessonTableModel.WEEK_STATE,"='2')",
+				" GROUP BY l.",LessonTableModel.NUMBER, " ORDER BY l.",LessonTableModel.NUMBER
+				).toString();
+		Cursor c = mDb.rawQuery(query, new String[]{Integer.toString(getDayOfWeek(dayNumber)), teacherName, 
+					Integer.toString(getWeekState(dayNumber))});
+		return c;
+	}
+	
+	
+	
 	public ArrayList<LessonListElement> getLessonsBySemestrDayNumber(int dayNumber){
-		mCalendar.setTime(Calendar.getInstance().getTime());
-		mCalendar.set(GregorianCalendar.DAY_OF_YEAR, dayNumber + DAY_OFFSET);
 		
 		return DataManager.getInstance().getLessonList(getDayOfWeek(dayNumber), getWeekState(dayNumber + DAY_OFFSET));
 	}
@@ -179,13 +203,27 @@ public class LessonManager {
 		boolean [][] result = new boolean [7][2];
 		
 		for(int i = 0; i < 2; i++){
-			for(int j = 1; j < 8; j++){
-				result[j-1][i] = DataManager.getInstance().dayHasLesson(j, i);
+			for(int j = 0; j < 7; j++){
+				result[j][i] = DataManager.getInstance().dayHasLesson(j, i);
 			}
 		}
 		
 		return result;
 	}
+	
+	
+	public boolean [][] getTeacherLessonMatrix(String teacheName){
+		boolean [][] result = new boolean [7][2];
+		
+		for(int i = 0; i < 2; i++){
+			for(int j = 0; j < 7; j++){
+				result[j][i] = DataManager.getInstance().dayHasLesson(j, i, teacheName);
+			}
+		}
+		
+		return result;
+	}
+	
 	
 	
 	public int [] getHomeWorkVector(){
@@ -200,6 +238,7 @@ public class LessonManager {
 		return result;
 	}
 	
+	
 	public Cursor getHomeWorkCursor(){
 		Cursor c = mDb.rawQuery(TextUtils.concat(
 				"SELECT COUNT(*) cnt, h.* FROM ",HomeWork.TABLE_NAME," as h WHERE h.", HomeWork.GROUP_ID," = ? "
@@ -208,9 +247,11 @@ public class LessonManager {
 		return c;
 	}
 	
+	
 	public long getCurrentGroupId(){
 		return PreferenceManager.getInstance().getGroupId();
 	}
+	
 	
 	public long getTimeStampBySemestrDayNumber(int dayNumber){
 		mCalendar.setTime(new Date(0));

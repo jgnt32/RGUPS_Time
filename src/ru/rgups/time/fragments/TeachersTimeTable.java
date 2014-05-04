@@ -1,15 +1,14 @@
 package ru.rgups.time.fragments;
 
 import ru.rgups.time.adapters.BaseCalendarAdapter;
+import ru.rgups.time.adapters.LessonListPagerAdapter;
 import ru.rgups.time.adapters.TeacherLessonListAdapter;
+import ru.rgups.time.adapters.TeacherPagerAdapter;
 import ru.rgups.time.adapters.TeachersCalendarAdapter;
+import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.DataManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ListView;
-
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
 
 public class TeachersTimeTable extends BaseTameTableFragment{
 
@@ -20,9 +19,9 @@ public class TeachersTimeTable extends BaseTameTableFragment{
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
 		mAdapter = new TeacherLessonListAdapter(getActivity(), null, false);
 		mTeachersName = getArguments().getString(TEACHERS_NAME);
+		super.onCreate(savedInstanceState);
 
 	}
 	
@@ -39,23 +38,14 @@ public class TeachersTimeTable extends BaseTameTableFragment{
 
 	@Override
 	protected BaseCalendarAdapter createNewCalendarAdapter() {
-		TeachersCalendarAdapter adapter = new TeachersCalendarAdapter(getActivity());
-		adapter.setTeachersName(getArguments().getString(TEACHERS_NAME));
+		TeachersCalendarAdapter adapter = new TeachersCalendarAdapter(getActivity(), mTeachersName);
 		return adapter;
 	}
 
-	private class FullTimeRequestListener implements RequestListener<Boolean>{
 
-		@Override
-		public void onRequestFailure(SpiceException e) {
-			e.printStackTrace();
-			
-		}
 
-		@Override
-		public void onRequestSuccess(Boolean response) {
-			Log.e(getClass().getSimpleName(), "onRequestSuccess");
-		}
-		
+	@Override
+	protected LessonListPagerAdapter getNewPagerAdapter() {
+		return new TeacherPagerAdapter(getChildFragmentManager(), LessonManager.DAY_COUNT, mTeachersName);
 	}
 }

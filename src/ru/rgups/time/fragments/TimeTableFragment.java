@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import ru.rgups.time.adapters.BaseCalendarAdapter;
 import ru.rgups.time.adapters.LessonAdapter;
 import ru.rgups.time.adapters.LessonCalendarAdapter;
+import ru.rgups.time.adapters.LessonListPagerAdapter;
+import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonList;
@@ -68,6 +70,12 @@ public class TimeTableFragment extends BaseTameTableFragment {
 	protected BaseCalendarAdapter createNewCalendarAdapter() {
 		mCalendarAdapter = new LessonCalendarAdapter(getActivity());
 		return mCalendarAdapter;
+	}
+
+
+	@Override
+	protected LessonListPagerAdapter getNewPagerAdapter() {
+		return new LessonListPagerAdapter(getChildFragmentManager(), LessonManager.DAY_COUNT);
 	}
 
 

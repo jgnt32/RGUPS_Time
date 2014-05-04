@@ -1,65 +1,52 @@
 package ru.rgups.time.fragments;
 
-import ru.rgups.time.R;
-import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
-import android.content.Context;
+import ru.rgups.time.adapters.TeacherLessonListAdapter;
+import ru.rgups.time.datamanagers.LessonManager;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
-public class TeacherLessonListFragment extends Fragment implements LoaderCallbacks<Cursor>{
+public class TeacherLessonListFragment extends LessonListFragment{
 	
-	public static final String TEACHER_NAME = "teacher_name";
-	
-	private StickyListHeadersListView mListView;
+	public final static String TEACHER_ARGS = "teacher_args";
+
+	private int mDayNumber;
 	private String mTeacherName;
+	private Cursor mCursor;
 	
+	private TeacherLessonListAdapter mAdapter;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		mDayNumber = getArguments().getInt(DAY_ARGS);
+		mTeacherName = getArguments().getString(TEACHER_ARGS);
+		mAdapter = new TeacherLessonListAdapter(getActivity(), null, false);
+
 		super.onCreate(savedInstanceState);
-		mTeacherName = getArguments().getString(TEACHER_NAME);
-	}
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.list_fragment, null);
-		mListView = (StickyListHeadersListView) v.findViewById(R.id.list_fragment_listview);
 		
-		return v;
-
 	}
 
 	@Override
-	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-
-		return null;
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		
 	}
 
 	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor c) {
-		
+	protected void setAdapter(ListView list) {
+		list.setAdapter(mAdapter);
 	}
-	
 
 	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
-		
+	protected void loadLessonsFromDb() {
+		mCursor = LessonManager.getInstance().getTeachersLessonsBySemestrDay(mDayNumber, mTeacherName);
 	}
-	
-	private class TeacherLoader extends CursorLoader{
 
-		public TeacherLoader(Context context) {
-			super(context);
-
-		}
-		
+	@Override
+	protected void notifyAdtapter() {
+		mAdapter.changeCursor(mCursor);
+		mAdapter.notifyDataSetChanged();
 	}
 
 }

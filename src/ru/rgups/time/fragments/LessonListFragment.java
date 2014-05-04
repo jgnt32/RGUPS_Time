@@ -52,6 +52,7 @@ public abstract class LessonListFragment extends Fragment implements OnItemClick
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.lesson_list_fragment, null);
 		mListView = (ListView) v.findViewById(R.id.lesson_list);
+		mListView.setEmptyView(v.findViewById(R.id.lesson_list_empty_view));
 		mListView.setOnItemClickListener(this);
 		setAdapter(mListView);
 		return v;
@@ -67,7 +68,6 @@ public abstract class LessonListFragment extends Fragment implements OnItemClick
 	private class LessonAyncTasck extends AsyncTask<Void, Void, Void>{
 		
 		public LessonAyncTasck() {
-			// TODO Auto-generated constructor stub
 		}
 		
 

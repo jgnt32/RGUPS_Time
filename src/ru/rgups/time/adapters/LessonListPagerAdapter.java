@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class LessonListPagerAdapter extends FragmentPagerAdapter{
 	
 	private int mCount;
+	
+	
 
 	public LessonListPagerAdapter(FragmentManager fm, int count) {
 		super(fm);
@@ -27,10 +29,9 @@ public class LessonListPagerAdapter extends FragmentPagerAdapter{
 
 	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return mCount;
 	}
-	
+
 	
 
 }

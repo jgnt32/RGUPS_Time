@@ -54,9 +54,11 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	//	}
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
-		mPagerAdapter = new LessonListPagerAdapter(getChildFragmentManager(), LessonManager.DAY_COUNT);
+		mPagerAdapter = getNewPagerAdapter();
 		
 	}
+	
+	protected abstract LessonListPagerAdapter getNewPagerAdapter();
 	
 
 	@Override
@@ -72,10 +74,10 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 		mCalendarList.setSelection(getLastSelectedDatePosition());
 		mCalendarList.setItemChecked(getLastSelectedDatePosition(), true);
 		mCalendarList.setOnItemClickListener(this);
-//		mCalendarList.setOnScrollListener(this);
+//		
 
 		mCalendarHint = (CalendarHint) v.findViewById(R.id.calendar_list_hint);
-		
+		mCalendarList.setOnScrollListener(this);
 		return v;
 	}
 	
@@ -121,7 +123,6 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 		int first = mCalendarList.getFirstVisiblePosition();
 		int last = mCalendarList.getLastVisiblePosition();
 		
-
 		if((first > targetPosition && first - targetPosition >= 10) || 
 				(last < targetPosition && targetPosition - last >= 10)){
 			
@@ -129,7 +130,6 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 
 		} else {
 			mCalendarList.smoothScrollToPosition(targetPosition);
-
 		}
 	}
 
@@ -185,13 +185,11 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	
 	@Override
 	public void onPageScrolled(int arg0, float arg1, int arg2) {
-		// TODO Auto-generated method stub
 		
 	}
 	
 	@Override
 	public void onPageScrollStateChanged(int arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 	
