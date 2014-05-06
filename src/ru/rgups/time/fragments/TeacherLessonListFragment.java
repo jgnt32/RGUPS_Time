@@ -3,6 +3,7 @@ package ru.rgups.time.fragments;
 import ru.rgups.time.adapters.TeacherLessonListAdapter;
 import ru.rgups.time.datamanagers.LessonManager;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,5 +49,7 @@ public class TeacherLessonListFragment extends LessonListFragment{
 		mAdapter.changeCursor(mCursor);
 		mAdapter.notifyDataSetChanged();
 	}
+	
+	
 
 }

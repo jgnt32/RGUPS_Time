@@ -94,6 +94,6 @@
     <string name="setting_staff">Общее</string>
     <string name="hw_empty">Домашних заданий нет</string>
     <string name="home_work_hint">Домашнее задание</string>
-    <string name="home_work_caption">Домашние задание</string>
-    
+    <string name="home_work_caption">Домашние задания</string>
+    <string name="teacher_list_empty_message">Преподователь не найден</string>
 </resources>

@@ -15,21 +15,25 @@ public class StudentLessonFragment extends LessonListFragment{
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
+	
 		super.onCreate(savedInstanceState);
 		mDayNumber = getArguments().getInt(DAY_ARGS);
+
+		mAdapter = new LessonAdapter(getActivity(), mLessons, LessonManager.getInstance().getTimeStampBySemestrDayNumber(mDayNumber));	
+
 	}
 	
 	
 	@Override
 	protected void setAdapter(ListView list) {
-		mAdapter = new LessonAdapter(getActivity(), mLessons);	
 		mListView.setAdapter(mAdapter);
 	}
 
 	@Override
 	protected void loadLessonsFromDb() {
 		mLessons.clear();
-//		mAdapter.setTimestamp(getTimeStamp());
+
 		mLessons.addAll(LessonManager.getInstance().getLessonsBySemestrDayNumber(mDayNumber));
 	}
 

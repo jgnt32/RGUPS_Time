@@ -14,12 +14,12 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -44,6 +44,13 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	private MenuItem mSearchItem;
 	private SearchView mSearchView;
 	private LessonListener mLessonListener;
+	private TeacherListAsyncLoad mAsyncDBLoad;
+	
+	private View mProgressView;
+
+	private View mEmptyMessage;
+	
+	private Cursor mTeacherListCursor;
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -56,28 +63,11 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		setRetainInstance(true);
-		mAdapter = new TeacherCursorAdapter(getActivity(), DataManager.getInstance().getAllTeachersCursor(), true);
+		mAdapter = new TeacherCursorAdapter(getActivity(), null, true);
 		mAdapter.setFilterQueryProvider(this);
-		
+		loadFromDb();
 	}
 	
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-	//	getLoaderManager().initLoader(0, null, this);
-	}
-	
-	@Override
-	public void onStart() {
-		super.onStart();
-	//	mLoader.forceLoad();
-	}
-	
-	@Override
-	public void onStop() {
-		super.onStop();
-	//	mLoader.stopLoading();
-	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,6 +76,9 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 		mListView = (StickyListHeadersListView) v.findViewById(R.id.list_fragment_listview);
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
+		mListView.setEmptyView(v.findViewById(R.id.list_fragment_empty_view));
+		mProgressView = v.findViewById(R.id.list_fragment_empty_view_progress);
+		mEmptyMessage = v.findViewById(R.id.list_fragment_empty_view_message);
 		return v;
 	}
 	
@@ -106,6 +99,11 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 				
 			});
 		}
+	}
+	
+	private void loadFromDb(){
+		mAsyncDBLoad = new TeacherListAsyncLoad();
+		mAsyncDBLoad.execute();
 	}
 	
 	@Override
@@ -166,11 +164,12 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 
 		@Override
 		public void onRequestSuccess(Boolean response) {
-			mAdapter.changeCursor( DataManager.getInstance().getAllTeachersCursor());
-			mAdapter.notifyDataSetChanged();
+			loadFromDb();
 		}
 		
 	}
+	
+	
 
 	@Override
 	public boolean onMenuItemActionCollapse(MenuItem arg0) {
@@ -182,6 +181,32 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	public boolean onMenuItemActionExpand(MenuItem arg0) {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	
+	private class TeacherListAsyncLoad extends AsyncTask<Void, Void, Void>{
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			mTeacherListCursor = DataManager.getInstance().getAllTeachersCursor();
+			try {
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		
+		@Override
+		protected void onPostExecute(Void result) {
+			super.onPostExecute(result);
+			if(isAdded()){
+				mAdapter.changeCursor( mTeacherListCursor);
+				mAdapter.notifyDataSetChanged();
+				mEmptyMessage.setVisibility(View.VISIBLE);
+				mProgressView.setVisibility(View.GONE);
+			}
+		}
 	}
 	
 }

@@ -49,9 +49,9 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-	//	if(mCalendarList == null | mCalendarList.getAdapter() == null){
+		if(mCalendarAdapter == null){
 			mCalendarAdapter = createNewCalendarAdapter();
-	//	}
+		}
 		setRetainInstance(true);
 		setHasOptionsMenu(true);
 		mPagerAdapter = getNewPagerAdapter();

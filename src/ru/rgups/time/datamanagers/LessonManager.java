@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import com.crashlytics.android.internal.s;
+
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HelperManager;
 import ru.rgups.time.model.HomeWork;
@@ -201,8 +203,8 @@ public class LessonManager {
 		boolean [][] result = new boolean [7][2];
 		
 		for(int i = 0; i < 2; i++){
-			for(int j = 0; j < 7; j++){
-				result[j][i] = DataManager.getInstance().dayHasLesson(j, i);
+			for(int j = 1; j < 8; j++){
+				result[j-1][i] = DataManager.getInstance().dayHasLesson(j, i);
 			}
 		}
 		
@@ -222,7 +224,17 @@ public class LessonManager {
 		return result;
 	}
 	
-	
+	public boolean [] getHomeworLessonListFragment(long timestamp, ArrayList<LessonListElement> lessonList){
+		boolean [] result = new boolean [lessonList.size()];
+		int i = 0;
+		for(LessonListElement lesson : lessonList){
+			result[i] = DataManager.getInstance().lessonHasHomeWork(lesson.getId(), timestamp);
+			i++;
+			
+		}
+		
+		return result;
+	}
 	
 	public int [] getHomeWorkVector(){
 		int [] result = new int [DAY_COUNT];

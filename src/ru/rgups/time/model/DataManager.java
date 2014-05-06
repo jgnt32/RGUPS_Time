@@ -570,7 +570,10 @@ public class DataManager {
 				"INNER JOIN ",LessonInformation.TABLE_NAME," as l ON ",
 				" h.",HomeWork.LESSON_ID,"=l.",LessonInformation.LESSON_ID,
 				" WHERE h.",
-				HomeWork.GROUP_ID,"=? AND h.",HomeWork.DATE,">=? AND h.",HomeWork.COMPLITE,"='0' ORDER BY h.",HomeWork.DATE
+				HomeWork.GROUP_ID,"=? AND h.",HomeWork.DATE,">=? ",
+				
+				" GROUP BY l.",LessonInformation.LESSON_ID,
+				" ORDER BY h.",HomeWork.DATE
 				).toString();
 		Cursor c = mDb.rawQuery(query, 
 				new String[]{groupId.toString(), Long.toString(Calendar.getInstance().getTimeInMillis())});
@@ -697,7 +700,7 @@ public class DataManager {
 				"SELECT * FROM ",HomeWork.TABLE_NAME,
 				" WHERE ",
 				HomeWork.LESSON_ID,"=? AND ",
-				HomeWork.GROUP_ID,"=? AND ",HomeWork.COMPLITE,"='0' ",
+				HomeWork.GROUP_ID,"=? ",
 				" AND ",HomeWork.DATE,"=?"
 				).toString(), new String[]{lessonId.toString(), 
 			PreferenceManager.getInstance().getGroupId().toString(),

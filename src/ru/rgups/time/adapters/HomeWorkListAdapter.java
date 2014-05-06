@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 public class HomeWorkListAdapter extends BaseAdapter implements StickyListHeadersAdapter{
@@ -57,6 +58,7 @@ public class HomeWorkListAdapter extends BaseAdapter implements StickyListHeader
 		
 		mViewHolder.lessonTitle.setText(""+getItem(position).getLessonTitle());
 		mViewHolder.message.setText(getItem(position).getMessage());
+		mViewHolder.compliteBox.setChecked(getItem(position).isComplite());
 //		mViewHolder.photoCount.setText(""+getItem(position).getImages().size());
 		return mView;
 	}
@@ -88,11 +90,13 @@ public class HomeWorkListAdapter extends BaseAdapter implements StickyListHeader
 		private TextView lessonTitle;
 		private TextView message;
 		private TextView photoCount;
+		private CheckBox compliteBox;
 		
 		public ViewHolder(View v) {
 			lessonTitle = (TextView) v.findViewById(R.id.homework_list_element_lesson_title);
 			message = (TextView) v.findViewById(R.id.homework_list_element_message);
 			photoCount = (TextView) v.findViewById(R.id.homework_list_element_photo_count);
+			compliteBox = (CheckBox) v.findViewById(R.id.lesson_list_element_checkbox);
 		}
 	}
 	
