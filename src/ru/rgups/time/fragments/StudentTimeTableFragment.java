@@ -18,7 +18,7 @@ import android.widget.ListView;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-public class TimeTableFragment extends BaseTameTableFragment {
+public class StudentTimeTableFragment extends BaseTameTableFragment {
 	
 	public final static String DAY_MONTH_DATE_FORMAT = "d MMMM";
 	public static final String DAY_OF_WEEK_DATE_FORMAT = "EEEE";
@@ -30,8 +30,8 @@ public class TimeTableFragment extends BaseTameTableFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-//		RestManager.getInstance().setSpiceManager(getSpiceManager());
-//		RestManager.getInstance().timeTableRequest(new GetTimeListener());
+		RestManager.getInstance().setSpiceManager(getSpiceManager());
+		RestManager.getInstance().timeTableRequest(new GetTimeListener());
 		mCalendarAdapter.refreshHomwWorkInfo();
 
 	}

@@ -49,7 +49,7 @@ public class HomeWorkListAdapter extends BaseAdapter implements StickyListHeader
 	public View getView(int position, View convertView, ViewGroup parent) {
 		mView = convertView;
 		if(mView == null){
-			mView = mInflater.inflate(R.layout.homework_list_elemetn, null);
+			mView = mInflater.inflate(R.layout.homework_list_elemetn, parent, false);
 			mViewHolder = new ViewHolder(mView);
 			mView.setTag(mViewHolder);
 		}else{

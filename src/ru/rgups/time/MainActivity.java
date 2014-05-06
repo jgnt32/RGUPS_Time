@@ -12,7 +12,7 @@ import ru.rgups.time.fragments.SettingFragment;
 import ru.rgups.time.fragments.SingleLessonFragment;
 import ru.rgups.time.fragments.TeachersListFragment;
 import ru.rgups.time.fragments.TeachersTimeTable;
-import ru.rgups.time.fragments.TimeTableFragment;
+import ru.rgups.time.fragments.StudentTimeTableFragment;
 import ru.rgups.time.fragments.WelcomeActivity;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.interfaces.SettingListener;
@@ -46,7 +46,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
-	private TimeTableFragment mTimeTableFragment;
+	private StudentTimeTableFragment mTimeTableFragment;
 	private HomeWorkListFragment mHomeWorkListFragment;
 	private SettingFragment mSettingFragment;
 	private boolean mReplaceFlag = false;
@@ -227,7 +227,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	
 	private void initFragmenets(){
 		mSettingFragment = new SettingFragment();
-		mTimeTableFragment = new TimeTableFragment();
+		mTimeTableFragment = new StudentTimeTableFragment();
 		mTeachersFrament = new TeachersListFragment();
 		mHomeWorkListFragment = new HomeWorkListFragment();
 

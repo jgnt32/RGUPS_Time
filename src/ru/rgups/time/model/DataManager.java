@@ -383,7 +383,7 @@ public class DataManager {
 				LessonTableModel.DAY,"='",dayNumber.toString(),"'", " AND ",
 				"(",LessonTableModel.WEEK_STATE,"='",weekState.toString(),"' OR " ,
 				LessonTableModel.WEEK_STATE,"='2')",
-				" GROUP BY ",LessonTableModel.NUMBER," ORDER BY ",LessonTableModel.NUMBER
+				" GROUP BY ",LessonTableModel.NUMBER, " ORDER BY ",LessonTableModel.NUMBER
 				).toString();
 		
 
@@ -432,7 +432,8 @@ public class DataManager {
 		ArrayList<LessonInformation> result = new ArrayList<LessonInformation>();
 		String query = TextUtils.concat(
 				"SELECT * FROM ",LessonInformation.TABLE_NAME, " WHERE ",
-				LessonInformation.LESSON_ID,"=?").toString();
+				LessonInformation.LESSON_ID,"=? ",
+				" GROUP BY ",LessonInformation.TEACHER_NAME).toString();
 		
 		Cursor c = mDb.rawQuery(query, new String[]{lessonId.toString()});
 		LessonInformation inf;
@@ -560,6 +561,25 @@ public class DataManager {
 			result.add(hw);
 		}
 		return result;
+	}
+	
+	
+	public Cursor getHomeWorks(){
+		Long groupId = PreferenceManager.getInstance().getGroupId();
+		String query = TextUtils.concat(
+				"SELECT h.",HomeWork.ID," as _id, h.*,l.*,i.* FROM ",HomeWork.TABLE_NAME," as h ",
+				"INNER JOIN ",LessonInformation.TABLE_NAME," as i ON ",
+				" h.",HomeWork.LESSON_ID," = i.",LessonInformation.LESSON_ID,
+				" INNER JOIN ",Lesson.TABLE_NAME," as l ON ",
+				" l.",Lesson.ID," = i.",LessonInformation.LESSON_ID,
+				" WHERE h.",HomeWork.GROUP_ID,"=? ",
+				
+				" GROUP BY h.",HomeWork.ID,
+				" ORDER BY h.",HomeWork.DATE, ", l.", Lesson.NUMBER
+				).toString();
+		Cursor c = mDb.rawQuery(query, 
+				new String[]{groupId.toString()});
+		return c;
 	}
 	
 	public ArrayList<HomeWork> getAllHomeWorks(){
