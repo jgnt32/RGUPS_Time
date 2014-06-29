@@ -22,8 +22,8 @@ public final class R {
 		public static final int transcriptMode = 0x7f01008c;
 	}
 	public static final class drawable {
-		public static final int hlv_overscroll_edge = 0x7f020066;
-		public static final int hlv_overscroll_glow = 0x7f020067;
+		public static final int hlv_overscroll_edge = 0x7f020067;
+		public static final int hlv_overscroll_glow = 0x7f020068;
 	}
 	public static final class id {
 		public static final int alwaysScroll = 0x7f050028;

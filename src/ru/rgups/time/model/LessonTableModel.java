@@ -1,5 +1,8 @@
 package ru.rgups.time.model;
 
+import java.util.ArrayList;
+
+import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.utils.PreferenceManager;
 
 import com.j256.ormlite.field.DatabaseField;
@@ -35,7 +38,8 @@ public class LessonTableModel {
 	@DatabaseField
 	private int weekState;
 	
-	
+	private ArrayList<LessonInformation> information;
+
 	public long getId() {
 		return id;
 	}

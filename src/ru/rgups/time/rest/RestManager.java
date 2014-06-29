@@ -31,7 +31,8 @@ public class RestManager {
 	}
 	
 	public void timeTableRequest(RequestListener<LessonList> listener){
-		this.getSpiceManager().execute(new TimeTableRequest(PreferenceManager.getInstance().getGroupId().toString()), listener);
+		String groupId = PreferenceManager.getInstance().getGroupId().toString();
+		this.getSpiceManager().execute(new TimeTableRequest(groupId), listener);
 	}
 	
 	public void fullTimeRequest(RequestListener<Boolean> listener){

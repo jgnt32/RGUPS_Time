@@ -20,7 +20,6 @@ public class Lesson {
 		
 	}
 	
-	private Day day;
 	
 	private long id;
 	
@@ -57,13 +56,7 @@ public class Lesson {
 		this.time = time;
 	}
 	
-	public Day getDay() {
-		return day;
-	}
-
-	public void setDay(Day day) {
-		this.day = day;
-	}
+	
 
 	public long getId() {
 		return id;

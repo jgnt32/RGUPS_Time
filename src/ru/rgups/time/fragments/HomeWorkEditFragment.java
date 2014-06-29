@@ -55,10 +55,7 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 		mPhotoGridView = (GridView) v.findViewById(R.id.home_work_grid_view);
 		mPhotoGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL); 
 		mPhotoGridView.setMultiChoiceModeListener(this);
-		mAdapter = new PhotoGalleryAdapter(getActivity());
-		mPhotoGridView.setAdapter(mAdapter);
 		mText = (EditText) v.findViewById(R.id.home_work_text);
-		Log.e("mHomeWork",""+mHomeWork);
 		if(mHomeWork != null){
 			mText.setText(mHomeWork.getMessage());
 		}
