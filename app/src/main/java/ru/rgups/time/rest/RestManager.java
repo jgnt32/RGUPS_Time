@@ -42,5 +42,9 @@ public class RestManager {
 	public void exucuteFacultetRequest(RequestListener<Boolean> listener){
 		this.getSpiceManager().execute(new FacultetTimeTableRequest(Boolean.class), listener);
 	}
-	
+
+    public void fetchHomeWorks(){
+        this.getSpiceManager().execute(new FetchHomeWorksRequest(), null);
+    }
+
 }

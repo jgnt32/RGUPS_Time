@@ -8,6 +8,8 @@ import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonInformation;
+import ru.rgups.time.rest.ApigeeManager;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -52,6 +54,7 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 		mLesson = DataManager.getInstance().getLesson(getArguments().getLong(LESSON_ID));
 		mTimePeriods = getActivity().getResources().getStringArray(R.array.lessons_time_periods);
 		timestamp = getArguments().getLong(TIMESTAMP);
+
 
 	}
 
@@ -112,7 +115,7 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 
 		switch (item.getItemId()){
 		case R.id.action_add:
-			mLessonListener.OnAddHomeWorkClick(mLesson.getId(), getArguments().getLong(TIMESTAMP));
+		    mLessonListener.OnAddHomeWorkClick(mLesson.getId(), getArguments().getLong(TIMESTAMP));
 			
 			return true;
 			

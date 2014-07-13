@@ -17,7 +17,7 @@ public class TimeTableRequest extends SpringAndroidSpiceRequest< LessonList > {
     
     public TimeTableRequest(String id) {
         super( LessonList.class );
-        this.baseUrl =  "http://rgups.ru/time/xml/?group="+id;
+        this.baseUrl = "http://www.jgnt32.narod.ru/xml.xml";///?group="+id;
         Log.e("TimeTableRequest","url:"+baseUrl);
     }
 

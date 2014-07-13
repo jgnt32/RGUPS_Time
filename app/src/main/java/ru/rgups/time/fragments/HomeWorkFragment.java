@@ -5,11 +5,16 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
+import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.HomeWorkImageAdapter;
 import ru.rgups.time.interfaces.HomeWorkListener;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HomeWork;
+import ru.rgups.time.rest.ApigeeManager;
+import ru.rgups.time.rest.RestManager;
+import ru.rgups.time.utils.PreferenceManager;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -31,7 +36,7 @@ import android.widget.GridView;
 
 import com.jakewharton.disklrucache.DiskLruCache;
 
-public class HomeWorkFragment extends Fragment{
+public class HomeWorkFragment extends BaseFragment {
 	
 	public static final String LESSON_ID = "lesson_id";
 	public static final String DATE = "date";
@@ -75,8 +80,15 @@ public class HomeWorkFragment extends Fragment{
 		mText = (EditText) v.findViewById(R.id.home_work_text);
 		return v;
 	}
-	
-	@Override
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.homework, menu);
 
@@ -133,8 +145,9 @@ public class HomeWorkFragment extends Fragment{
 			mHomeWork.setDate(new Date(getArguments().getLong(DATE)));
 			mHomeWork.setLessonId(getArguments().getLong(LESSON_ID));
 			mHomeWork.setMessage(mText.getText().toString());
-			
-			DataManager.getInstance().saveHomeWork(mHomeWork);			
+            mHomeWork.setGroupId(PreferenceManager.getInstance().getGroupId());
+			DataManager.getInstance().saveHomeWork(mHomeWork);
+            ApigeeManager.getInstance().pushHomeWorkOnServer(mHomeWork);
 		}
 	}
 	

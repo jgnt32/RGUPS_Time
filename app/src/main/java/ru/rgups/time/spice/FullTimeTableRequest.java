@@ -18,7 +18,7 @@ public class FullTimeTableRequest extends SpringAndroidSpiceRequest< Boolean > {
 
 	private final String mTimeUrl = "http://rgups.ru/time/xml/?group=";
 	private final String mFacultetList = "http://rgups.ru/time/xml/";
-	private final String mGroupListUrl = "http://rgups.ru/time/xml/?faculty=";
+	private final String mGroupListUrl = "http://jgnt32.narod.ru/xml.xml?faculty=";
 	
 	private String url;
 	private Activity mActivity;

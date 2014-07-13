@@ -7,6 +7,9 @@ import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 @DatabaseTable(tableName = "home_work_table")
 public class HomeWork {
 	public static final String TABLE_NAME = "home_work_table";

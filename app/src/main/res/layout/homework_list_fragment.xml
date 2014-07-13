@@ -4,9 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+    <ListView
         android:id="@+id/homework_list_fragment_listview"
-        android:divider="@null"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     
