@@ -1,26 +1,24 @@
 package ru.rgups.time.fragments;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import ru.rgups.time.adapters.BaseCalendarAdapter;
-import ru.rgups.time.adapters.LessonAdapter;
 import ru.rgups.time.adapters.LessonCalendarAdapter;
 import ru.rgups.time.adapters.LessonListPagerAdapter;
-import ru.rgups.time.datamanagers.LessonManager;
+import ru.rgups.time.loaders.LessonExistingVector;
 import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.CalendarManager;
 
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
 import android.widget.ListView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-public class StudentTimeTableFragment extends BaseTameTableFragment {
+public class StudentTimeTableFragment extends BasePageTameTableFragment implements LoaderManager.LoaderCallbacks<boolean[][]> {
 	
 	public final static String DAY_MONTH_DATE_FORMAT = "d MMMM";
 	public static final String DAY_OF_WEEK_DATE_FORMAT = "EEEE";
@@ -30,12 +28,28 @@ public class StudentTimeTableFragment extends BaseTameTableFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		RestManager.getInstance().setSpiceManager(getSpiceManager());
-		RestManager.getInstance().timeTableRequest(new GetTimeListener());
-
+	    getLoaderManager().restartLoader(0, null, this);
+        getLoaderManager().getLoader(0).forceLoad();
 	}
-	
-	private class GetTimeListener implements RequestListener< LessonList >{
+
+    @Override
+    public android.support.v4.content.Loader<boolean[][]> onCreateLoader(int id, Bundle args) {
+        return new LessonExistingVector(getActivity(), null);
+    }
+
+    @Override
+    public void onLoadFinished(android.support.v4.content.Loader<boolean[][]> loader, boolean[][] data) {
+        mCalendarAdapter.setmLessonMatrix(data);
+        mCalendarAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(android.support.v4.content.Loader<boolean[][]> loader) {
+
+    }
+
+
+    private class GetTimeListener implements RequestListener< LessonList >{
 		
 		
 		@Override
@@ -51,17 +65,6 @@ public class StudentTimeTableFragment extends BaseTameTableFragment {
 				e.printStackTrace();
 			}
 		}
-	}
-
-
-	@Override
-	protected void setLessonAdapter(ListView list) {
-	}
-
-
-	@Override
-	protected void notifyAdapterSetChanged(int day, int weekState) {
-	
 	}
 
 

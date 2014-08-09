@@ -36,27 +36,26 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	private int mLastSelected = -1;
 
 	private GregorianCalendar mTimestampCalendar;
-	
 
-//	protected boolean mLessonMatrix[][] = new boolean [7][2];
 
-//	protected LoadLessonInfo mAsyncLoad;
-	
+    public boolean[][] getmLessonMatrix() {
+        return mLessonMatrix;
+    }
+
+    public void setmLessonMatrix(boolean[][] mLessonMatrix) {
+        this.mLessonMatrix = mLessonMatrix;
+    }
+
+    protected boolean mLessonMatrix[][] = new boolean [7][2];
+
+
 	public BaseCalendarAdapter(Context context){
 		mContext = context;
 		mLessonFreeColor = context.getResources().getColor(R.color.lesson_free);
 		mBlueColor = context.getResources().getColor(R.color.theme_blue);
 
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		mTimestampCalendar = new GregorianCalendar();
-		
-		mTimestampCalendar.setTime(Calendar.getInstance().getTime());
-		mTimestampCalendar.set(GregorianCalendar.HOUR, 0);
-		mTimestampCalendar.set(GregorianCalendar.MINUTE, 0);
-		mTimestampCalendar.set(GregorianCalendar.SECOND, 0);
-		mTimestampCalendar.set(GregorianCalendar.MILLISECOND, 0);
-/*		mAsyncLoad = new LoadLessonInfo();
-		mAsyncLoad.execute();*/
+
 	}
 	
 	@Override
@@ -92,8 +91,16 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		}else{
 			mHolder = (ViewHolder) mView.getTag();
 		}
-			
 
+        if(isLessonFree(position)){
+
+            mView.setBackgroundResource(R.drawable.calendar_list_selector);
+            mHolder.getDayOfWeek().setTextColor(mBlueColor);
+        } else {
+            mView.setBackgroundResource(R.drawable.lesson_free_calendar_list_selector);
+            mHolder.getDayOfWeek().setTextColor(mLessonFreeColor);
+
+        }
 		  mHolder.text.setText(DateFormat.format("d",CalendarManager.getDate(position)));
 		  mHolder.dayOfWeek.setText(DateFormat.format(DAY_OF_WEEK_FORMAT, CalendarManager.getDate(position)).toString().toUpperCase());
 		  if(CalendarManager.isOverLine(position)){
@@ -119,8 +126,12 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		return mView;
 	}
 
+    private boolean isLessonFree(int position) {
+        return mLessonMatrix[CalendarManager.getDayOfWeek(position) - 1][CalendarManager.getWeekState(position)];
+    }
 
-	public int getDayNumber(int position){
+
+    public int getDayNumber(int position){
 		if(getItem(position).get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.SUNDAY){
 			return 7;
 		}else{
@@ -241,23 +252,5 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	protected void loadHomeWorkInf(){
 		
 	}
-	
 
-/*	private class LoadLessonInfo extends AsyncTask<Void, Void, Void>{
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			mLessonMatrix = getLessonMatrix();
-			loadHomeWorkInf();
-			return null;
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			BaseCalendarAdapter.this.notifyDataSetChanged();
-		}
-		
-	}*/
-	
 }

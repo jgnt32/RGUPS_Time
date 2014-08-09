@@ -120,7 +120,7 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-		mLessonListener.onTeacherClick(mAdapter.getTeacherName());
+		mLessonListener.onTeacherClick(mAdapter.getTeacherName(position));
 	}
 
 	@Override

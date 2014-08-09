@@ -30,8 +30,9 @@ public class TeacherCursorAdapter extends CursorAdapter {
 		return mInflater.inflate(R.layout.simple_list_element, null);
 	}
 	
-	public String getTeacherName(){
-		return getCursor().getString(getCursor().getColumnIndex(LessonInformation.TEACHER_NAME));
+	public String getTeacherName(int position){
+        getCursor().moveToPosition(position);
+        return getCursor().getString(getCursor().getColumnIndex(LessonInformation.TEACHER_NAME));
 	}
 
 /*	@Override

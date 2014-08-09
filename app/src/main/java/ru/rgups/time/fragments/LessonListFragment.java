@@ -58,11 +58,5 @@ public abstract class LessonListFragment extends Fragment implements OnItemClick
 	
 	protected abstract void setAdapter(ListView list);
 	
-	protected abstract void loadLessonsFromDb();
-	
-	protected abstract void notifyAdtapter();
-	
-
-	
 
 }

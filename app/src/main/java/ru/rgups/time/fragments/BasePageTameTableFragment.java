@@ -28,7 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-public abstract class BaseTameTableFragment extends BaseFragment implements it.sephiroth.android.library.widget.AbsHListView.OnScrollListener, 
+public abstract class BasePageTameTableFragment extends BaseFragment implements it.sephiroth.android.library.widget.AbsHListView.OnScrollListener,
 OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.OnPageChangeListener{
 	
 	private HListView mCalendarList;
@@ -133,9 +133,6 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 		}
 	}
 
-	protected abstract void setLessonAdapter(ListView list);
-	
-	protected abstract void notifyAdapterSetChanged(int day, int weekState);
 
 	protected abstract BaseCalendarAdapter createNewCalendarAdapter();
 	

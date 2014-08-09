@@ -39,15 +39,6 @@ public class StudentLessonFragment extends LessonListFragment implements LoaderM
 		mListView.setAdapter(mAdapter);
 	}
 
-	@Override
-	protected void loadLessonsFromDb() {
-
-	}
-
-	@Override
-	protected void notifyAdtapter() {
-		mAdapter.notifyDataSetChanged();			
-	}
 
 
 	@Override

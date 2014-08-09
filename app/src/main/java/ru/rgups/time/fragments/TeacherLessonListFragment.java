@@ -1,15 +1,18 @@
 package ru.rgups.time.fragments;
 
 import ru.rgups.time.adapters.TeacherLessonListAdapter;
-import ru.rgups.time.datamanagers.LessonManager;
+import ru.rgups.time.loaders.TeacherLessonLoader;
+
+
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class TeacherLessonListFragment extends LessonListFragment{
+public class TeacherLessonListFragment extends LessonListFragment implements LoaderManager.LoaderCallbacks<Cursor>{
 	
 	public final static String TEACHER_ARGS = "teacher_args";
 
@@ -24,12 +27,18 @@ public class TeacherLessonListFragment extends LessonListFragment{
 		mDayNumber = getArguments().getInt(DAY_ARGS);
 		mTeacherName = getArguments().getString(TEACHER_ARGS);
 		mAdapter = new TeacherLessonListAdapter(getActivity(), null, false);
-
 		super.onCreate(savedInstanceState);
 		
 	}
 
-	@Override
+    @Override
+    public void onResume() {
+        super.onResume();
+        getLoaderManager().restartLoader(0, null, this);
+        getLoaderManager().getLoader(0).forceLoad();
+    }
+
+    @Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		
 	}
@@ -39,17 +48,19 @@ public class TeacherLessonListFragment extends LessonListFragment{
 		list.setAdapter(mAdapter);
 	}
 
-	@Override
-	protected void loadLessonsFromDb() {
-		mCursor = LessonManager.getInstance().getTeachersLessonsBySemestrDay(mDayNumber, mTeacherName);
-	}
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return new TeacherLessonLoader(getActivity(), mDayNumber, mTeacherName);
+    }
 
-	@Override
-	protected void notifyAdtapter() {
-		mAdapter.changeCursor(mCursor);
-		mAdapter.notifyDataSetChanged();
-	}
-	
-	
+    @Override
+    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
+        mAdapter.changeCursor(cursor);
+        mAdapter.notifyDataSetChanged();
+    }
 
+    @Override
+    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+
+    }
 }
