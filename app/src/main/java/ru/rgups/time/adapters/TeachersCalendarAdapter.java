@@ -3,6 +3,8 @@ package ru.rgups.time.adapters;
 import ru.rgups.time.R;
 import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.DataManager;
+import ru.rgups.time.utils.CalendarManager;
+
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.view.View;
@@ -21,7 +23,7 @@ public class TeachersCalendarAdapter extends BaseCalendarAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v =  super.getView(position, convertView, parent);
-		if(mLessonMatrix[LessonManager.getInstance().getDayOfWeek(position)-1] [ LessonManager.getInstance().getWeekState(position+LessonManager.DAY_OFFSET)]){
+		if(mLessonMatrix[CalendarManager.getDayOfWeek(position)-1] [ CalendarManager.getWeekState(position + CalendarManager.getDayOffset())]){
 			
 			v.setBackgroundResource(R.drawable.calendar_list_selector);
 			mHolder.getDayOfWeek().setTextColor(mBlueColor);

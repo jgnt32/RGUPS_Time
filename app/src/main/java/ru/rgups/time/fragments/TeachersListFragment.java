@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FilterQueryProvider;
+import android.widget.ListView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -38,7 +39,7 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class TeachersListFragment extends BaseFragment implements OnItemClickListener, LoaderCallbacks<Cursor>, 
 																SearchView.OnQueryTextListener, FilterQueryProvider, MenuItemCompat.OnActionExpandListener{
-	private StickyListHeadersListView  mListView;
+	private ListView mListView;
 	private TeacherCursorAdapter mAdapter;
 	private RTCursorLoader mLoader;
 	private MenuItem mSearchItem;
@@ -73,12 +74,12 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.simple_list_fragment, null);
-		mListView = (StickyListHeadersListView) v.findViewById(R.id.list_fragment_listview);
+		mListView = (ListView) v.findViewById(R.id.list_fragment_listview);
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
-		mListView.setEmptyView(v.findViewById(R.id.list_fragment_empty_view));
+	/*	mListView.setEmptyView(v.findViewById(R.id.list_fragment_empty_view));
 		mProgressView = v.findViewById(R.id.list_fragment_empty_view_progress);
-		mEmptyMessage = v.findViewById(R.id.list_fragment_empty_view_message);
+		mEmptyMessage = v.findViewById(R.id.list_fragment_empty_view_message);*/
 		return v;
 	}
 	
@@ -203,8 +204,8 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 			if(isAdded()){
 				mAdapter.changeCursor( mTeacherListCursor);
 				mAdapter.notifyDataSetChanged();
-				mEmptyMessage.setVisibility(View.VISIBLE);
-				mProgressView.setVisibility(View.GONE);
+/*				mEmptyMessage.setVisibility(View.VISIBLE);
+				mProgressView.setVisibility(View.GONE);*/
 			}
 		}
 	}

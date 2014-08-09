@@ -79,14 +79,14 @@ public class LessonAdapter extends BaseAdapter{
 			mHolder = (ViewHolder) mView.getTag();
 		}
 		
-		if(mHwVector!= null){
+	/*	if(mHwVector!= null){
 			if(mHwVector[position]){
 			
 				mHolder.hwIndicator.setVisibility(View.VISIBLE);
 			}else{
 				mHolder.hwIndicator.setVisibility(View.GONE);
 			}
-			}
+			}*/
 		if(getItem(position).getInformation().size()>0){
 			StringBuffer roomBuffer = new StringBuffer();
 			StringBuffer teacherBuffer = new StringBuffer();

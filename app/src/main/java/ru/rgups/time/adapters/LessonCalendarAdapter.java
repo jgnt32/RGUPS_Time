@@ -3,6 +3,8 @@ package ru.rgups.time.adapters;
 import ru.rgups.time.R;
 import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.DataManager;
+import ru.rgups.time.utils.CalendarManager;
+
 import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
@@ -12,7 +14,7 @@ import android.widget.TextView;
 
 public class LessonCalendarAdapter extends BaseCalendarAdapter{
 	
-	private int [] mHomeWorksVector = new int[LessonManager.DAY_COUNT];
+	private int [] mHomeWorksVector = new int[CalendarManager.getCorrectDayCount()];
 	
 	public LessonCalendarAdapter(Context context) {
 		super(context);
@@ -31,7 +33,7 @@ public class LessonCalendarAdapter extends BaseCalendarAdapter{
 			mHolder.getmHWIndicator().setVisibility(View.GONE);
 		} 
 		
-		if(mLessonMatrix[getDayNumber(position)-1] [ getWeekState(position)]){
+/*		if(mLessonMatrix[getDayNumber(position)-1] [CalendarManager.getWeekState(position)]){
 			
 			v.setBackgroundResource(R.drawable.calendar_list_selector);
 			mHolder.getDayOfWeek().setTextColor(mBlueColor);
@@ -39,14 +41,14 @@ public class LessonCalendarAdapter extends BaseCalendarAdapter{
 			v.setBackgroundResource(R.drawable.lesson_free_calendar_list_selector);
 			mHolder.getDayOfWeek().setTextColor(mLessonFreeColor);
 			
-		}
+		}*/
 		
 		return v;
 	}
 	
 	@Override
 	protected void loadHomeWorkInf() {
-		mHomeWorksVector = LessonManager.getInstance().getHomeWorkVector();
+//		mHomeWorksVector = LessonManager.getInstance().getHomeWorkVector();
 	}
 
 	@Override

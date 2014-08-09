@@ -4,12 +4,13 @@ import ru.rgups.time.R;
 import ru.rgups.time.model.entity.LessonInformation;
 import android.content.Context;
 import android.database.Cursor;
+import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class TeacherCursorAdapter extends StickyListHeadersCursorAdapter{
+public class TeacherCursorAdapter extends CursorAdapter {
 	
 	private LayoutInflater mInflater;
 	
@@ -33,7 +34,7 @@ public class TeacherCursorAdapter extends StickyListHeadersCursorAdapter{
 		return getCursor().getString(getCursor().getColumnIndex(LessonInformation.TEACHER_NAME));
 	}
 
-	@Override
+/*	@Override
 	protected View newHeaderView(Context context, Cursor cursor, ViewGroup parent) {
 		return mInflater.inflate(R.layout.group_list_divier, null);
 	}
@@ -47,6 +48,6 @@ public class TeacherCursorAdapter extends StickyListHeadersCursorAdapter{
 	@Override
 	public long getHeaderId(Cursor c) {
 		return c.getString(c.getColumnIndex(LessonInformation.TEACHER_NAME)).substring(0, 1).hashCode();
-	}
+	}*/
 
 }

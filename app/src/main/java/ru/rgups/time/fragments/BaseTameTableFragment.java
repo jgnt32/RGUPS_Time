@@ -108,7 +108,7 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		calendarListItemClick(CalendarManager.getInstance().getCurrentDayOfTheYear());
+		calendarListItemClick(CalendarManager.getCurrentDayOfTheYear());
 		return true;
 	}
 	
@@ -147,12 +147,12 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	@Override
 	public void onItemClick(android.widget.AdapterView<?> arg0, View v, int position, long id) {
 		
-		mLessonListener.OnLessonListElementClick(id, mCalendarAdapter.getTimestamp(getLastSelectedDatePosition()));
+		mLessonListener.OnLessonListElementClick(id, CalendarManager.getDate(getLastSelectedDatePosition()));
 	}
 
 	protected int getLastSelectedDatePosition() {
 		if(mLastSelectedDatePosition == -1){
-			return CalendarManager.getInstance().getCurrentDayOfTheYear();
+			return CalendarManager.getCurrentDayOfTheYear();
 		}else{
 			return mLastSelectedDatePosition;			
 		}
@@ -170,9 +170,9 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	@Override
 	public void onScroll(AbsHListView view, int firstVisibleItem,
 			int visibleItemCount, int totalItemCount) {
-		mCalendarHint.setText(""+CalendarManager.getInstance().getCalendarListMonthTitle(firstVisibleItem));
+		mCalendarHint.setText("" + CalendarManager.getCalendarListMonthTitle(firstVisibleItem));
 		
-		if(CalendarManager.getInstance().montIsChanged(firstVisibleItem)){
+		if(CalendarManager.montIsChanged(firstVisibleItem)){
 			mCalendarHint.showHint();
 		}
 		
@@ -180,7 +180,7 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	
 	
 	protected long getTimeStamp(){
-		return mCalendarAdapter.getTimestamp(getLastSelectedDatePosition());
+		return CalendarManager.getDate(getLastSelectedDatePosition());
 	}
 	
 	@Override

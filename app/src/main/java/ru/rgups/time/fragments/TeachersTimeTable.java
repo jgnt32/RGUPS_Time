@@ -7,6 +7,8 @@ import ru.rgups.time.adapters.TeacherPagerAdapter;
 import ru.rgups.time.adapters.TeachersCalendarAdapter;
 import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.DataManager;
+import ru.rgups.time.utils.CalendarManager;
+
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -46,6 +48,6 @@ public class TeachersTimeTable extends BaseTameTableFragment{
 
 	@Override
 	protected LessonListPagerAdapter getNewPagerAdapter() {
-		return new TeacherPagerAdapter(getChildFragmentManager(), LessonManager.DAY_COUNT, mTeachersName);
+		return new TeacherPagerAdapter(getChildFragmentManager(), CalendarManager.getCorrectDayCount(), mTeachersName);
 	}
 }

@@ -12,6 +12,8 @@ import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.rest.RestManager;
+import ru.rgups.time.utils.CalendarManager;
+
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -75,7 +77,7 @@ public class StudentTimeTableFragment extends BaseTameTableFragment {
 
 	@Override
 	protected LessonListPagerAdapter getNewPagerAdapter() {
-		return new LessonListPagerAdapter(getChildFragmentManager(), LessonManager.DAY_COUNT);
+		return new LessonListPagerAdapter(getChildFragmentManager(), CalendarManager.getCorrectDayCount());
 	}
 
 

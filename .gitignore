@@ -86,6 +86,7 @@ ipch/
 *.sdf
 *.cachefile
 
+
 # Visual Studio profiler
 *.psess
 *.vsp
@@ -213,3 +214,7 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+build
+.idea
+.gradle
