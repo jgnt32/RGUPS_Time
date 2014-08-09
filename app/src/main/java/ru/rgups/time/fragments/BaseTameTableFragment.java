@@ -136,6 +136,7 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	protected abstract void setLessonAdapter(ListView list);
 	
 	protected abstract void notifyAdapterSetChanged(int day, int weekState);
+
 	protected abstract BaseCalendarAdapter createNewCalendarAdapter();
 	
 	@Override

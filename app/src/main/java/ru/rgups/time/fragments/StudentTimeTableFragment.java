@@ -26,15 +26,12 @@ public class StudentTimeTableFragment extends BaseTameTableFragment {
 	public static final String DAY_OF_WEEK_DATE_FORMAT = "EEEE";
 	
 	private LessonCalendarAdapter mCalendarAdapter;
-
-
 		
 	@Override
 	public void onResume() {
 		super.onResume();
 		RestManager.getInstance().setSpiceManager(getSpiceManager());
 		RestManager.getInstance().timeTableRequest(new GetTimeListener());
-		mCalendarAdapter.refreshHomwWorkInfo();
 
 	}
 	

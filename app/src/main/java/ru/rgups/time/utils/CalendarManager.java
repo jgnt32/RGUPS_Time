@@ -80,7 +80,7 @@ public class CalendarManager {
 	
 	public static SEMESTR spotSemestr(){
 		int month = Calendar.getInstance().get(Calendar.MONTH);
-		if(month >= Calendar.SEPTEMBER){
+		if(month >= Calendar.AUGUST){
 			return SEMESTR.FIRST_SEMESTR;
 		}else{
 			return SEMESTR.SECOND_SEMESTR;
@@ -99,7 +99,7 @@ public class CalendarManager {
         mSemestrCalendar.setTimeInMillis(System.currentTimeMillis());
         mSemestrCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
         mSemestrCalendar.setMinimalDaysInFirstWeek(4);
-        mSemestrCalendar.set(Calendar.DAY_OF_YEAR, dayOfSemestr + getCorrectDayCount());
+        mSemestrCalendar.set(Calendar.DAY_OF_YEAR, dayOfSemestr + getDayOffset());
         return mSemestrCalendar;
     }
 
@@ -117,7 +117,7 @@ public class CalendarManager {
 			int dayOffset = Calendar.getInstance().getMaximum(Calendar.DAY_OF_YEAR) - getCorrectDayCount();
 			return dayOffset;
 		}else{
-			return 0;  //because first position = 0
+			return 1;  // 1 -- because first position = 0 equel 31 december
 		}
 	
 	}
@@ -168,7 +168,7 @@ public class CalendarManager {
     public static int getWeekNumber(int dayOfSemestr) {
         mSemestrCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
         mSemestrCalendar.setMinimalDaysInFirstWeek(4);
-        mSemestrCalendar.set(Calendar.DAY_OF_YEAR, dayOfSemestr + getCorrectDayCount());
+        mSemestrCalendar.set(Calendar.DAY_OF_YEAR, dayOfSemestr + getDayOffset());
         return mSemestrCalendar.get(Calendar.WEEK_OF_YEAR);
     }
 

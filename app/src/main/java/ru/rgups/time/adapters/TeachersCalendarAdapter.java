@@ -23,15 +23,15 @@ public class TeachersCalendarAdapter extends BaseCalendarAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v =  super.getView(position, convertView, parent);
-		if(mLessonMatrix[CalendarManager.getDayOfWeek(position)-1] [ CalendarManager.getWeekState(position + CalendarManager.getDayOffset())]){
+	/*	if(mLessonMatrix[CalendarManager.getDayOfWeek(position)-1] [ CalendarManager.getWeekState(position + CalendarManager.getDayOffset())]){
 			
 			v.setBackgroundResource(R.drawable.calendar_list_selector);
 			mHolder.getDayOfWeek().setTextColor(mBlueColor);
-		} else {
+		} else {*/
 			v.setBackgroundResource(R.drawable.lesson_free_calendar_list_selector);
 			mHolder.getDayOfWeek().setTextColor(mLessonFreeColor);
 			
-		}
+	//	}
 		return v;
 	}
 	
@@ -41,9 +41,5 @@ public class TeachersCalendarAdapter extends BaseCalendarAdapter{
 		this.mTeachersName = mTeachersName;
 	}
 
-	@Override
-	protected boolean[][] getLessonMatrix() {
-		return LessonManager.getInstance().getTeacherLessonMatrix(mTeachersName);
-	}
 
 }

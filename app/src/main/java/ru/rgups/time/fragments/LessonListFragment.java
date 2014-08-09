@@ -24,8 +24,6 @@ public abstract class LessonListFragment extends Fragment implements OnItemClick
 	
 	protected ListView mListView;
 
-	private LessonAyncTasck mAyncTasck;
-
 	private int mDayNamber;
 	
 	private int mWeekState;
@@ -42,8 +40,7 @@ public abstract class LessonListFragment extends Fragment implements OnItemClick
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mAyncTasck = new LessonAyncTasck();
-		mAyncTasck.execute();
+
 	}
 	
 	
@@ -65,26 +62,7 @@ public abstract class LessonListFragment extends Fragment implements OnItemClick
 	
 	protected abstract void notifyAdtapter();
 	
-	private class LessonAyncTasck extends AsyncTask<Void, Void, Void>{
-		
-		public LessonAyncTasck() {
-		}
-		
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			loadLessonsFromDb();
-			return null;
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			notifyAdtapter();
-		}
-		
-	}
-	
 	
 
 }

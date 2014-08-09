@@ -14,11 +14,11 @@ import android.widget.TextView;
 
 public class LessonCalendarAdapter extends BaseCalendarAdapter{
 	
-	private int [] mHomeWorksVector = new int[CalendarManager.getCorrectDayCount()];
+//	private int [] mHomeWorksVector = new int[CalendarManager.getCorrectDayCount()];
 	
 	public LessonCalendarAdapter(Context context) {
 		super(context);
-		context.getResources().getColor(R.color.red);
+
 	}
 	
 	@Override
@@ -26,12 +26,12 @@ public class LessonCalendarAdapter extends BaseCalendarAdapter{
 		
 		View v = super.getView(position, convertView, parent);
 
-		if(mHomeWorksVector[position] > 0){
+/*		if(mHomeWorksVector[position] > 0){
 			mHolder.getmHWIndicator().setVisibility(View.VISIBLE);
 			mHolder.getHwCount().setText(Integer.toString(mHomeWorksVector[position]));
-		} else {
+		} else {*/
 			mHolder.getmHWIndicator().setVisibility(View.GONE);
-		} 
+//		}
 		
 /*		if(mLessonMatrix[getDayNumber(position)-1] [CalendarManager.getWeekState(position)]){
 			
@@ -51,19 +51,15 @@ public class LessonCalendarAdapter extends BaseCalendarAdapter{
 //		mHomeWorksVector = LessonManager.getInstance().getHomeWorkVector();
 	}
 
-	@Override
+	/*@Override
 	protected boolean[][] getLessonMatrix() {
 		return LessonManager.getInstance().getStudentLessonMatrix();
-	}
+	}*/
 	
 	
-	public void refreshHomwWorkInfo(){
-		HomeWorkVectorAsyncTask asyncTask = new HomeWorkVectorAsyncTask();
-		asyncTask.execute();
-	}
+
 	
-	
-	private class HomeWorkVectorAsyncTask extends AsyncTask<Void, Void, Void>{
+/*	private class HomeWorkVectorAsyncTask extends AsyncTask<Void, Void, Void>{
 
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -77,7 +73,7 @@ public class LessonCalendarAdapter extends BaseCalendarAdapter{
 			LessonCalendarAdapter.this.notifyDataSetChanged();
 		}
 		
-	}
+	}*/
 	
 	
 

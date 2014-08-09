@@ -37,11 +37,10 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 
 	private GregorianCalendar mTimestampCalendar;
 	
-	private Color mBlue;
-	
-	protected boolean mLessonMatrix[][] = new boolean [7][2];
 
-	protected LoadLessonInfo mAsyncLoad;
+//	protected boolean mLessonMatrix[][] = new boolean [7][2];
+
+//	protected LoadLessonInfo mAsyncLoad;
 	
 	public BaseCalendarAdapter(Context context){
 		mContext = context;
@@ -56,8 +55,8 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		mTimestampCalendar.set(GregorianCalendar.MINUTE, 0);
 		mTimestampCalendar.set(GregorianCalendar.SECOND, 0);
 		mTimestampCalendar.set(GregorianCalendar.MILLISECOND, 0);
-		mAsyncLoad = new LoadLessonInfo();
-		mAsyncLoad.execute();
+/*		mAsyncLoad = new LoadLessonInfo();
+		mAsyncLoad.execute();*/
 	}
 	
 	@Override
@@ -76,7 +75,7 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	}
 	
 
-    /** you shold dived on 86000**/
+    /** Mayby you shold dived on 86000**/
 	@Override
 	public long getItemId(int position) {
 		return CalendarManager.getDate(position);
@@ -243,9 +242,8 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		
 	}
 	
-	protected abstract boolean [][] getLessonMatrix();
-	
-	private class LoadLessonInfo extends AsyncTask<Void, Void, Void>{
+
+/*	private class LoadLessonInfo extends AsyncTask<Void, Void, Void>{
 
 		@Override
 		protected Void doInBackground(Void... params) {
@@ -260,6 +258,6 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 			BaseCalendarAdapter.this.notifyDataSetChanged();
 		}
 		
-	}
+	}*/
 	
 }
