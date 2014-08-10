@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -31,7 +32,7 @@ public class GroupListFragment extends BaseFragment implements OnItemClickListen
 	public static final String FUCULTET_ID = "facultet_id";
 	
 	private ArrayList<Group> mGroupList = new ArrayList<Group>();
-	private ListView mListView;
+	private StickyListHeadersListView mListView;
 	private GroupListAdapter mAdapter;
 	private Long mFacultetId;
 	private AuthListener mAuthListener;
@@ -61,7 +62,9 @@ public class GroupListFragment extends BaseFragment implements OnItemClickListen
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.group_list_fargment, null);
-		mListView = (ListView) v.findViewById(R.id.groupList);
+		mListView = new StickyListHeadersListView(getActivity());
+        LinearLayout listViewContainer = (LinearLayout) v.findViewById(R.id.group_list_container);
+        listViewContainer.addView(mListView);
 		mListView.setOnItemClickListener(this);
 		mListView.setEmptyView(v.findViewById(R.id.group_list_empty_view));
 		mListView.setAdapter(mAdapter);
