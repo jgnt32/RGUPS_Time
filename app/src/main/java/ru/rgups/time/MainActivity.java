@@ -98,7 +98,6 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	@Override
 	protected void onResume() {
 		super.onResume();
-		RestManager.getInstance().setSpiceManager(getSpiceManager());
 	/*	if(!PreferenceManager.getInstance().isFacultetsTimeDowloaded() && PreferenceManager.getInstance().getFacultetId() != -1){
 			RestManager.getInstance().exucuteFacultetRequest(new FacultetTimeRequestListener());
 			mProgressDialog.show();

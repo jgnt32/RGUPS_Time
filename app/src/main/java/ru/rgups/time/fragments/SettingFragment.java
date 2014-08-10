@@ -54,7 +54,6 @@ public class SettingFragment extends BaseFragment implements OnClickListener{
 	@Override
 	public void onResume() {
 		super.onResume();
-		RestManager.getInstance().setSpiceManager(getSpiceManager());
 	}
 
 

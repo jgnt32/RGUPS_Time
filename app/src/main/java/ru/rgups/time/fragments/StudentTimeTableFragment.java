@@ -30,7 +30,8 @@ public class StudentTimeTableFragment extends BasePageTameTableFragment implemen
 		super.onResume();
 	    getLoaderManager().restartLoader(0, null, this);
         getLoaderManager().getLoader(0).forceLoad();
-	}
+	    RestManager.getInstance().timeTableRequest(null);
+    }
 
     @Override
     public android.support.v4.content.Loader<boolean[][]> onCreateLoader(int id, Bundle args) {

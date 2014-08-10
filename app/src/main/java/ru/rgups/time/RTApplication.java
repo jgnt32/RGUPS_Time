@@ -9,6 +9,7 @@ import ru.rgups.time.model.entity.Facultet;
 import ru.rgups.time.model.entity.Group;
 import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.rest.ApigeeManager;
+import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.DialogManager;
 import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;
@@ -27,6 +28,7 @@ public class RTApplication extends Application{
 		PreferenceManager.initalize(getApplicationContext());
 		DialogManager.initInstatnce(getApplicationContext());
         ApigeeManager.initInstance(getApplicationContext());
+        RestManager.setContext(getApplicationContext());
         if (HelperManager.getHelper() == null) {
 			RoboSpiceDatabaseHelper databaseHelper = new RoboSpiceDatabaseHelper(this, HelperManager.DB_NAME, HelperManager.DB_VERSION);
 			HelperManager.setHelper(databaseHelper);

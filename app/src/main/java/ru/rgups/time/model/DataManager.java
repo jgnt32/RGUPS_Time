@@ -23,6 +23,8 @@ import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;
 import ru.rgups.time.utils.Slipper;
 import android.content.Context;
+import android.database.ContentObservable;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -30,7 +32,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
-public class DataManager {
+public class DataManager extends ContentObservable{
 	
 	private SQLiteStatement mSaveLessonStatement;
 	private SQLiteStatement mSaveInformationStatement;
@@ -43,6 +45,8 @@ public class DataManager {
 	private SQLiteStatement mSetHomeWorkChecked;
 	private SQLiteStatement mSaveGroupStatement;
 	private SQLiteStatement mSaveFacultetStatement;
+
+
 	
 	public DataManager() {
 		mDb = HelperManager.getHelper().getWritableDatabase();
@@ -256,7 +260,8 @@ public class DataManager {
 		}
 		finally{
 			mDb.endTransaction();
-			
+            dispatchChange(true, null);
+
 		}
 		
 	}

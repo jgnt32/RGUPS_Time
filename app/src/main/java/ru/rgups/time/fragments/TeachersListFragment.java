@@ -5,6 +5,8 @@ import ru.rgups.time.R;
 import ru.rgups.time.adapters.TeacherCursorAdapter;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.loaders.RTCursorLoader;
+import ru.rgups.time.loaders.TeacherLessonLoader;
+import ru.rgups.time.loaders.TecherListLoader;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.DialogManager;
@@ -31,9 +33,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FilterQueryProvider;
 import android.widget.ListView;
 
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
-
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
@@ -45,8 +44,6 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	private MenuItem mSearchItem;
 	private SearchView mSearchView;
 	private LessonListener mLessonListener;
-	private TeacherListAsyncLoad mAsyncDBLoad;
-	
 	private View mProgressView;
 
 	private View mEmptyMessage;
@@ -66,7 +63,6 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 		setRetainInstance(true);
 		mAdapter = new TeacherCursorAdapter(getActivity(), null, true);
 		mAdapter.setFilterQueryProvider(this);
-		loadFromDb();
 	}
 	
 	
@@ -86,7 +82,6 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	@Override
 	public void onResume() {
 		super.onResume();
-		RestManager.getInstance().setSpiceManager(getSpiceManager());
 		if(!PreferenceManager.getInstance().isFullTimeDownloaded() &&
 				!PreferenceManager.getInstance().fullTimeDialoWasShowed()){
 			PreferenceManager.getInstance().setFullTimeDownloadingDialogShowed(true);
@@ -94,18 +89,18 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					RestManager.getInstance().fullTimeRequest(new FullTimeListener());
+					RestManager.getInstance().fullTimeRequest(null);
 					Crouton.showText(getActivity(), getString(R.string.main_loading_begin), Style.INFO);
 				}
 				
 			});
 		}
+
+        getLoaderManager().restartLoader(0, null, this);
+        getLoaderManager().getLoader(0).forceLoad();
 	}
 	
-	private void loadFromDb(){
-		mAsyncDBLoad = new TeacherListAsyncLoad();
-		mAsyncDBLoad.execute();
-	}
+
 	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -125,7 +120,7 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int c, Bundle arg1) {
-		return mLoader = new RTCursorLoader(getActivity());
+		return new TecherListLoader(getActivity());
 	}
 
 	@Override
@@ -155,22 +150,6 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 		return DataManager.getInstance().getFiltredTeachersCursor(constraint.toString());
 	}
 
-	private class FullTimeListener implements RequestListener<Boolean>{
-
-		@Override
-		public void onRequestFailure(SpiceException e) {
-			e.printStackTrace();
-			
-		}
-
-		@Override
-		public void onRequestSuccess(Boolean response) {
-			loadFromDb();
-		}
-		
-	}
-	
-	
 
 	@Override
 	public boolean onMenuItemActionCollapse(MenuItem arg0) {
@@ -183,31 +162,6 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
-	private class TeacherListAsyncLoad extends AsyncTask<Void, Void, Void>{
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			mTeacherListCursor = DataManager.getInstance().getAllTeachersCursor();
-			try {
-				Thread.sleep(400);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			return null;
-		}
-		
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			if(isAdded()){
-				mAdapter.changeCursor( mTeacherListCursor);
-				mAdapter.notifyDataSetChanged();
-/*				mEmptyMessage.setVisibility(View.VISIBLE);
-				mProgressView.setVisibility(View.GONE);*/
-			}
-		}
-	}
 	
 }
