@@ -73,8 +73,6 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 			mInformationContainer.addView(getLesson(lesson));
 		}
 
-		
-		
 		mTitle.setText(mLesson.getInformation().get(0).getTitle());
 		mTime.setText(mTimePeriods[mLesson.getLessonNumber()-1]);
 

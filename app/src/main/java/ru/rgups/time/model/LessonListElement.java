@@ -14,6 +14,8 @@ public class LessonListElement {
 	
 	private ArrayList<LessonInformation> information;
 
+    private boolean hasHomeWork;
+
 	public int getDayNumber() {
 		return dayNumber;
 	}
@@ -46,5 +48,11 @@ public class LessonListElement {
 		this.id = id;
 	}
 
-	
+    public boolean isHasHomeWork() {
+        return hasHomeWork;
+    }
+
+    public void setHasHomeWork(boolean hasHomeWork) {
+        this.hasHomeWork = hasHomeWork;
+    }
 }

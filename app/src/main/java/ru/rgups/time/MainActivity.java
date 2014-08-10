@@ -16,6 +16,7 @@ import ru.rgups.time.fragments.StudentTimeTableFragment;
 import ru.rgups.time.fragments.WelcomeActivity;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.interfaces.SettingListener;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.DialogManager;
 import ru.rgups.time.utils.PreferenceManager;
@@ -79,6 +80,8 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 			openTimeTableFragment();
 
 		}
+
+        DataManager.getInstance().writeToSD(this);
 	}
 
 	private void openWelcomeActivity(){

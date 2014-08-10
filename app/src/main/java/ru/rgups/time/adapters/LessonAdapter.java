@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import ru.rgups.time.R;
 import ru.rgups.time.datamanagers.LessonManager;
-import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.DoubleLine;
 import ru.rgups.time.model.entity.LessonInformation;
@@ -35,22 +34,13 @@ public class LessonAdapter extends BaseAdapter{
 	private String[] timePeriods;
 	private Long timestamp = (long) 0;
 	private String mHeaderNumber;
-	
-	private boolean [] mHwVector;
-	
-	private HomeWorkVectorAsync mHomeWorkVectorAsyncTask;
-	
-	public LessonAdapter(Context context, ArrayList<LessonListElement> list, long timestamp){
+
+
+	public LessonAdapter(Context context, ArrayList<LessonListElement> list){
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);	
 		mLessonList = list;
 		timePeriods = context.getResources().getStringArray(R.array.lessons_time_periods);
 		mHeaderNumber = context.getResources().getString(R.string.lesson_list_divider);
-		this.timestamp = timestamp;
-		
-		mHomeWorkVectorAsyncTask = new HomeWorkVectorAsync();
-		
-		mHomeWorkVectorAsyncTask.execute();
-		
 	}
 
 	@Override
@@ -79,14 +69,12 @@ public class LessonAdapter extends BaseAdapter{
 			mHolder = (ViewHolder) mView.getTag();
 		}
 		
-	/*	if(mHwVector!= null){
-			if(mHwVector[position]){
-			
+
+			if(getItem(position).isHasHomeWork()){
 				mHolder.hwIndicator.setVisibility(View.VISIBLE);
 			}else{
 				mHolder.hwIndicator.setVisibility(View.GONE);
 			}
-			}*/
 		if(getItem(position).getInformation().size()>0){
 			StringBuffer roomBuffer = new StringBuffer();
 			StringBuffer teacherBuffer = new StringBuffer();
@@ -127,22 +115,7 @@ public class LessonAdapter extends BaseAdapter{
 
 		return mView;
 	}
-	
-	private class HomeWorkVectorAsync extends AsyncTask<Void, Void, Void>{
 
-		@Override
-		protected Void doInBackground(Void... params) {
-			mHwVector = LessonManager.getInstance().getHomeworLessonListFragment(getTimestamp(), mLessonList);
-			return null;
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			notifyDataSetChanged();
-		}
-		
-	}
 	
 	
 

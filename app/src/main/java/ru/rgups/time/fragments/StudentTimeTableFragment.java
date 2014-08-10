@@ -50,23 +50,6 @@ public class StudentTimeTableFragment extends BasePageTameTableFragment implemen
     }
 
 
-    private class GetTimeListener implements RequestListener< LessonList >{
-		
-		
-		@Override
-		public void onRequestFailure(SpiceException exception) {
-		}
-
-		@Override
-		public void onRequestSuccess(LessonList list) {
-			try {
-				DataManager.getInstance().writeToSD(getActivity());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-	}
 
 
 	@Override

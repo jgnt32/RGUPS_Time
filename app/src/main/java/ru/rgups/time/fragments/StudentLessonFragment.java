@@ -4,6 +4,7 @@ import ru.rgups.time.adapters.LessonAdapter;
 import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.loaders.StudentsLessonLoader;
 import ru.rgups.time.model.LessonListElement;
+import ru.rgups.time.utils.CalendarManager;
 
 import android.content.Loader;
 import android.os.Bundle;
@@ -24,7 +25,7 @@ public class StudentLessonFragment extends LessonListFragment implements LoaderM
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mDayNumber = getArguments().getInt(DAY_ARGS);
-		mAdapter = new LessonAdapter(getActivity(), mLessons, LessonManager.getInstance().getTimeStampBySemestrDayNumber(mDayNumber));
+		mAdapter = new LessonAdapter(getActivity(), mLessons);
 	}
 
     @Override
@@ -34,24 +35,23 @@ public class StudentLessonFragment extends LessonListFragment implements LoaderM
         getLoaderManager().getLoader(0).forceLoad();
     }
 
+
     @Override
 	protected void setAdapter(ListView list) {
 		mListView.setAdapter(mAdapter);
 	}
 
 
-
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		mLessonListener.OnLessonListElementClick(id, LessonManager.getInstance().getTimeStampBySemestrDayNumber(mDayNumber));
+		mLessonListener.OnLessonListElementClick(id, CalendarManager.getDate(mDayNumber));
 	}
 
 
     @Override
     public android.support.v4.content.Loader<ArrayList<LessonListElement>> onCreateLoader(int i, Bundle bundle) {
         return new StudentsLessonLoader(getActivity(), mDayNumber);
-
     }
 
     @Override

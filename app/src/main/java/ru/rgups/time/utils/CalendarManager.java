@@ -25,6 +25,8 @@ public class CalendarManager {
     public static final int SECOND_SEMESTR_LEAP_DAY_COUNT = 213;
     public static final int SECOND_SEMESTR_UNLEAP_DAY_COUNT = 212;
 
+    public static final int MILISECONDS_PER_DAY = 86400000;
+
     public static enum WEEK_STATE {
         UNDER_LINE,
         OVER_LINE

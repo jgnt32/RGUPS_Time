@@ -73,7 +73,7 @@ public class HomeWorkListFragment extends BaseFragment implements OnItemClickLis
     @Override
     public void onResume() {
         super.onResume();
-        ApigeeManager.getInstance().fetchHomeWorks();
+
     }
 
     @Override

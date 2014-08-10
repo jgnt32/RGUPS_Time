@@ -65,15 +65,7 @@ public class LessonManager {
 	}
 	
 	
-	
-	public ArrayList<LessonListElement> getLessonsBySemestrDayNumber(int dayNumber){
-		
-		return DataManager.getInstance().getLessonList(CalendarManager.getDayOfWeek(dayNumber),
-                CalendarManager.getWeekState(dayNumber));
-	}
-	
 
-	
 	
 	public boolean [][] getStudentLessonMatrix(){
 		boolean [][] result = new boolean [7][2];
@@ -100,11 +92,11 @@ public class LessonManager {
 		return result;
 	}
 	
-	public boolean [] getHomeworLessonListFragment(long timestamp, ArrayList<LessonListElement> lessonList){
+	public boolean [] getHomeWorkExistingVector(long timestamp, ArrayList<LessonListElement> lessonList){
 		boolean [] result = new boolean [lessonList.size()];
 		int i = 0;
 		for(LessonListElement lesson : lessonList){
-			result[i] = DataManager.getInstance().lessonHasHomeWork(lesson.getId(), timestamp);
+			result[i] = DataManager.getInstance().lessonHasHomeWork(lesson.getId(), timestamp / CalendarManager.MILISECONDS_PER_DAY);
 			i++;
 			
 		}
@@ -138,12 +130,6 @@ public class LessonManager {
 		return PreferenceManager.getInstance().getGroupId();
 	}
 	
-	
-	public long getTimeStampBySemestrDayNumber(int dayNumber){
-		mCalendar.setTime(new Date(0));
-		mCalendar.set(GregorianCalendar.YEAR, Calendar.getInstance().get(Calendar.YEAR));
-		mCalendar.set(GregorianCalendar.DAY_OF_YEAR, CalendarManager.getCurrentDayOfTheYear());
-		return mCalendar.getTimeInMillis();
-	}
+
 	
 }

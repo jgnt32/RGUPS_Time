@@ -29,7 +29,7 @@ public class StudentsLessonLoader extends AsyncTaskLoader<ArrayList<LessonListEl
 
     @Override
     public ArrayList<LessonListElement> loadInBackground() {
-        return LessonManager.getInstance().getLessonsBySemestrDayNumber(mDayNumber);
+        return DataManager.getInstance().getLessonList(mDayNumber);
     }
 
 

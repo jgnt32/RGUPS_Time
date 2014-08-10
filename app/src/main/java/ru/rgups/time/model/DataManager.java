@@ -2,6 +2,7 @@ package ru.rgups.time.model;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
@@ -10,6 +11,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
+import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.entity.Day;
 import ru.rgups.time.model.entity.DoubleLine;
 import ru.rgups.time.model.entity.Facultet;
@@ -19,6 +21,7 @@ import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
+import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;
 import ru.rgups.time.utils.Slipper;
@@ -267,7 +270,7 @@ public class DataManager extends ContentObservable{
 	}
 	
 	
-	public void writeToSD(Context context) throws IOException {
+	public void writeToSD(Context context) {
 	    File sd = Environment.getExternalStorageDirectory();
 
 	    if (sd.canWrite()) {
@@ -277,11 +280,17 @@ public class DataManager extends ContentObservable{
 	        File backupDB = new File(sd, backupDBPath);
 
 	        if (dbFile.exists()) {
-	            FileChannel src = new FileInputStream(dbFile).getChannel();
-	            FileChannel dst = new FileOutputStream(backupDB).getChannel();
-	            dst.transferFrom(src, 0, src.size());
-	            src.close();
-	            dst.close();
+                FileChannel src = null;
+                try {
+                    src = new FileInputStream(dbFile).getChannel();
+                    FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                    dst.transferFrom(src, 0, src.size());
+                    src.close();
+                    dst.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
 	        }
 	    }
 	    Log.e("write to SD","writeToSD");
@@ -379,36 +388,47 @@ public class DataManager extends ContentObservable{
 		}
 	}
 	
-	public ArrayList<LessonListElement> getLessonList(final Integer dayNumber, final Integer weekState){
+	public ArrayList<LessonListElement> getLessonList(final Integer dayOfSemestr){
 		ArrayList<LessonListElement> result = new ArrayList<LessonListElement>();
+
+        int weekState = CalendarManager.getWeekState(dayOfSemestr);
+        int dayOfWeek = CalendarManager.getDayOfWeek(dayOfSemestr);
 		
 		String query = TextUtils.concat(
 				"SELECT * FROM ",LessonTableModel.TABLE_NAME," WHERE ",
 				LessonTableModel.GROUP_ID," ='",PreferenceManager.getInstance().getGroupId().toString(),"' AND ",
-				LessonTableModel.DAY,"='",dayNumber.toString(),"'", " AND ",
-				"(",LessonTableModel.WEEK_STATE,"='",weekState.toString(),"' OR " ,
+				LessonTableModel.DAY,"=? AND ",
+				"(",LessonTableModel.WEEK_STATE,"=? OR " ,
 				LessonTableModel.WEEK_STATE,"='2')",
 				" GROUP BY ",LessonTableModel.NUMBER, " ORDER BY ",LessonTableModel.NUMBER
 				).toString();
 		
 
-		Cursor c = mDb.rawQuery(query, new String[]{});
+		Cursor c = mDb.rawQuery(query, new String[]{Integer.toString(dayOfWeek), Integer.toString(weekState)});
 		LessonListElement lesson;
+        long date = CalendarManager.getDate(dayOfSemestr) / CalendarManager.MILISECONDS_PER_DAY;
 		while(c.moveToNext()){
-				lesson = new LessonListElement();
-				lesson.setId(c.getLong(c.getColumnIndex(LessonTableModel.ID)));		
-
-				lesson.setDayNumber(c.getInt(c.getColumnIndex(LessonTableModel.DAY)));
-				lesson.setLessonNumber(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)));
-				lesson.setInformation(getLessonInformation(c.getLong(c.getColumnIndex(LessonTableModel.ID))));
-				result.add(lesson);
+            lesson = getLessonFromCursor(c);
+            lesson.setHasHomeWork(DataManager.getInstance().lessonHasHomeWork(lesson.getId(), date));
+    		result.add(lesson);
 			
 		}
 
 		return result;
 	}
-	
-	public ArrayList<LessonListElement> getLessonList(){
+
+    private LessonListElement getLessonFromCursor(Cursor c) {
+        LessonListElement lesson;
+        lesson = new LessonListElement();
+        lesson.setId(c.getLong(c.getColumnIndex(LessonTableModel.ID)));
+
+        lesson.setDayNumber(c.getInt(c.getColumnIndex(LessonTableModel.DAY)));
+        lesson.setLessonNumber(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)));
+        lesson.setInformation(getLessonInformation(c.getLong(c.getColumnIndex(LessonTableModel.ID))));
+        return lesson;
+    }
+
+    public ArrayList<LessonListElement> getLessonList(){
 		ArrayList<LessonListElement> result = new ArrayList<LessonListElement>();
 		
 		String query = TextUtils.concat(
@@ -421,13 +441,9 @@ public class DataManager extends ContentObservable{
 		Cursor c = mDb.rawQuery(query, new String[]{});
 		LessonListElement lesson;
 		while(c.moveToNext()){
-				lesson = new LessonListElement();
-				lesson.setId(c.getLong(c.getColumnIndex(LessonTableModel.ID)));		
-				lesson.setDayNumber(c.getInt(c.getColumnIndex(LessonTableModel.DAY)));
-				lesson.setLessonNumber(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)));
-				lesson.setInformation(getLessonInformation(c.getLong(c.getColumnIndex(LessonTableModel.ID))));
-				result.add(lesson);
-			
+            lesson = getLessonFromCursor(c);
+			result.add(lesson);
+
 		}
 
 		return result;
@@ -489,7 +505,7 @@ public class DataManager extends ContentObservable{
 		try{
 			mSaveHomeWorkStatement.clearBindings();
 			if(homeWork.getDate() != null){
-				mSaveHomeWorkStatement.bindLong(1, homeWork.getDate().getTime());
+				mSaveHomeWorkStatement.bindLong(1, homeWork.getDate().getTime() / CalendarManager.MILISECONDS_PER_DAY);
 			}
 			
 			mSaveHomeWorkStatement.bindLong(2, homeWork.getLessonId());
@@ -531,18 +547,24 @@ public class DataManager extends ContentObservable{
 				).toString(), 
 				new String[]{id.toString()});
 		if(c.moveToFirst()){
-			result = new HomeWork();
-			result.setId(c.getLong(c.getColumnIndex(HomeWork.ID)));
-			result.setDate(new Date(c.getLong(c.getColumnIndex(HomeWork.DATE))));
-			result.setLessonId(c.getLong(c.getColumnIndex(HomeWork.LESSON_ID)));
-			result.setMessage(c.getString(c.getColumnIndex(HomeWork.MESSAGE)));
-			result.setImages(Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES))));
-			result.setComplite(c.getInt(c.getColumnIndex(HomeWork.COMPLITE))>0);
-			result.setGroupId(c.getLong(c.getColumnIndex(HomeWork.GROUP_ID)));
-
+			result = getHomeWorkFromCursor(c);
 		}
 		return result;
 	}
+
+    private HomeWork getHomeWorkFromCursor(Cursor c){
+        HomeWork result =  new HomeWork();
+            result.setId(c.getLong(c.getColumnIndex(HomeWork.ID)));
+            result.setDate(new Date(c.getLong(c.getColumnIndex(HomeWork.DATE)) * CalendarManager.MILISECONDS_PER_DAY));
+            result.setLessonId(c.getLong(c.getColumnIndex(HomeWork.LESSON_ID)));
+            result.setMessage(c.getString(c.getColumnIndex(HomeWork.MESSAGE)));
+            result.setImages(Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES))));
+            result.setComplite(c.getInt(c.getColumnIndex(HomeWork.COMPLITE))>0);
+            result.setGroupId(c.getLong(c.getColumnIndex(HomeWork.GROUP_ID)));
+
+
+        return result;
+    }
 
 	public ArrayList<HomeWork> getHomeWorkList(Long date, Long lessonId){
 		ArrayList<HomeWork> result = new ArrayList<HomeWork>();
@@ -554,16 +576,7 @@ public class DataManager extends ContentObservable{
 				new String[]{});
 		while(c.moveToNext()){
 
-			HomeWork hw = new HomeWork();
-			hw.setId(c.getLong(c.getColumnIndex(HomeWork.ID)));
-			hw.setDate(new Date(c.getLong(c.getColumnIndex(HomeWork.DATE))));
-			hw.setLessonId(c.getLong(c.getColumnIndex(HomeWork.LESSON_ID)));
-			hw.setMessage(c.getString(c.getColumnIndex(HomeWork.MESSAGE)));
-			hw.setImages(Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES))));
-			hw.setComplite(c.getInt(c.getColumnIndex(HomeWork.COMPLITE))>0);
-			hw.setGroupId(c.getLong(c.getColumnIndex(HomeWork.GROUP_ID)));
-
-			result.add(hw);
+			result.add(getHomeWorkFromCursor(c));
 		}
 		return result;
 	}
