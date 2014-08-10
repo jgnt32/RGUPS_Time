@@ -91,7 +91,8 @@ public class LessonManager {
 		
 		return result;
 	}
-	
+
+    @Deprecated
 	public boolean [] getHomeWorkExistingVector(long timestamp, ArrayList<LessonListElement> lessonList){
 		boolean [] result = new boolean [lessonList.size()];
 		int i = 0;
@@ -109,15 +110,18 @@ public class LessonManager {
 		Cursor c = getHomeWorkCursor();
 		
 		while(c.moveToNext()){
-			mCalendar.setTimeInMillis(c.getLong(c.getColumnIndex(HomeWork.DATE)));
-			result[mCalendar.get(GregorianCalendar.DAY_OF_YEAR) - CalendarManager.getDayOffset()] = c.getInt(c.getColumnIndex("cnt"));
+			result[getDayOfSemestr(c)] = c.getInt(c.getColumnIndex("cnt"));
 		}
 
 		return result;
 	}
-	
-	
-	public Cursor getHomeWorkCursor(){
+
+    private int getDayOfSemestr(Cursor c) {
+        return CalendarManager.getDayOfSemestr(c.getLong(c.getColumnIndex(HomeWork.DATE)) * CalendarManager.MILISECONDS_PER_DAY);
+    }
+
+
+    public Cursor getHomeWorkCursor(){
 		Cursor c = mDb.rawQuery(TextUtils.concat(
 				"SELECT COUNT(*) cnt, h.* FROM ",HomeWork.TABLE_NAME," as h WHERE h.", HomeWork.GROUP_ID," = ? "
 				," AND h.",HomeWork.COMPLITE," = '0' GROUP BY ", HomeWork.DATE 

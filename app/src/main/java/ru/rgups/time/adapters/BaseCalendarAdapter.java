@@ -249,8 +249,5 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		mLastSelected  = last;
 	}
 	
-	protected void loadHomeWorkInf(){
-		
-	}
 
 }

@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/calendar_bottom_indicator"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="5dp"
+
         android:text="ПН"
         android:textColor="@color/theme_blue"
         android:textSize="10sp" />

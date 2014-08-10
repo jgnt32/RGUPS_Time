@@ -105,6 +105,15 @@ public class CalendarManager {
         return mSemestrCalendar;
     }
 
+
+    public static int getDayOfSemestr(long date){
+        mSemestrCalendar.setTimeInMillis(System.currentTimeMillis());
+        mSemestrCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
+        mSemestrCalendar.setMinimalDaysInFirstWeek(4);
+        mSemestrCalendar.setTimeInMillis(date);
+        return mSemestrCalendar.get(Calendar.DAY_OF_YEAR) - getDayOffset();
+    }
+
     public static int getDayOfWeek(int dayOfSemestr){
 
         if(getCalendar(dayOfSemestr).get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.SUNDAY){

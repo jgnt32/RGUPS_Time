@@ -6,11 +6,12 @@ import android.support.v4.content.AsyncTaskLoader;
 
 import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.DataManager;
+import ru.rgups.time.model.entity.StudentCalendarLessonInfo;
 
 /**
  * Created by timewaistinguru on 09.08.2014.
  */
-public class LessonExistingVector extends AsyncTaskLoader<boolean[][]> {
+public class LessonExistingVector extends AsyncTaskLoader<StudentCalendarLessonInfo> {
 
     private String mTeacher;
     private ContentObserver mObserver = new ForceLoadContentObserver();
@@ -23,11 +24,16 @@ public class LessonExistingVector extends AsyncTaskLoader<boolean[][]> {
     }
 
     @Override
-    public boolean[][] loadInBackground() {
+    public StudentCalendarLessonInfo loadInBackground() {
+        StudentCalendarLessonInfo result = new StudentCalendarLessonInfo();
+
         if(mTeacher == null){
-            return LessonManager.getInstance().getStudentLessonMatrix();
+            result.setLessonMatrix(LessonManager.getInstance().getStudentLessonMatrix());
+            result.setHwVector(LessonManager.getInstance().getHomeWorkVector());
         } else {
-            return LessonManager.getInstance().getTeacherLessonMatrix(mTeacher);
+            result.setLessonMatrix(LessonManager.getInstance().getTeacherLessonMatrix(mTeacher));
         }
+
+        return result;
     }
 }

@@ -8,6 +8,7 @@ import ru.rgups.time.adapters.LessonListPagerAdapter;
 import ru.rgups.time.loaders.LessonExistingVector;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.entity.LessonList;
+import ru.rgups.time.model.entity.StudentCalendarLessonInfo;
 import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.CalendarManager;
 
@@ -18,7 +19,7 @@ import android.widget.ListView;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-public class StudentTimeTableFragment extends BasePageTameTableFragment implements LoaderManager.LoaderCallbacks<boolean[][]> {
+public class StudentTimeTableFragment extends BasePageTameTableFragment implements LoaderManager.LoaderCallbacks<StudentCalendarLessonInfo> {
 	
 	public final static String DAY_MONTH_DATE_FORMAT = "d MMMM";
 	public static final String DAY_OF_WEEK_DATE_FORMAT = "EEEE";
@@ -34,18 +35,19 @@ public class StudentTimeTableFragment extends BasePageTameTableFragment implemen
     }
 
     @Override
-    public android.support.v4.content.Loader<boolean[][]> onCreateLoader(int id, Bundle args) {
+    public android.support.v4.content.Loader<StudentCalendarLessonInfo> onCreateLoader(int id, Bundle args) {
         return new LessonExistingVector(getActivity(), null);
     }
 
     @Override
-    public void onLoadFinished(android.support.v4.content.Loader<boolean[][]> loader, boolean[][] data) {
-        mCalendarAdapter.setmLessonMatrix(data);
+    public void onLoadFinished(android.support.v4.content.Loader<StudentCalendarLessonInfo> loader, StudentCalendarLessonInfo data) {
+        mCalendarAdapter.setmLessonMatrix(data.getLessonMatrix());
+        mCalendarAdapter.setHomeWorksVector(data.getHwVector());
         mCalendarAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onLoaderReset(android.support.v4.content.Loader<boolean[][]> loader) {
+    public void onLoaderReset(android.support.v4.content.Loader<StudentCalendarLessonInfo> loader) {
 
     }
 

@@ -13,8 +13,7 @@ import android.widget.TextView;
 
 
 public class LessonCalendarAdapter extends BaseCalendarAdapter{
-	
-//	private int [] mHomeWorksVector = new int[CalendarManager.getCorrectDayCount()];
+	private int [] mHomeWorksVector = new int[CalendarManager.getCorrectDayCount()];
 	
 	public LessonCalendarAdapter(Context context) {
 		super(context);
@@ -26,55 +25,20 @@ public class LessonCalendarAdapter extends BaseCalendarAdapter{
 		
 		View v = super.getView(position, convertView, parent);
 
-/*		if(mHomeWorksVector[position] > 0){
+		if(mHomeWorksVector[position] > 0){
 			mHolder.getmHWIndicator().setVisibility(View.VISIBLE);
 			mHolder.getHwCount().setText(Integer.toString(mHomeWorksVector[position]));
-		} else {*/
-			mHolder.getmHWIndicator().setVisibility(View.GONE);
-//		}
-		
-/*		if(mLessonMatrix[getDayNumber(position)-1] [CalendarManager.getWeekState(position)]){
-			
-			v.setBackgroundResource(R.drawable.calendar_list_selector);
-			mHolder.getDayOfWeek().setTextColor(mBlueColor);
 		} else {
-			v.setBackgroundResource(R.drawable.lesson_free_calendar_list_selector);
-			mHolder.getDayOfWeek().setTextColor(mLessonFreeColor);
-			
-		}*/
-		
+			mHolder.getmHWIndicator().setVisibility(View.GONE);
+		}
 		return v;
 	}
-	
-	@Override
-	protected void loadHomeWorkInf() {
-//		mHomeWorksVector = LessonManager.getInstance().getHomeWorkVector();
-	}
 
-	/*@Override
-	protected boolean[][] getLessonMatrix() {
-		return LessonManager.getInstance().getStudentLessonMatrix();
-	}*/
-	
-	
+    public int[] getHomeWorksVector() {
+        return mHomeWorksVector;
+    }
 
-	
-/*	private class HomeWorkVectorAsyncTask extends AsyncTask<Void, Void, Void>{
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			loadHomeWorkInf();
-			return null;
-		}
-		
-		@Override
-		protected void onPostExecute(Void result) {
-			super.onPostExecute(result);
-			LessonCalendarAdapter.this.notifyDataSetChanged();
-		}
-		
-	}*/
-	
-	
-
+    public void setHomeWorksVector(int[] mHomeWorksVector) {
+        this.mHomeWorksVector = mHomeWorksVector;
+    }
 }
