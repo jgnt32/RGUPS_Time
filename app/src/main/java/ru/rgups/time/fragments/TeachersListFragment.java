@@ -38,7 +38,7 @@ import de.keyboardsurfer.android.widget.crouton.Style;
 
 public class TeachersListFragment extends BaseFragment implements OnItemClickListener, LoaderCallbacks<Cursor>, 
 																SearchView.OnQueryTextListener, FilterQueryProvider, MenuItemCompat.OnActionExpandListener{
-	private ListView mListView;
+	private StickyListHeadersListView mListView;
 	private TeacherCursorAdapter mAdapter;
 	private RTCursorLoader mLoader;
 	private MenuItem mSearchItem;
@@ -69,14 +69,14 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.simple_list_fragment, null);
-		mListView = (ListView) v.findViewById(R.id.list_fragment_listview);
+//		View v = inflater.inflate(R.layout.simple_list_fragment, null);
+		mListView = new StickyListHeadersListView(getActivity());
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 	/*	mListView.setEmptyView(v.findViewById(R.id.list_fragment_empty_view));
 		mProgressView = v.findViewById(R.id.list_fragment_empty_view_progress);
 		mEmptyMessage = v.findViewById(R.id.list_fragment_empty_view_message);*/
-		return v;
+		return mListView;
 	}
 	
 	@Override

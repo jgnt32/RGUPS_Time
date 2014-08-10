@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-public class TeacherCursorAdapter extends CursorAdapter {
+public class TeacherCursorAdapter extends StickyListHeadersCursorAdapter {
 	
 	private LayoutInflater mInflater;
 	
@@ -35,7 +35,7 @@ public class TeacherCursorAdapter extends CursorAdapter {
         return getCursor().getString(getCursor().getColumnIndex(LessonInformation.TEACHER_NAME));
 	}
 
-/*	@Override
+	@Override
 	protected View newHeaderView(Context context, Cursor cursor, ViewGroup parent) {
 		return mInflater.inflate(R.layout.group_list_divier, null);
 	}
@@ -49,6 +49,6 @@ public class TeacherCursorAdapter extends CursorAdapter {
 	@Override
 	public long getHeaderId(Cursor c) {
 		return c.getString(c.getColumnIndex(LessonInformation.TEACHER_NAME)).substring(0, 1).hashCode();
-	}*/
+	}
 
 }
