@@ -3,11 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/sticky_list_view_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </LinearLayout>
     
-    <ListView
-        android:id="@+id/homework_list_fragment_listview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
     
     <RelativeLayout 
         android:id="@+id/hw_empty_view"

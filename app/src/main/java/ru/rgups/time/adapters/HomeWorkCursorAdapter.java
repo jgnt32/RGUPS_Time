@@ -3,6 +3,8 @@ package ru.rgups.time.adapters;
 import ru.rgups.time.R;
 import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.entity.LessonInformation;
+import ru.rgups.time.utils.CalendarManager;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.text.format.DateFormat;
@@ -34,10 +36,14 @@ public class HomeWorkCursorAdapter extends StickyListHeadersCursorAdapter{
 	@Override
 	protected void bindHeaderView(View v, Context context, Cursor c) {
 		final TextView date = (TextView) v.findViewById(R.id.divider_text);
-		date.setText(DateFormat.format(DIVIDER_DATE_FORMAT,  c.getLong(c.getColumnIndex(HomeWork.DATE))));
+		date.setText(DateFormat.format(DIVIDER_DATE_FORMAT, getDate(c)));
 	}
 
-	@Override
+    private long getDate(Cursor c) {
+        return c.getLong(c.getColumnIndex(HomeWork.DATE)) * CalendarManager.MILISECONDS_PER_DAY;
+    }
+
+    @Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
 		return  mInflater.inflate(R.layout.homework_list_elemetn, parent, false);
 	}

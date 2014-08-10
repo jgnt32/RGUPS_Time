@@ -12,6 +12,7 @@ import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.rest.ApigeeManager;
 import ru.rgups.time.rest.RestManager;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.AsyncTask;
@@ -22,11 +23,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 public class HomeWorkListFragment extends BaseFragment implements OnItemClickListener{
 
-	private ListView  mListView;
+	private StickyListHeadersListView mListView;
 	private LessonListener mLessonListener;
 	private HomeWorkCursorAdapter mAdpter;
 	private HomeWorkAsyncTask mAsyncTask;
@@ -55,12 +57,13 @@ public class HomeWorkListFragment extends BaseFragment implements OnItemClickLis
 	}
 
 
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.homework_list_fragment, null);
-		mListView = (ListView) v.findViewById(R.id.homework_list_fragment_listview);
+		mListView = new StickyListHeadersListView(getActivity());// because https://github.com/emilsjolander/StickyListHeaders/issues/293
+        LinearLayout listViewContainer = (LinearLayout) v.findViewById(R.id.sticky_list_view_container);
+        listViewContainer.addView(mListView);
 		mListView.setOnItemClickListener(this);
 		mListView.setAdapter(mAdpter);
 		mListView.setEmptyView(v.findViewById(R.id.hw_empty_view));
