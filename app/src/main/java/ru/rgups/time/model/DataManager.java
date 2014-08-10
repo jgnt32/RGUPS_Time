@@ -568,12 +568,14 @@ public class DataManager extends ContentObservable{
 
 	public ArrayList<HomeWork> getHomeWorkList(Long date, Long lessonId){
 		ArrayList<HomeWork> result = new ArrayList<HomeWork>();
+
+        String hwDate = Long.toString(date / CalendarManager.MILISECONDS_PER_DAY);
 		String query = TextUtils.concat(
 				"SELECT * FROM ",HomeWork.TABLE_NAME," WHERE ",
-				HomeWork.DATE,"='",date.toString(),"' AND ",HomeWork.LESSON_ID,"='",lessonId.toString(),"'"
+				HomeWork.DATE,"= ? AND ",HomeWork.LESSON_ID,"= ?"
 				).toString();
 		Cursor c = mDb.rawQuery(query, 
-				new String[]{});
+				new String[]{hwDate, lessonId.toString()});
 		while(c.moveToNext()){
 
 			result.add(getHomeWorkFromCursor(c));
