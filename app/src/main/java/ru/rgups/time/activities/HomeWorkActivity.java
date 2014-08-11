@@ -2,7 +2,6 @@ package ru.rgups.time.activities;
 
 import ru.rgups.time.R;
 import ru.rgups.time.fragments.HomeWorkEditFragment;
-import ru.rgups.time.fragments.HomeWorkFragment;
 import ru.rgups.time.interfaces.HomeWorkListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -21,13 +20,11 @@ public class HomeWorkActivity extends ActionBarActivity implements HomeWorkListe
 		setContentView(R.layout.homework_activity);
 		initActionBar();
 		switch(getIntent().getExtras().getInt(LAUNCH_TYPE)){
-		
-		case ADD:
-			AddHomeWork(getIntent().getExtras().getLong(HomeWorkFragment.LESSON_ID), 
-					getIntent().getExtras().getLong(HomeWorkFragment.DATE));
-			break;
+
 		case EDIT:
-			EditHomeWork(getIntent().getExtras().getLong(HomeWorkEditFragment.HOMEWORK_ID));
+			EditHomeWork(getIntent().getExtras().getLong(HomeWorkEditFragment.HOMEWORK_ID),
+                    getIntent().getExtras().getLong(HomeWorkEditFragment.LESSON_ID),
+                    getIntent().getExtras().getLong(HomeWorkEditFragment.DATE));
 			break;
 		}
 	}
@@ -47,23 +44,15 @@ public class HomeWorkActivity extends ActionBarActivity implements HomeWorkListe
 		}
 	}
 	
-	@Override
-	public void AddHomeWork(long lessonId, Long date) {
-		HomeWorkFragment fragment = new HomeWorkFragment();
-		Bundle args = new Bundle();
-		args.putLong(HomeWorkFragment.LESSON_ID, lessonId);
-		args.putLong(HomeWorkFragment.DATE, date);
-		fragment.setArguments(args);
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.replace(R.id.homework_activity_frame, fragment);
-		ft.commit();		
-	}
+
 
 	@Override
-	public void EditHomeWork(Long hwId) {
+	public void EditHomeWork(Long hwId, long lessonId, Long date) {
 		HomeWorkEditFragment fragment = new HomeWorkEditFragment();
 		Bundle args = new Bundle();
 		args.putLong(HomeWorkEditFragment.HOMEWORK_ID, hwId);
+        args.putLong(HomeWorkEditFragment.LESSON_ID, lessonId);
+        args.putLong(HomeWorkEditFragment.DATE, date);
 		fragment.setArguments(args);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 		ft.replace(R.id.homework_activity_frame, fragment);

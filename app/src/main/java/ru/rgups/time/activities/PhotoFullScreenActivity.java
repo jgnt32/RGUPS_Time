@@ -16,6 +16,7 @@ import ru.rgups.time.adapters.gallery.UrlPagerAdapter;
 public class PhotoFullScreenActivity extends ActionBarActivity {
 
     public static final String PHOTOS = "home_works_photo";
+    public static final String CURRENT_ITEM = "current_photo";
 
     private GalleryViewPager mViewPager;
     private UrlPagerAdapter mPhotosAdapter;

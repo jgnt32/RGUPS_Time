@@ -6,7 +6,6 @@ import ru.rgups.time.activities.HomeWorkActivity;
 import ru.rgups.time.adapters.DrawerListAdapter;
 import ru.rgups.time.fragments.ClapFragment;
 import ru.rgups.time.fragments.HomeWorkEditFragment;
-import ru.rgups.time.fragments.HomeWorkFragment;
 import ru.rgups.time.fragments.HomeWorkListFragment;
 import ru.rgups.time.fragments.SettingFragment;
 import ru.rgups.time.fragments.SingleLessonFragment;
@@ -297,9 +296,9 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	@Override
 	public void OnAddHomeWorkClick(long lessonId, Long date) {
 		Intent i = new Intent(this, HomeWorkActivity.class);
-		i.putExtra(HomeWorkActivity.LAUNCH_TYPE, HomeWorkActivity.ADD);
-		i.putExtra(HomeWorkFragment.DATE, date);
-		i.putExtra(HomeWorkFragment.LESSON_ID, lessonId);
+		i.putExtra(HomeWorkActivity.LAUNCH_TYPE, HomeWorkActivity.EDIT);
+		i.putExtra(HomeWorkEditFragment.DATE, date);
+		i.putExtra(HomeWorkEditFragment.LESSON_ID, lessonId);
 		startActivity(i);
 	}
 
