@@ -45,6 +45,8 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 	private HomeWorkImageAdapter mAdapter;
 	private EditText mText;
 	private HomeWork mHomeWork;
+    private ArrayList<String> mPhotos = new ArrayList<String>();
+
 	private HomeWorkListener mHomeWorkListener;
 
     private static final int REQUEST_CODE = 0;
@@ -61,19 +63,13 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		mHomeWork = DataManager.getInstance().getHomeWork(getArguments().getLong(HOMEWORK_ID));
+        mPhotos.clear();
+        mPhotos.addAll(mHomeWork.getImages());
 		mAdapter = initAdapter();
 	}
 
     private HomeWorkImageAdapter initAdapter() {
-        if(mHomeWork == null){
-            mHomeWork = new HomeWork();
-            mHomeWork.setImages(new ArrayList<String>());
-            return new HomeWorkImageAdapter(getActivity(), mHomeWork.getImages());
-
-        } else {
-            return new HomeWorkImageAdapter(getActivity(), mHomeWork.getImages());
-
-        }
+        return new HomeWorkImageAdapter(getActivity(), mPhotos);
     }
 
 
@@ -87,9 +83,8 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
         mPhotoGridView.setAdapter(mAdapter);
         mPhotoGridView.setOnItemClickListener(this);
 		mText = (EditText) v.findViewById(R.id.home_work_text);
-		if(mHomeWork != null){
-			mText.setText(mHomeWork.getMessage());
-		}
+    	mText.setText(mHomeWork.getMessage());
+
 		return v;
 	}
 
@@ -146,13 +141,7 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 
 
     private void addImage(String uri){
-        if(mHomeWork == null){
-            mHomeWork = new HomeWork();
-            if(mHomeWork.getImages() == null){
-                mHomeWork.setImages(new ArrayList<String>());
-            }
-        }
-        mHomeWork.getImages().add(uri);
+        mPhotos.add(uri);
         mAdapter.notifyDataSetChanged();
     }
 
@@ -177,23 +166,26 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
     private void close(){
         mHomeWorkListener.finisActivity();
     }
-	
+
+
 	private void saveHomeWork(){
 		if(isReadyToSave()){
-			mHomeWork.setMessage(mText.getText().toString());
 
-            if(mHomeWork.getId() == 0){
-
+            if(mHomeWork == null){
+                mHomeWork = new HomeWork();
                 mHomeWork.setDate(new Date(getArguments().getLong(DATE)));
                 mHomeWork.setLessonId(getArguments().getLong(LESSON_ID));
                 mHomeWork.setMessage(mText.getText().toString());
                 mHomeWork.setGroupId(PreferenceManager.getInstance().getGroupId());
+            }
 
+			mHomeWork.setMessage(mText.getText().toString());
+            mHomeWork.setImages(mPhotos);
 
+            if(mHomeWork.getId() == 0){
                 DataManager.getInstance().saveHomeWork(mHomeWork);
             } else {
                 DataManager.getInstance().updateHomeWork(mHomeWork);
-
             }
 		} else {
             close();
@@ -201,7 +193,7 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 	}
 
     private boolean isReadyToSave() {
-        if(mHomeWork.getImages() != null & !mHomeWork.getImages().isEmpty()){
+        if(!mPhotos.isEmpty()){
             return true;
         } else {
             return !mText.getText().toString().isEmpty();

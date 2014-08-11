@@ -42,7 +42,7 @@ public class HomeWork {
 	private String lessonTitle;
 	
 	@DatabaseField(dataType = DataType.SERIALIZABLE)
-	private ArrayList<String> images;
+	private ArrayList<String> images = new ArrayList<String>();
 
 	public long getId() {
 		return id;

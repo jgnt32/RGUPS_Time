@@ -93,8 +93,10 @@ public class DataManager extends ContentObservable{
 		mUpdateHomeWorkStatement = mDb.compileStatement(TextUtils.concat(
 				"UPDATE OR IGNORE ",HomeWork.TABLE_NAME," SET ",
 				HomeWork.COMPLITE, " = ?, ",	//1
-				HomeWork.MESSAGE, " = ? ",		//2
-				" WHERE ",HomeWork.ID, " = ? "	//3
+				HomeWork.MESSAGE, " = ?, ",		//2
+                HomeWork.IMAGES, " = ? ",		//3
+
+                " WHERE ",HomeWork.ID, " = ? "	//4
 				).toString());
 		
 		mSetHomeWorkChecked = mDb.compileStatement(TextUtils.concat(
@@ -673,8 +675,12 @@ public class DataManager extends ContentObservable{
 				if(hw.getMessage() != null){
 					mUpdateHomeWorkStatement.bindString(2, hw.getMessage());
 				}
+
+                if(hw.getMessage() != null){
+                    mUpdateHomeWorkStatement.bindBlob(3, Slipper.serializeObject(hw.getImages()));
+                }
 				
-				mUpdateHomeWorkStatement.bindLong(3, hw.getId());
+				mUpdateHomeWorkStatement.bindLong(4, hw.getId());
 				mUpdateHomeWorkStatement.execute();
 			}
 			mDb.setTransactionSuccessful();
