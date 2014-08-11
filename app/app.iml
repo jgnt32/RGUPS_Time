@@ -87,6 +87,7 @@
     <orderEntry type="library" exported="" name="commons-lang3-3.1" level="project" />
     <orderEntry type="library" exported="" name="robospice-1.4.6" level="project" />
     <orderEntry type="library" exported="" name="ormlite-android-4.46" level="project" />
+    <orderEntry type="library" exported="" name="universal-image-loader-1.9.2" level="project" />
   </component>
 </module>
 

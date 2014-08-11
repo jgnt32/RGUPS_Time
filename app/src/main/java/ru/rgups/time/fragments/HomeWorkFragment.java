@@ -20,6 +20,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -35,6 +36,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 
 import com.jakewharton.disklrucache.DiskLruCache;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class HomeWorkFragment extends BaseFragment {
 	
@@ -47,15 +49,9 @@ public class HomeWorkFragment extends BaseFragment {
 	private EditText mText;
 	private HomeWork mHomeWork;
 	private HomeWorkListener mHomeWorkListener;
-	private ArrayList<Bitmap> mList = new ArrayList<Bitmap>();
+	private ArrayList<String> mList = new ArrayList<String>();
 	
-	private DiskLruCache mDiskLruCache;
-	private final Object mDiskCacheLock = new Object();
-	private boolean mDiskCacheStarting = true;
-	private static final int DISK_CACHE_SIZE = 1024 * 1024 * 10; // 10MB
-	private static final String DISK_CACHE_SUBDIR = "thumbnails";
 
-	
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -126,11 +122,10 @@ public class HomeWorkFragment extends BaseFragment {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
             try {
-             
+                data.getData();
                 InputStream stream = getActivity().getContentResolver().openInputStream(
                         data.getData());
-                Bitmap bitmap = BitmapFactory.decodeStream(stream);
-                mList.add(bitmap);
+                mList.add(data.getData().toString());
                 mAdapter.notifyDataSetChanged();
                 stream.close();
             } catch (Exception e) {
@@ -139,15 +134,16 @@ public class HomeWorkFragment extends BaseFragment {
 	}
 	
 	private void saveHomeWork(){
-		if(!mText.getText().toString().isEmpty()){
+
+        if(!mText.getText().toString().isEmpty()){
 			Log.e("tm ="+getArguments().getLong(DATE),"lessonid = "+getArguments().getLong(LESSON_ID));
 			mHomeWork = new HomeWork();
 			mHomeWork.setDate(new Date(getArguments().getLong(DATE)));
 			mHomeWork.setLessonId(getArguments().getLong(LESSON_ID));
 			mHomeWork.setMessage(mText.getText().toString());
             mHomeWork.setGroupId(PreferenceManager.getInstance().getGroupId());
+            mHomeWork.setImages(mList);
 			DataManager.getInstance().saveHomeWork(mHomeWork);
-            ApigeeManager.getInstance().pushHomeWorkOnServer(mHomeWork);
 		}
 	}
 	

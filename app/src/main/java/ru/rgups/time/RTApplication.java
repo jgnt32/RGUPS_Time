@@ -14,9 +14,14 @@ import ru.rgups.time.utils.DialogManager;
 import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Application;
+import android.content.Context;
 
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.octo.android.robospice.persistence.ormlite.RoboSpiceDatabaseHelper;
 
 public class RTApplication extends Application{
@@ -29,6 +34,7 @@ public class RTApplication extends Application{
 		DialogManager.initInstatnce(getApplicationContext());
         ApigeeManager.initInstance(getApplicationContext());
         RestManager.setContext(getApplicationContext());
+        initImageLoader(getApplicationContext());
         if (HelperManager.getHelper() == null) {
 			RoboSpiceDatabaseHelper databaseHelper = new RoboSpiceDatabaseHelper(this, HelperManager.DB_NAME, HelperManager.DB_VERSION);
 			HelperManager.setHelper(databaseHelper);
@@ -52,5 +58,22 @@ public class RTApplication extends Application{
 			e.printStackTrace();
 		}
 	}
+
+    public static void initImageLoader(Context context) {
+        // This configuration tuning is custom. You can tune every option, you may tune some of them,
+        // or you can create default configuration by
+        //  ImageLoaderConfiguration.createDefault(this);
+        // method.
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+                .threadPriority(Thread.NORM_PRIORITY - 2)
+                .denyCacheImageMultipleSizesInMemory()
+                .diskCacheFileNameGenerator(new Md5FileNameGenerator())
+                .diskCacheSize(50 * 1024 * 1024) // 50 Mb
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .writeDebugLogs() // Remove for release app
+                .build();
+        // Initialize ImageLoader with configuration.
+        ImageLoader.getInstance().init(config);
+    }
 
 }

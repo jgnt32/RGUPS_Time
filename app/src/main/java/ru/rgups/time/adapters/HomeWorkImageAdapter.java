@@ -6,18 +6,26 @@ import ru.rgups.time.R;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 public class HomeWorkImageAdapter extends BaseAdapter{
 	
 	private LayoutInflater mInflater;
-	private ArrayList<Bitmap> mList;
+	private ArrayList<String> mList;
+    DisplayImageOptions mImageOptions = new DisplayImageOptions.Builder()
+            .cacheInMemory(true)
+            .cacheOnDisk(true)
+            .build();
 	
-	public HomeWorkImageAdapter(Context context, ArrayList<Bitmap> list) {
+	public HomeWorkImageAdapter(Context context, ArrayList<String> list) {
 		mList = list;
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
@@ -28,7 +36,7 @@ public class HomeWorkImageAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public Bitmap getItem(int position) {
+	public String getItem(int position) {
 		return mList.get(position);
 	}
 
@@ -41,7 +49,7 @@ public class HomeWorkImageAdapter extends BaseAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v = mInflater.inflate(R.layout.home_work_grid_element, null);
 		ImageView imageView = (ImageView) v.findViewById(R.id.home_work_grid_element);
-		imageView.setImageBitmap(getItem(position));
+        ImageLoader.getInstance().displayImage(getItem(position), imageView, mImageOptions);
 		return v;
 	}
 	

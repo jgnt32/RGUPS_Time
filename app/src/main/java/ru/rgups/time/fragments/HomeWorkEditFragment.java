@@ -1,6 +1,7 @@
 package ru.rgups.time.fragments;
 
 import ru.rgups.time.R;
+import ru.rgups.time.adapters.HomeWorkImageAdapter;
 import ru.rgups.time.adapters.PhotoGalleryAdapter;
 import ru.rgups.time.interfaces.HomeWorkListener;
 import ru.rgups.time.model.DataManager;
@@ -23,15 +24,18 @@ import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.EditText;
 import android.widget.GridView;
 
+import java.util.ArrayList;
+
 public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeListener{
 	
 	public static final String HOMEWORK_ID = "homework_id";
 	
 	private GridView mPhotoGridView;
-	private PhotoGalleryAdapter mAdapter;
+	private HomeWorkImageAdapter mAdapter;
 	private EditText mText;
 	private HomeWork mHomeWork;
 	private HomeWorkListener mHomeWorkListener;
+    private ArrayList<String> mList = new ArrayList<String>();
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -44,7 +48,8 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		mHomeWork = DataManager.getInstance().getHomeWork(getArguments().getLong(HOMEWORK_ID));
-		
+
+		mAdapter = new HomeWorkImageAdapter(getActivity(), mHomeWork.getImages());
 	}
 	
 	
@@ -55,6 +60,7 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 		mPhotoGridView = (GridView) v.findViewById(R.id.home_work_grid_view);
 		mPhotoGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL); 
 		mPhotoGridView.setMultiChoiceModeListener(this);
+        mPhotoGridView.setAdapter(mAdapter);
 		mText = (EditText) v.findViewById(R.id.home_work_text);
 		if(mHomeWork != null){
 			mText.setText(mHomeWork.getMessage());
