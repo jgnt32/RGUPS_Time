@@ -1,6 +1,7 @@
 package ru.rgups.time.fragments;
 
 import ru.rgups.time.R;
+import ru.rgups.time.activities.PhotoFullScreenActivity;
 import ru.rgups.time.adapters.HomeWorkImageAdapter;
 import ru.rgups.time.adapters.PhotoGalleryAdapter;
 import ru.rgups.time.interfaces.HomeWorkListener;
@@ -10,6 +11,7 @@ import ru.rgups.time.utils.DialogManager;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -21,12 +23,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView.MultiChoiceModeListener;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 
 import java.util.ArrayList;
 
-public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeListener{
+public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeListener, AdapterView.OnItemClickListener{
 	
 	public static final String HOMEWORK_ID = "homework_id";
 	
@@ -61,6 +64,7 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 		mPhotoGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL); 
 		mPhotoGridView.setMultiChoiceModeListener(this);
         mPhotoGridView.setAdapter(mAdapter);
+        mPhotoGridView.setOnItemClickListener(this);
 		mText = (EditText) v.findViewById(R.id.home_work_text);
 		if(mHomeWork != null){
 			mText.setText(mHomeWork.getMessage());
@@ -145,4 +149,11 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 		Log.e("onItemCheckedStateChanged","position = "+position+"; count = "+mPhotoGridView.getCheckedItemCount());
 		
 	}
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent i = new Intent(getActivity(), PhotoFullScreenActivity.class);
+        i.putStringArrayListExtra(PhotoFullScreenActivity.PHOTOS, mHomeWork.getImages());
+        startActivity(i);
+    }
 }

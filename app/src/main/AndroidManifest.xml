@@ -57,7 +57,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />            </intent-filter>
         </receiver>
 
-    
+    <activity android:name=".activities.PhotoFullScreenActivity"></activity>
     
     
     <meta-data android:name="com.crashlytics.ApiKey" android:value="5a2cc6ac6ddc499c700c758436da20104f4d181a"/>
