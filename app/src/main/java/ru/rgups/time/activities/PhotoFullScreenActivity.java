@@ -29,7 +29,10 @@ public class PhotoFullScreenActivity extends ActionBarActivity {
         setContentView(R.layout.photo_activity);
         mPhotos  =  getIntent().getStringArrayListExtra(PHOTOS);
         mPhotosAdapter = new UrlPagerAdapter(this, mPhotos);
+
         mViewPager = (GalleryViewPager) findViewById(R.id.galery_view_pager);
         mViewPager.setAdapter(mPhotosAdapter);
+        mViewPager.setCurrentItem(getIntent().getIntExtra(CURRENT_ITEM, 0));
+
     }
 }

@@ -138,21 +138,19 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK)
+        if (resultCode == Activity.RESULT_OK) {
 
-            switch (requestCode){
+            switch (requestCode) {
                 case GALLERY_REQUEST:
                     addImageFromGallery(data);
-
                     break;
 
                 case CAMERA_REQUEST:
                     addImageFromCamera();
                     break;
-
             }
 
-
+        }
     }
 
     private void addImageFromCamera(){
@@ -280,6 +278,7 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(getActivity(), PhotoFullScreenActivity.class);
         i.putStringArrayListExtra(PhotoFullScreenActivity.PHOTOS, mPhotos);
+        i.putExtra(PhotoFullScreenActivity.CURRENT_ITEM, position);
         startActivity(i);
     }
 
