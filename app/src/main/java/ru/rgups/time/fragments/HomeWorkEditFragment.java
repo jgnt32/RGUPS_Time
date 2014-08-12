@@ -3,7 +3,6 @@ package ru.rgups.time.fragments;
 import ru.rgups.time.R;
 import ru.rgups.time.activities.PhotoFullScreenActivity;
 import ru.rgups.time.adapters.HomeWorkImageAdapter;
-import ru.rgups.time.adapters.PhotoGalleryAdapter;
 import ru.rgups.time.interfaces.HomeWorkListener;
 import ru.rgups.time.interfaces.PickUpImageListener;
 import ru.rgups.time.model.DataManager;
@@ -18,7 +17,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -35,7 +35,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 
-import java.io.InputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -44,7 +44,6 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
     public static final String LESSON_ID = "lesson_id";
     public static final String HOMEWORK_ID = "homework_id";
     public static final String DATE = "date";
-    private static final int CAMERA_REQUEST = 1;
 
     private GridView mPhotoGridView;
 	private HomeWorkImageAdapter mAdapter;
@@ -52,9 +51,12 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 	private HomeWork mHomeWork;
     private ArrayList<String> mPhotos = new ArrayList<String>();
 
+    private Uri mCameraUri = null;
+
 	private HomeWorkListener mHomeWorkListener;
 
-    private static final int REQUEST_CODE = 0;
+    private static final int GALLERY_REQUEST = 0;
+    private static final int CAMERA_REQUEST = 1;
 
 
     @Override
@@ -130,34 +132,55 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
         PickDialogFragment fragment = new PickDialogFragment();
         fragment.setImageListener(this);
         fragment.show(getChildFragmentManager(), null);
-        /*
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE);
-        */
+
     }
 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE || requestCode == CAMERA_REQUEST)
-            try {
-                ClipData list =
-                        data.getClipData();
+        if (resultCode == Activity.RESULT_OK)
 
-                if(list != null){
-                    for (int i = 0; i < list.getItemCount(); i++) {
-                        addImage(list.getItemAt(i).getUri().toString());
-                    }
-                } else{
-                    addImage(data.getData().toString());
+            switch (requestCode){
+                case GALLERY_REQUEST:
+                    addImageFromGallery(data);
 
-                }
+                    break;
 
-            } catch (Exception e) {
-                e.printStackTrace();
+                case CAMERA_REQUEST:
+                    addImageFromCamera();
+                    break;
+
             }
+
+
+    }
+
+    private void addImageFromCamera(){
+        try {
+            addImage(mCameraUri.toString());
+            mCameraUri = null;
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private void addImageFromGallery(Intent data) {
+        try {
+            ClipData list =
+                    data.getClipData();
+
+            if(list != null){
+                for (int i = 0; i < list.getItemCount(); i++) {
+                    addImage(list.getItemAt(i).getUri().toString());
+                }
+            } else{
+                addImage(data.getData().toString());
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -278,6 +301,9 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
     @Override
     public void onPickNewPhotoClick() {
         Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        mCameraUri = getPhotoUri();
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, mCameraUri);
+
         startActivityForResult(cameraIntent, CAMERA_REQUEST);
 
     }
@@ -288,7 +314,16 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE);
+
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST);
+
+    }
+
+    private Uri getPhotoUri(){
+        File cameraImageOutputFile = new File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                Long.toString(System.currentTimeMillis()) + ".jpg");
+        return Uri.fromFile(cameraImageOutputFile);
 
     }
 }
