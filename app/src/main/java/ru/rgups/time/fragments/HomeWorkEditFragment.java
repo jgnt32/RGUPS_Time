@@ -5,16 +5,20 @@ import ru.rgups.time.activities.PhotoFullScreenActivity;
 import ru.rgups.time.adapters.HomeWorkImageAdapter;
 import ru.rgups.time.adapters.PhotoGalleryAdapter;
 import ru.rgups.time.interfaces.HomeWorkListener;
+import ru.rgups.time.interfaces.PickUpImageListener;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.utils.DialogManager;
 import ru.rgups.time.utils.PreferenceManager;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -36,10 +40,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeListener, AdapterView.OnItemClickListener,
-        LoaderManager.LoaderCallbacks<HomeWork>{
+        LoaderManager.LoaderCallbacks<HomeWork>, PickUpImageListener{
     public static final String LESSON_ID = "lesson_id";
     public static final String HOMEWORK_ID = "homework_id";
     public static final String DATE = "date";
+    private static final int CAMERA_REQUEST = 1;
 
     private GridView mPhotoGridView;
 	private HomeWorkImageAdapter mAdapter;
@@ -64,7 +69,9 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 		setHasOptionsMenu(true);
 		mHomeWork = DataManager.getInstance().getHomeWork(getArguments().getLong(HOMEWORK_ID));
         mPhotos.clear();
-        mPhotos.addAll(mHomeWork.getImages());
+        if(mHomeWork != null){
+            mPhotos.addAll(mHomeWork.getImages());
+        }
 		mAdapter = initAdapter();
 	}
 
@@ -83,7 +90,9 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
         mPhotoGridView.setAdapter(mAdapter);
         mPhotoGridView.setOnItemClickListener(this);
 		mText = (EditText) v.findViewById(R.id.home_work_text);
-    	mText.setText(mHomeWork.getMessage());
+        if(mHomeWork != null){
+            mText.setText(mHomeWork.getMessage());
+        }
 
 		return v;
 	}
@@ -118,22 +127,34 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 
 
     public void pickImage() {
+        PickDialogFragment fragment = new PickDialogFragment();
+        fragment.setImageListener(this);
+        fragment.show(getChildFragmentManager(), null);
+        /*
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE);
+        */
     }
 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK)
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE || requestCode == CAMERA_REQUEST)
             try {
-                data.getData();
-                InputStream stream = getActivity().getContentResolver().openInputStream(
-                        data.getData());
-                addImage(data.getData().toString());
-                stream.close();
+                ClipData list =
+                        data.getClipData();
+
+                if(list != null){
+                    for (int i = 0; i < list.getItemCount(); i++) {
+                        addImage(list.getItemAt(i).getUri().toString());
+                    }
+                } else{
+                    addImage(data.getData().toString());
+
+                }
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -235,7 +256,7 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(getActivity(), PhotoFullScreenActivity.class);
-        i.putStringArrayListExtra(PhotoFullScreenActivity.PHOTOS, mHomeWork.getImages());
+        i.putStringArrayListExtra(PhotoFullScreenActivity.PHOTOS, mPhotos);
         startActivity(i);
     }
 
@@ -251,6 +272,23 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 
     @Override
     public void onLoaderReset(Loader<HomeWork> homeWorkLoader) {
+
+    }
+
+    @Override
+    public void onPickNewPhotoClick() {
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+
+    }
+
+    @Override
+    public void onPickPhotoFromGalleryClick() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_CODE);
 
     }
 }

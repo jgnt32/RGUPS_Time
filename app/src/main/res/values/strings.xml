@@ -96,4 +96,5 @@
     <string name="home_work_hint">Домашнее задание</string>
     <string name="home_work_caption">Домашние задания</string>
     <string name="teacher_list_empty_message">Преподователь не найден</string>
+    <string name="pick_up_image_dialog_title">Прикрепить фото</string>
 </resources>
