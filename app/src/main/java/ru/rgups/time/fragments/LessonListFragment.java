@@ -30,6 +30,7 @@ public abstract class LessonListFragment extends Fragment implements OnItemClick
 	
 	protected ArrayList<LessonListElement> mLessons = new ArrayList<LessonListElement>();
 
+    private View mProgress;
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -51,9 +52,14 @@ public abstract class LessonListFragment extends Fragment implements OnItemClick
 		mListView = (ListView) v.findViewById(R.id.lesson_list);
 		mListView.setEmptyView(v.findViewById(R.id.lesson_list_empty_view));
 		mListView.setOnItemClickListener(this);
+        mProgress = v.findViewById(R.id.lesson_list_empty_progress_view);
 		setAdapter(mListView);
 		return v;
 	}
+
+    protected void hideProgress(){
+        mProgress.setVisibility(View.GONE);
+    }
 	
 	
 	protected abstract void setAdapter(ListView list);

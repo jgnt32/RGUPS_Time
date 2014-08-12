@@ -11,19 +11,37 @@
         android:divider="@null"
         android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:visibility="gone">
     </ListView>
     
     <RelativeLayout 
         android:id="@+id/lesson_list_empty_view"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
-        
-        <TextView 
+
+        <TextView
             android:layout_centerInParent="true"
             android:text="@string/lesson_empty_view"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"/>
+
+        <RelativeLayout
+            android:background="@color/lesson_list_backgroud"
+            android:id="@+id/lesson_list_empty_progress_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:layout_centerInParent="true"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+        </RelativeLayout>
+
+
             
     </RelativeLayout>
 

@@ -59,6 +59,7 @@ public class StudentLessonFragment extends LessonListFragment implements LoaderM
         mLessons.clear();
         mLessons.addAll(lessonListElements);
         mAdapter.notifyDataSetChanged();
+        hideProgress();
     }
 
     @Override
