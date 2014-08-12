@@ -16,14 +16,11 @@
         <LinearLayout
             android:id="@+id/pick_up_photo_from_gallery"
             android:background="@drawable/base_selector"
-            android:clickable="true"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:layout_width="120dp"
             android:layout_height="120dp"
-            android:focusable="true"
-            android:layout_centerInParent="true"
-            android:focusableInTouchMode="true">
+            android:layout_centerInParent="true">
 
 
 
@@ -50,15 +47,12 @@
         <LinearLayout
             android:id="@+id/pick_up_new_photo"
             android:background="@drawable/base_selector"
-            android:clickable="true"
-            android:focusable="true"
             android:layout_centerInParent="true"
             android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:focusableInTouchMode="true">
+            android:layout_height="120dp">
 
             <ImageView
 
