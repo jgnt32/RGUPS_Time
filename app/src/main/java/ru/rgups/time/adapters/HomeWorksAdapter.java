@@ -6,7 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -22,6 +26,7 @@ public class HomeWorksAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private ViewHolder mHolder;
+    private DisplayImageOptions mDisplayImageOptions =  new DisplayImageOptions.Builder().build();
 
     public HomeWorksAdapter(Context mContext, ArrayList<HomeWork> mHomeWorks) {
         this.mHomeWorks = mHomeWorks;
@@ -55,15 +60,28 @@ public class HomeWorksAdapter extends BaseAdapter {
         }
 
         mHolder.message.setText(getItem(position).getMessage());
+        if(getItem(position).getImages() != null && !getItem(position).getImages().isEmpty()){
+            mHolder.photoContainer.setVisibility(View.VISIBLE);
+            ImageLoader.getInstance().displayImage(getItem(position).getImages().get(0), mHolder.photo);
+            mHolder.photoCount.setText(getItem(position).getImages().size()+" фото");
+        } else {
+            mHolder.photoContainer.setVisibility(View.GONE);
+
+        }
         return convertView;
     }
 
     private class ViewHolder{
         private TextView message;
         private TextView photoCount;
+        private ImageView photo;
+        private View photoContainer;
 
         private ViewHolder(View v) {
             message = (TextView) v.findViewById(R.id.home_work_list_element_text);
+            photoCount = (TextView) v.findViewById(R.id.home_work_list_element_photo_count);
+            photo = (ImageView) v.findViewById(R.id.home_work_image_preview);
+            photoContainer = v.findViewById(R.id.home_work_list_element_image_container);
         }
     }
 }

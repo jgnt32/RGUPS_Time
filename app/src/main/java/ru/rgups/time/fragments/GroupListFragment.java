@@ -48,7 +48,7 @@ public class GroupListFragment extends BaseFragment implements OnItemClickListen
 		super.onCreate(savedInstanceState);
 		mFacultetId = getArguments().getLong(FUCULTET_ID);
 		mGroupList = new ArrayList<Group>();
-		getGroupList();
+	//	getGroupList();
 		
 		mAdapter = new GroupListAdapter(getActivity(), mGroupList);
 	}
@@ -71,7 +71,7 @@ public class GroupListFragment extends BaseFragment implements OnItemClickListen
 	    return  v;
 	}
 	
-	private void getGroupList(){
+/*	private void getGroupList(){
 		
 		this.getSpiceManager().execute(new GroupListRequest(mFacultetId), new GetGroupListListener());
 	}
@@ -91,7 +91,7 @@ public class GroupListFragment extends BaseFragment implements OnItemClickListen
 			mAdapter.notifyDataSetChanged();
 		}
 		
-	}
+	}*/
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
