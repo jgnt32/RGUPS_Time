@@ -13,20 +13,42 @@
         android:padding="7dp" >
 
 
-        <TextView
-            android:id="@+id/home_work_list_element_text"
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1">
 
-            android:text="Ну почитать там че нить"
-            android:textSize="17sp" />
+            <TextView
+                android:id="@+id/homework_list_element_lesson_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                android:textColor="@color/theme_blue"
+                android:text="Физика"
+                android:textSize="19sp" />
+
+            <TextView
+                android:id="@+id/home_work_list_element_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/homework_message_hint"
+                android:text="Ну почитать там че нить"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+
+
 
         <RelativeLayout
             android:id="@+id/home_work_list_element_image_container"
             android:visibility="gone"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
 
             <ImageView
                 android:scaleType="centerCrop"

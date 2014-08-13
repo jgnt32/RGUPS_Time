@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.HomeWorksAdapter;
-import ru.rgups.time.adapters.SingleLessonsHWCardCursorAdapter;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.loaders.HomeWorkLoader;
 import ru.rgups.time.model.HomeWork;

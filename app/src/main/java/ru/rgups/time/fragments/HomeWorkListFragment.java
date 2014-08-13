@@ -62,6 +62,9 @@ public class HomeWorkListFragment extends BaseFragment implements OnItemClickLis
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.homework_list_fragment, null);
 		mListView = new StickyListHeadersListView(getActivity());// because https://github.com/emilsjolander/StickyListHeaders/issues/293
+        mListView.setDivider(null);
+        mListView.setAreHeadersSticky(false);
+        mListView.setSelector(android.R.color.transparent);
         LinearLayout listViewContainer = (LinearLayout) v.findViewById(R.id.sticky_list_view_container);
         listViewContainer.addView(mListView);
 		mListView.setOnItemClickListener(this);

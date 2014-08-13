@@ -99,4 +99,5 @@
     <string name="pick_up_image_dialog_title">Прикрепить фото</string>
     <string name="single_lesson_info">Информация</string>
     <string name="single_lesson_hw">Задания</string>
+    <string name="homework_message_hint">Описание отсутствует</string>
 </resources>
