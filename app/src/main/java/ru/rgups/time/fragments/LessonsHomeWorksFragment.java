@@ -122,6 +122,6 @@ public class LessonsHomeWorksFragment extends Fragment implements LoaderManager.
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.e("hw = ", ""+id);
+        mLessonListener.OnHomeWorkListElementClick(id);
     }
 }

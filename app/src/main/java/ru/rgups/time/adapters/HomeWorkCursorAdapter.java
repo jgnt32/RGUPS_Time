@@ -75,7 +75,7 @@ public class HomeWorkCursorAdapter extends StickyListHeadersCursorAdapter implem
         compliteBox.setOnCheckedChangeListener(null);
 		compliteBox.setChecked(isComplite);
         compliteBox.setOnCheckedChangeListener(this);
-        
+
         compliteBox.setTag(c.getLong(c.getColumnIndex("_id")));
 
         if(isComplite){

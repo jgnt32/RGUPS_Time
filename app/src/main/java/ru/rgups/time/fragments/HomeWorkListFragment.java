@@ -84,7 +84,7 @@ public class HomeWorkListFragment extends BaseFragment implements OnItemClickLis
 
     @Override
 	public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-	//	mLessonListener.OnLessonListElementClick(mAdpter.getItem(position).getLessonId(), mAdpter.getItem(position).getDate().getTime());
+		mLessonListener.OnHomeWorkListElementClick(id);
 	}
 
     @Override
