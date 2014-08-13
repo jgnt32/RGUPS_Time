@@ -1,6 +1,7 @@
 package ru.rgups.time.adapters;
 
 import ru.rgups.time.R;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.utils.CalendarManager;
@@ -13,14 +14,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
 
-public class HomeWorkCursorAdapter extends StickyListHeadersCursorAdapter{
+public class HomeWorkCursorAdapter extends StickyListHeadersCursorAdapter implements CompoundButton.OnCheckedChangeListener{
 
 	public static final String DIVIDER_DATE_FORMAT = "d MMMM, EEEE";
 
@@ -59,14 +62,27 @@ public class HomeWorkCursorAdapter extends StickyListHeadersCursorAdapter{
 		final TextView lessonTitle = (TextView) v.findViewById(R.id.homework_list_element_lesson_title);
 		final TextView message = (TextView) v.findViewById(R.id.home_work_list_element_text);
 		final TextView photoCount = (TextView) v.findViewById(R.id.home_work_list_element_photo_count);
-		final CheckBox compliteBox = (CheckBox) v.findViewById(R.id.home_work_list_element_check_box);
+		final ToggleButton compliteBox = (ToggleButton) v.findViewById(R.id.home_work_list_element_check_box);
         final ImageView photo = (ImageView) v.findViewById(R.id.home_work_image_preview);
         final View photoContainer = v.findViewById(R.id.home_work_list_element_image_container);
-
+        final View body = v.findViewById(R.id.home_work_list_element_body);
         lessonTitle.setVisibility(View.VISIBLE);
 		lessonTitle.setText(c.getString(c.getColumnIndex(LessonInformation.LESSON_TITLE)));
 		message.setText(c.getString(c.getColumnIndex(HomeWork.MESSAGE)));
-		compliteBox.setChecked(c.getInt(c.getColumnIndex(HomeWork.COMPLITE)) > 0);
+
+        boolean isComplite = c.getInt(c.getColumnIndex(HomeWork.COMPLITE)) > 0;
+
+        compliteBox.setOnCheckedChangeListener(null);
+		compliteBox.setChecked(isComplite);
+        compliteBox.setOnCheckedChangeListener(this);
+        
+        compliteBox.setTag(c.getLong(c.getColumnIndex("_id")));
+
+        if(isComplite){
+            body.setBackground(context.getResources().getDrawable(R.drawable.hw_done_indicator));
+        } else {
+            body.setBackground(null);
+        }
 
         ArrayList<String> images = Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES)));
 
@@ -85,4 +101,9 @@ public class HomeWorkCursorAdapter extends StickyListHeadersCursorAdapter{
 		return c.getLong(c.getColumnIndex(HomeWork.DATE));
 	}
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        DataManager.getInstance().setHomeWorkChecked((Long) buttonView.getTag(), isChecked);
+
+    }
 }

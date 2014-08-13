@@ -6,12 +6,10 @@
                 <shape android:shape="rectangle"
                     android:dither="true">
 
-                    <corners android:radius="2dp"/>
+                    <corners  android:radius="2dp"/>
 
                     <solid android:color="#ccc" />
-                    <selector xmlns:android="http://schemas.android.com/apk/res/android" >
 
-                    </selector>
                 </shape>
             </item>
 
@@ -23,10 +21,7 @@
 
                     <solid android:color="@color/theme_green_with_alpha" />
 
-                    <padding android:bottom="8dp"
-                        android:left="8dp"
-                        android:right="8dp"
-                        android:top="8dp" />
+
                 </shape>
             </item>
         </layer-list>
@@ -55,11 +50,6 @@
                     <corners android:radius="2dp" />
 
                     <solid android:color="@color/white" />
-
-                    <padding android:bottom="8dp"
-                        android:left="8dp"
-                        android:right="8dp"
-                        android:top="8dp" />
                 </shape>
             </item>
         </layer-list>

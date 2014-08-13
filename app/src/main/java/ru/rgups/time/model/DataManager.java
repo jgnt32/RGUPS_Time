@@ -728,7 +728,9 @@ public class DataManager extends ContentObservable{
 		}
 		finally{
 			mDb.endTransaction();
-		}
+            dispatchChange(true, null);
+
+        }
 	}
 	
 	public int getHomeWorkCountAtDay(Long timestamp){

@@ -9,78 +9,94 @@
         android:layout_margin="7dp"
         android:background="@drawable/card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="7dp" >
+        android:layout_height="wrap_content">
 
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/homework_list_element_lesson_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:textStyle="bold"
-                android:visibility="gone"
-                android:textColor="@color/theme_blue"
-                android:text="Физика"
-                android:textSize="19sp" />
-
-            <TextView
-                android:id="@+id/home_work_list_element_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
                 android:layout_weight="1"
-                android:hint="@string/homework_message_hint"
-                android:text="Ну почитать там че нить"
-                android:textSize="17sp" />
-
-        </LinearLayout>
-
-
-
-        <RelativeLayout
-            android:id="@+id/home_work_list_element_image_container"
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0">
-
-            <ImageView
-                android:scaleType="centerCrop"
-                android:src="@drawable/login"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:id="@+id/home_work_image_preview" />
-
-            <TextView
-                android:id="@+id/home_work_list_element_photo_count"
-                android:background="@color/theme_blue_with_alpha"
-                android:gravity="center"
-                android:layout_centerInParent="true"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:text="10 фото"
+                android:background="@drawable/hw_done_indicator"
+                android:id="@+id/home_work_list_element_body"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignBottom="@+id/home_work_image_preview"
-                android:layout_alignRight="@+id/home_work_image_preview"
-                android:layout_alignEnd="@+id/home_work_image_preview"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content">
 
-        </RelativeLayout>
+                <LinearLayout
+                    android:padding="8dp"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
 
-        <CheckBox
+                    <TextView
+                        android:id="@+id/homework_list_element_lesson_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        android:textColor="@color/theme_blue"
+                        android:text="Физика"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:id="@+id/home_work_list_element_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/homework_message_hint"
+                        android:text="Ну почитать там че нить"
+                        android:textSize="17sp" />
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:padding="8dp"
+                    android:id="@+id/home_work_list_element_image_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0">
+
+                    <ImageView
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/login"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:id="@+id/home_work_image_preview" />
+
+                    <TextView
+                        android:id="@+id/home_work_list_element_photo_count"
+                        android:background="@color/theme_blue_with_alpha"
+                        android:gravity="center"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:text="10 фото"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_alignBottom="@+id/home_work_image_preview"
+                        android:layout_alignRight="@+id/home_work_image_preview"
+                        android:layout_alignEnd="@+id/home_work_image_preview"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        <ToggleButton
             android:id="@+id/home_work_list_element_check_box"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:text="New ToggleButton"
+            android:textOff=""
+            android:textOn=""
+            android:checked="false"
             android:focusable="false"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/hw_check_button" />
+
     </LinearLayout>
+
+
 
 
 </LinearLayout>

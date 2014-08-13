@@ -1,6 +1,8 @@
 package ru.rgups.time.loaders;
 
 import android.content.Context;
+import android.database.ContentObservable;
+import android.database.ContentObserver;
 import android.support.v4.content.AsyncTaskLoader;
 
 import java.util.ArrayList;
@@ -17,10 +19,13 @@ public class HomeWorkLoader extends AsyncTaskLoader<ArrayList<HomeWork>> {
 
     private long mLessonId;
 
+    private ContentObserver mObserver = new ForceLoadContentObserver();
+
     public HomeWorkLoader(Context context, long date, long lessonId) {
         super(context);
         mDate = date;
         mLessonId = lessonId;
+        DataManager.getInstance().registerObserver(mObserver);
     }
 
     @Override

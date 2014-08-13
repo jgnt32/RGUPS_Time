@@ -9,6 +9,8 @@
 
     <color name="theme_blue_with_alpha">#7734495E</color>
 
+    <color name="alpha_black">#33000000</color>
+
     <color name="bg_grey">#E5E5E5</color>
 	<color name="red">#FF0000</color>
 	<color name="lesson_free">#808080</color>

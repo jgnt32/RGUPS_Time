@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -15,12 +17,13 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import java.util.ArrayList;
 
 import ru.rgups.time.R;
+import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HomeWork;
 
 /**
  * Created by timewaistinguru on 13.08.2014.
  */
-public class HomeWorksAdapter extends BaseAdapter {
+public class HomeWorksAdapter extends BaseAdapter implements CompoundButton.OnCheckedChangeListener{
 
     private ArrayList<HomeWork> mHomeWorks;
     private Context mContext;
@@ -68,20 +71,41 @@ public class HomeWorksAdapter extends BaseAdapter {
             mHolder.photoContainer.setVisibility(View.GONE);
 
         }
+
+        mHolder.compliteBox.setChecked(getItem(position).isComplite());
+
+        if(getItem(position).isComplite()){
+            mHolder.body.setBackground(mContext.getResources().getDrawable(R.drawable.hw_done_indicator));
+        } else {
+            mHolder.body.setBackground(null);
+        }
+
+        mHolder.compliteBox.setOnCheckedChangeListener(this);
+        mHolder.compliteBox.setTag(getItem(position).getId());
+
         return convertView;
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        DataManager.getInstance().setHomeWorkChecked((Long) buttonView.getTag(), isChecked);
+    }
+
     private class ViewHolder{
+        private final ToggleButton compliteBox;
         private TextView message;
         private TextView photoCount;
         private ImageView photo;
         private View photoContainer;
+        private View body;
 
         private ViewHolder(View v) {
             message = (TextView) v.findViewById(R.id.home_work_list_element_text);
             photoCount = (TextView) v.findViewById(R.id.home_work_list_element_photo_count);
             photo = (ImageView) v.findViewById(R.id.home_work_image_preview);
             photoContainer = v.findViewById(R.id.home_work_list_element_image_container);
+            compliteBox = (ToggleButton) v.findViewById(R.id.home_work_list_element_check_box);
+            body = v.findViewById(R.id.home_work_list_element_body);
         }
     }
 }
