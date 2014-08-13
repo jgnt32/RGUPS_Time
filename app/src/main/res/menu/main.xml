@@ -9,7 +9,7 @@
     
     <item android:id="@+id/action_add"
         android:title="@string/action_add_homework"
-        android:icon="@drawable/ic_content_new"
+        android:icon="@drawable/ic_action_new"
         android:visible="false"
 		sabd:showAsAction="always"/>
     
