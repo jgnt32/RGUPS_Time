@@ -9,6 +9,7 @@ import ru.rgups.time.fragments.HomeWorkEditFragment;
 import ru.rgups.time.fragments.HomeWorkListFragment;
 import ru.rgups.time.fragments.SettingFragment;
 import ru.rgups.time.fragments.SingleLessonFragment;
+import ru.rgups.time.fragments.SingleLessonPageFragment;
 import ru.rgups.time.fragments.TeachersListFragment;
 import ru.rgups.time.fragments.TeachersTimeTable;
 import ru.rgups.time.fragments.StudentTimeTableFragment;
@@ -126,11 +127,6 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	}
 
 
-	 @Override
-	 public void onConfigurationChanged(Configuration newConfig) {
-		 super.onConfigurationChanged(newConfig);
-	 //    mDrawerToggle.onConfigurationChanged(newConfig);
-	 } 
 	
 	 @Override
 	 public boolean onOptionsItemSelected(MenuItem item) {
@@ -146,48 +142,10 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	 
 	 private void initActionBar(){
 		 getSupportActionBar().setDisplayShowTitleEnabled(true); 
-	//	 getSupportActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 		 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	 }
 	
-	private void initDrawer(){
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-	    
-	    if(mDrawerToggle==null){
-	        mDrawerToggle = new RTDrawerToggle(this,mDrawerLayout, R.drawable.ic_drawer, R.string.draw_open,
-	        		R.string.draw_close);	   
-	    }
-	    mDrawerLayout.setDrawerListener(mDrawerToggle);	
-	 }
-	
-	private class RTDrawerToggle extends ActionBarDrawerToggle{
 
-		public RTDrawerToggle(Activity activity, DrawerLayout drawerLayout,
-				int drawerImageRes, int openDrawerContentDescRes,
-				int closeDrawerContentDescRes) {
-			super(activity, drawerLayout, drawerImageRes, openDrawerContentDescRes,
-					closeDrawerContentDescRes);
-		}
-		
-		 @Override
-	        public void onDrawerClosed(View drawerView) {
-	//            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
-	        }
-
-	        @Override
-	        public void onDrawerOpened(View drawerView) {
-//	            invalidateOptionsMenu(); // calls onPrepareOptionsMenu()
-	        }
-		
-		
-	}
-	
-	 @Override
-	 protected void onPostCreate(Bundle savedInstanceState) {
-		 super.onPostCreate(savedInstanceState);
-	//     mDrawerToggle.syncState();
-	     
-	 }
 
 	 @Override
 	 protected void onDestroy() {
@@ -281,7 +239,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 
 	@Override
 	public void OnLessonListElementClick(long lessonId, Long date) {
-		SingleLessonFragment fragment = new SingleLessonFragment();
+        SingleLessonPageFragment fragment = new SingleLessonPageFragment();
 		Bundle args = new Bundle();
 		args.putLong(SingleLessonFragment.LESSON_ID, lessonId);
 		args.putLong(SingleLessonFragment.TIMESTAMP, date);

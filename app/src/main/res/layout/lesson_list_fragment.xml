@@ -9,10 +9,10 @@
     <ListView
         android:id="@+id/lesson_list"
         android:divider="@null"
+        android:listSelector="@android:color/transparent"
         android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+        android:layout_height="match_parent">
     </ListView>
     
     <RelativeLayout 
@@ -27,8 +27,8 @@
             android:layout_width="wrap_content"/>
 
         <RelativeLayout
-            android:background="@color/lesson_list_backgroud"
             android:id="@+id/lesson_list_empty_progress_view"
+            android:background="@color/bg_grey"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

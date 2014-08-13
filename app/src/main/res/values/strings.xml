@@ -18,7 +18,7 @@
     
     <!-- DRAWER -->
     <string name="drawer_time">Расписание</string>
-    <string name="drawer_homework">Домашнии задания</string>
+    <string name="drawer_homework">Домашние задания</string>
     <string name="drawer_teachers">Преподаватели</string>
     <string name="drawer_setting">Настройки</string>
     <!-- ACTION MENUS -->
@@ -97,4 +97,6 @@
     <string name="home_work_caption">Домашние задания</string>
     <string name="teacher_list_empty_message">Преподователь не найден</string>
     <string name="pick_up_image_dialog_title">Прикрепить фото</string>
+    <string name="single_lesson_info">Информация</string>
+    <string name="single_lesson_hw">Задания</string>
 </resources>

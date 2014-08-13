@@ -27,19 +27,19 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class SingleLessonFragment extends Fragment implements OnClickListener, OnCheckedChangeListener{
+public class SingleLessonFragment extends Fragment{
 	
 	public static final String TIMESTAMP = "timestamp";
 	public static final String LESSON_ID = "lesson_id";
 
 	private LessonListElement mLesson;
 	private LessonListener mLessonListener;
-	private LinearLayout mInformationContainer;
-	private LinearLayout mHomeWorkContainer;
 	private TextView mTitle;
 	private TextView mTime;
-	private TextView mHWLabel;
-	private String[] mTimePeriods;
+    private TextView mRoom;
+    private TextView mType;
+    private TextView mTeacher;
+    private String[] mTimePeriods;
 	private long timestamp;
 	@Override
 	public void onAttach(Activity activity) {
@@ -63,102 +63,71 @@ public class SingleLessonFragment extends Fragment implements OnClickListener, O
 		View v = inflater.inflate(R.layout.single_lesson_fragment, null);
 		mTime = (TextView) v.findViewById(R.id.single_lesson_time);
 		mTitle = (TextView) v.findViewById(R.id.single_lesson_title);
-		mHWLabel = (TextView) v.findViewById(R.id.single_lesson_homework_label);
-		mInformationContainer = (LinearLayout) v.findViewById(R.id.single_information_container);
-		mHomeWorkContainer = (LinearLayout) v.findViewById(R.id.home_work_container);
-		if(DataManager.getInstance().getHomeWorkList(timestamp, mLesson.getId()).size() == 0){
-			mHWLabel.setVisibility(View.GONE);
-		}
-		for(LessonInformation lesson : mLesson.getInformation()){
-			mInformationContainer.addView(getLesson(lesson));
-		}
-
 		mTitle.setText(mLesson.getInformation().get(0).getTitle());
 		mTime.setText(mTimePeriods[mLesson.getLessonNumber()-1]);
+        mRoom = (TextView) v.findViewById(R.id.lesson_room);
+        mType = (TextView) v.findViewById(R.id.single_information_type);
+        mTeacher = (TextView) v.findViewById(R.id.single_information_teacher);
 
-		return v;
-	}
-	
-	@Override
-	public void onStart() {
-		super.onStart();
-		ArrayList<HomeWork> list = DataManager.getInstance().getHomeWorkList(timestamp, mLesson.getId());
-		
-		if(list.size() == 0){
-			mHWLabel.setVisibility(View.GONE);
-		}else{
-			mHWLabel.setVisibility(View.VISIBLE);
-		}
-		
-		for(HomeWork homeWork : list){
-			mHomeWorkContainer.addView(getHomeWorkListElement(homeWork));
-		}
-	}
-	
-	@Override
-	public void onStop() {
-		super.onStop();
-		mHomeWorkContainer.removeAllViews();
-	}
-	
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		inflater.inflate(R.menu.main, menu);
-		menu.findItem(R.id.action_add).setVisible(true);
-		
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-
-		switch (item.getItemId()){
-		case R.id.action_add:
-		    mLessonListener.OnAddHomeWorkClick(mLesson.getId(), getArguments().getLong(TIMESTAMP));
-			
-			return true;
-			
-		default: return super.onOptionsItemSelected(item);
-
-		}
-		
-	}
-	
-	private View getLesson(LessonInformation lesson){
-		LayoutInflater inflater  = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = inflater.inflate(R.layout.single_lesson_information_element, null);
-		final TextView teacher = (TextView) v.findViewById(R.id.single_information_teacher);
-		final TextView type = (TextView) v.findViewById(R.id.single_information_type);
-		final TextView room = (TextView) v.findViewById(R.id.single_information_room);
-		teacher.setText(lesson.getTeacher());
-		type.setText(lesson.getType());
-		room.setText(lesson.getRoom());
-		return v;
-	}
-	
-	private View getHomeWorkListElement(HomeWork homeWork){
-		final LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = (View) inflater.inflate(R.layout.home_work_list_element, null);
-		TextView message = (TextView) v.findViewById(R.id.home_work_list_element_text);
-		CheckBox checkBox = (CheckBox) v.findViewById(R.id.home_work_list_element_check_box);
-		message.setText(homeWork.getMessage());
-		checkBox.setChecked(homeWork.isComplite());
-		v.setTag(homeWork.getId());
-		v.setOnClickListener(this);
-		checkBox.setTag(homeWork.getId());
-		checkBox.setOnCheckedChangeListener(this);
-		return v;
-	}
-	
-	
-	@Override
-	public void onClick(View v) {
-		mLessonListener.OnHomeWorkListElementClick((Long) v.getTag());
+        mRoom.setText(getRooms());
+        mType.setText(getTypes());
+        mTeacher.setText(getTeachers());
+        return v;
 	}
 
-	@Override
-	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		HomeWork hw = DataManager.getInstance().getHomeWork((Long) buttonView.getTag());
-		hw.setComplite(isChecked);
-		DataManager.getInstance().updateHomeWork(hw);
-	}
+
+
+    public String getRooms(){
+        String result = null;
+        StringBuffer buffer = new StringBuffer();
+
+        for(LessonInformation inf : mLesson.getInformation()){
+            if(inf.getRoom() != null & !inf.getRoom().trim().isEmpty()){
+                buffer.append(inf.getRoom()).append(", ");
+            }
+        }
+
+        if(buffer.length() != 0){
+            result = buffer.substring(0, buffer.length() - 2);
+        }
+        return result;
+    }
+
+
+    public String getTeachers(){
+        String result = null;
+        StringBuffer buffer = new StringBuffer();
+
+        for(LessonInformation inf : mLesson.getInformation()){
+            if(inf.getTeacher() != null & !inf.getTeacher().trim().isEmpty()){
+                buffer.append(inf.getTeacher()).append(", ");
+            }
+        }
+
+        if(buffer.length() != 0){
+            result  = buffer.substring(0, buffer.length() - 2);
+        }
+
+        return result;
+
+    }
+
+
+    public String getTypes(){
+        String result = null;
+        StringBuffer buffer = new StringBuffer();
+
+        for(LessonInformation inf : mLesson.getInformation()){
+            if(inf.getType() != null & !inf.getType().trim().isEmpty()
+                    & !buffer.toString().contains(inf.getType())){
+                buffer.append(inf.getType()).append(", ");
+            }
+        }
+        if(buffer.length() != 0){
+            result = buffer.substring(0, buffer.length() - 2);
+        }
+        return result;
+    }
+	
+
 }

@@ -2,6 +2,9 @@
 <resources>
 	<color name="white">#FFFFFF</color>    
 	<color name="theme_green">#2ECC71</color>
+    <color name="theme_green_with_alpha">#AA2ECC71</color>
+
+
 	<color name="theme_blue">#34495E</color>
 	<color name="bg_grey">#E5E5E5</color>
 	<color name="red">#FF0000</color>
