@@ -100,4 +100,6 @@
     <string name="single_lesson_info">Информация</string>
     <string name="single_lesson_hw">Задания</string>
     <string name="homework_message_hint">Описание отсутствует</string>
+    <string name="login_app_name">РАСПИСАНИЕ \n РГУПС</string>
+
 </resources>

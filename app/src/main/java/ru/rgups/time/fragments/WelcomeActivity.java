@@ -2,13 +2,17 @@ package ru.rgups.time.fragments;
 
 import ru.rgups.time.R;
 import ru.rgups.time.activities.AuthActivity;
+import ru.rgups.time.utils.Blur;
+
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class WelcomeActivity extends FragmentActivity implements OnClickListener{
 
@@ -17,14 +21,16 @@ public class WelcomeActivity extends FragmentActivity implements OnClickListener
 	private FacultetListFragment facultetListFragment;
 
 	private Button mLoginButton;
-	
-	
+	private ImageView mLoginPoster;
 
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.welcome_activity);
+        mLoginPoster = (ImageView) findViewById(R.id.login_poster);
+        BitmapDrawable image = (BitmapDrawable) getResources().getDrawable(R.drawable.poster);
+        mLoginPoster.setImageBitmap(Blur.fastblur(image.getBitmap(), 20));
 		facultetListFragment = new FacultetListFragment();
 		mLoginButton = (Button) findViewById(R.id.login_button);
 		mLoginButton.setOnClickListener(this);
