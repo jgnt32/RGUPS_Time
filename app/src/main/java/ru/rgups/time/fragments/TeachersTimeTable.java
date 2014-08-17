@@ -2,11 +2,9 @@ package ru.rgups.time.fragments;
 
 import ru.rgups.time.adapters.BaseCalendarAdapter;
 import ru.rgups.time.adapters.LessonListPagerAdapter;
-import ru.rgups.time.adapters.TeacherLessonListAdapter;
 import ru.rgups.time.adapters.TeacherPagerAdapter;
 import ru.rgups.time.adapters.TeachersCalendarAdapter;
 import ru.rgups.time.loaders.LessonExistingVector;
-import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.entity.StudentCalendarLessonInfo;
 import ru.rgups.time.utils.CalendarManager;
 
@@ -44,7 +42,7 @@ public class TeachersTimeTable extends BasePageTameTableFragment implements Load
 
 	@Override
 	protected LessonListPagerAdapter getNewPagerAdapter() {
-		return new TeacherPagerAdapter(getChildFragmentManager(), CalendarManager.getCorrectDayCount(), mTeachersName);
+		return new TeacherPagerAdapter(getChildFragmentManager(), CalendarManager.getCorrectSemestrDayCount(), mTeachersName);
 	}
 
     @Override

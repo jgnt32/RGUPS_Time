@@ -1,7 +1,6 @@
 package ru.rgups.time.utils;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import android.text.format.DateFormat;
@@ -47,30 +46,30 @@ public class CalendarManager {
     }
 
 
-	public static String getCalendarListMonthTitle(int shift){
+	public static synchronized String getCalendarListMonthTitle(int shift){
 		mSemestrCalendar.set(GregorianCalendar.DAY_OF_YEAR, shift + getDayOffset());
 		return DateFormat.format(MONTH_FORMAT, mSemestrCalendar.getTime()).toString();
 	}
 
 
-	public static int getCurrentDayOfTheYear(){
+	public static synchronized int getCurrentDayOfTheYear(){
 		mSemestrCalendar.setTime(Calendar.getInstance().getTime());
 		return mSemestrCalendar.get(GregorianCalendar.DAY_OF_YEAR) - getDayOffset();
 	}
 
-    public static int getDayOfTheYear(int dayOfSemestr){
+    public static synchronized int getDayOfTheYear(int dayOfSemestr){
 
         return dayOfSemestr + getDayOffset();
     }
 
 
-	public static int getCalendarListMonthNumber(int shift){
+	public static synchronized int getCalendarListMonthNumber(int shift){
 		mSemestrCalendar.set(GregorianCalendar.DAY_OF_YEAR, shift + getDayOffset());
 		return mSemestrCalendar.get(GregorianCalendar.MONTH);
 	}
 
-	
-	public static boolean montIsChanged(int shift){
+
+	public static synchronized boolean montIsChanged(int shift){
 		if(mOldMonth != getCalendarListMonthNumber(shift)){
 			mOldMonth = getCalendarListMonthNumber(shift);
 			return true;
@@ -79,8 +78,8 @@ public class CalendarManager {
 			return false;
 		}
 	}
-	
-	public static SEMESTR spotSemestr(){
+
+	public static synchronized SEMESTR spotSemestr(){
 		int month = Calendar.getInstance().get(Calendar.MONTH);
 		if(month >= Calendar.AUGUST){
 			return SEMESTR.FIRST_SEMESTR;
@@ -89,16 +88,14 @@ public class CalendarManager {
 		}
 	}
 
-    public static long getDate(int dayOfSemestr){
-        mSemestrCalendar.setTimeInMillis(System.currentTimeMillis());
+    public static synchronized long getDate(int dayOfSemestr){
         mSemestrCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
         mSemestrCalendar.setMinimalDaysInFirstWeek(4);
         mSemestrCalendar.set(Calendar.DAY_OF_YEAR, dayOfSemestr + getDayOffset());
         return mSemestrCalendar.getTimeInMillis();
     }
 
-    private static GregorianCalendar getCalendar(int dayOfSemestr){
-        mSemestrCalendar.setTimeInMillis(System.currentTimeMillis());
+    private synchronized static GregorianCalendar getCalendar(int dayOfSemestr){
         mSemestrCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
         mSemestrCalendar.setMinimalDaysInFirstWeek(4);
         mSemestrCalendar.set(Calendar.DAY_OF_YEAR, dayOfSemestr + getDayOffset());
@@ -106,15 +103,14 @@ public class CalendarManager {
     }
 
 
-    public static int getDayOfSemestr(long date){
-        mSemestrCalendar.setTimeInMillis(System.currentTimeMillis());
+    public static  synchronized int getDayOfSemestr(long date){
         mSemestrCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
         mSemestrCalendar.setMinimalDaysInFirstWeek(4);
         mSemestrCalendar.setTimeInMillis(date);
         return mSemestrCalendar.get(Calendar.DAY_OF_YEAR) - getDayOffset();
     }
 
-    public static int getDayOfWeek(int dayOfSemestr){
+    public static synchronized int getDayOfWeek(int dayOfSemestr){
 
         if(getCalendar(dayOfSemestr).get(GregorianCalendar.DAY_OF_WEEK) == GregorianCalendar.SUNDAY){
             return 7;
@@ -122,18 +118,18 @@ public class CalendarManager {
             return getCalendar(dayOfSemestr).get(GregorianCalendar.DAY_OF_WEEK) - 1;
         }
     }
-	
-	public static int getDayOffset(){
+
+	public static synchronized int getDayOffset(){
 		if(spotSemestr() == SEMESTR.FIRST_SEMESTR){
-			int dayOffset = Calendar.getInstance().getMaximum(Calendar.DAY_OF_YEAR) - getCorrectDayCount();
-			return dayOffset;
+			int dayOffset = Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_YEAR) - getCorrectSemestrDayCount();
+			return dayOffset + 1;
 		}else{
 			return 1;  // 1 -- because first position = 0 equel 31 december
 		}
-	
+
 	}
-	
-	public static int getCorrectDayCount(){
+
+	public static synchronized int getCorrectSemestrDayCount(){
 
 		if(spotSemestr() == SEMESTR.FIRST_SEMESTR){
 			return FIRST_SEMESTR_DAY_COUNT;						//первый семестр
@@ -147,7 +143,7 @@ public class CalendarManager {
 	}
 
 
-    public static boolean weekIsParity(int weekNumber){
+    public static synchronized boolean weekIsParity(int weekNumber){
         if(weekNumber % 2 == 0){
             return true;
         }else{
@@ -156,7 +152,7 @@ public class CalendarManager {
     }
 
 
-    public static boolean isOverLine(int dayOfSemestr){
+    public static synchronized boolean isOverLine(int dayOfSemestr){
 
         int weekOfYear = getWeekNumber(dayOfSemestr);
 
@@ -176,7 +172,7 @@ public class CalendarManager {
     }
 
 
-    public static int getWeekNumber(int dayOfSemestr) {
+    public static synchronized int getWeekNumber(int dayOfSemestr) {
         mSemestrCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
         mSemestrCalendar.setMinimalDaysInFirstWeek(4);
         mSemestrCalendar.set(Calendar.DAY_OF_YEAR, dayOfSemestr + getDayOffset());
@@ -212,7 +208,7 @@ public class CalendarManager {
         }
     }
 
-    public static boolean isMonday(int dayOfSemestr){
+    public static synchronized boolean isMonday(int dayOfSemestr){
         if(getCalendar(dayOfSemestr).get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY){
             return true;
         } else {
@@ -221,7 +217,7 @@ public class CalendarManager {
     }
 
 
-    public static boolean isSunday(int dayOfSemestr){
+    public static synchronized boolean isSunday(int dayOfSemestr){
         if(getCalendar(dayOfSemestr).get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
             return true;
         } else {
@@ -230,7 +226,7 @@ public class CalendarManager {
 
     }
 
-    public static int getWeekState(int dayOfSemestr){
+    public static synchronized int getWeekState(int dayOfSemestr){
         if(isOverLine(dayOfSemestr)){
             return OVER_LINE;
         } else {

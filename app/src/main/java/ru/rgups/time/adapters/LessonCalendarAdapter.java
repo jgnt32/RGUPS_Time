@@ -1,19 +1,14 @@
 package ru.rgups.time.adapters;
 
-import ru.rgups.time.R;
-import ru.rgups.time.datamanagers.LessonManager;
-import ru.rgups.time.model.DataManager;
 import ru.rgups.time.utils.CalendarManager;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 
 public class LessonCalendarAdapter extends BaseCalendarAdapter{
-	private int [] mHomeWorksVector = new int[CalendarManager.getCorrectDayCount()];
+	private int [] mHomeWorksVector = new int[CalendarManager.getCorrectSemestrDayCount()];
 	
 	public LessonCalendarAdapter(Context context) {
 		super(context);

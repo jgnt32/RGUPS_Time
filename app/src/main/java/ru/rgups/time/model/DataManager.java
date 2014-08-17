@@ -108,6 +108,7 @@ public class DataManager extends ContentObservable{
 		mDeleteInformationStatement = mDb.compileStatement(TextUtils.concat(
 				"DELETE FROM ",LessonInformation.TABLE_NAME," WHERE ",LessonInformation.GROUP_ID,"=?"
 				).toString());
+
 		mDeleteHomeWorkStatement = mDb.compileStatement(TextUtils.concat(
 				"DELETE FROM ", HomeWork.TABLE_NAME, " WHERE ", HomeWork.ID ," = ?"
 				).toString());
@@ -159,7 +160,7 @@ public class DataManager extends ContentObservable{
 		}
 		finally{
 			mDb.endTransaction();
-			
+			dispatchChange(true, null);
 		}
 		
 
@@ -211,8 +212,7 @@ public class DataManager extends ContentObservable{
 			mDb.beginTransaction();
 			for(Day day : lessonList.getDays()){
 				for(Lesson lesson : day.getLessons()){
-				
-					
+
 					if(lesson.getDoubleLine() != null){
 						mSaveLessonStatement.bindLong(1, day.getNumber());
 						mSaveLessonStatement.bindLong(2, lesson.getNumber());

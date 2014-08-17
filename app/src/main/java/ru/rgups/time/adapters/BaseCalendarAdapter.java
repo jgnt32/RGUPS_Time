@@ -1,17 +1,12 @@
 package ru.rgups.time.adapters;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import ru.rgups.time.R;
-import ru.rgups.time.model.entity.OverLine;
-import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.CalendarManager;
-import ru.rgups.time.utils.ConstUtils;
+
 import android.content.Context;
-import android.graphics.Color;
-import android.os.AsyncTask;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +55,7 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	
 	@Override
 	public int getCount() {
-		return CalendarManager.getCorrectDayCount();
+		return CalendarManager.getCorrectSemestrDayCount();
 	}
 	
 	@Override

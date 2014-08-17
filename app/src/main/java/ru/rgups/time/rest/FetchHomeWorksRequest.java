@@ -21,4 +21,6 @@ public class FetchHomeWorksRequest extends SpringAndroidSpiceRequest<HomeWorksLi
         HomeWorksList result = getRestTemplate().getForObject(url, HomeWorksList.class);
         return result;
     }
+
+
 }

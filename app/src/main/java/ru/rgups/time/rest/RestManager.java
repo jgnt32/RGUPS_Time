@@ -5,6 +5,7 @@ import android.content.Context;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.spice.FacultetTimeTableRequest;
 import ru.rgups.time.spice.FullTimeTableRequest;
+import ru.rgups.time.spice.GroupListRequest;
 import ru.rgups.time.spice.SampleSpiceService;
 import ru.rgups.time.spice.TimeTableRequest;
 import ru.rgups.time.utils.PreferenceManager;
@@ -59,6 +60,10 @@ public class RestManager {
 
     public void fetchHomeWorks(){
         this.getSpiceManager().execute(new FetchHomeWorksRequest(), null);
+    }
+
+    public void fetchGroup(long facultetId){
+        this.getSpiceManager().execute(new GroupListRequest(facultetId), null);
     }
 
 }

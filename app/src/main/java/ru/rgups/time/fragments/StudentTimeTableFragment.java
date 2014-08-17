@@ -1,23 +1,15 @@
 package ru.rgups.time.fragments;
 
-import java.io.IOException;
-
 import ru.rgups.time.adapters.BaseCalendarAdapter;
 import ru.rgups.time.adapters.LessonCalendarAdapter;
 import ru.rgups.time.adapters.LessonListPagerAdapter;
 import ru.rgups.time.loaders.LessonExistingVector;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.model.entity.StudentCalendarLessonInfo;
 import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.CalendarManager;
 
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
-import android.widget.ListView;
-
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
 
 public class StudentTimeTableFragment extends BasePageTameTableFragment implements LoaderManager.LoaderCallbacks<StudentCalendarLessonInfo> {
 	
@@ -63,7 +55,7 @@ public class StudentTimeTableFragment extends BasePageTameTableFragment implemen
 
 	@Override
 	protected LessonListPagerAdapter getNewPagerAdapter() {
-		return new LessonListPagerAdapter(getChildFragmentManager(), CalendarManager.getCorrectDayCount());
+		return new LessonListPagerAdapter(getChildFragmentManager(), CalendarManager.getCorrectSemestrDayCount());
 	}
 
 

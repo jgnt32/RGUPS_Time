@@ -9,7 +9,7 @@ public class StudentCalendarLessonInfo {
 
     protected boolean mLessonMatrix[][] = new boolean [7][2];
 
-    protected int[] mHwVector = new int[CalendarManager.getCorrectDayCount()];
+    protected int[] mHwVector = new int[CalendarManager.getCorrectSemestrDayCount()];
 
     public StudentCalendarLessonInfo() {
     }

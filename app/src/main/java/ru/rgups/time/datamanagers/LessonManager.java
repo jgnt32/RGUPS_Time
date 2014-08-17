@@ -1,11 +1,7 @@
 package ru.rgups.time.datamanagers;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
-
-import com.crashlytics.android.internal.s;
 
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HelperManager;
@@ -13,10 +9,7 @@ import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.LessonTableModel;
 import ru.rgups.time.model.entity.LessonInformation;
-import ru.rgups.time.model.entity.OverLine;
-import ru.rgups.time.model.entity.UnderLine;
 import ru.rgups.time.utils.CalendarManager;
-import ru.rgups.time.utils.ConstUtils;
 import ru.rgups.time.utils.PreferenceManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -104,20 +97,28 @@ public class LessonManager {
 		
 		return result;
 	}
-	
+
+
 	public int [] getHomeWorkVector(){
-		int [] result = new int [CalendarManager.getCorrectDayCount()];
-		Cursor c = getHomeWorkCursor();
-		
-		while(c.moveToNext()){
-			result[getDayOfSemestr(c)] = c.getInt(c.getColumnIndex("cnt"));
-		}
+        int [] result = new int [CalendarManager.getCorrectSemestrDayCount()];
+        Cursor c = getHomeWorkCursor();
+        try {
+
+
+            while(c.moveToNext()){
+                result[getDayOfSemestr(c)] = c.getInt(c.getColumnIndex("cnt"));
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
 
 		return result;
 	}
 
+
     private int getDayOfSemestr(Cursor c) {
-        return CalendarManager.getDayOfSemestr(c.getLong(c.getColumnIndex(HomeWork.DATE)) * CalendarManager.MILISECONDS_PER_DAY);
+        long date = c.getLong(c.getColumnIndex(HomeWork.DATE)) * CalendarManager.MILISECONDS_PER_DAY;
+        return CalendarManager.getDayOfSemestr(date);
     }
 
 
@@ -128,12 +129,11 @@ public class LessonManager {
 				).toString(), new String[]{Long.toString(getCurrentGroupId())});
 		return c;
 	}
-	
+
 	
 	public long getCurrentGroupId(){
 		return PreferenceManager.getInstance().getGroupId();
 	}
-	
 
 	
 }
