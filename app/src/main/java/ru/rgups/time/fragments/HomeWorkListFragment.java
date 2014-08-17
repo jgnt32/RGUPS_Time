@@ -1,6 +1,7 @@
 package ru.rgups.time.fragments;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
@@ -21,13 +22,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
+
 
 public class HomeWorkListFragment extends BaseFragment implements OnItemClickListener,
         LoaderManager.LoaderCallbacks<Cursor>{
@@ -39,7 +47,7 @@ public class HomeWorkListFragment extends BaseFragment implements OnItemClickLis
 	private View mProgress;
 	
 	private View mEmptyMessage;
-	
+	private Spinner mSpinner;
 
 	
 	@Override
@@ -52,11 +60,24 @@ public class HomeWorkListFragment extends BaseFragment implements OnItemClickLis
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mAdpter = new HomeWorkCursorAdapter(getActivity(), null, true);
-
+        setHasOptionsMenu(true);
 	}
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.home_work_list, menu);
+        mSpinner = (Spinner) MenuItemCompat.getActionView(menu.findItem(R.id.home_work_action_spinner));
+        String [] data = {"Все", "Выполненные", "Невыполненные"};
 
-	@Override
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.home_work_spinner_drop_down, data);
+        adapter.setDropDownViewResource(R.layout.home_work_spinner_drop_down);
+        mSpinner.setAdapter(adapter);
+
+    }
+
+
+
+    @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.homework_list_fragment, null);
@@ -105,5 +126,7 @@ public class HomeWorkListFragment extends BaseFragment implements OnItemClickLis
     public void onLoaderReset(Loader<Cursor> loader) {
 
     }
+
+
 
 }
