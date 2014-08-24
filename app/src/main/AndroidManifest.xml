@@ -37,6 +37,9 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.NoActionBar"></activity>
         <service android:name=".spice.SampleSpiceService"></service>
+        <service android:name=".services.LessonNotificationService"></service>
+
+        LessonNotificationService
         
         <activity android:name=".activities.AuthActivity"
                   android:screenOrientation="portrait">

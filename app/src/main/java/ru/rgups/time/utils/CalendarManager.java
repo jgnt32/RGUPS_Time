@@ -104,6 +104,7 @@ public class CalendarManager {
 
 
     public static  synchronized int getDayOfSemestr(long date){
+
         mSemestrCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
         mSemestrCalendar.setMinimalDaysInFirstWeek(4);
         mSemestrCalendar.setTimeInMillis(date);

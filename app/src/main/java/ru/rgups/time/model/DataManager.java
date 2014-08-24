@@ -884,5 +884,118 @@ public class DataManager extends ContentObservable{
 		}
 		return result;
 	}
+
+    public LessonListElement getCurrentLesson(int weekState, int day, int number){
+        LessonListElement result = null;
+        Cursor c = getCursorCurrentLesson(weekState, day, number);
+        if(c.moveToFirst()){
+            result = getLessonFromCursor(c);
+        }
+        return result;
+    }
+
+
+
+    public LessonListElement getClosestLesson(int weekState, int day, int number){
+        LessonListElement result = null;
+        try {
+            Cursor c;
+            c = getCursorClosestLessonByNumber(weekState, day, number);
+            if(c.moveToFirst()){                    //if has lesson today
+                result = getLessonFromCursor(c);
+            } else {
+                c = getCursorClosestLessonByDay(weekState, day);
+                if(c.moveToFirst()){                //if has lesson in other days on this week
+                    result = getLessonFromCursor(c);
+                } else {
+                    c = getCursorClosestLessonFromOtherWeek(weekState);
+                    if(c.moveToFirst()){            //if has lesson on other week
+                        result = getLessonFromCursor(c);
+                    }
+                }
+            }
+            c.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    private Cursor getCursorClosestLessonFromOtherWeek(int weekState) throws Exception {
+        String query;
+        Cursor c;
+        query = TextUtils.concat(
+                "SELECT * FROM ", LessonTableModel.TABLE_NAME,
+                " WHERE ",
+                "(", LessonTableModel.WEEK_STATE, "=? OR ", LessonTableModel.WEEK_STATE, "=2) ",
+                " ORDER BY ", LessonTableModel.DAY, ", ", LessonTableModel.NUMBER
+        ).toString();
+
+        c = mDb.rawQuery(query, new String[]{Integer.toString(invertWeekState(weekState))});
+        return c;
+    }
+
+    private Cursor getCursorClosestLessonByDay(int weekState, int day) {
+        String query;
+        Cursor c;
+        query = TextUtils.concat(
+                "SELECT * FROM ", LessonTableModel.TABLE_NAME,
+                " WHERE ",
+                "(", LessonTableModel.WEEK_STATE, "=? OR ", LessonTableModel.WEEK_STATE, "=2) AND ",
+                LessonTableModel.DAY, ">? ",
+                " ORDER BY ", LessonTableModel.DAY, ", ", LessonTableModel.NUMBER
+        ).toString();
+
+        c = mDb.rawQuery(query, new String[]{Integer.toString(weekState), Integer.toString(day)});
+        return c;
+    }
+
+    private Cursor getCursorClosestLessonByNumber(int weekState, int day, int number) {
+        Cursor c;
+        String query = TextUtils.concat(
+                "SELECT * FROM ", LessonTableModel.TABLE_NAME,
+                " WHERE ",
+                "(", LessonTableModel.WEEK_STATE, "=? OR ", LessonTableModel.WEEK_STATE, "=2) AND ",
+                LessonTableModel.DAY, ">=? AND ",
+                LessonTableModel.NUMBER, ">=? ",
+                " ORDER BY ", LessonTableModel.DAY, ", ", LessonTableModel.NUMBER
+
+        ).toString();
+
+        c = mDb.rawQuery(query, new String[]{Integer.toString(weekState), Integer.toString(day), Integer.toString(number)});
+        return c;
+    }
+
+    private Cursor getCursorCurrentLesson(int weekState, int day, int number) {
+        Cursor c;
+        String query = TextUtils.concat(
+                "SELECT * FROM ", LessonTableModel.TABLE_NAME,
+                " WHERE ",
+                "(", LessonTableModel.WEEK_STATE, "=? OR ", LessonTableModel.WEEK_STATE, "=2) AND ",
+                LessonTableModel.DAY, "=? AND ",
+                LessonTableModel.NUMBER, "=? ",
+                " ORDER BY ", LessonTableModel.DAY, ", ", LessonTableModel.NUMBER
+
+        ).toString();
+
+        c = mDb.rawQuery(query, new String[]{Integer.toString(weekState), Integer.toString(day), Integer.toString(number)});
+        return c;
+    }
+
+
+    private int invertWeekState(int weekState) throws Exception {
+        int result = -1;
+        if(weekState == UnderLine.WEEK_STATE){
+            result = OverLine.WEEK_STATE;
+        } else {
+            result = UnderLine.WEEK_STATE;
+        }
+        if(result == -1 ){
+            throw new Exception ("Ivalid params weeksState. WeekState should be equel '0' or '1'.") ;
+        }
+
+        return result;
+    }
 	
 }

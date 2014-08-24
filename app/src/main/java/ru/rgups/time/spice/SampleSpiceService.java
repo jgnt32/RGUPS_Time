@@ -1,6 +1,7 @@
 package ru.rgups.time.spice;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -10,6 +11,7 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.xml.SimpleXmlHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import ru.rgups.time.R;
 import ru.rgups.time.model.HelperManager;
 import ru.rgups.time.model.entity.Day;
 import ru.rgups.time.model.entity.DoubleLine;
@@ -20,11 +22,15 @@ import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
 import android.app.Application;
+import android.app.Notification;
+import android.content.Intent;
 
 import com.octo.android.robospice.SpringAndroidSpiceService;
 import com.octo.android.robospice.persistence.CacheManager;
 import com.octo.android.robospice.persistence.ormlite.InDatabaseObjectPersisterFactory;
 import com.octo.android.robospice.persistence.ormlite.RoboSpiceDatabaseHelper;
+import com.octo.android.robospice.request.CachedSpiceRequest;
+import com.octo.android.robospice.request.listener.RequestListener;
 
 /**
  * Simple service
@@ -32,7 +38,7 @@ import com.octo.android.robospice.persistence.ormlite.RoboSpiceDatabaseHelper;
  * @author sni
  * 
  */
-public class SampleSpiceService extends SpringAndroidSpiceService {
+public class SampleSpiceService extends SpringAndroidSpiceService{
 
     private static final int WEBSERVICES_TIMEOUT = 10000;
 
@@ -84,5 +90,16 @@ public class SampleSpiceService extends SpringAndroidSpiceService {
         restTemplate.setMessageConverters( listHttpMessageConverters );
         return restTemplate;
     }
+
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+  /*  @Override
+    public Notification createDefaultNotification() {
+        return ;
+    }*/
 
 }

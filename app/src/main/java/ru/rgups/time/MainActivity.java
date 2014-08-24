@@ -18,13 +18,17 @@ import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.interfaces.SettingListener;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.rest.RestManager;
+import ru.rgups.time.services.LessonNotificationService;
 import ru.rgups.time.utils.DialogManager;
 import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -80,9 +84,24 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 			openTimeTableFragment();
 
 		}
-
         DataManager.getInstance().writeToSD(this);
+        startLessonService();
+
 	}
+
+    public void startLessonService()
+    {
+        //Start Service service to handle data refresh
+        Intent serviceIntent = new Intent(this, LessonNotificationService.class);
+
+        //Schedule additional service calls using alarm manager.
+        AlarmManager alarmManager = (AlarmManager) this.getSystemService(ALARM_SERVICE);
+        PendingIntent pi = PendingIntent.getService(this, 0, serviceIntent, 0);
+
+        //Retrieve time interval from settings (a good practice to let users set the interval).
+        alarmManager.cancel(pi);
+        alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 10000  , pi);
+    }
 
 	private void openWelcomeActivity(){
 		if(PreferenceManager.getInstance().getGroupId() == -1){

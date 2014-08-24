@@ -1,6 +1,7 @@
 package ru.rgups.time.datamanagers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import ru.rgups.time.model.DataManager;
@@ -135,5 +136,69 @@ public class LessonManager {
 		return PreferenceManager.getInstance().getGroupId();
 	}
 
+    public LessonListElement getClosestLesson(){
+        GregorianCalendar calendar = new GregorianCalendar();
+        int dayOfSemestr = CalendarManager.getDayOfSemestr(calendar.getTimeInMillis());
+        int dayOfWeek ;
+
+        if(dayOfSemestr < 0){
+            dayOfWeek = 0;
+        } else {
+            dayOfWeek = CalendarManager.getDayOfWeek(dayOfSemestr);
+        }
+        int weekState = CalendarManager.getWeekState(dayOfSemestr);
+        int lessonNumber = getCurrentLessonNumber();
+        LessonListElement result = DataManager.getInstance().getClosestLesson(weekState, dayOfWeek, lessonNumber);
+        return result;
+    }
+
+    public LessonListElement getCurrentLesson(){
+        LessonListElement result = null;
+        GregorianCalendar calendar = new GregorianCalendar();
+        int dayOfSemestr = CalendarManager.getDayOfSemestr(calendar.getTimeInMillis());
+        int dayOfWeek = CalendarManager.getDayOfWeek(dayOfSemestr);
+        int weekState = CalendarManager.getWeekState(dayOfSemestr);
+        int lessonNumber = getCurrentLessonNumber();
+
+        if(dayOfSemestr > 0){
+            result = DataManager.getInstance().getCurrentLesson(weekState, dayOfWeek, lessonNumber);
+        }
+
+        return result;
+    }
+
+    public int getCurrentLessonNumber(){
+        int result = 9;
+        GregorianCalendar calendar = new GregorianCalendar();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minutes = calendar.get(Calendar.MINUTE);
+
+        int mod = hour * 60 + minutes;  // minute of day
+
+        if(mod >= getMinutesOfDay(0, 0) & mod <= getMinutesOfDay(9, 50)){     //00.00 - 9.50
+            result = 1;
+        } else if(mod >= getMinutesOfDay(9, 50) & mod <= getMinutesOfDay(11, 35)){ //9.50 - 11.35
+            result = 2;
+        } else if(mod >= getMinutesOfDay(12, 5) & mod <= getMinutesOfDay(13, 35)){ //12.05 - 13.35
+            result = 3;
+        } else if(mod >= getMinutesOfDay(13, 35) & mod <= getMinutesOfDay(15, 20)) { //13.35 - 15.20
+            result = 4;
+        } else if(mod >= getMinutesOfDay(15, 20) & mod <= getMinutesOfDay(17, 00)){  //15.20 - 17.00
+            result = 5;
+        } else if(mod >= getMinutesOfDay(17, 0) & mod <= getMinutesOfDay(18, 40)){  //17.00 - 18.40
+            result = 6;
+        } else if(mod >= getMinutesOfDay(18, 40) & mod <= getMinutesOfDay(20, 20)){  //18.40 - 20.20
+            result = 7;
+        } else if(mod >= getMinutesOfDay(20, 20) & mod <= getMinutesOfDay(22, 0)){  //20.20 - 22.00
+            result = 8;
+        }
+
+        return result;
+    }
+
+    /**Return current minute of day**/
+    private int getMinutesOfDay(int hour, int minutes){
+        return hour * 60 + minutes;
+    }
 	
 }

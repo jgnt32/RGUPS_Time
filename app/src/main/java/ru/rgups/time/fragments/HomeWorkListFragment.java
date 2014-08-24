@@ -61,6 +61,7 @@ public class HomeWorkListFragment extends BaseFragment implements OnItemClickLis
 		super.onCreate(savedInstanceState);
 		mAdpter = new HomeWorkCursorAdapter(getActivity(), null, true);
         setHasOptionsMenu(true);
+
 	}
 
     @Override
