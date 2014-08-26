@@ -48,13 +48,16 @@ import de.keyboardsurfer.android.widget.crouton.Crouton;
 public class MainActivity extends BaseDrawerActivity implements  SettingListener, OnClickListener, OnItemClickListener, LessonListener{
 
 	public static final String OVER_DRAWER_TRANSACTION = "over_drawer_transaction";
-	private DrawerLayout mDrawerLayout;
+    public static final String NOTIFICATION_LESSON_ID = "notofoaction_lesson_id";
+    public static final String NOTIFICATION_LESSON_DATE = "notification_lesson_date";
+
+    private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
 	private StudentTimeTableFragment mTimeTableFragment;
 	private HomeWorkListFragment mHomeWorkListFragment;
 	private SettingFragment mSettingFragment;
-	private boolean mReplaceFlag = false;
+	private boolean mReplaceFlag = true;
 	private TeachersListFragment mTeachersFrament;
 	private ProgressDialog mProgressDialog;
 	private MenuDrawer mDrawer;
@@ -86,11 +89,33 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		}
         DataManager.getInstance().writeToSD(this);
         startLessonService();
+        if(savedInstanceState == null){
+            openTimeTableFragment();
+        }
+        handleOnNotificationClick(getIntent().getExtras());
 
 	}
 
-    public void startLessonService()
-    {
+
+    private void handleOnNotificationClick(Bundle extra){
+        if(extra != null){
+
+            SingleLessonPageFragment fragment = new SingleLessonPageFragment();
+            Bundle args = new Bundle();
+            args.putLong(SingleLessonFragment.LESSON_ID, extra.getLong(NOTIFICATION_LESSON_ID));
+            args.putLong(SingleLessonFragment.TIMESTAMP, extra.getLong(NOTIFICATION_LESSON_DATE));
+            fragment.setArguments(args);
+            openFragment(fragment, null);
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        handleOnNotificationClick(intent.getExtras());
+    }
+
+    public void startLessonService(){
         //Start Service service to handle data refresh
         Intent serviceIntent = new Intent(this, LessonNotificationService.class);
 
@@ -116,19 +141,6 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 
 	}
 
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-	/*	if(!PreferenceManager.getInstance().isFacultetsTimeDowloaded() && PreferenceManager.getInstance().getFacultetId() != -1){
-			RestManager.getInstance().exucuteFacultetRequest(new FacultetTimeRequestListener());
-			mProgressDialog.show();
-		}else{
-			if(mReplaceFlag){*/
-				openTimeTableFragment();
-//			}
-//		}
-	}
 
 	private void openTimeTableFragment(){
 		if(PreferenceManager.getInstance().getGroupId() != -1){
@@ -263,14 +275,18 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		args.putLong(SingleLessonFragment.LESSON_ID, lessonId);
 		args.putLong(SingleLessonFragment.TIMESTAMP, date);
 		fragment.setArguments(args);
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.replace(R.id.frameLayout, fragment, OVER_DRAWER_TRANSACTION);
-		ft.addToBackStack(null);
-
-		ft.commit();
+        openFragment(fragment, OVER_DRAWER_TRANSACTION);
 	}
 
-	@Override
+    private void openFragment(SingleLessonPageFragment fragment, String tag) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayout, fragment, tag);
+        ft.addToBackStack(null);
+
+        ft.commit();
+    }
+
+    @Override
 	public void OnAddHomeWorkClick(long lessonId, Long date) {
 		Intent i = new Intent(this, HomeWorkActivity.class);
 		i.putExtra(HomeWorkActivity.LAUNCH_TYPE, HomeWorkActivity.EDIT);

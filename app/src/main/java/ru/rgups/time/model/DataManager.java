@@ -958,7 +958,7 @@ public class DataManager extends ContentObservable{
                 " WHERE ",
                 "(", LessonTableModel.WEEK_STATE, "=? OR ", LessonTableModel.WEEK_STATE, "=2) AND ",
                 LessonTableModel.DAY, ">=? AND ",
-                LessonTableModel.NUMBER, ">=? ",
+                LessonTableModel.NUMBER, ">? ",
                 " ORDER BY ", LessonTableModel.DAY, ", ", LessonTableModel.NUMBER
 
         ).toString();

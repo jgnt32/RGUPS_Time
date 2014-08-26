@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:src="@drawable/ic_launcher"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_weight="0"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
+
+
+    <LinearLayout
+        android:id="@+id/notification_closest_lesson_cotainer"
+        android:orientation="vertical"
+        android:background="@drawable/base_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/notification_lesson_status"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Следующая пара"/>
+
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/notification_closest_lesson_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Физика"/>
+
+        <TextView
+            android:id="@+id/notification_closest_lesson_room"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Д406"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

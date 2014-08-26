@@ -139,16 +139,20 @@ public class LessonManager {
     public LessonListElement getClosestLesson(){
         GregorianCalendar calendar = new GregorianCalendar();
         int dayOfSemestr = CalendarManager.getDayOfSemestr(calendar.getTimeInMillis());
-        int dayOfWeek ;
+        int lessonNumber;
 
         if(dayOfSemestr < 0){
-            dayOfWeek = 0;
+            dayOfSemestr = 0;
+           lessonNumber = 0;
         } else {
-            dayOfWeek = CalendarManager.getDayOfWeek(dayOfSemestr);
+            lessonNumber = getCurrentLessonNumber();
         }
+
+        int dayOfWeek = CalendarManager.getDayOfWeek(dayOfSemestr);
+
         int weekState = CalendarManager.getWeekState(dayOfSemestr);
-        int lessonNumber = getCurrentLessonNumber();
         LessonListElement result = DataManager.getInstance().getClosestLesson(weekState, dayOfWeek, lessonNumber);
+        result.setDate(CalendarManager.getDate(dayOfSemestr));
         return result;
     }
 
@@ -160,8 +164,9 @@ public class LessonManager {
         int weekState = CalendarManager.getWeekState(dayOfSemestr);
         int lessonNumber = getCurrentLessonNumber();
 
-        if(dayOfSemestr > 0){
+        if(dayOfSemestr >= 0){
             result = DataManager.getInstance().getCurrentLesson(weekState, dayOfWeek, lessonNumber);
+            result.setDate(CalendarManager.getDate(dayOfSemestr));
         }
 
         return result;
