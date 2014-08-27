@@ -1,11 +1,13 @@
 package ru.rgups.time.services;
 
+
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -36,9 +38,10 @@ public class LessonNotificationService extends Service {
         mClosestLesson = LessonManager.getInstance().getClosestLesson();
 
         Log.e("LessonNotificationService", "onBind");
-        Notification n = new Notification.Builder(this)
+        Notification n = new NotificationCompat.Builder(this)
                /* setContentText(mClosestLesson.getInformation().get(0).getTitle())
                 .setContentTitle("Ближайшая пара")*/
+                .setContentIntent(getPendingIntent(mClosestLesson, mLesson))
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContent(getRemoteViews())
                 .build();
@@ -60,30 +63,39 @@ public class LessonNotificationService extends Service {
             result = new RemoteViews(getPackageName(), R.layout.notification_closest_lesson_only);
             result.setTextViewText(R.id.notification_closest_lesson_title, mClosestLesson.getTitle());
             result.setTextViewText(R.id.notification_closest_lesson_room, mClosestLesson.getRooms());
-            result.setOnClickPendingIntent(R.id.notification_closest_lesson_cotainer, getPendingIntent(mClosestLesson));
+         //   result.setPendingIntentTemplate(R.id.notification_closest_lesson_cotainer, getPendingIntent(mClosestLesson));
 
 
         } else {
             result = new RemoteViews(getPackageName(), R.layout.notification_closest_and_current_lesson);
 
-            result.setTextViewText(R.id.notification_current_lesson_title, mLesson.getTitle());
-            result.setTextViewText(R.id.notification_current_lesson_room, mLesson.getRooms());
-            result.setOnClickPendingIntent(R.id.notification_currenr_lesson_cotainer, getPendingIntent(mLesson));
-
-
             result.setTextViewText(R.id.notification_closest_lesson_title, mClosestLesson.getTitle());
             result.setTextViewText(R.id.notification_closest_lesson_room, mClosestLesson.getRooms());
-            result.setOnClickPendingIntent(R.id.notification_closest_lesson_cotainer, getPendingIntent(mClosestLesson));
+           // result.setPendingIntentTemplate(R.id.notification_closest_lesson_cotainer, getPendingIntent(mClosestLesson, mLesson));
+
+            result.setTextViewText(R.id.notification_current_lesson_title, mLesson.getTitle());
+            result.setTextViewText(R.id.notification_current_lesson_room, mLesson.getRooms());
+          //  result.setPendingIntentTemplate(R.id.notification_currenr_lesson_cotainer, getPendingIntent(mLesson));
+
+
+
         }
 
         return result;
     }
 
-    private PendingIntent getPendingIntent(LessonListElement lesson){
+    private PendingIntent getPendingIntent(LessonListElement closeLesson, LessonListElement currentLesson){
         Intent notificationIntent = new Intent(this, MainActivity.class);
         notificationIntent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        notificationIntent.putExtra(MainActivity.NOTIFICATION_LESSON_ID, lesson.getId());
-        notificationIntent.putExtra(MainActivity.NOTIFICATION_LESSON_DATE, lesson.getDate().getTime());
+        if(currentLesson == null){
+            notificationIntent.putExtra(MainActivity.NOTIFICATION_LESSON_ID, closeLesson.getId());
+            notificationIntent.putExtra(MainActivity.NOTIFICATION_LESSON_DATE, closeLesson.getDate().getTime());
+
+        } else {
+            notificationIntent.putExtra(MainActivity.NOTIFICATION_LESSON_ID, currentLesson.getId());
+            notificationIntent.putExtra(MainActivity.NOTIFICATION_LESSON_DATE, currentLesson.getDate().getTime());
+
+        }
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);

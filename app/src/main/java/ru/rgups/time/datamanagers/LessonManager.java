@@ -12,6 +12,8 @@ import ru.rgups.time.model.LessonTableModel;
 import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.utils.PreferenceManager;
+
+import android.app.PendingIntent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -166,7 +168,10 @@ public class LessonManager {
 
         if(dayOfSemestr >= 0){
             result = DataManager.getInstance().getCurrentLesson(weekState, dayOfWeek, lessonNumber);
-            result.setDate(CalendarManager.getDate(dayOfSemestr));
+            if(result != null){
+                result.setDate(CalendarManager.getDate(dayOfSemestr));
+
+            }
         }
 
         return result;
