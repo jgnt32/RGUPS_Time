@@ -28,7 +28,7 @@
 
         <RelativeLayout
             android:id="@+id/lesson_list_empty_progress_view"
-            android:background="@color/bg_grey"
+            android:background="@color/lesson_list_backgroud"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

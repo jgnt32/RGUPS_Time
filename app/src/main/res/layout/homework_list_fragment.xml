@@ -20,11 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         
-        <ProgressBar 
-            android:layout_centerInParent="true"
-            android:id="@+id/hw_empty_progress"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"/>
+
 
         <TextView
             android:id="@+id/hw_empty_message"
@@ -32,8 +28,20 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:visibility="gone"
+            android:visibility="visible"
             android:text="@string/hw_empty" />
+
+        <RelativeLayout
+            android:id="@+id/hw_empty_progress"
+            android:background="@color/bg_grey"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+        </RelativeLayout>
         
     </RelativeLayout>
     

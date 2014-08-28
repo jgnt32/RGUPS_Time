@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Date;
 
 import ru.rgups.time.datamanagers.LessonManager;
+import ru.rgups.time.fragments.HomeWorkListFragment;
 import ru.rgups.time.model.entity.Day;
 import ru.rgups.time.model.entity.DoubleLine;
 import ru.rgups.time.model.entity.Facultet;
@@ -586,7 +587,7 @@ public class DataManager extends ContentObservable{
 	}
 	
 	
-	public Cursor getHomeWorks(){
+	public Cursor getHomeWorks(long status){
 		Long groupId = PreferenceManager.getInstance().getGroupId();
 		String query = TextUtils.concat(
 				"SELECT h.",HomeWork.ID," as _id, h.*,l.*,i.* FROM ",HomeWork.TABLE_NAME," as h ",
@@ -595,14 +596,28 @@ public class DataManager extends ContentObservable{
 				" INNER JOIN ",Lesson.TABLE_NAME," as l ON ",
 				" l.",Lesson.ID," = i.",LessonInformation.LESSON_ID,
 				" WHERE h.",HomeWork.GROUP_ID,"=? ",
-				
+				" %status_condition ",
 				" GROUP BY h.",HomeWork.ID,
 				" ORDER BY h.",HomeWork.DATE, ", l.", Lesson.NUMBER
 				).toString();
-		Cursor c = mDb.rawQuery(query, 
+
+
+		Cursor c = mDb.rawQuery(query.replace("%status_condition", getStatusCondition(status)),
 				new String[]{groupId.toString()});
 		return c;
 	}
+
+    private String getStatusCondition(long status){
+        String result = "";
+        if(status == HomeWorkListFragment.COMPITED_HOME_WORKS){
+            result = " AND "+HomeWork.COMPLITE+"= 1";
+        } else if (status == HomeWorkListFragment.UNCOMPLITED_HOMEWORKS){
+            result = " AND "+HomeWork.COMPLITE+"= 0";
+        }
+        return result;
+    }
+
+
 	
 	public ArrayList<HomeWork> getAllHomeWorks(){
 		Long groupId = PreferenceManager.getInstance().getGroupId();

@@ -15,6 +15,7 @@ import ru.rgups.time.MainActivity;
 import ru.rgups.time.R;
 import ru.rgups.time.datamanagers.LessonManager;
 import ru.rgups.time.model.LessonListElement;
+import ru.rgups.time.utils.PreferenceManager;
 
 /**
  * Created by timewaistinguru on 23.08.2014.
@@ -34,13 +35,20 @@ public class LessonNotificationService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if(PreferenceManager.getInstance().statusBarNotificationIsEnabled()) {
+            createNotification();
+        }
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    private void createNotification() {
         mLesson = LessonManager.getInstance().getCurrentLesson();
         mClosestLesson = LessonManager.getInstance().getClosestLesson();
 
         Log.e("LessonNotificationService", "onBind");
         Notification n = new NotificationCompat.Builder(this)
-               /* setContentText(mClosestLesson.getInformation().get(0).getTitle())
-                .setContentTitle("Ближайшая пара")*/
+           /* setContentText(mClosestLesson.getInformation().get(0).getTitle())
+            .setContentTitle("Ближайшая пара")*/
                 .setContentIntent(getPendingIntent(mClosestLesson, mLesson))
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setContent(getRemoteViews())
@@ -52,8 +60,6 @@ public class LessonNotificationService extends Service {
 
         notificationManager.cancelAll();
         notificationManager.notify(0, n);
-
-        return super.onStartCommand(intent, flags, startId);
     }
 
     private RemoteViews getRemoteViews() {

@@ -40,17 +40,24 @@ import android.widget.Spinner;
 public class HomeWorkListFragment extends BaseFragment implements OnItemClickListener,
         LoaderManager.LoaderCallbacks<Cursor>{
 
+    public final static long ALL_HOME_WORKS = Long.valueOf(0);
+    public final static long COMPITED_HOME_WORKS = Long.valueOf(1);
+    public final static long UNCOMPLITED_HOMEWORKS = Long.valueOf(2);
+
 	private StickyListHeadersListView mListView;
 	private LessonListener mLessonListener;
 	private HomeWorkCursorAdapter mAdpter;
 
 	private View mProgress;
-	
+
+
+
 	private View mEmptyMessage;
 	private Spinner mSpinner;
+    private long mHomeWorkStatus = ALL_HOME_WORKS;
 
-	
-	@Override
+
+    @Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		mLessonListener = (LessonListener) activity;
@@ -73,9 +80,25 @@ public class HomeWorkListFragment extends BaseFragment implements OnItemClickLis
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), R.layout.home_work_spinner_drop_down, data);
         adapter.setDropDownViewResource(R.layout.home_work_spinner_drop_down);
         mSpinner.setAdapter(adapter);
-
+        mSpinner.setOnItemSelectedListener(getOnSpinnerItemSelectListener());
     }
 
+    private AdapterView.OnItemSelectedListener getOnSpinnerItemSelectListener() {
+        return new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mHomeWorkStatus = id;
+                restartLoader();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        };
+    }
 
 
     @Override
@@ -100,6 +123,10 @@ public class HomeWorkListFragment extends BaseFragment implements OnItemClickLis
     @Override
     public void onResume() {
         super.onResume();
+        restartLoader();
+    }
+
+    private void restartLoader() {
         getLoaderManager().restartLoader(0, null, this);
         getLoaderManager().getLoader(0).forceLoad();
     }
@@ -111,7 +138,7 @@ public class HomeWorkListFragment extends BaseFragment implements OnItemClickLis
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new HomeWorkCursorLoader(getActivity());
+        return new HomeWorkCursorLoader(getActivity(), mHomeWorkStatus);
     }
 
 
