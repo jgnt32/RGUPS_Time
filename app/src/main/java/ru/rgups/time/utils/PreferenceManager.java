@@ -10,6 +10,7 @@ public class PreferenceManager {
 	private final static String GROUP_TITLE = "group_title";
 	private final static String FULL_TIME_DOWNLOADED = "full_time_downloaded";
 	private final static String FULL_TIME_DOWNLOADING_DIALOG_SHOWED = "full_time_dowloding_showed";
+    private final static String STATUS_BAR_NOTIFICATION = "status_bar_notification";
 
 	private final static String FACULTETS_TIME_DOWNLOADED = "facultets_time_downloaded";
 
@@ -95,6 +96,16 @@ public class PreferenceManager {
 		return mPreference.getBoolean(FULL_TIME_DOWNLOADING_DIALOG_SHOWED, false);
 
 	}
+
+    public void setStatusBarNotificationEnebled(boolean value){
+        mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
+        mPreference.edit().putBoolean(STATUS_BAR_NOTIFICATION, value).commit();
+    }
+
+    public boolean statusBarNotificationIsEnabled(){
+        mPreference = mContext.getSharedPreferences(PLACE, Context.MODE_PRIVATE);
+        return mPreference.getBoolean(STATUS_BAR_NOTIFICATION, false);
+    }
 	
 	
 }

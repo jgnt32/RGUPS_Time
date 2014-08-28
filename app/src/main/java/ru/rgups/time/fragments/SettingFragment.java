@@ -9,6 +9,8 @@ import ru.rgups.time.model.DataManager;
 import ru.rgups.time.rest.ApigeeManager;
 import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.DialogManager;
+import ru.rgups.time.utils.PreferenceManager;
+
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -17,15 +19,18 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
-public class SettingFragment extends BaseFragment implements OnClickListener{
+public class SettingFragment extends BaseFragment implements OnClickListener, CompoundButton.OnCheckedChangeListener{
 	private SettingListener mListener;
 	private View mLogoutButton;
 	private Button mFullDowloadButton;
 	private TextView mGroupTitle;
 	private TextView mFacultetTitle;
 	private Button mAboutButton;
+    private Switch mSwitch;
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -47,6 +52,9 @@ public class SettingFragment extends BaseFragment implements OnClickListener{
 		mFacultetTitle.setText(DataManager.getInstance().getCurrentFacultetTitle());
 		mAboutButton = (Button) v.findViewById(R.id.setting_about);
 		mAboutButton.setOnClickListener(this);
+        mSwitch = (Switch) v.findViewById(R.id.setting_notification_switch);
+        mSwitch.setChecked(PreferenceManager.getInstance().statusBarNotificationIsEnabled());
+        mSwitch.setOnCheckedChangeListener(this);
 		return v;
 	}
 
@@ -104,4 +112,12 @@ public class SettingFragment extends BaseFragment implements OnClickListener{
 		}
 	}
 
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        switch (buttonView.getId()){
+            case R.id.setting_notification_switch:
+                mListener.enableLessonNotification(isChecked);
+                break;
+        }
+    }
 }

@@ -77,8 +77,6 @@ public class LessonNotificationService extends Service {
             result.setTextViewText(R.id.notification_current_lesson_room, mLesson.getRooms());
           //  result.setPendingIntentTemplate(R.id.notification_currenr_lesson_cotainer, getPendingIntent(mLesson));
 
-
-
         }
 
         return result;

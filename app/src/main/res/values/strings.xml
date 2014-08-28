@@ -102,4 +102,6 @@
     <string name="homework_message_hint">Описание отсутствует</string>
     <string name="login_app_name">РАСПИСАНИЕ \n РГУПС</string>
 
+    <string name="settings_notification_switch">Уведомление в \n статус баре</string>
+
 </resources>
