@@ -33,7 +33,7 @@ public class ApigeeManager {
     private ApigeeClient mApigeeClient;
 
     private ApigeeManager (Context context){
-        mApigeeClient = new ApigeeClient(ORGNAME, APPNAME, context);
+//        mApigeeClient = new ApigeeClient(ORGNAME, APPNAME, context);
     }
 
     public static void initInstance(Context context){

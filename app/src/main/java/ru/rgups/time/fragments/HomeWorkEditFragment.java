@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -30,6 +31,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -39,7 +41,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeListener, AdapterView.OnItemClickListener,
+public class HomeWorkEditFragment extends Fragment implements  AdapterView.OnItemClickListener,
         LoaderManager.LoaderCallbacks<HomeWork>, PickUpImageListener{
     public static final String LESSON_ID = "lesson_id";
     public static final String HOMEWORK_ID = "homework_id";
@@ -87,8 +89,12 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 
 		View v = inflater.inflate(R.layout.homework_fragment, null);
 		mPhotoGridView = (GridView) v.findViewById(R.id.home_work_grid_view);
-		mPhotoGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL); 
-		mPhotoGridView.setMultiChoiceModeListener(this);
+		mPhotoGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
+
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1){
+            mPhotoGridView.setMultiChoiceModeListener(getMultiChoiceModeListener());
+        }
+
         mPhotoGridView.setAdapter(mAdapter);
         mPhotoGridView.setOnItemClickListener(this);
 		mText = (EditText) v.findViewById(R.id.home_work_text);
@@ -99,8 +105,55 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 		return v;
 	}
 
-	
-	@Override
+    private MultiChoiceModeListener getMultiChoiceModeListener() {
+        return new MultiChoiceModeListener() {
+            @Override
+            public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                mode.getMenuInflater().inflate(R.menu.action_mode, menu);
+                return true;
+            }
+
+
+            @Override
+            public boolean onPrepareActionMode(ActionMode arg0, Menu arg1) {
+                return true;
+            }
+
+
+            @Override
+            public void onItemCheckedStateChanged(ActionMode arg0, int position, long id, boolean checked) {
+                if(checked){
+                    mCheckedPhotos.add(mAdapter.getItem(position));
+                } else {
+                    mCheckedPhotos.remove(mAdapter.getItem(position));
+                }
+                Log.e("onItemCheckedStateChanged", "position = " + position + "; count = " + mPhotoGridView.getCheckedItemCount());
+
+            }
+
+            @Override
+            public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                switch (item.getItemId()){
+
+                    case R.id.action_mode_delete:
+                        deletePhotos();
+                        mode.finish();
+
+                        break;
+
+                }
+                return true;
+            }
+
+            @Override
+            public void onDestroyActionMode(ActionMode mode) {
+
+            }
+        };
+    }
+
+
+    @Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.homework, menu);
 		menu.findItem(R.id.action_save).setVisible(true);
@@ -243,19 +296,7 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
 
     }
 
-    @Override
-	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-        switch (item.getItemId()){
 
-            case R.id.action_mode_delete:
-                deletePhotos();
-                mode.finish();
-
-                break;
-
-        }
-		return true;
-	}
 
     private void deletePhotos(){
         for(String photo : mCheckedPhotos){
@@ -265,35 +306,7 @@ public class HomeWorkEditFragment extends Fragment implements MultiChoiceModeLis
     }
 
 
-	@Override
-	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-        mode.getMenuInflater().inflate(R.menu.action_mode, menu);
-		return true;
-	}
 
-
-	@Override
-	public void onDestroyActionMode(ActionMode arg0) {
-		
-	}
-
-
-	@Override
-	public boolean onPrepareActionMode(ActionMode arg0, Menu arg1) {
-		return true;
-	}
-
-
-	@Override
-	public void onItemCheckedStateChanged(ActionMode arg0, int position, long id, boolean checked) {
-        if(checked){
-            mCheckedPhotos.add(mAdapter.getItem(position));
-        } else {
-            mCheckedPhotos.remove(mAdapter.getItem(position));
-        }
-		Log.e("onItemCheckedStateChanged","position = "+position+"; count = "+mPhotoGridView.getCheckedItemCount());
-		
-	}
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

@@ -71,11 +71,11 @@ public class LessonAdapter extends BaseAdapter{
 		}
 		
 
-		/*	if(getItem(position).isHasHomeWork()){
+			if(getItem(position).isHasHomeWork()){
 				mHolder.hwIndicator.setVisibility(View.VISIBLE);
 			}else{
 				mHolder.hwIndicator.setVisibility(View.GONE);
-			}*/
+			}
 		if(getItem(position).getInformation().size()>0){
 			StringBuffer roomBuffer = new StringBuffer();
 			StringBuffer teacherBuffer = new StringBuffer();
@@ -139,7 +139,7 @@ public class LessonAdapter extends BaseAdapter{
 			this.setTeacher((TextView) view.findViewById(R.id.lesson_teacher));
 			this.roomContainer = view.findViewById(R.id.lesson_room_container);
 			this.teacherContainer = view.findViewById(R.id.lesson_teacher_container);
-	//		hwIndicator = (ImageView) view.findViewById(R.id.lesson_list_element_homework_indicator);
+			hwIndicator = (ImageView) view.findViewById(R.id.lesson_list_element_homework_indicator);
 		}
 		
 

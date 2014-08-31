@@ -82,10 +82,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		initActionBar();
 //		initDrawer();
 		initFragmenets();
-		if(savedInstanceState == null && PreferenceManager.getInstance().isFacultetsTimeDowloaded()){
-			openTimeTableFragment();
 
-		}
         DataManager.getInstance().writeToSD(this);
         startNotificationService();
         if(savedInstanceState == null){
@@ -125,7 +122,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 
             //Retrieve time interval from settings (a good practice to let users set the interval).
             alarmManager.cancel(pi);
-            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 10000  , pi);
+            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime(), 300000  , pi); // every 5 minute
 
         }
     }
@@ -135,12 +132,6 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 			Intent i = new Intent(this, WelcomeActivity.class);
 			startActivity(i);
 		}
-	}
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
-
 	}
 
 
