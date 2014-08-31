@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener, Co
 	private TextView mGroupTitle;
 	private TextView mFacultetTitle;
 	private Button mAboutButton;
-    private Switch mSwitch;
+    private CheckBox mCheckBox;
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -52,9 +53,9 @@ public class SettingFragment extends BaseFragment implements OnClickListener, Co
 		mFacultetTitle.setText(DataManager.getInstance().getCurrentFacultetTitle());
 		mAboutButton = (Button) v.findViewById(R.id.setting_about);
 		mAboutButton.setOnClickListener(this);
-        mSwitch = (Switch) v.findViewById(R.id.setting_notification_switch);
-        mSwitch.setChecked(PreferenceManager.getInstance().statusBarNotificationIsEnabled());
-        mSwitch.setOnCheckedChangeListener(this);
+        mCheckBox = (CheckBox) v.findViewById(R.id.setting_notification_switch);
+        mCheckBox.setChecked(PreferenceManager.getInstance().statusBarNotificationIsEnabled());
+        mCheckBox.setOnCheckedChangeListener(this);
 		return v;
 	}
 

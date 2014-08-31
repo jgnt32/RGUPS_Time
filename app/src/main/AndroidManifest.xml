@@ -49,7 +49,8 @@
         
         <activity 
             android:name=".activities.HomeWorkActivity"
-           	android:uiOptions="splitActionBarWhenNarrow">
+            android:theme="@style/AppBaseTheme"
+            android:uiOptions="splitActionBarWhenNarrow">
             
         </activity>
         
@@ -60,7 +61,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />            </intent-filter>
         </receiver>
 
-    <activity android:name=".activities.PhotoFullScreenActivity"></activity>
+    <activity android:name=".activities.PhotoFullScreenActivity"
+        android:theme="@style/AppBaseTheme"
+
+        ></activity>
     
     
     <meta-data android:name="com.crashlytics.ApiKey" android:value="5a2cc6ac6ddc499c700c758436da20104f4d181a"/>

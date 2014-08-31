@@ -32,6 +32,7 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -161,11 +162,21 @@ public class DataManager extends ContentObservable{
 		}
 		finally{
 			mDb.endTransaction();
-			dispatchChange(true, null);
+            notifyObservers();
 		}
 		
 
 	}
+
+    public void notifyObservers(){
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1){
+            dispatchChange(true, null);
+        } else {
+            dispatchChange(true);
+
+        }
+
+    }
 	
 	public void saveFacultet(Collection<Facultet> list){
 		
@@ -183,7 +194,7 @@ public class DataManager extends ContentObservable{
 		}
 		finally{
 			mDb.endTransaction();
-			
+            notifyObservers();
 		}
 		
 
@@ -266,8 +277,7 @@ public class DataManager extends ContentObservable{
 		}
 		finally{
 			mDb.endTransaction();
-            dispatchChange(true, null);
-
+            notifyObservers();
 		}
 		
 	}
@@ -743,7 +753,7 @@ public class DataManager extends ContentObservable{
 		}
 		finally{
 			mDb.endTransaction();
-            dispatchChange(true, null);
+            notifyObservers();
 
         }
 	}

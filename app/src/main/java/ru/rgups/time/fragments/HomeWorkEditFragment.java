@@ -89,10 +89,11 @@ public class HomeWorkEditFragment extends Fragment implements  AdapterView.OnIte
 
 		View v = inflater.inflate(R.layout.homework_fragment, null);
 		mPhotoGridView = (GridView) v.findViewById(R.id.home_work_grid_view);
-		mPhotoGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
 
         if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1){
             mPhotoGridView.setMultiChoiceModeListener(getMultiChoiceModeListener());
+            mPhotoGridView.setChoiceMode(GridView.CHOICE_MODE_MULTIPLE_MODAL);
+
         }
 
         mPhotoGridView.setAdapter(mAdapter);
@@ -343,9 +344,10 @@ public class HomeWorkEditFragment extends Fragment implements  AdapterView.OnIte
 
     @Override
     public void onPickPhotoFromGalleryClick() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+
+        Intent intent =  new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+   /*     intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);*/
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST);

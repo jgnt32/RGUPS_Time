@@ -1,6 +1,7 @@
 package ru.rgups.time.adapters;
 
 import android.content.Context;
+import android.os.Build;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,10 +75,20 @@ public class HomeWorksAdapter extends BaseAdapter implements CompoundButton.OnCh
 
         mHolder.compliteBox.setChecked(getItem(position).isComplite());
 
+
         if(getItem(position).isComplite()){
-            mHolder.body.setBackground(mContext.getResources().getDrawable(R.drawable.hw_done_indicator));
+            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1){
+                mHolder.body.setBackground(mContext.getResources().getDrawable(R.drawable.hw_done_indicator));
+            } else {
+                mHolder.body.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.hw_done_indicator));
+            }
         } else {
-            mHolder.body.setBackground(null);
+
+            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1){
+                mHolder.body.setBackground(null);
+            } else {
+                mHolder.body.setBackgroundDrawable(null);
+            }
         }
 
         mHolder.compliteBox.setOnCheckedChangeListener(this);
@@ -85,6 +96,8 @@ public class HomeWorksAdapter extends BaseAdapter implements CompoundButton.OnCh
 
         return convertView;
     }
+
+
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

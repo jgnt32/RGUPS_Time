@@ -9,6 +9,7 @@ import ru.rgups.time.utils.Slipper;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Build;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,10 +79,20 @@ public class HomeWorkCursorAdapter extends StickyListHeadersCursorAdapter implem
 
         compliteBox.setTag(c.getLong(c.getColumnIndex("_id")));
 
+
         if(isComplite){
-            body.setBackground(context.getResources().getDrawable(R.drawable.hw_done_indicator));
+            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1){
+                body.setBackground(mContext.getResources().getDrawable(R.drawable.hw_done_indicator));
+            } else {
+                body.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.hw_done_indicator));
+            }
         } else {
-            body.setBackground(null);
+
+            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1){
+                body.setBackground(null);
+            } else {
+                body.setBackgroundDrawable(null);
+            }
         }
 
         ArrayList<String> images = Slipper.deserializeObjectToString(c.getBlob(c.getColumnIndex(HomeWork.IMAGES)));

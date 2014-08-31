@@ -22,7 +22,7 @@ public class HomeWorkImageAdapter extends BaseAdapter{
 	private ArrayList<String> mList;
     DisplayImageOptions mImageOptions = new DisplayImageOptions.Builder()
             .cacheInMemory(true)
-            .cacheOnDisk(true)
+    //        .cacheOnDisk(true)
             .build();
 	
 	public HomeWorkImageAdapter(Context context, ArrayList<String> list) {
