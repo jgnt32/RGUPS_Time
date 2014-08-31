@@ -7,7 +7,7 @@ import android.text.format.DateFormat;
 
 public class CalendarManager {
 
-	private static final String MONTH_FORMAT = "LLLL";
+	private static final String MONTH_FORMAT = "MMMM";
 	
 	private static CalendarManager mInstance;
 	
