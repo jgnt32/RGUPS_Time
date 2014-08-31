@@ -45,21 +45,24 @@ public class LessonNotificationService extends Service {
         mLesson = LessonManager.getInstance().getCurrentLesson();
         mClosestLesson = LessonManager.getInstance().getClosestLesson();
 
-        Log.e("LessonNotificationService", "onBind");
-        Notification n = new NotificationCompat.Builder(this)
+        if(mClosestLesson != null){
+            Log.e("LessonNotificationService", "onBind");
+            Notification n = new NotificationCompat.Builder(this)
            /* setContentText(mClosestLesson.getInformation().get(0).getTitle())
             .setContentTitle("Ближайшая пара")*/
-                .setContentIntent(getPendingIntent(mClosestLesson, mLesson))
-                .setSmallIcon(R.drawable.ic_launcher)
-                .setContent(getRemoteViews())
-                .build();
+                    .setContentIntent(getPendingIntent(mClosestLesson, mLesson))
+                    .setSmallIcon(R.drawable.ic_launcher)
+                    .setContent(getRemoteViews())
+                    .build();
 
-        n.flags = Notification.FLAG_ONGOING_EVENT;
-        NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+            n.flags = Notification.FLAG_ONGOING_EVENT;
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
 
-        notificationManager.cancelAll();
-        notificationManager.notify(0, n);
+            notificationManager.cancelAll();
+            notificationManager.notify(0, n);
+        }
+
     }
 
     private RemoteViews getRemoteViews() {

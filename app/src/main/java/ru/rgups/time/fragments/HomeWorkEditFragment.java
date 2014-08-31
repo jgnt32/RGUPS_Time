@@ -350,7 +350,7 @@ public class HomeWorkEditFragment extends Fragment implements  AdapterView.OnIte
         intent.setAction(Intent.ACTION_GET_CONTENT);*/
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
 
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST);
+        startActivityForResult(intent, GALLERY_REQUEST);
 
     }
 

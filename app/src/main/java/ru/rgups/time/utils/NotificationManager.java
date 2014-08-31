@@ -46,7 +46,7 @@ public class NotificationManager {
 	
 	
 	public void addNewNotification(HomeWork hw){
-		if(calendar.getInstance().getTimeInMillis()<hw.getDate().getTime()){
+	/*	if(calendar.getInstance().getTimeInMillis()<hw.getDate().getTime()){
 			Intent intent = new Intent(mContext, HomeWorkNotificationReceiver.class);
 			intent.putExtra(HomeWorkEditFragment.HOMEWORK_ID, hw.getId());
 			PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, (int) hw.getId(),
@@ -58,16 +58,16 @@ public class NotificationManager {
 	
 			mAlarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
 
-		}
+		}*/
 	}
 	
 	public void removeNotification(HomeWork hw){
-		Log.e("removeNotification",hw.getDate().toString());
+/*		Log.e("removeNotification",hw.getDate().toString());
 		Intent intent = new Intent(mContext, HomeWorkNotificationReceiver.class);
 		intent.putExtra(HomeWorkEditFragment.HOMEWORK_ID, hw.getId());
 		PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext, (int) hw.getId(),
 		intent, PendingIntent.FLAG_CANCEL_CURRENT );			 
-		mAlarmManager.cancel(pendingIntent);
+		mAlarmManager.cancel(pendingIntent);*/
 	}
 	
 }

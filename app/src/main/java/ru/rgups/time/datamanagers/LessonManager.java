@@ -154,7 +154,10 @@ public class LessonManager {
 
         int weekState = CalendarManager.getWeekState(dayOfSemestr);
         LessonListElement result = DataManager.getInstance().getClosestLesson(weekState, dayOfWeek, lessonNumber);
-        result.setDate(CalendarManager.getDate(dayOfSemestr));
+        if(result != null){
+            result.setDate(CalendarManager.getDate(dayOfSemestr));
+
+        }
         return result;
     }
 

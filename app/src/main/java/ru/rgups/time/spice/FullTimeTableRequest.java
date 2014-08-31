@@ -33,25 +33,8 @@ public class FullTimeTableRequest extends SpringAndroidSpiceRequest< Boolean > {
 	public Boolean loadDataFromNetwork() throws Exception {
 		boolean result = false;
 		try{
-			
-			FacultetList facultetList = getRestTemplate().getForObject(mFacultetList, FacultetList.class);
-			for(Facultet facultet : facultetList.getFacultetList()){
-				Log.e("FullTimeTableRequest",""+facultet.getName());
-				url = TextUtils.concat(mGroupListUrl,Integer.toString(facultet.getId())).toString();
-				if(!facultet.getName().trim().equalsIgnoreCase("Лицей") && !facultet.getName().equalsIgnoreCase("Техникум РГУПС")){
-					GroupList groupList = getRestTemplate().getForObject( url, GroupList.class );
 
-					for(Group group : groupList.getGroupList()){
-						url = TextUtils.concat(mTimeUrl,Long.toString(group.getId())).toString();
-						
-						LessonList list = getRestTemplate().getForObject( url, LessonList.class );
-						Log.e("LessonList ","title = "+list.getTitle()+"; id = "+group.getId());
-				    	DataManager.getInstance().saveLessons(list, group.getId());
-				    	
-					}
-			
-				}
-			}
+            fetchFacultet();
 			
 			PreferenceManager.getInstance().setFullTimeDownloaded(true);
 			result = true;
@@ -65,8 +48,44 @@ public class FullTimeTableRequest extends SpringAndroidSpiceRequest< Boolean > {
 		
 		return result;
 	}
-	
-	private class UpdateProgressThred extends Thread{
+
+    private void fetchFacultet() {
+        FacultetList facultetList = getRestTemplate().getForObject(mFacultetList, FacultetList.class);
+        for(Facultet facultet : facultetList.getFacultetList()){
+            Log.e("FullTimeTableRequest", "" + facultet.getName());
+            try {
+                url = TextUtils.concat(mGroupListUrl, Integer.toString(facultet.getId())).toString();
+                if(!facultet.getName().trim().equalsIgnoreCase("Лицей") && !facultet.getName().equalsIgnoreCase("Техникум РГУПС")){
+                    GroupList groupList = getRestTemplate().getForObject( url, GroupList.class );
+
+                    fetchFacultetsGroupAndSave(groupList);
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+          }
+    }
+
+    private void fetchFacultetsGroupAndSave(GroupList groupList) {
+
+        for(Group group : groupList.getGroupList()){
+            try {
+                url = TextUtils.concat(mTimeUrl, Long.toString(group.getId())).toString();
+
+                LessonList list = getRestTemplate().getForObject( url, LessonList.class );
+                Log.e("LessonList ", "title = " + list.getTitle() + "; id = " + group.getId());
+                DataManager.getInstance().saveLessons(list, group.getId());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private class UpdateProgressThred extends Thread{
 	
 		@Override
 		public void run() {

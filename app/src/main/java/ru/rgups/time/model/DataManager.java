@@ -953,11 +953,14 @@ public class DataManager extends ContentObservable{
         query = TextUtils.concat(
                 "SELECT * FROM ", LessonTableModel.TABLE_NAME,
                 " WHERE ",
-                "(", LessonTableModel.WEEK_STATE, "=? OR ", LessonTableModel.WEEK_STATE, "=2) ",
+                "(", LessonTableModel.WEEK_STATE, "=? OR ", LessonTableModel.WEEK_STATE, "=2) AND ",
+                LessonTableModel.GROUP_ID, "=? ",
+
                 " ORDER BY ", LessonTableModel.DAY, ", ", LessonTableModel.NUMBER
         ).toString();
 
-        c = mDb.rawQuery(query, new String[]{Integer.toString(invertWeekState(weekState))});
+        c = mDb.rawQuery(query, new String[]{Integer.toString(invertWeekState(weekState)),
+                PreferenceManager.getInstance().getGroupId().toString()});
         return c;
     }
 
@@ -968,11 +971,14 @@ public class DataManager extends ContentObservable{
                 "SELECT * FROM ", LessonTableModel.TABLE_NAME,
                 " WHERE ",
                 "(", LessonTableModel.WEEK_STATE, "=? OR ", LessonTableModel.WEEK_STATE, "=2) AND ",
-                LessonTableModel.DAY, ">? ",
+                LessonTableModel.DAY, ">? AND ",
+                LessonTableModel.GROUP_ID, "=? ",
+
                 " ORDER BY ", LessonTableModel.DAY, ", ", LessonTableModel.NUMBER
         ).toString();
 
-        c = mDb.rawQuery(query, new String[]{Integer.toString(weekState), Integer.toString(day)});
+        c = mDb.rawQuery(query, new String[]{Integer.toString(weekState), Integer.toString(day),
+                PreferenceManager.getInstance().getGroupId().toString()});
         return c;
     }
 
@@ -983,12 +989,17 @@ public class DataManager extends ContentObservable{
                 " WHERE ",
                 "(", LessonTableModel.WEEK_STATE, "=? OR ", LessonTableModel.WEEK_STATE, "=2) AND ",
                 LessonTableModel.DAY, ">=? AND ",
-                LessonTableModel.NUMBER, ">? ",
+                LessonTableModel.NUMBER, ">? AND ",
+                LessonTableModel.GROUP_ID, "=? ",
+
+
                 " ORDER BY ", LessonTableModel.DAY, ", ", LessonTableModel.NUMBER
 
         ).toString();
 
-        c = mDb.rawQuery(query, new String[]{Integer.toString(weekState), Integer.toString(day), Integer.toString(number)});
+        c = mDb.rawQuery(query, new String[]{
+                Integer.toString(weekState), Integer.toString(day), Integer.toString(number),
+                PreferenceManager.getInstance().getGroupId().toString()});
         return c;
     }
 
@@ -999,12 +1010,16 @@ public class DataManager extends ContentObservable{
                 " WHERE ",
                 "(", LessonTableModel.WEEK_STATE, "=? OR ", LessonTableModel.WEEK_STATE, "=2) AND ",
                 LessonTableModel.DAY, "=? AND ",
-                LessonTableModel.NUMBER, "=? ",
+                LessonTableModel.NUMBER, "=? AND ",
+                LessonTableModel.GROUP_ID, "=? ",
+
+
                 " ORDER BY ", LessonTableModel.DAY, ", ", LessonTableModel.NUMBER
 
         ).toString();
 
-        c = mDb.rawQuery(query, new String[]{Integer.toString(weekState), Integer.toString(day), Integer.toString(number)});
+        c = mDb.rawQuery(query, new String[]{Integer.toString(weekState), Integer.toString(day), Integer.toString(number),
+        PreferenceManager.getInstance().getGroupId().toString()});
         return c;
     }
 

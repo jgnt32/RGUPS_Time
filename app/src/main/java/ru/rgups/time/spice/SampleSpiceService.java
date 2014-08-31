@@ -97,9 +97,9 @@ public class SampleSpiceService extends SpringAndroidSpiceService{
         return super.onStartCommand(intent, flags, startId);
     }
 
-  /*  @Override
+    @Override
     public Notification createDefaultNotification() {
-        return ;
-    }*/
+        return null;
+    }
 
 }
