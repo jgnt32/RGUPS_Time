@@ -88,7 +88,7 @@
     <string name="login_facultet_caption">Выберите факултет</string>
     <string name="login_group_caption">Выберите группу</string>
     
-    <string name="setting_full_time_button">Скачать всё</string>
+    <string name="setting_full_time_button">Кэшировать всё</string>
     <string name="setting_logout">Сменить группу</string>
     
     <string name="setting_staff">Общее</string>

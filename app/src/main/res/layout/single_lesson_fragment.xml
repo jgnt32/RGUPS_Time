@@ -26,7 +26,7 @@
 	        android:textStyle="bold" />
 
         <View
-            android:background="@color/theme_blue"
+            android:background="@color/theme_blue_with_alpha"
             android:layout_width="match_parent"
             android:layout_height="1px"/>
 
@@ -54,7 +54,7 @@
 
         <View
             android:layout_marginLeft="45dp"
-            android:background="@color/theme_blue"
+            android:background="@color/theme_blue_with_alpha"
             android:layout_width="match_parent"
             android:layout_height="1px"/>
 
@@ -80,7 +80,7 @@
         </LinearLayout>
         <View
             android:layout_marginLeft="45dp"
-            android:background="@color/theme_blue"
+            android:background="@color/theme_blue_with_alpha"
             android:layout_width="match_parent"
             android:layout_height="1px"/>
 
@@ -106,7 +106,7 @@
 
         <View
             android:layout_marginLeft="45dp"
-            android:background="@color/theme_blue"
+            android:background="@color/theme_blue_with_alpha"
             android:layout_width="match_parent"
             android:layout_height="1px"/>
 

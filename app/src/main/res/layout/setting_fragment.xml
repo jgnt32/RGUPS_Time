@@ -22,7 +22,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/theme_blue" />
+            android:background="@color/theme_blue_with_alpha" />
 
         <TextView
             android:id="@+id/setting_facultet_title"
@@ -41,6 +41,11 @@
             android:textColor="@color/theme_blue"
             android:textSize="17sp" />
 
+        <View
+            android:background="@color/theme_blue_with_alpha"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
         <Button
             android:id="@+id/setting_about"
             android:background="@drawable/base_selector"
@@ -52,9 +57,9 @@
             android:text="@string/about" />
 
         <View
-            android:background="@color/theme_blue"
             android:layout_width="match_parent"
-            android:layout_height="2dp"/>
+            android:layout_height="1dp"
+            android:background="@color/theme_blue_with_alpha" />
 
         <LinearLayout
             android:padding="5dp"
@@ -89,7 +94,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/theme_blue" />
+            android:background="@color/theme_blue_with_alpha" />
 
         <Button
             android:id="@+id/setting_full_time_button"
@@ -104,8 +109,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/theme_blue" />
-
+            android:background="@color/theme_blue_with_alpha" />
         <Button
             android:id="@+id/setting_logout_button"
             android:background="@drawable/base_selector"
