@@ -39,6 +39,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.crashlytics.android.Crashlytics;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
@@ -58,13 +59,12 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	private SettingFragment mSettingFragment;
 	private boolean mReplaceFlag = true;
 	private TeachersListFragment mTeachersFrament;
-	private ProgressDialog mProgressDialog;
 	private MenuDrawer mDrawer;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
-//		Crashlytics.start(this);
+		Crashlytics.start(this);
 		mDrawer = MenuDrawer.attach(this, MenuDrawer.Type.BEHIND, Position.LEFT, MenuDrawer.MENU_DRAG_WINDOW);
         mDrawer.setContentView(R.layout.activity_main);
         mDrawer.setMenuView(R.layout.menu_drawer);		
@@ -75,7 +75,6 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
         findViewById(R.id.drawer_setting).setOnClickListener(this);
         openWelcomeActivity();
 		
-		mProgressDialog = DialogManager.getNewProgressDialog(this, R.string.progress_message);
 /*		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mDrawerList.setOnItemClickListener(this);
 		mDrawerList.setAdapter(new DrawerListAdapter(this));*/
@@ -136,10 +135,10 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 
 
 	private void openTimeTableFragment(){
-		if(PreferenceManager.getInstance().getGroupId() != -1){
+	//	if(PreferenceManager.getInstance().getGroupId() != -1){
 			changeFragment(DrawerListAdapter.TIME_FRAGMENT);
 			mReplaceFlag = false;
-		}
+		//}
 	}
 	
 	
@@ -252,13 +251,10 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 
 	@Override
 	public void logOut() {
-		showClapFragment();
-		
-		PreferenceManager.getInstance().saveGroupId((long) -1);
+        openTimeTableFragment();
+        PreferenceManager.getInstance().saveGroupId((long) -1);
 		PreferenceManager.getInstance().saveFacultetId((long) -1);
-		PreferenceManager.getInstance().setFucultetsTimeDownloaded(false);
 		this.openWelcomeActivity();
-		mReplaceFlag = true;
 	}
 
     @Override
@@ -313,25 +309,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 		startActivity(i);
 		
 	}
-	
-	private class FacultetTimeRequestListener implements RequestListener<Boolean>{
 
-		@Override
-		public void onRequestFailure(SpiceException e) {
-			e.printStackTrace();
-			mProgressDialog.cancel();
-			
-		}
-
-		@Override
-		public void onRequestSuccess(Boolean response) {
-			openTimeTableFragment();
-			PreferenceManager.getInstance().setFucultetsTimeDownloaded(true);
-			mProgressDialog.cancel();
-
-		}
-		
-	}
 
 	@Override
 	public void onTeacherClick(String teachersName) {
