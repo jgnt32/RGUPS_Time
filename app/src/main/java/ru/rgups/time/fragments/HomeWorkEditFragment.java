@@ -218,17 +218,8 @@ public class HomeWorkEditFragment extends Fragment implements  AdapterView.OnIte
 
     private void addImageFromGallery(Intent data) {
         try {
-            ClipData list =
-                    data.getClipData();
 
-            if(list != null){
-                for (int i = 0; i < list.getItemCount(); i++) {
-                    addImage(list.getItemAt(i).getUri().toString());
-                }
-            } else{
-                addImage(data.getData().toString());
-
-            }
+            addImage(data.getData().toString());
 
         } catch (Exception e) {
             e.printStackTrace();

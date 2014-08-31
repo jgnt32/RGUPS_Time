@@ -77,14 +77,14 @@ public class HomeWorksAdapter extends BaseAdapter implements CompoundButton.OnCh
 
 
         if(getItem(position).isComplite()){
-            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1){
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
                 mHolder.body.setBackground(mContext.getResources().getDrawable(R.drawable.hw_done_indicator));
             } else {
                 mHolder.body.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.hw_done_indicator));
             }
         } else {
 
-            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1){
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
                 mHolder.body.setBackground(null);
             } else {
                 mHolder.body.setBackgroundDrawable(null);

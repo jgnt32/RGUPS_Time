@@ -81,14 +81,14 @@ public class HomeWorkCursorAdapter extends StickyListHeadersCursorAdapter implem
 
 
         if(isComplite){
-            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1){
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
                 body.setBackground(mContext.getResources().getDrawable(R.drawable.hw_done_indicator));
             } else {
                 body.setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.hw_done_indicator));
             }
         } else {
 
-            if(Build.VERSION.SDK_INT > Build.VERSION_CODES.GINGERBREAD_MR1){
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
                 body.setBackground(null);
             } else {
                 body.setBackgroundDrawable(null);

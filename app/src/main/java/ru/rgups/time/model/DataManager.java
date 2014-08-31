@@ -169,7 +169,7 @@ public class DataManager extends ContentObservable{
 	}
 
     public void notifyObservers(){
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLY_BEAN){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN){
             dispatchChange(true, null);
         } else {
             dispatchChange(true);

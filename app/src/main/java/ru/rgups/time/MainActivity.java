@@ -82,7 +82,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 //		initDrawer();
 		initFragmenets();
 
-        DataManager.getInstance().writeToSD(this);
+     //   DataManager.getInstance().writeToSD(this);
         startNotificationService();
         if(savedInstanceState == null){
             openTimeTableFragment();
