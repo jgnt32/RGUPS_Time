@@ -22,7 +22,7 @@ public class TeachersCalendarAdapter extends BaseCalendarAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v =  super.getView(position, convertView, parent);
-	    mHolder.getDayOfWeek().setTextColor(mLessonFreeColor);
+	//    mHolder.getDayOfWeek().setTextColor(mLessonFreeColor);
 
 		return v;
 	}

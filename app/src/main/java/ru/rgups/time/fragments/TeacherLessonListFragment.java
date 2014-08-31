@@ -19,7 +19,7 @@ public class TeacherLessonListFragment extends LessonListFragment implements Loa
 	private int mDayNumber;
 	private String mTeacherName;
 	private Cursor mCursor;
-	
+
 	private TeacherLessonListAdapter mAdapter;
 	
 	@Override
@@ -57,6 +57,7 @@ public class TeacherLessonListFragment extends LessonListFragment implements Loa
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         mAdapter.changeCursor(cursor);
         mAdapter.notifyDataSetChanged();
+        mProgress.setVisibility(View.GONE);
     }
 
     @Override

@@ -30,7 +30,7 @@ public abstract class LessonListFragment extends Fragment implements OnItemClick
 	
 	protected ArrayList<LessonListElement> mLessons = new ArrayList<LessonListElement>();
 
-    private View mProgress;
+    protected View mProgress;
 	
 	@Override
 	public void onAttach(Activity activity) {
