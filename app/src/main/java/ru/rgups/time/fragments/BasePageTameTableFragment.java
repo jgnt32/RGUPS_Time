@@ -137,8 +137,10 @@ OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.O
 	protected abstract BaseCalendarAdapter createNewCalendarAdapter();
 	
 	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	
-		mPager.setCurrentItem(position, false);
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(mPager != null){
+            mPager.setCurrentItem(position, false);
+        }
 		setLastSelectedDatePosition(position);
 	}
 	
