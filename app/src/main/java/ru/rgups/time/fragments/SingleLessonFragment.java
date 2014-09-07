@@ -63,14 +63,15 @@ public class SingleLessonFragment extends Fragment{
 		View v = inflater.inflate(R.layout.single_lesson_fragment, null);
 		mTime = (TextView) v.findViewById(R.id.single_lesson_time);
 		mTitle = (TextView) v.findViewById(R.id.single_lesson_title);
-		mTitle.setText(mLesson.getInformation().get(0).getTitle());
+
+		mTitle.setText(mLesson.getTitle());
 		mTime.setText(mTimePeriods[mLesson.getLessonNumber()-1]);
         mRoom = (TextView) v.findViewById(R.id.lesson_room);
         mType = (TextView) v.findViewById(R.id.single_information_type);
         mTeacher = (TextView) v.findViewById(R.id.single_information_teacher);
 
-        mRoom.setText(getRooms());
-        mType.setText(getTypes());
+        mRoom.setText(mLesson.getRooms());
+        mType.setText(mLesson.getTypes());
         mTeacher.setText(getTeachers());
         return v;
 	}

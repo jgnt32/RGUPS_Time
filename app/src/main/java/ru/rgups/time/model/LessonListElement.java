@@ -87,6 +87,20 @@ public class LessonListElement {
         return result;
     }
 
+    public String getTypes(){
+        StringBuffer buffer = new StringBuffer();
+        for(LessonInformation inf : getInformation()){
+            if(!buffer.toString().contains(inf.getType())){
+                buffer.append(inf.getType()).append(", ");
+            }
+        }
+        String result = null;
+        if(buffer.length() > 0){
+            result = buffer.substring(0, buffer.length() - 2);
+        }
+        return result;
+    }
+
     public Date getDate() {
         return date;
     }
