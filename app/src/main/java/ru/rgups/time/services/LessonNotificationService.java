@@ -28,8 +28,6 @@ public class LessonNotificationService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.e("LessonNotificationService", "onBind");
-
-
         return null;
     }
 
@@ -79,11 +77,19 @@ public class LessonNotificationService extends Service {
             result = new RemoteViews(getPackageName(), R.layout.notification_closest_and_current_lesson);
 
             result.setTextViewText(R.id.notification_closest_lesson_title, mClosestLesson.getTitle());
-            result.setTextViewText(R.id.notification_closest_lesson_room, mClosestLesson.getRooms());
+
+            if(mClosestLesson.getRooms() != null){
+                result.setTextViewText(R.id.notification_closest_lesson_room, mClosestLesson.getRooms());
+
+            }
            // result.setPendingIntentTemplate(R.id.notification_closest_lesson_cotainer, getPendingIntent(mClosestLesson, mLesson));
 
             result.setTextViewText(R.id.notification_current_lesson_title, mLesson.getTitle());
-            result.setTextViewText(R.id.notification_current_lesson_room, mLesson.getRooms());
+
+            if(mLesson.getRooms() != null){
+                result.setTextViewText(R.id.notification_current_lesson_room, mLesson.getRooms());
+
+            }
           //  result.setPendingIntentTemplate(R.id.notification_currenr_lesson_cotainer, getPendingIntent(mLesson));
 
         }
