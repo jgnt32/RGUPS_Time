@@ -94,7 +94,7 @@ public class LessonAdapter extends BaseAdapter{
 					}
 				}
 				
-				mHolder.title.setText(lesson.getTitle());
+				mHolder.title.setText(lesson.getTitle() + " ("+ lesson.getType() + ")");
 			}
 			this.setText(mHolder.roomContainer, mHolder.room, roomBuffer);
 			this.setText(mHolder.teacherContainer, mHolder.teacher, teacherBuffer);
