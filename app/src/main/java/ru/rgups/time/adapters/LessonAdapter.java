@@ -94,7 +94,7 @@ public class LessonAdapter extends BaseAdapter{
 					}
 				}
 				
-				mHolder.title.setText(lesson.getTitle() + " ("+ lesson.getType() + ")");
+				mHolder.title.setText(getTitle(lesson));
 			}
 			this.setText(mHolder.roomContainer, mHolder.room, roomBuffer);
 			this.setText(mHolder.teacherContainer, mHolder.teacher, teacherBuffer);
@@ -117,10 +117,17 @@ public class LessonAdapter extends BaseAdapter{
 		return mView;
 	}
 
-	
-	
+    private String getTitle(LessonInformation lesson) {
+        String result = lesson.getTitle();
 
-	private class ViewHolder{
+        if(lesson.getType() != null && !lesson.getType().trim().isEmpty()){
+            result = lesson.getTitle() + " ("+ lesson.getType() + ")";
+        }
+        return  result;
+    }
+
+
+    private class ViewHolder{
 		private TextView title;
 		private View teacherContainer;
 		private View roomContainer;
