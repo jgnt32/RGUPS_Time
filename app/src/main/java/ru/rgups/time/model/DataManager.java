@@ -843,6 +843,7 @@ public class DataManager extends ContentObservable{
 	}
 	
 	public boolean dayHasLesson(Integer day, Integer weekState){
+        boolean result = false;
 		String query = TextUtils.concat(
 				"SELECT * FROM ",LessonTableModel.TABLE_NAME," WHERE ",
 				LessonTableModel.GROUP_ID," =? AND ",
@@ -855,7 +856,12 @@ public class DataManager extends ContentObservable{
 
 		Cursor c = mDb.rawQuery(query, new String[]{PreferenceManager.getInstance().getGroupId().toString(),
 				day.toString(), weekState.toString()});
-		return c.getCount()>0;
+
+        if(c != null){
+            result = c.getCount() > 0;
+        }
+
+		return result;
 		
 	}
 	

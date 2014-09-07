@@ -62,7 +62,7 @@ public class LessonListElement {
     public String getTitle(){
         StringBuffer buffer = new StringBuffer();
         for(LessonInformation inf : getInformation()){
-            if(!buffer.toString().contains(inf.getTitle())){
+            if(inf != null && inf.getTitle() != null && !buffer.toString().contains(inf.getTitle())){
                 buffer.append(inf.getTitle()).append(", ");
             }
         }
@@ -76,7 +76,7 @@ public class LessonListElement {
     public String getRooms(){
         StringBuffer buffer = new StringBuffer();
         for(LessonInformation inf : getInformation()){
-            if(!buffer.toString().contains(inf.getRoom())){
+            if(inf != null && inf.getRoom() != null && !buffer.toString().contains(inf.getRoom())){
                 buffer.append(inf.getRoom()).append(", ");
             }
         }
@@ -90,7 +90,7 @@ public class LessonListElement {
     public String getTypes(){
         StringBuffer buffer = new StringBuffer();
         for(LessonInformation inf : getInformation()){
-            if(!buffer.toString().contains(inf.getType())){
+            if(inf != null && inf.getType() != null && !buffer.toString().contains(inf.getType())){
                 buffer.append(inf.getType()).append(", ");
             }
         }
