@@ -1,13 +1,16 @@
 package ru.rgups.time.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
+import android.os.Build;
 import android.text.format.DateFormat;
 
 public class CalendarManager {
 
-	private static final String MONTH_FORMAT = "MMMM";
+	private static final String MONTH_FORMAT = "MMMMM";
 	
 	private static CalendarManager mInstance;
 	
@@ -48,8 +51,14 @@ public class CalendarManager {
 
 	public static synchronized String getCalendarListMonthTitle(int shift){
 		mSemestrCalendar.set(GregorianCalendar.DAY_OF_YEAR, shift + getDayOffset());
-		return DateFormat.format(MONTH_FORMAT, mSemestrCalendar.getTime()).toString();
+		return getCalendarHintDateFormat().format(mSemestrCalendar.getTime());
 	}
+
+
+    private static SimpleDateFormat getCalendarHintDateFormat(){
+        String fmt = Build.VERSION.SDK_INT <= 8 ? "MMMM" : "LLLL";
+        return new SimpleDateFormat(fmt);
+    }
 
 
 	public static synchronized int getCurrentDayOfTheYear(){
