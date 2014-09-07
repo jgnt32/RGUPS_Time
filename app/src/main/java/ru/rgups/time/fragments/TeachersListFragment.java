@@ -125,8 +125,10 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor c) {
-		mAdapter.changeCursor(c);
-		mAdapter.notifyDataSetChanged();
+        if(c != null && !c.isClosed()){
+            mAdapter.changeCursor(c);
+            mAdapter.notifyDataSetChanged();
+        }
 	}
 
 	@Override
