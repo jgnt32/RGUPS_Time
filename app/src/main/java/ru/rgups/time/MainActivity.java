@@ -65,15 +65,18 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
 		Crashlytics.start(this);
-		mDrawer = MenuDrawer.attach(this, MenuDrawer.Type.BEHIND, Position.LEFT, MenuDrawer.MENU_DRAG_WINDOW);
-        mDrawer.setContentView(R.layout.activity_main);
-        mDrawer.setMenuView(R.layout.menu_drawer);		
-				
-        findViewById(R.id.drawer_homework).setOnClickListener(this);
-        findViewById(R.id.drawer_teachers).setOnClickListener(this);
-        findViewById(R.id.drawer_timetable).setOnClickListener(this);
-        findViewById(R.id.drawer_setting).setOnClickListener(this);
-        openWelcomeActivity();
+        if(mDrawer == null){
+            mDrawer = MenuDrawer.attach(this, MenuDrawer.Type.BEHIND, Position.LEFT, MenuDrawer.MENU_DRAG_WINDOW);
+            mDrawer.setContentView(R.layout.activity_main);
+            mDrawer.setMenuView(R.layout.menu_drawer);
+            findViewById(R.id.drawer_homework).setOnClickListener(this);
+            findViewById(R.id.drawer_teachers).setOnClickListener(this);
+            findViewById(R.id.drawer_timetable).setOnClickListener(this);
+            findViewById(R.id.drawer_setting).setOnClickListener(this);
+
+        }
+
+         openWelcomeActivity();
 		
 /*		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mDrawerList.setOnItemClickListener(this);
