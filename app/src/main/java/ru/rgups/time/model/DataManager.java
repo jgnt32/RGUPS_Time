@@ -471,16 +471,18 @@ public class DataManager extends ContentObservable{
 		
 		Cursor c = mDb.rawQuery(query, new String[]{lessonId.toString()});
 		LessonInformation inf;
-		
-		while(c.moveToNext()){
-		
-			inf = new LessonInformation();
-			inf.setTitle(c.getString(c.getColumnIndex(LessonInformation.LESSON_TITLE)));
-			inf.setTeacher(c.getString(c.getColumnIndex(LessonInformation.TEACHER_NAME)));
-			inf.setRoom(c.getString(c.getColumnIndex(LessonInformation.ROOM)));
-			inf.setType(c.getString(c.getColumnIndex(LessonInformation.LESSON_TYPE)));
-			result.add(inf);
-		}
+		if(c != null){
+            while(c.moveToNext()){
+
+                inf = new LessonInformation();
+                inf.setTitle(c.getString(c.getColumnIndex(LessonInformation.LESSON_TITLE)));
+                inf.setTeacher(c.getString(c.getColumnIndex(LessonInformation.TEACHER_NAME)));
+                inf.setRoom(c.getString(c.getColumnIndex(LessonInformation.ROOM)));
+                inf.setType(c.getString(c.getColumnIndex(LessonInformation.LESSON_TYPE)));
+                result.add(inf);
+            }
+        }
+
 		
 		return result;
 	}
