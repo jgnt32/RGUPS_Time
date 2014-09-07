@@ -29,8 +29,8 @@ public class WelcomeActivity extends FragmentActivity implements OnClickListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.welcome_activity);
         mLoginPoster = (ImageView) findViewById(R.id.login_poster);
-        BitmapDrawable image = (BitmapDrawable) getResources().getDrawable(R.drawable.poster);
-        mLoginPoster.setImageBitmap(Blur.fastblur(image.getBitmap(), 20));
+    //    BitmapDrawable image = (BitmapDrawable) getResources().getDrawable(R.drawable.poster);
+  //      mLoginPoster.setImageBitmap(Blur.fastblur(image.getBitmap(), 20));
 		facultetListFragment = new FacultetListFragment();
 		mLoginButton = (Button) findViewById(R.id.login_button);
 		mLoginButton.setOnClickListener(this);
