@@ -61,42 +61,51 @@ public class LessonListElement {
 
     public String getTitle(){
         StringBuffer buffer = new StringBuffer();
-        for(LessonInformation inf : getInformation()){
-            if(inf != null && inf.getTitle() != null && !buffer.toString().contains(inf.getTitle())){
-                buffer.append(inf.getTitle()).append(", ");
+        String result = null;
+
+        if (getInformation() != null) {
+            for(LessonInformation inf : getInformation()){
+                if(inf != null && inf.getTitle() != null && !buffer.toString().contains(inf.getTitle())){
+                    buffer.append(inf.getTitle()).append(", ");
+                }
+            }
+            if(buffer.length() > 0){
+                result = buffer.substring(0, buffer.length() - 2);
             }
         }
-        String result = null;
-        if(buffer.length() > 0){
-            result = buffer.substring(0, buffer.length() - 2);
-        }
         return result;
+
     }
 
     public String getRooms(){
-        StringBuffer buffer = new StringBuffer();
-        for(LessonInformation inf : getInformation()){
-            if(inf != null && inf.getRoom() != null && !buffer.toString().contains(inf.getRoom())){
-                buffer.append(inf.getRoom()).append(", ");
-            }
-        }
         String result = null;
-        if(buffer.length() > 0){
-            result = buffer.substring(0, buffer.length() - 2);
+        StringBuffer buffer = new StringBuffer();
+        if (getInformation() != null) {
+            for(LessonInformation inf : getInformation()){
+                if(inf != null && inf.getRoom() != null && !buffer.toString().contains(inf.getRoom())){
+                    buffer.append(inf.getRoom()).append(", ");
+                }
+            }
+            if(buffer.length() > 0){
+                result = buffer.substring(0, buffer.length() - 2);
+            }
+
         }
         return result;
     }
 
     public String getTypes(){
         StringBuffer buffer = new StringBuffer();
-        for(LessonInformation inf : getInformation()){
-            if(inf != null && inf.getType() != null && !buffer.toString().contains(inf.getType())){
-                buffer.append(inf.getType()).append(", ");
-            }
-        }
         String result = null;
-        if(buffer.length() > 0){
-            result = buffer.substring(0, buffer.length() - 2);
+        if (getInformation() != null) {
+            for(LessonInformation inf : getInformation()){
+                if(inf != null && inf.getType() != null && !buffer.toString().contains(inf.getType())){
+                    buffer.append(inf.getType()).append(", ");
+                }
+            }
+            if(buffer.length() > 0){
+                result = buffer.substring(0, buffer.length() - 2);
+            }
         }
         return result;
     }

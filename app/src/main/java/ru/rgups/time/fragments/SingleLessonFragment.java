@@ -1,30 +1,17 @@
 package ru.rgups.time.fragments;
 
-import java.util.ArrayList;
-
 import ru.rgups.time.R;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.HomeWork;
 import ru.rgups.time.model.LessonListElement;
 import ru.rgups.time.model.entity.LessonInformation;
-import ru.rgups.time.rest.ApigeeManager;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SingleLessonFragment extends Fragment{
@@ -65,7 +52,7 @@ public class SingleLessonFragment extends Fragment{
 		mTitle = (TextView) v.findViewById(R.id.single_lesson_title);
 
 		mTitle.setText(mLesson.getTitle());
-		mTime.setText(mTimePeriods[mLesson.getLessonNumber()-1]);
+		mTime.setText(getTimePeriod());
         mRoom = (TextView) v.findViewById(R.id.lesson_room);
         mType = (TextView) v.findViewById(R.id.single_information_type);
         mTeacher = (TextView) v.findViewById(R.id.single_information_teacher);
@@ -76,21 +63,36 @@ public class SingleLessonFragment extends Fragment{
         return v;
 	}
 
+    private String getTimePeriod() {
+
+        int lessonNumber = mLesson.getLessonNumber();
+        String reault = null;
+        if (lessonNumber > 0) {
+            lessonNumber--;
+        } else if (!(lessonNumber < 0)){
+            reault = mTimePeriods[lessonNumber];
+        }
+        return reault;
+    }
 
 
     public String getRooms(){
         String result = null;
         StringBuffer buffer = new StringBuffer();
 
-        for(LessonInformation inf : mLesson.getInformation()){
-            if(inf.getRoom() != null & !inf.getRoom().trim().isEmpty()){
-                buffer.append(inf.getRoom()).append(", ");
+        if (mLesson.getInformation() != null) {
+            for(LessonInformation inf : mLesson.getInformation()){
+                if(inf.getRoom() != null & !inf.getRoom().trim().isEmpty()){
+                    buffer.append(inf.getRoom()).append(", ");
+                }
+            }
+
+            if(buffer.length() != 0){
+                result = buffer.substring(0, buffer.length() - 2);
             }
         }
 
-        if(buffer.length() != 0){
-            result = buffer.substring(0, buffer.length() - 2);
-        }
+
         return result;
     }
 
@@ -99,14 +101,17 @@ public class SingleLessonFragment extends Fragment{
         String result = null;
         StringBuffer buffer = new StringBuffer();
 
-        for(LessonInformation inf : mLesson.getInformation()){
-            if(inf.getTeacher() != null & !inf.getTeacher().trim().isEmpty()){
-                buffer.append(inf.getTeacher()).append(", ");
-            }
-        }
+        if (mLesson.getInformation() != null) {
 
-        if(buffer.length() != 0){
-            result  = buffer.substring(0, buffer.length() - 2);
+            for(LessonInformation inf : mLesson.getInformation()){
+                if(inf.getTeacher() != null & !inf.getTeacher().trim().isEmpty()){
+                    buffer.append(inf.getTeacher()).append(", ");
+                }
+            }
+
+            if(buffer.length() != 0){
+                result  = buffer.substring(0, buffer.length() - 2);
+            }
         }
 
         return result;
@@ -118,14 +123,17 @@ public class SingleLessonFragment extends Fragment{
         String result = null;
         StringBuffer buffer = new StringBuffer();
 
-        for(LessonInformation inf : mLesson.getInformation()){
-            if(inf.getType() != null & !inf.getType().trim().isEmpty()
-                    & !buffer.toString().contains(inf.getType())){
-                buffer.append(inf.getType()).append(", ");
+        if (mLesson.getInformation() != null) {
+            for(LessonInformation inf : mLesson.getInformation()){
+                if(inf.getType() != null & !inf.getType().trim().isEmpty()
+                        & !buffer.toString().contains(inf.getType())){
+                    buffer.append(inf.getType()).append(", ");
+                }
             }
-        }
-        if(buffer.length() != 0){
-            result = buffer.substring(0, buffer.length() - 2);
+            if(buffer.length() != 0){
+                result = buffer.substring(0, buffer.length() - 2);
+            }
+
         }
         return result;
     }

@@ -109,6 +109,7 @@ public class LessonNotificationService extends Service {
             notificationIntent.putExtra(MainActivity.NOTIFICATION_LESSON_DATE, currentLesson.getDate().getTime());
 
         }
+        notificationIntent.putExtra(MainActivity.FROM_PUSH, true);
 
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);

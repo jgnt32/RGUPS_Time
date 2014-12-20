@@ -50,6 +50,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	public static final String OVER_DRAWER_TRANSACTION = "over_drawer_transaction";
     public static final String NOTIFICATION_LESSON_ID = "notofoaction_lesson_id";
     public static final String NOTIFICATION_LESSON_DATE = "notification_lesson_date";
+    public static final String FROM_PUSH = "from_push";
 
     private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
@@ -96,7 +97,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 
 
     private void handleOnNotificationClick(Bundle extra){
-        if(extra != null){
+        if(extra != null && extra.getBoolean(FROM_PUSH)){
 
             SingleLessonPageFragment fragment = new SingleLessonPageFragment();
             Bundle args = new Bundle();

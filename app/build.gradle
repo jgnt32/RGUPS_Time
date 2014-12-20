@@ -1,9 +1,8 @@
 apply plugin: 'android'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "20.0.0"
-    aaptOptions.useAaptPngCruncher = true // Bug fix: return to old PNG processor
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
 
     buildscript {
         repositories {
@@ -36,8 +35,6 @@ android {
 
     buildTypes {
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
 }
