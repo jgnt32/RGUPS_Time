@@ -2,16 +2,17 @@ package ru.rgups.time.rest;
 
 import android.content.Context;
 
-import ru.rgups.time.model.entity.LessonList;
-import ru.rgups.time.spice.FacultetTimeTableRequest;
-import ru.rgups.time.spice.FullTimeTableRequest;
-import ru.rgups.time.spice.GroupListRequest;
-import ru.rgups.time.spice.SampleSpiceService;
-import ru.rgups.time.spice.TimeTableRequest;
-import ru.rgups.time.utils.PreferenceManager;
-
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.request.listener.RequestListener;
+
+import ru.rgups.time.model.entity.LessonList;
+import ru.rgups.time.model.entity.teachers.TeacherList;
+import ru.rgups.time.spice.FacultetTimeTableRequest;
+import ru.rgups.time.spice.GroupListRequest;
+import ru.rgups.time.spice.SampleSpiceService;
+import ru.rgups.time.spice.TeacherListRequest;
+import ru.rgups.time.spice.TimeTableRequest;
+import ru.rgups.time.utils.PreferenceManager;
 
 public class RestManager {
 	
@@ -53,8 +54,8 @@ public class RestManager {
         }
 	}
 	
-	public void fullTimeRequest(RequestListener<Boolean> listener){
-		this.getSpiceManager().execute(new FullTimeTableRequest(Boolean.class), listener);
+	public void fullTimeRequest(RequestListener<TeacherList> listener, Context context){
+		this.getSpiceManager().execute(new TeacherListRequest(context), listener);
 	}
 
 	public void exucuteFacultetRequest(RequestListener<Boolean> listener){

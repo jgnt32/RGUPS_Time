@@ -1,17 +1,25 @@
 package ru.rgups.time.model;
 
+import android.content.Context;
+import android.database.ContentObservable;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
+import android.os.Build;
+import android.os.Environment;
+import android.text.TextUtils;
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
-import ru.rgups.time.datamanagers.LessonManager;
+import io.realm.Realm;
 import ru.rgups.time.fragments.HomeWorkListFragment;
 import ru.rgups.time.model.entity.Day;
 import ru.rgups.time.model.entity.DoubleLine;
@@ -22,20 +30,11 @@ import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
+import ru.rgups.time.model.entity.teachers.Teacher;
 import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;
 import ru.rgups.time.utils.Slipper;
-import android.content.Context;
-import android.database.ContentObservable;
-import android.database.ContentObserver;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
-import android.os.Build;
-import android.os.Environment;
-import android.text.TextUtils;
-import android.util.Log;
 
 public class DataManager extends ContentObservable{
 	
@@ -1040,10 +1039,12 @@ public class DataManager extends ContentObservable{
             result = UnderLine.WEEK_STATE;
         }
         if(result == -1 ){
-            throw new Exception ("Ivalid params weeksState. WeekState should be equel '0' or '1'.") ;
+            throw new Exception ("Invalid params weeksState. WeekState should be equel '0' or '1'.") ;
         }
 
         return result;
     }
+
+
 	
 }

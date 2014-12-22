@@ -1,16 +1,5 @@
 package ru.rgups.time.fragments;
 
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
-import ru.rgups.time.BaseFragment;
-import ru.rgups.time.R;
-import ru.rgups.time.interfaces.SettingListener;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.rest.ApigeeManager;
-import ru.rgups.time.rest.RestManager;
-import ru.rgups.time.utils.DialogManager;
-import ru.rgups.time.utils.PreferenceManager;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -21,8 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
+
+import ru.rgups.time.BaseFragment;
+import ru.rgups.time.R;
+import ru.rgups.time.interfaces.SettingListener;
+import ru.rgups.time.model.DataManager;
+import ru.rgups.time.utils.DialogManager;
+import ru.rgups.time.utils.PreferenceManager;
 
 public class SettingFragment extends BaseFragment implements OnClickListener, CompoundButton.OnCheckedChangeListener{
 	private SettingListener mListener;
@@ -101,14 +96,7 @@ public class SettingFragment extends BaseFragment implements OnClickListener, Co
 			break;
 			
 		case R.id.setting_full_time_button:
-			DialogManager.showPositiveDialog(getActivity(), R.string.setting_full_download_message, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					RestManager.getInstance().fullTimeRequest(null);
-					Crouton.showText(getActivity(), getString(R.string.main_loading_begin), Style.INFO);
-				}
-			});
+
 			break;
 		}
 	}

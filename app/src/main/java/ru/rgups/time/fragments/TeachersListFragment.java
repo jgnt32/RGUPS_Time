@@ -1,27 +1,13 @@
 package ru.rgups.time.fragments;
 
-import ru.rgups.time.BaseFragment;
-import ru.rgups.time.R;
-import ru.rgups.time.adapters.TeacherCursorAdapter;
-import ru.rgups.time.interfaces.LessonListener;
-import ru.rgups.time.loaders.RTCursorLoader;
-import ru.rgups.time.loaders.TeacherLessonLoader;
-import ru.rgups.time.loaders.TecherListLoader;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.rest.RestManager;
-import ru.rgups.time.utils.DialogManager;
-import ru.rgups.time.utils.PreferenceManager;
-import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.app.Activity;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,15 +17,25 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FilterQueryProvider;
-import android.widget.ListView;
 
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TeachersListFragment extends BaseFragment implements OnItemClickListener, LoaderCallbacks<Cursor>, 
+import ru.rgups.time.BaseFragment;
+import ru.rgups.time.R;
+import ru.rgups.time.adapters.TeacherListAdapter;
+import ru.rgups.time.interfaces.LessonListener;
+import ru.rgups.time.loaders.RTCursorLoader;
+import ru.rgups.time.loaders.TecherListLoader;
+import ru.rgups.time.model.DataManager;
+import ru.rgups.time.model.entity.teachers.Teacher;
+import ru.rgups.time.rest.RestManager;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+
+public class TeachersListFragment extends BaseFragment implements OnItemClickListener, LoaderCallbacks<List<Teacher>>,
 																SearchView.OnQueryTextListener, FilterQueryProvider, MenuItemCompat.OnActionExpandListener{
 	private StickyListHeadersListView mListView;
-	private TeacherCursorAdapter mAdapter;
+	private TeacherListAdapter mAdapter;
 	private RTCursorLoader mLoader;
 	private MenuItem mSearchItem;
 	private SearchView mSearchView;
@@ -49,6 +45,8 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	private View mEmptyMessage;
 	
 	private Cursor mTeacherListCursor;
+
+    private List<Teacher> teachers = new ArrayList<>();
 	
 	@Override
 	public void onAttach(Activity activity) {
@@ -61,8 +59,7 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		setRetainInstance(true);
-		mAdapter = new TeacherCursorAdapter(getActivity(), null, true);
-		mAdapter.setFilterQueryProvider(this);
+		mAdapter = new TeacherListAdapter(getActivity(), teachers);
 	}
 	
 	
@@ -82,26 +79,12 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	@Override
 	public void onResume() {
 		super.onResume();
-		if(!PreferenceManager.getInstance().isFullTimeDownloaded() &&
-				!PreferenceManager.getInstance().fullTimeDialoWasShowed()){
-			PreferenceManager.getInstance().setFullTimeDownloadingDialogShowed(true);
-			DialogManager.showPositiveDialog(getActivity(), R.string.full_download_message, new OnClickListener(){
-
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					RestManager.getInstance().fullTimeRequest(null);
-					Crouton.showText(getActivity(), getString(R.string.main_loading_begin), Style.INFO);
-				}
-				
-			});
-		}
-
+        RestManager.getInstance().fullTimeRequest(null, getActivity().getApplicationContext());
         getLoaderManager().restartLoader(0, null, this);
         getLoaderManager().getLoader(0).forceLoad();
 	}
 	
 
-	
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		inflater.inflate(R.menu.teach, menu);
@@ -115,35 +98,44 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-		mLessonListener.onTeacherClick(mAdapter.getTeacherName(position));
+
 	}
 
 	@Override
-	public Loader<Cursor> onCreateLoader(int c, Bundle arg1) {
-		return new TecherListLoader(getActivity());
-	}
-
-	@Override
-	public void onLoadFinished(Loader<Cursor> loader, Cursor c) {
-        if(c != null && !c.isClosed()){
-            mAdapter.changeCursor(c);
-            mAdapter.notifyDataSetChanged();
+	public Loader<List<Teacher>> onCreateLoader(int c, Bundle arg1) {
+        String query = null;
+        if (mSearchView != null && mSearchView.getQuery() != null) {
+            query = mSearchView.getQuery().toString();
         }
+        return new TecherListLoader(getActivity(), query);
 	}
 
-	@Override
-	public void onLoaderReset(Loader<Cursor> loader) {
-		
-	}
+    @Override
+    public void onLoadFinished(Loader<List<Teacher>> loader, List<Teacher> data) {
+        Log.e("Teacher list","onLoadFinished "+data);
+        teachers.clear();
+        teachers.addAll(data);
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Teacher>> loader) {
+
+    }
+
+
 
 	@Override
 	public boolean onQueryTextChange(String value) {
-		mAdapter.getFilter().filter(value);
+        getLoaderManager().restartLoader(0, null, this);
+        getLoaderManager().getLoader(0).forceLoad();
 		return true;
 	}
 
 	@Override
 	public boolean onQueryTextSubmit(String value) {
+        getLoaderManager().restartLoader(0, null, this);
+        getLoaderManager().getLoader(0).forceLoad();
 		return false;
 	}
 
