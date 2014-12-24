@@ -79,7 +79,7 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	@Override
 	public void onResume() {
 		super.onResume();
-        RestManager.getInstance().fullTimeRequest(null, getActivity().getApplicationContext());
+        RestManager.getInstance().teacherListRequest(null, getActivity().getApplicationContext());
         getLoaderManager().restartLoader(0, null, this);
         getLoaderManager().getLoader(0).forceLoad();
 	}
@@ -98,7 +98,7 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-
+        RestManager.getInstance().teacherLessonRequest(null, this.getActivity().getApplication(), mAdapter.getItem(position).getId());
 	}
 
 	@Override

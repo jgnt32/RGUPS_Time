@@ -6,10 +6,12 @@ import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.request.listener.RequestListener;
 
 import ru.rgups.time.model.entity.LessonList;
+import ru.rgups.time.model.entity.teachers.TeacherLessonList;
 import ru.rgups.time.model.entity.teachers.TeacherList;
 import ru.rgups.time.spice.FacultetTimeTableRequest;
 import ru.rgups.time.spice.GroupListRequest;
 import ru.rgups.time.spice.SampleSpiceService;
+import ru.rgups.time.spice.TeacherLessonRequest;
 import ru.rgups.time.spice.TeacherListRequest;
 import ru.rgups.time.spice.TimeTableRequest;
 import ru.rgups.time.utils.PreferenceManager;
@@ -54,9 +56,13 @@ public class RestManager {
         }
 	}
 	
-	public void fullTimeRequest(RequestListener<TeacherList> listener, Context context){
+	public void teacherListRequest(RequestListener<TeacherList> listener, Context context){
 		this.getSpiceManager().execute(new TeacherListRequest(context), listener);
 	}
+
+    public void teacherLessonRequest(RequestListener<TeacherLessonList> listener, Context context, long teacherId){
+        this.getSpiceManager().execute(new TeacherLessonRequest(context, teacherId), listener);
+    }
 
 	public void exucuteFacultetRequest(RequestListener<Boolean> listener){
 		this.getSpiceManager().execute(new FacultetTimeTableRequest(Boolean.class), listener);

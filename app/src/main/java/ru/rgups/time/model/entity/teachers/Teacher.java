@@ -8,6 +8,7 @@ import io.realm.annotations.Index;
 /**
  * Created by jgnt32 on 22.12.2014.
  */
+
 public class Teacher extends RealmObject {
 
     @Element(name = "id")

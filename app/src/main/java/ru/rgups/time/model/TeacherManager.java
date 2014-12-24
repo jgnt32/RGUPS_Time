@@ -1,7 +1,6 @@
 package ru.rgups.time.model;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +9,7 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import ru.rgups.time.model.entity.teachers.Teacher;
+import ru.rgups.time.model.entity.teachers.TeachersLesson;
 
 /**
  * Created by jgnt32 on 22.12.2014.
@@ -74,6 +74,45 @@ public class TeacherManager {
         }
         realm.close();
         return result;
+    }
+
+    public void saveTeacherLesson(Collection<TeachersLesson> lessons, long teacherId){
+        Realm realm = Realm.getInstance(context);
+
+        realm.beginTransaction();
+        if (!lessons.isEmpty()) {
+            RealmResults<TeachersLesson> realmResult = realm
+                    .where(TeachersLesson.class)
+                    .equalTo("teacherId", teacherId)
+                    .findAll();
+            realmResult.clear();
+        }
+        realm.commitTransaction();
+
+        realm.beginTransaction();
+        for (TeachersLesson lesson : lessons) {
+            TeachersLesson toDbLesson = realm.createObject(TeachersLesson.class);
+            cloneLesson(toDbLesson, lesson);
+        }
+        realm.commitTransaction();
+
+        realm.close();
+    }
+
+    public void cloneLesson(TeachersLesson newLesson, TeachersLesson oldLesson){
+
+
+        newLesson.setDayOfWeek(oldLesson.getDayOfWeek());
+        newLesson.setNumber(oldLesson.getNumber());
+        newLesson.setTimeFrom(oldLesson.getTimeFrom());
+        newLesson.setTimeTo(oldLesson.getTimeTo());
+        newLesson.setPeriodicity(oldLesson.getPeriodicity());
+        newLesson.setSubject(oldLesson.getSubject());
+        newLesson.setKind(oldLesson.getKind());
+        newLesson.setTeacherId(oldLesson.getTeacherId());
+        newLesson.setTeacherName(oldLesson.getTeacherName());
+        newLesson.setRoom(oldLesson.getRoom());
+        newLesson.setStudyGroup(oldLesson.getStudyGroup());
     }
 
 }
