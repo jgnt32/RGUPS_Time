@@ -11,7 +11,8 @@ import java.util.Collection;
 @Root(strict = false)
 public class TeacherLessonList {
 
-    @ElementList(inline = true, name = "lessons", type = TeachersLesson.class, required = false, empty = true)
+
+    @ElementList(inline = true, entry = "lesson", type = TeachersLesson.class, required = false)
     private Collection<TeachersLesson> lessons;
 
     public Collection<TeachersLesson> getLessons() {

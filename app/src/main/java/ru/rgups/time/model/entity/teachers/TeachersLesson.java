@@ -8,40 +8,39 @@ import io.realm.RealmObject;
  * Created by jgnt32 on 22.12.2014.
  */
 
-@Element(name = "lesson")
 public class TeachersLesson extends RealmObject{
 
-    @Element(name = "day_week")
+    @Element(name = "day_week", required = false)
     private String dayOfWeek;
 
-    @Element(name = "number")
+    @Element(name = "number", required = false)
     private int number;
 
-    @Element(name = "time_from")
+    @Element(name = "time_from", required = false)
     private String timeFrom;
 
-    @Element(name = "time_to")
+    @Element(name = "time_to", required = false)
     private String timeTo;
 
-    @Element(name = "periodicity")
+    @Element(name = "periodicity", required = false)
     private String periodicity;
 
-    @Element(name = "subject")
+    @Element(name = "subject", required = false)
     private String subject;
 
-    @Element(name = "kind")
+    @Element(name = "kind", required = false)
     private String kind;
 
-    @Element(name = "teacher_id")
+    @Element(name = "teacher_id", required = false)
     private long teacherId;
 
-    @Element(name = "teacher_name")
-    private long teacherName;
+    @Element(name = "teacher_name", required = false)
+    private String teacherName;
 
-    @Element(name = "room")
+    @Element(name = "room", required = false)
     private String room;
 
-    @Element(name = "study_group")
+    @Element(name = "study_group", required = false)
     private String studyGroup;
 
     public String getDayOfWeek() {
@@ -108,11 +107,11 @@ public class TeachersLesson extends RealmObject{
         this.teacherId = teacherId;
     }
 
-    public long getTeacherName() {
+    public String getTeacherName() {
         return teacherName;
     }
 
-    public void setTeacherName(long teacherName) {
+    public void setTeacherName(String teacherName) {
         this.teacherName = teacherName;
     }
 
