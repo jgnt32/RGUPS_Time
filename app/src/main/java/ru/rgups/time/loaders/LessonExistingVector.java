@@ -13,13 +13,13 @@ import ru.rgups.time.model.entity.StudentCalendarLessonInfo;
  */
 public class LessonExistingVector extends AsyncTaskLoader<StudentCalendarLessonInfo> {
 
-    private String mTeacher;
+    private long mTeacherId = -1;
     private ContentObserver mObserver = new ForceLoadContentObserver();
 
 
-    public LessonExistingVector(Context context, String teacher) {
+    public LessonExistingVector(Context context, long teacherId) {
         super(context);
-        this.mTeacher = teacher;
+        this.mTeacherId = teacherId;
         DataManager.getInstance().registerObserver(mObserver);
     }
 
@@ -27,11 +27,11 @@ public class LessonExistingVector extends AsyncTaskLoader<StudentCalendarLessonI
     public StudentCalendarLessonInfo loadInBackground() {
         StudentCalendarLessonInfo result = new StudentCalendarLessonInfo();
 
-        if(mTeacher == null){
+        if(mTeacherId == -1){
             result.setLessonMatrix(LessonManager.getInstance().getStudentLessonMatrix());
             result.setHwVector(LessonManager.getInstance().getHomeWorkVector());
         } else {
-            result.setLessonMatrix(LessonManager.getInstance().getTeacherLessonMatrix(mTeacher));
+            result.setLessonMatrix(LessonManager.getInstance().getTeacherLessonMatrix(mTeacherId));
         }
 
         return result;

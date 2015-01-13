@@ -1,5 +1,8 @@
 package ru.rgups.time.fragments;
 
+import android.os.Bundle;
+import android.support.v4.app.LoaderManager;
+
 import ru.rgups.time.adapters.BaseCalendarAdapter;
 import ru.rgups.time.adapters.LessonCalendarAdapter;
 import ru.rgups.time.adapters.LessonListPagerAdapter;
@@ -7,9 +10,6 @@ import ru.rgups.time.loaders.LessonExistingVector;
 import ru.rgups.time.model.entity.StudentCalendarLessonInfo;
 import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.CalendarManager;
-
-import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
 
 public class StudentTimeTableFragment extends BasePageTameTableFragment implements LoaderManager.LoaderCallbacks<StudentCalendarLessonInfo> {
 	
@@ -24,11 +24,12 @@ public class StudentTimeTableFragment extends BasePageTameTableFragment implemen
 	    getLoaderManager().restartLoader(0, null, this);
         getLoaderManager().getLoader(0).forceLoad();
 	    RestManager.getInstance().timeTableRequest(null);
+
     }
 
     @Override
     public android.support.v4.content.Loader<StudentCalendarLessonInfo> onCreateLoader(int id, Bundle args) {
-        return new LessonExistingVector(getActivity(), null);
+        return new LessonExistingVector(getActivity(), 0);
     }
 
     @Override

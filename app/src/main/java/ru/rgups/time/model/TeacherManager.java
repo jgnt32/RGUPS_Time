@@ -76,6 +76,17 @@ public class TeacherManager {
         return result;
     }
 
+    public RealmResults<TeachersLesson> getTeachersLessons(long teacherId){
+        Realm realm = Realm.getInstance(context);
+
+        RealmResults<TeachersLesson> result = realm
+                .where(TeachersLesson.class)
+                .equalTo("teacherId", teacherId)
+                .findAll();
+
+        return result;
+    }
+
     public void saveTeacherLesson(Collection<TeachersLesson> lessons, long teacherId){
         Realm realm = Realm.getInstance(context);
 

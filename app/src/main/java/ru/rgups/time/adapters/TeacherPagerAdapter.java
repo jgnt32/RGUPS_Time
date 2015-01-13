@@ -1,17 +1,18 @@
 package ru.rgups.time.adapters;
 
-import ru.rgups.time.fragments.TeacherLessonListFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import ru.rgups.time.fragments.TeacherLessonListFragment;
+
 public class TeacherPagerAdapter extends LessonListPagerAdapter{
 	
-	private String mTeacherName;
+	private long mTeacherId;
 
-	public TeacherPagerAdapter(FragmentManager fm, int count, String name) {
+	public TeacherPagerAdapter(FragmentManager fm, int count, long teacherId) {
 		super(fm, count);
-		mTeacherName = name;
+        mTeacherId = teacherId;
 	}
 
 	
@@ -19,7 +20,7 @@ public class TeacherPagerAdapter extends LessonListPagerAdapter{
 	public Fragment getItem(int position) {
 		Bundle args = new  Bundle();
 		args.putInt(TeacherLessonListFragment.DAY_ARGS, position);
-		args.putString(TeacherLessonListFragment.TEACHER_ARGS, mTeacherName);
+		args.putLong(TeacherLessonListFragment.TEACHER_ARGS, mTeacherId);
 		TeacherLessonListFragment fragment = new TeacherLessonListFragment();
 		fragment.setArguments(args);
 		

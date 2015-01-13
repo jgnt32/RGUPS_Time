@@ -1,21 +1,15 @@
 package ru.rgups.time.adapters;
 
-import ru.rgups.time.R;
-import ru.rgups.time.datamanagers.LessonManager;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.utils.CalendarManager;
-
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 public class TeachersCalendarAdapter extends BaseCalendarAdapter{
 	private String mTeachersName;
 	private ColorStateList mLessonFreeBg;
 	
-	public TeachersCalendarAdapter(Context context, String teacherName) {
+	public TeachersCalendarAdapter(Context context, long teacherId) {
 		super(context);
 	}
 	

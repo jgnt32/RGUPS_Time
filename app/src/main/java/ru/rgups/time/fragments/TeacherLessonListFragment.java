@@ -1,9 +1,5 @@
 package ru.rgups.time.fragments;
 
-import ru.rgups.time.adapters.TeacherLessonListAdapter;
-import ru.rgups.time.loaders.TeacherLessonLoader;
-
-
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -12,12 +8,18 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class TeacherLessonListFragment extends LessonListFragment implements LoaderManager.LoaderCallbacks<Cursor>{
+import io.realm.RealmResults;
+import ru.rgups.time.adapters.TeacherLessonListAdapter;
+import ru.rgups.time.model.TeacherManager;
+import ru.rgups.time.model.entity.teachers.TeachersLesson;
+import ru.rgups.time.rest.RestManager;
+
+public class TeacherLessonListFragment extends LessonListFragment implements LoaderManager.LoaderCallbacks<RealmResults<TeachersLesson>>{
 	
 	public final static String TEACHER_ARGS = "teacher_args";
 
 	private int mDayNumber;
-	private String mTeacherName;
+	private long mTeacherId;
 	private Cursor mCursor;
 
 	private TeacherLessonListAdapter mAdapter;
@@ -25,43 +27,46 @@ public class TeacherLessonListFragment extends LessonListFragment implements Loa
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		mDayNumber = getArguments().getInt(DAY_ARGS);
-		mTeacherName = getArguments().getString(TEACHER_ARGS);
-		mAdapter = new TeacherLessonListAdapter(getActivity(), null, false);
-		super.onCreate(savedInstanceState);
+       // mTeacherId = getArguments().getLong(TEACHER_ARGS);
+        RealmResults<TeachersLesson> teachersLessons = TeacherManager.getInstance(getActivity()).getTeachersLessons(31599);
+        mAdapter = new TeacherLessonListAdapter(getActivity(), teachersLessons, false);
+
+        super.onCreate(savedInstanceState);
 		
 	}
 
     @Override
     public void onResume() {
         super.onResume();
-        getLoaderManager().restartLoader(0, null, this);
-        getLoaderManager().getLoader(0).forceLoad();
+
     }
 
     @Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		
+        mLessonListener.onTeacherClick(id);
 	}
 
 	@Override
 	protected void setAdapter(ListView list) {
-		list.setAdapter(mAdapter);
-	}
-
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new TeacherLessonLoader(getActivity(), mDayNumber, mTeacherName);
+        mListView.setAdapter(mAdapter);
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
-        mAdapter.changeCursor(cursor);
+    public Loader<RealmResults<TeachersLesson>> onCreateLoader(int i, Bundle bundle) {
+        return null;
+    }
+
+    @Override
+    public void onLoadFinished(Loader<RealmResults<TeachersLesson>> cursorLoader, RealmResults<TeachersLesson> data) {
+     /*   mAdapter.updateRealmResults(data);
         mAdapter.notifyDataSetChanged();
         mProgress.setVisibility(View.GONE);
+        if (mListView.getAdapter() == null) {
+        }*/
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> cursorLoader) {
+    public void onLoaderReset(Loader<RealmResults<TeachersLesson>> cursorLoader) {
 
     }
 }

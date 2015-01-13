@@ -98,8 +98,8 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-        RestManager.getInstance().teacherLessonRequest(null, this.getActivity().getApplication(), mAdapter.getItem(position).getId());
-	}
+	    mLessonListener.onTeacherClick(id);
+    }
 
 	@Override
 	public Loader<List<Teacher>> onCreateLoader(int c, Bundle arg1) {

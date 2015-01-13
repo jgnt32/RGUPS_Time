@@ -1,30 +1,8 @@
 package ru.rgups.time;
 
-import net.simonvt.menudrawer.MenuDrawer;
-import net.simonvt.menudrawer.Position;
-import ru.rgups.time.activities.HomeWorkActivity;
-import ru.rgups.time.adapters.DrawerListAdapter;
-import ru.rgups.time.fragments.ClapFragment;
-import ru.rgups.time.fragments.HomeWorkEditFragment;
-import ru.rgups.time.fragments.HomeWorkListFragment;
-import ru.rgups.time.fragments.SettingFragment;
-import ru.rgups.time.fragments.SingleLessonFragment;
-import ru.rgups.time.fragments.SingleLessonPageFragment;
-import ru.rgups.time.fragments.TeachersListFragment;
-import ru.rgups.time.fragments.TeachersTimeTable;
-import ru.rgups.time.fragments.StudentTimeTableFragment;
-import ru.rgups.time.fragments.WelcomeActivity;
-import ru.rgups.time.interfaces.LessonListener;
-import ru.rgups.time.interfaces.SettingListener;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.services.LessonNotificationService;
-import ru.rgups.time.utils.DialogManager;
-import ru.rgups.time.utils.PreferenceManager;
-
 import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -40,10 +18,27 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.crashlytics.android.Crashlytics;
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
+
+import net.simonvt.menudrawer.MenuDrawer;
+import net.simonvt.menudrawer.Position;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
+import ru.rgups.time.activities.HomeWorkActivity;
+import ru.rgups.time.adapters.DrawerListAdapter;
+import ru.rgups.time.fragments.ClapFragment;
+import ru.rgups.time.fragments.HomeWorkEditFragment;
+import ru.rgups.time.fragments.HomeWorkListFragment;
+import ru.rgups.time.fragments.SettingFragment;
+import ru.rgups.time.fragments.SingleLessonFragment;
+import ru.rgups.time.fragments.SingleLessonPageFragment;
+import ru.rgups.time.fragments.StudentTimeTableFragment;
+import ru.rgups.time.fragments.TeachersListFragment;
+import ru.rgups.time.fragments.TeachersTimeTable;
+import ru.rgups.time.fragments.WelcomeActivity;
+import ru.rgups.time.interfaces.LessonListener;
+import ru.rgups.time.interfaces.SettingListener;
+import ru.rgups.time.services.LessonNotificationService;
+import ru.rgups.time.utils.PreferenceManager;
 
 public class MainActivity extends BaseDrawerActivity implements  SettingListener, OnClickListener, OnItemClickListener, LessonListener{
 
@@ -316,9 +311,9 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 
 
 	@Override
-	public void onTeacherClick(String teachersName) {
+	public void onTeacherClick(long teacherId) {
 		Bundle args = new Bundle();
-		args.putString(TeachersTimeTable.TEACHERS_NAME, teachersName);
+		args.putLong(TeachersTimeTable.TEACHERS_NAME, teacherId);
 		TeachersTimeTable fragment = new TeachersTimeTable();
 		fragment.setArguments(args);
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

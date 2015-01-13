@@ -1,5 +1,10 @@
 package ru.rgups.time.datamanagers;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
+import android.text.TextUtils;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -12,12 +17,6 @@ import ru.rgups.time.model.LessonTableModel;
 import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.utils.PreferenceManager;
-
-import android.app.PendingIntent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
-import android.text.TextUtils;
 
 public class LessonManager {
 	private SQLiteDatabase mDb;
@@ -75,13 +74,13 @@ public class LessonManager {
 		return result;
 	}
 	
-	
-	public boolean [][] getTeacherLessonMatrix(String teacheName){
+	//TODO new matrix alg
+	public boolean [][] getTeacherLessonMatrix(long teacheId){
 		boolean [][] result = new boolean [7][2];
 		
 		for(int i = 0; i < 2; i++){
 			for(int j = 1; j < 8; j++){
-				result[j-1][i] = DataManager.getInstance().dayHasLesson(j, i, teacheName);
+				result[j-1][i] = false; //DataManager.getInstance().dayHasLesson(j, i, teacheName);
 			}
 		}
 		

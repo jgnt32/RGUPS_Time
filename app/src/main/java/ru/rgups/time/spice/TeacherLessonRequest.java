@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.octo.android.robospice.request.springandroid.SpringAndroidSpiceRequest;
 
+import ru.rgups.time.model.TeacherManager;
 import ru.rgups.time.model.entity.teachers.TeacherLessonList;
 
 /**
@@ -24,7 +25,7 @@ public class TeacherLessonRequest extends SpringAndroidSpiceRequest<TeacherLesso
     @Override
     public TeacherLessonList loadDataFromNetwork() throws Exception {
         TeacherLessonList result = getRestTemplate().getForObject( url, TeacherLessonList.class);
-     //   TeacherManager.getInstance(context).saveTeacherLesson(result.getLessons(), mTeacherId);
+        TeacherManager.getInstance(context).saveTeacherLesson(result.getLessons(), mTeacherId);
         return result;
     }
 }
