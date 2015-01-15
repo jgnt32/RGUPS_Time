@@ -38,13 +38,12 @@ public class TeacherLessonListAdapter extends RealmBaseAdapter<TeachersLesson>{
         }
 
         mHolder.teacher.setText(getItem(position).getTeacherName());
-      /*  mHolder.room.setText(c.getString(c.getColumnIndex(LessonInformation.ROOM)));
-        mHolder.lessonTitle.setText(c.getString(c.getColumnIndex(LessonInformation.LESSON_TITLE)));
+        mHolder.room.setText(getItem(position).getRoom());
+        mHolder.lessonTitle.setText(getItem(position).getSubject());
 
-        mHolder.number.setText(mHeaderNumber.replace("#", Integer.toString(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)))));
-        mHolder.time.setText(mTime[c.getInt(c.getColumnIndex(LessonTableModel.NUMBER))-1]);
+        mHolder.number.setText(""+getItem(position).getNumber());
 
-        number.setText(mHeaderNumber.replace("#", Integer.toString(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)))));
+        /*number.setText(mHeaderNumber.replace("#", Integer.toString(c.getInt(c.getColumnIndex(LessonTableModel.NUMBER)))));
         time.setText(mTime[c.getInt(c.getColumnIndex(LessonTableModel.NUMBER))-1]);*/
 
         return convertView;

@@ -1,6 +1,10 @@
 package ru.rgups.time.model.entity.teachers;
 
+import com.google.gson.Gson;
+
 import org.simpleframework.xml.Element;
+
+import java.util.ArrayList;
 
 import io.realm.RealmObject;
 
@@ -42,6 +46,16 @@ public class TeachersLesson extends RealmObject{
 
     @Element(name = "study_group", required = false)
     private String studyGroup;
+
+    private String studyGroups;
+
+    public String getStudyGroups() {
+        return studyGroups;
+    }
+
+    public void setStudyGroups(String studyGroups) {
+        this.studyGroups = studyGroups;
+    }
 
     public String getDayOfWeek() {
         return dayOfWeek;
@@ -130,6 +144,8 @@ public class TeachersLesson extends RealmObject{
     public void setStudyGroup(String studyGroup) {
         this.studyGroup = studyGroup;
     }
+
+
 
 
 

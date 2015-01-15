@@ -28,6 +28,6 @@ public class TeacherLessonLoader extends AsyncTaskLoader<RealmResults<TeachersLe
 
     @Override
     public RealmResults<TeachersLesson> loadInBackground() {
-        return TeacherManager.getInstance(getContext()).getTeachersLessons(mTeacherId);
+        return TeacherManager.getInstance(getContext()).getTeachersLessons(mTeacherId, 1);
     }
 }

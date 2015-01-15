@@ -2,6 +2,7 @@ package ru.rgups.time.fragments;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.view.View;
@@ -12,7 +13,6 @@ import io.realm.RealmResults;
 import ru.rgups.time.adapters.TeacherLessonListAdapter;
 import ru.rgups.time.model.TeacherManager;
 import ru.rgups.time.model.entity.teachers.TeachersLesson;
-import ru.rgups.time.rest.RestManager;
 
 public class TeacherLessonListFragment extends LessonListFragment implements LoaderManager.LoaderCallbacks<RealmResults<TeachersLesson>>{
 	
@@ -27,13 +27,19 @@ public class TeacherLessonListFragment extends LessonListFragment implements Loa
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		mDayNumber = getArguments().getInt(DAY_ARGS);
-       // mTeacherId = getArguments().getLong(TEACHER_ARGS);
-        RealmResults<TeachersLesson> teachersLessons = TeacherManager.getInstance(getActivity()).getTeachersLessons(31599);
+        mTeacherId = getArguments().getLong(TEACHER_ARGS);
+        RealmResults<TeachersLesson> teachersLessons = TeacherManager.getInstance(getActivity()).getTeachersLessons(31599, mDayNumber);
         mAdapter = new TeacherLessonListAdapter(getActivity(), teachersLessons, false);
-
         super.onCreate(savedInstanceState);
 		
 	}
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mProgress.setVisibility(View.GONE);
+
+    }
 
     @Override
     public void onResume() {
@@ -60,7 +66,7 @@ public class TeacherLessonListFragment extends LessonListFragment implements Loa
     public void onLoadFinished(Loader<RealmResults<TeachersLesson>> cursorLoader, RealmResults<TeachersLesson> data) {
      /*   mAdapter.updateRealmResults(data);
         mAdapter.notifyDataSetChanged();
-        mProgress.setVisibility(View.GONE);
+
         if (mListView.getAdapter() == null) {
         }*/
     }
