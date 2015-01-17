@@ -12,7 +12,7 @@ import ru.rgups.time.model.entity.teachers.TeacherLessonList;
  */
 public class TeacherLessonRequest extends SpringAndroidSpiceRequest<TeacherLessonList> {
 
-    private String url = "http://rgups.ru/time/xml/teachers.php?id=31599&year=2014&semester=1";
+    private String mUrl = "http://rgups.ru/time/xml/teachers.php?id=%id&year=2014&semester=1";
     private Context context;
     private long mTeacherId;
 
@@ -24,7 +24,8 @@ public class TeacherLessonRequest extends SpringAndroidSpiceRequest<TeacherLesso
 
     @Override
     public TeacherLessonList loadDataFromNetwork() throws Exception {
-        TeacherLessonList result = getRestTemplate().getForObject( url, TeacherLessonList.class);
+
+        TeacherLessonList result = getRestTemplate().getForObject( mUrl.replace("%id", Long.toString(mTeacherId)), TeacherLessonList.class);
         TeacherManager.getInstance(context).saveTeacherLesson(result.getLessons(), mTeacherId);
         return result;
     }

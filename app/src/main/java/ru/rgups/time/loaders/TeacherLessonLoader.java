@@ -5,8 +5,7 @@ import android.database.ContentObserver;
 import android.support.v4.content.AsyncTaskLoader;
 
 import io.realm.RealmResults;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.TeacherManager;
+import ru.rgups.time.model.UriGenerator;
 import ru.rgups.time.model.entity.teachers.TeachersLesson;
 
 /**
@@ -23,11 +22,11 @@ public class TeacherLessonLoader extends AsyncTaskLoader<RealmResults<TeachersLe
         super(context);
         mTeacherId = teacherId;
         mDayNumber = dayOfSemestr;
-        DataManager.getInstance().registerObserver(mObserver);
+        context.getContentResolver().registerContentObserver(UriGenerator.generate(TeachersLesson.class, teacherId), true, mObserver);
     }
 
     @Override
     public RealmResults<TeachersLesson> loadInBackground() {
-        return TeacherManager.getInstance(getContext()).getTeachersLessons(mTeacherId, 1);
+        return null;
     }
 }

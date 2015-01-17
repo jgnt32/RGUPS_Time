@@ -2,8 +2,8 @@ package ru.rgups.time.model;
 
 import android.net.Uri;
 
-import ru.rgups.time.model.entity.Lesson;
 import ru.rgups.time.model.entity.teachers.Teacher;
+import ru.rgups.time.model.entity.teachers.TeachersLesson;
 
 /**
  * Created by jgnt32 on 22.12.2014.
@@ -18,8 +18,8 @@ public class UriGenerator {
         Uri result = null;
         if (clazz == Teacher.class) {
             result = Uri.parse(SCHEME + "teacher" + "/" + rowId);
-        } else if (clazz == Lesson.class){
-            result = Uri.parse(SCHEME + "lesson" + "/" + rowId);
+        } else if (clazz == TeachersLesson.class){
+            result = Uri.parse(SCHEME + "tachers_lesson" + "/" + rowId);
         }
 
         return result;

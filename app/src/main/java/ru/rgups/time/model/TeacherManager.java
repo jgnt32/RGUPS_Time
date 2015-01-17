@@ -145,6 +145,8 @@ public class TeacherManager {
         realm.commitTransaction();
 
         realm.close();
+        context.getContentResolver().notifyChange(UriGenerator.generate(TeachersLesson.class, null), null);
+
     }
 
     public void cloneLesson(TeachersLesson newLesson, TeachersLesson oldLesson){
