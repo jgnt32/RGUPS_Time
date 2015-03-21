@@ -44,15 +44,27 @@ public class LessonNotificationService extends Service {
         mClosestLesson = LessonManager.getInstance().getClosestLesson();
 
         if(mClosestLesson != null){
+            NotificationCompat.BigPictureStyle notiStyle = new
+                    NotificationCompat.BigPictureStyle();
             Log.e("LessonNotificationService", "onBind");
-            Notification n = new NotificationCompat.Builder(this)
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
            /* setContentText(mClosestLesson.getInformation().get(0).getTitle())
             .setContentTitle("Ближайшая пара")*/
                     .setContentIntent(getPendingIntent(mClosestLesson, mLesson))
                     .setSmallIcon(R.drawable.ic_launcher)
-                    .setContent(getRemoteViews())
-                    .build();
 
+                    .setStyle(notiStyle);
+
+            if (mLesson != null) {
+                builder.setContentTitle(getString(R.string.current_lesson))
+                       .setContentText(mLesson.getTitle()+" "+mLesson.getRooms());
+            } else {
+                builder.setContentTitle(getString(R.string.next_lesson))
+                       .setContentText(mClosestLesson.getTitle()+" "+mClosestLesson.getRooms());
+            }
+
+            Notification n = builder.build();
+            n.bigContentView = getRemoteViews();
             n.flags = Notification.FLAG_ONGOING_EVENT;
             NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
@@ -67,14 +79,14 @@ public class LessonNotificationService extends Service {
         RemoteViews result;
 
         if(mLesson == null){
-            result = new RemoteViews(getPackageName(), R.layout.notification_closest_lesson_only);
+            result = new RemoteViews(getApplicationContext().getPackageName(), R.layout.notification_closest_lesson_only);
             result.setTextViewText(R.id.notification_closest_lesson_title, mClosestLesson.getTitle());
             result.setTextViewText(R.id.notification_closest_lesson_room, mClosestLesson.getRooms());
          //   result.setPendingIntentTemplate(R.id.notification_closest_lesson_cotainer, getPendingIntent(mClosestLesson));
 
 
         } else {
-            result = new RemoteViews(getPackageName(), R.layout.notification_closest_and_current_lesson);
+            result = new RemoteViews(getApplicationContext().getPackageName(), R.layout.notification_closest_and_current_lesson);
 
             result.setTextViewText(R.id.notification_closest_lesson_title, mClosestLesson.getTitle());
 

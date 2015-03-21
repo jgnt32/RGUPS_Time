@@ -3,7 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="100dp">
 
     <ImageView
         android:src="@drawable/ic_launcher"
@@ -15,6 +15,7 @@
         android:layout_marginRight="10dp" />
 
     <LinearLayout
+        android:layout_gravity="center_vertical"
         android:id="@+id/notification_currenr_lesson_cotainer"
         android:layout_weight="1"
         android:orientation="vertical"
@@ -22,17 +23,19 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:textColor="@color/primary_text"
             android:textSize="16sp"
             android:id="@+id/notification_current_lesson_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Сейчас идет"/>
+            android:text="@string/current_lesson"/>
 
         <TextView
             android:layout_marginLeft="10dp"
             android:id="@+id/notification_current_lesson_title"
             android:layout_width="match_parent"
             android:lines="1"
+            android:textColor="@color/secondary_text"
             android:ellipsize="end"
             android:layout_height="wrap_content"
             android:text="Физика"/>
@@ -40,6 +43,7 @@
         <TextView
             android:id="@+id/notification_current_lesson_room"
             android:layout_marginLeft="10dp"
+            android:textColor="@color/secondary_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Д406"/>
@@ -48,6 +52,7 @@
 
 
     <LinearLayout
+        android:layout_gravity="center_vertical"
         android:id="@+id/notification_closest_lesson_cotainer"
         android:padding="0dp"
         android:layout_weight="1"
@@ -57,10 +62,11 @@
 
         <TextView
             android:id="@+id/notification_lesson_status"
+            android:textColor="@color/primary_text"
             android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Следующая пара"/>
+            android:text="@string/next_lesson"/>
 
         <TextView
             android:layout_marginLeft="10dp"
@@ -68,6 +74,7 @@
             android:layout_width="match_parent"
             android:ellipsize="end"
             android:layout_height="wrap_content"
+            android:textColor="@color/secondary_text"
             android:lines="1"
             android:text="Физика"/>
 
@@ -76,6 +83,7 @@
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/secondary_text"
             android:text="Д406"/>
 
     </LinearLayout>

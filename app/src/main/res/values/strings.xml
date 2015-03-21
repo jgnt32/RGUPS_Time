@@ -40,13 +40,20 @@
 	<string name="homework_delete_message">Вы действительно хотите удалить это домашнее задание?</string>
 
  	
- 	<string name="about_dialog_massage">
+ 	<string name="about_dialog_massage_1">
  	    Данное приложение было разработано Ткаченко Артёмом, 
  	    студентом группы АВМ-024, в рамках дипломной работы.\n
- 	    \n
- 	    Благодарности: Хлопину Константину, Жижанову Андрею.
  	</string>
- 	
+
+    <string name="about_dialog_massage_2">
+ 	    Благодарности:\nХлопину Константину,\nЖижанову Андрею,\nСамсонову Владимиру и\nСухоруковой Ольге.\n
+ 	</string>
+
+    <string name="about_dialog_massage_3">
+        rgups.schedule.feedback@gmail.com
+ 	</string>
+
+
  	<string name="version_caption">Расписание РГУПС v#</string>
  	
  	<string name="logout_dialog_message">
@@ -87,5 +94,7 @@
     <string name="login_app_name">РАСПИСАНИЕ \n РГУПС</string>
 
     <string name="settings_notification_switch">Уведомление в \n статус баре</string>
+    <string name="next_lesson">Следующая пара</string>
+    <string name="current_lesson">Текущая пара</string>
 
 </resources>

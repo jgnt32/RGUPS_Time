@@ -19,6 +19,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="17sp"
-        android:text="@string/about_dialog_massage" />
+        android:text="@string/about_dialog_massage_1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:text="@string/about_dialog_massage_2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="17sp"
+        android:textStyle="bold"
+
+        android:text="@string/about_dialog_massage_3" />
 
 </LinearLayout>
