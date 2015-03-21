@@ -6,7 +6,6 @@
 
     <LinearLayout
         android:layout_margin="7dp"
-        android:background="@drawable/card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -22,31 +21,15 @@
             android:text="Информатика"
             android:textColor="@color/primary_text"
 	        android:textSize="20sp"
-            android:layout_marginBottom="10dp"
 	        android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/single_lesson_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8.20 - 9.50"
+            android:textSize="19sp" />
 
-
-        <LinearLayout
-            android:gravity="center_vertical"
-            android:padding="7dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_marginRight="7dp"
-                android:src="@drawable/time"
-                android:layout_width="20dp"
-                android:layout_height="20dp" />
-
-            <TextView
-                android:id="@+id/single_lesson_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="8.20 - 9.50"
-                android:textSize="19sp" />
-
-        </LinearLayout>
 
 
 

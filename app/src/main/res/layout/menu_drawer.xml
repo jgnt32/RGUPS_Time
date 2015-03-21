@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:background="@drawable/calendar_list_selector"
+        android:background="?attr/selectableItemBackground"
         android:padding="10dp" >
 
         <ImageView
@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:background="@drawable/calendar_list_selector"
+        android:background="?attr/selectableItemBackground"
         android:padding="10dp" >
 
         <ImageView
@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:background="@drawable/calendar_list_selector"        
+        android:background="?attr/selectableItemBackground"
         android:padding="10dp" >
 
         <ImageView
@@ -89,7 +89,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:background="@drawable/calendar_list_selector"        
+        android:background="?attr/selectableItemBackground"
         android:padding="10dp" >
 
         <ImageView

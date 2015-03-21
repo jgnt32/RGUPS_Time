@@ -22,7 +22,7 @@ import ru.rgups.time.utils.PreferenceManager;
 public class SettingFragment extends BaseFragment implements OnClickListener, CompoundButton.OnCheckedChangeListener{
 	private SettingListener mListener;
 	private View mLogoutButton;
-	private Button mFullDowloadButton;
+
 	private TextView mGroupTitle;
 	private TextView mFacultetTitle;
 	private Button mAboutButton;
@@ -38,8 +38,6 @@ public class SettingFragment extends BaseFragment implements OnClickListener, Co
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.setting_fragment, null);
-		mFullDowloadButton = (Button) v.findViewById(R.id.setting_full_time_button);
-		mFullDowloadButton.setOnClickListener(this);
 		mLogoutButton = v.findViewById(R.id.setting_logout_button);
 		mLogoutButton.setOnClickListener(this);
 		mGroupTitle = (TextView) v.findViewById(R.id.setting_group_title);
@@ -63,42 +61,39 @@ public class SettingFragment extends BaseFragment implements OnClickListener, Co
 
 	@Override
 	public void onClick(View v) {
-		switch(v.getId()){
-		
-		case R.id.setting_about:
-			try {
-			
-				View view = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog, null);
-				
-				TextView version = (TextView) view.findViewById(R.id.about_dialog_version_caption);
-				String versionCaption = getResources().getString(R.string.version_caption);
-			
-				String versionInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName;
-				version.setText(versionCaption.replace("#", versionInfo));
-				DialogManager.showNeutralCustomDialog(getActivity(), view);
+		switch(v.getId()) {
 
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			break;
-		
-		case R.id.setting_logout_button:
-			DialogManager.showPositiveDialog(getActivity(), R.string.logout_dialog_message, new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					mListener.logOut();						
+            case R.id.setting_about:
+                try {
 
-				}
-			});
-			
-			break;
-			
-		case R.id.setting_full_time_button:
+                    View view = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog, null);
 
-			break;
-		}
+                    TextView version = (TextView) view.findViewById(R.id.about_dialog_version_caption);
+                    String versionCaption = getResources().getString(R.string.version_caption);
+
+                    String versionInfo = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName;
+                    version.setText(versionCaption.replace("#", versionInfo));
+                    DialogManager.showNeutralCustomDialog(getActivity(), view);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                break;
+
+            case R.id.setting_logout_button:
+                DialogManager.showPositiveDialog(getActivity(), R.string.logout_dialog_message, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mListener.logOut();
+
+                    }
+                });
+
+                break;
+        }
+
 	}
 
     @Override

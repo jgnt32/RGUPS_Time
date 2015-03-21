@@ -8,7 +8,6 @@
     android:layout_height="match_parent">
 
     <com.astuetz.PagerSlidingTabStrip
-
         android:id="@+id/single_lessons_tabs"
         app:pstsIndicatorColor="@color/accent"
         app:pstsUnderlineColor="@color/accent"

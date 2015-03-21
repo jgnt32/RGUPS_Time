@@ -11,18 +11,8 @@
         android:orientation="vertical"
         android:padding="15dp" >
 
-        <TextView
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/setting_staff"
-            android:textSize="17sp"
-            android:layout_gravity="left"
-            android:layout_marginBottom="5dp"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/primary_dark" />
+
 
         <TextView
             android:id="@+id/setting_facultet_title"
@@ -30,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:gravity="left|center_vertical"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/secondary_text"
             android:textSize="17sp" />
         <TextView
             android:id="@+id/setting_group_title"
@@ -38,18 +28,18 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:gravity="left|center_vertical"
-            android:textColor="@color/primary_text"
+            android:textColor="@color/secondary_text"
             android:textSize="17sp" />
 
         <View
             android:background="@color/primary_dark"
             android:layout_width="match_parent"
-            android:layout_height="2dp"/>
+            android:layout_height="1dp"/>
 
         <Button
             android:id="@+id/setting_about"
-            android:background="@drawable/base_selector"
-            android:textColor="@color/primary_text"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="@color/secondary_text"
             android:gravity="left|center_vertical"
             android:padding="5dp"
             android:layout_width="match_parent"
@@ -82,29 +72,8 @@
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17sp"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="left"
-            android:gravity="left"
-            android:text="Расписание" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:background="@color/primary_dark" />
 
-        <Button
-            android:id="@+id/setting_full_time_button"
-            android:background="@drawable/base_selector"
-            android:textColor="@color/primary_text"
-            android:gravity="left|center_vertical"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/setting_full_time_button" />
 
         <View
             android:layout_width="match_parent"
@@ -112,8 +81,8 @@
             android:background="@color/primary_dark" />
         <Button
             android:id="@+id/setting_logout_button"
-            android:background="@drawable/base_selector"
-            android:textColor="@color/primary_text"
+            android:background="?attr/selectableItemBackground"
+            android:textColor="@color/secondary_text"
             android:gravity="left|center_vertical"
             android:padding="5dp"
             android:layout_width="match_parent"
