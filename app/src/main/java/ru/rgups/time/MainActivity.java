@@ -61,6 +61,7 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);		
 		Crashlytics.start(this);
+        setTitle(null);
         if(mDrawer == null){
             mDrawer = MenuDrawer.attach(this, MenuDrawer.Type.BEHIND, Position.LEFT, MenuDrawer.MENU_DRAG_WINDOW);
             mDrawer.setContentView(R.layout.activity_main);

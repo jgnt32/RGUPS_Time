@@ -18,11 +18,12 @@ import ru.rgups.time.adapters.TeacherPagerAdapter;
 import ru.rgups.time.adapters.TeachersCalendarAdapter;
 import ru.rgups.time.loaders.LessonExistingVector;
 import ru.rgups.time.model.entity.StudentCalendarLessonInfo;
+import ru.rgups.time.model.entity.teachers.TeacherLessonList;
 import ru.rgups.time.model.entity.teachers.TeachersLesson;
 import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.CalendarManager;
 
-public class TeachersTimeTable extends BasePageTameTableFragment implements LoaderManager.LoaderCallbacks<StudentCalendarLessonInfo>, RequestListener<Collection<TeachersLesson>>{
+public class TeachersTimeTable extends BasePageTameTableFragment implements LoaderManager.LoaderCallbacks<StudentCalendarLessonInfo>, RequestListener<TeacherLessonList>{
 
 	public static final String TEACHERS_NAME = "teachers_name";
 	
@@ -45,7 +46,7 @@ public class TeachersTimeTable extends BasePageTameTableFragment implements Load
     @Override
     public void onResume() {
         super.onResume();
-        RestManager.getInstance().teacherLessonRequest(this, this.getActivity().getApplication(), mTeachersId);
+        RestManager.getInstance().teacherLessonRequest(this, mTeachersId);
         mProgressBar.setVisibility(View.VISIBLE);
         getLoaderManager().restartLoader(0, null, this);
         getLoaderManager().getLoader(0).forceLoad();
@@ -87,7 +88,7 @@ public class TeachersTimeTable extends BasePageTameTableFragment implements Load
     }
 
     @Override
-    public void onRequestSuccess(Collection<TeachersLesson> teachersLessons) {
+    public void onRequestSuccess(TeacherLessonList teacherLessonList) {
         mProgressBar.setVisibility(View.GONE);
 
     }

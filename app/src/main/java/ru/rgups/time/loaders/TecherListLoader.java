@@ -27,6 +27,6 @@ public class TecherListLoader extends AsyncTaskLoader<List<Teacher>> {
 
     @Override
     public List<Teacher> loadInBackground() {
-        return TeacherManager.getInstance(getContext()).getTeachers(mName);
+        return TeacherManager.getInstance().getTeachers(mName);
     }
 }

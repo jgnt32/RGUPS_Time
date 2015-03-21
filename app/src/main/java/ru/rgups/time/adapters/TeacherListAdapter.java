@@ -27,7 +27,7 @@ public class TeacherListAdapter extends BaseAdapter implements StickyListHeaders
     @Override
     public View getHeaderView(int i, View view, ViewGroup viewGroup) {
         if (view == null) {
-            view = mInflater.inflate(R.layout.group_list_divier, null);
+            view = mInflater.inflate(R.layout.group_list_divier, viewGroup, false);
         }
         final TextView text = (TextView) view.findViewById(R.id.levelTitle);
         text.setText(getItem(i).getShortName().substring(0, 1));
@@ -57,7 +57,7 @@ public class TeacherListAdapter extends BaseAdapter implements StickyListHeaders
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.simple_list_element, null);
+            convertView = mInflater.inflate(R.layout.simple_list_element, parent, false);
         }
         TextView name = (TextView) convertView.findViewById(R.id.list_element_text);
         name.setText(getItem(position).getShortName());

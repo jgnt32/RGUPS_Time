@@ -26,9 +26,19 @@ import com.octo.android.robospice.persistence.ormlite.RoboSpiceDatabaseHelper;
 
 public class RTApplication extends Application{
 
+    private static Context mContext;
+
+    public static Context getContext(){
+        return mContext;
+    }
+
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
+
+        mContext = getApplicationContext();
+
 		HelperManager.setDbPath(getApplicationContext());
 		PreferenceManager.initalize(getApplicationContext());
 		DialogManager.initInstatnce(getApplicationContext());

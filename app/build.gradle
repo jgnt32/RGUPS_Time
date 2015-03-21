@@ -30,7 +30,7 @@ android {
     defaultConfig {
         applicationId "ru.rgups.time"
         minSdkVersion 9
-        targetSdkVersion 17
+        targetSdkVersion 21
     }
 
     buildTypes {

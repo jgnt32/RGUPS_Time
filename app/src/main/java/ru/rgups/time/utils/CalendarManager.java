@@ -97,6 +97,19 @@ public class CalendarManager {
 		}
 	}
 
+    public static synchronized int getSemester(){
+        if (spotSemestr() == SEMESTR.FIRST_SEMESTR) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    public static synchronized int getYear(){
+        return Calendar.getInstance().get(Calendar.YEAR);
+    }
+
+
     public static synchronized long getDate(int dayOfSemestr){
         mSemestrCalendar.setFirstDayOfWeek(GregorianCalendar.MONDAY);
         mSemestrCalendar.setMinimalDaysInFirstWeek(4);

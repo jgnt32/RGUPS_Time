@@ -6,24 +6,25 @@ import com.octo.android.robospice.request.springandroid.SpringAndroidSpiceReques
 
 import ru.rgups.time.model.TeacherManager;
 import ru.rgups.time.model.entity.teachers.TeacherList;
+import ru.rgups.time.rest.UrlBuilder;
+import ru.rgups.time.rest.UrlConstants;
 
 /**
  * Created by jgnt32 on 22.12.2014.
  */
 public class TeacherListRequest extends SpringAndroidSpiceRequest<TeacherList> {
 
-    private String url = "http://rgups.ru/time/xml/teachers.php";
-    private Context context;
+    private String url = null;
 
-    public TeacherListRequest(Context context) {
+    public TeacherListRequest() {
         super(TeacherList.class);
-        this.context = context;
+        url = UrlBuilder.make(UrlConstants.TEACHERS, null);
     }
 
     @Override
     public TeacherList loadDataFromNetwork() throws Exception {
         TeacherList result = getRestTemplate().getForObject( url, TeacherList.class);
-        TeacherManager.getInstance(context).saveTeachers(result.getTeachers());
+        TeacherManager.getInstance().saveTeachers(result.getTeachers());
         return result;
     }
 }

@@ -12,9 +12,20 @@
     <color name="alpha_black">#33000000</color>
 
     <color name="bg_grey">#E5E5E5</color>
-	<color name="red">#FF0000</color>
 	<color name="lesson_free">#808080</color>
 	<color name="drawer_background">#303030</color>
 	<color name="lesson_list_backgroud">#D8D8D8</color>
 	<color name="rt_selector_pressed">#2ECC71CC</color>
+
+    <color name="colorPrimary">#2980B9</color>
+    <color name="colorPrimaryDark">#216189</color>
+    <color name="white_70_alpha">#AAFFFFFF</color>
+    <color name="windowBackground">#182D41</color>
+    <color name="red">#E74C3C</color>
+    <color name="red_dark">#B64133</color>
+    <color name="red_pressed">#C65E53</color>
+    <color name="highlight_primary">#34495E</color>
+    <color name="view_pager_bg">#2980B9</color>
+    <color name="green_unpressed">#2ECC71</color>
+    <color name="green_pressed">#29A95A</color>
 </resources>

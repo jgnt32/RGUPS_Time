@@ -56,12 +56,12 @@ public class RestManager {
         }
 	}
 	
-	public void teacherListRequest(RequestListener<TeacherList> listener, Context context){
-		this.getSpiceManager().execute(new TeacherListRequest(context), listener);
+	public void teacherListRequest(RequestListener<TeacherList> listener){
+		this.getSpiceManager().execute(new TeacherListRequest(), listener);
 	}
 
-    public void teacherLessonRequest(RequestListener<TeacherLessonList> listener, Context context, long teacherId){
-        this.getSpiceManager().execute(new TeacherLessonRequest(context, teacherId), listener);
+    public void teacherLessonRequest(RequestListener<TeacherLessonList> listener, long teacherId){
+        this.getSpiceManager().execute(new TeacherLessonRequest(teacherId), listener);
     }
 
 	public void exucuteFacultetRequest(RequestListener<Boolean> listener){

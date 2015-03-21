@@ -10,6 +10,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
+import ru.rgups.time.RTApplication;
 import ru.rgups.time.model.entity.teachers.Teacher;
 import ru.rgups.time.model.entity.teachers.TeachersLesson;
 import ru.rgups.time.utils.CalendarManager;
@@ -31,9 +32,9 @@ public class TeacherManager {
         this.context = context;
     }
 
-    public static TeacherManager getInstance(Context context) {
+    public static TeacherManager getInstance() {
         if (mInstance == null) {
-            mInstance = new TeacherManager(context);
+            mInstance = new TeacherManager(RTApplication.getContext());
         }
         return mInstance;
     }

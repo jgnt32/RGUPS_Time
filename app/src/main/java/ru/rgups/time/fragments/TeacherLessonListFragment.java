@@ -29,7 +29,7 @@ public class TeacherLessonListFragment extends LessonListFragment implements Loa
 	public void onCreate(Bundle savedInstanceState) {
 		mDayNumber = getArguments().getInt(DAY_ARGS);
         mTeacherId = getArguments().getLong(TEACHER_ARGS);
-        RealmResults<TeachersLesson> teachersLessons = TeacherManager.getInstance(getActivity()).getTeachersLessons(mTeacherId, mDayNumber);
+        RealmResults<TeachersLesson> teachersLessons = TeacherManager.getInstance().getTeachersLessons(mTeacherId, mDayNumber);
         mAdapter = new TeacherLessonListAdapter(getActivity(), teachersLessons, false);
         super.onCreate(savedInstanceState);
 		
@@ -71,7 +71,7 @@ public class TeacherLessonListFragment extends LessonListFragment implements Loa
         if (mListView.getAdapter() == null) {
         }*/
 
-        RealmResults<TeachersLesson> teachersLessons = TeacherManager.getInstance(getActivity()).getTeachersLessons(mTeacherId, mDayNumber);
+        RealmResults<TeachersLesson> teachersLessons = TeacherManager.getInstance().getTeachersLessons(mTeacherId, mDayNumber);
         mAdapter.updateRealmResults(teachersLessons);
     }
 
