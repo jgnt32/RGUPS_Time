@@ -2,23 +2,21 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res/ru.rgups.time" >
     
-    <item android:state_pressed="true" android:drawable="@color/theme_green" />
+    <item android:state_pressed="true" android:drawable="@color/accent" />
     
     <item android:state_enabled="true"
-     	android:state_focused="true" android:drawable="@color/theme_green" />
+     	android:state_focused="true" android:drawable="@color/accent" />
     
     <item android:state_enabled="true"
-     	android:state_selected="true" android:drawable="@color/theme_green" />
+     	android:state_selected="true" android:drawable="@color/accent" />
     
-    <item android:state_activated="true" android:drawable="@color/theme_green"></item>
+    <item android:state_activated="true" android:drawable="@color/accent"></item>
     
-    <item android:state_checked="true" android:drawable="@color/theme_green"></item>
+    <item android:state_checked="true" android:drawable="@color/accent"></item>
     
     <item android:state_checked="false" android:drawable="@android:color/transparent"></item>
     
     <item android:state_activated="false" android:drawable="@android:color/transparent"></item>
-    
-    <item app:lesson_free_state ="true" android:drawable="@color/red"></item>
-    
+
     <item android:drawable="@android:color/transparent" />
 </selector>

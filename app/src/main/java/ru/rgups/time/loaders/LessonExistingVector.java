@@ -13,8 +13,15 @@ import ru.rgups.time.model.entity.StudentCalendarLessonInfo;
  */
 public class LessonExistingVector extends AsyncTaskLoader<StudentCalendarLessonInfo> {
 
+
+
     private long mTeacherId = -1;
     private ContentObserver mObserver = new ForceLoadContentObserver();
+
+    public LessonExistingVector(Context context){
+        this(context, -1);
+
+    }
 
 
     public LessonExistingVector(Context context, long teacherId) {

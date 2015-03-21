@@ -2,7 +2,6 @@
 
 <RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="60dp"
     android:layout_height="60dp"
  	android:background="@drawable/calendar_list_selector"
@@ -10,32 +9,32 @@
     
     <View
         android:id="@+id/calendar_left_indicator"
-        android:layout_width="2dp"
+        android:layout_width="3px"
         android:layout_height="60dp"
         android:layout_alignParentLeft="true"
-        android:background="@color/theme_green"
+        android:background="@color/accent"
         android:visibility="invisible" />
 
      <View
          android:id="@+id/calendar_right_indicator"
-         android:layout_width="2dp"
+         android:layout_width="3px"
          android:layout_height="60dp"
          android:layout_alignParentRight="true"
-         android:background="@color/theme_green"
+         android:background="@color/accent"
          android:visibility="invisible" />
      
       <View
           android:id="@+id/calendar_top_indicator"
           android:layout_width="60dp"
-          android:layout_height="5dp"
+          android:layout_height="6px"
           android:layout_alignParentTop="true"
-          android:background="@color/theme_green" />
+          android:background="@color/accent" />
 
       <View 
         android:id="@+id/calendar_bottom_indicator"          
         android:layout_width="60dp"
-        android:layout_height="5dp"
-        android:background="@color/theme_green"
+        android:layout_height="6px"
+        android:background="@color/accent"
         android:layout_alignParentBottom="true"/>      
       
     <TextView
@@ -55,9 +54,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/calendar_bottom_indicator"
         android:layout_centerHorizontal="true"
-
+        android:layout_marginBottom="5dp"
         android:text="ПН"
-        android:textColor="@color/theme_blue"
+        android:textColor="@color/white"
         android:textSize="10sp" />
 
     

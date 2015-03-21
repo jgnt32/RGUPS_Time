@@ -50,6 +50,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'io.realm:realm-android:0.76.0'
     compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.android.support:cardview-v7:21.0.+'
+
 
     compile('de.keyboardsurfer.android.widget:crouton:1.8.4:@aar') {
         // exclusion is not neccessary, but generally a good idea.

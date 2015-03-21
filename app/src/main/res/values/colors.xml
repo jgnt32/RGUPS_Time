@@ -1,31 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<color name="white">#FFFFFF</color>    
-	<color name="theme_green">#2ECC71</color>
-    <color name="theme_green_with_alpha">#AA2ECC71</color>
 
-
-	<color name="theme_blue">#34495E</color>
-
-    <color name="theme_blue_with_alpha">#7734495E</color>
-
-    <color name="alpha_black">#33000000</color>
 
     <color name="bg_grey">#E5E5E5</color>
 	<color name="lesson_free">#808080</color>
-	<color name="drawer_background">#303030</color>
-	<color name="lesson_list_backgroud">#D8D8D8</color>
-	<color name="rt_selector_pressed">#2ECC71CC</color>
 
-    <color name="colorPrimary">#2980B9</color>
-    <color name="colorPrimaryDark">#216189</color>
-    <color name="white_70_alpha">#AAFFFFFF</color>
-    <color name="windowBackground">#182D41</color>
-    <color name="red">#E74C3C</color>
-    <color name="red_dark">#B64133</color>
-    <color name="red_pressed">#C65E53</color>
-    <color name="highlight_primary">#34495E</color>
-    <color name="view_pager_bg">#2980B9</color>
-    <color name="green_unpressed">#2ECC71</color>
-    <color name="green_pressed">#29A95A</color>
+    <color name="primary">#03A9F4</color>
+    <color name="primary_dark">#0288D1</color>
+    <color name="primary_light">#B3E5FC</color>
+    <color name="accent">#8BC34A</color>
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="icons">#FFFFFF</color>
+    <color name="divider">#B6B6B6</color>
+
 </resources>

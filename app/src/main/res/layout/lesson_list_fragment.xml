@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lesson_list_backgroud"
+    android:background="@color/bg_grey"
     android:orientation="vertical" >
 
 
@@ -27,14 +27,13 @@
             android:layout_width="wrap_content"/>
 
         <RelativeLayout
+            android:background="@color/bg_grey"
             android:id="@+id/lesson_list_empty_progress_view"
-            android:background="@color/lesson_list_backgroud"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ProgressBar
                 android:layout_centerInParent="true"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"/>

@@ -47,7 +47,7 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 	public BaseCalendarAdapter(Context context){
 		mContext = context;
 		mLessonFreeColor = context.getResources().getColor(R.color.lesson_free);
-		mBlueColor = context.getResources().getColor(R.color.theme_blue);
+		mBlueColor = context.getResources().getColor(R.color.accent);
 
 		mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -90,10 +90,10 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
         if(isLessonFree(position)){
 
             mView.setBackgroundResource(R.drawable.calendar_list_selector);
-            mHolder.getDayOfWeek().setTextColor(mBlueColor);
+         //   mHolder.getDayOfWeek().setTextColor(mBlueColor);
         } else {
             mView.setBackgroundResource(R.drawable.lesson_free_calendar_list_selector);
-            mHolder.getDayOfWeek().setTextColor(mLessonFreeColor);
+        //    mHolder.getDayOfWeek().setTextColor(mLessonFreeColor);
 
         }
 		  mHolder.text.setText(DateFormat.format("d",CalendarManager.getDate(position)));

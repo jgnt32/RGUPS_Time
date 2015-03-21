@@ -29,7 +29,7 @@ public class StudentTimeTableFragment extends BasePageTameTableFragment implemen
 
     @Override
     public android.support.v4.content.Loader<StudentCalendarLessonInfo> onCreateLoader(int id, Bundle args) {
-        return new LessonExistingVector(getActivity(), 0);
+        return new LessonExistingVector(getActivity());
     }
 
     @Override
@@ -43,8 +43,6 @@ public class StudentTimeTableFragment extends BasePageTameTableFragment implemen
     public void onLoaderReset(android.support.v4.content.Loader<StudentCalendarLessonInfo> loader) {
 
     }
-
-
 
 
 	@Override

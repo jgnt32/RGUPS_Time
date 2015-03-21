@@ -20,15 +20,11 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
             android:text="Информатика"
-            android:textColor="@color/theme_blue"
+            android:textColor="@color/primary_text"
 	        android:textSize="20sp"
             android:layout_marginBottom="10dp"
 	        android:textStyle="bold" />
 
-        <View
-            android:background="@color/theme_blue_with_alpha"
-            android:layout_width="match_parent"
-            android:layout_height="1px"/>
 
 
         <LinearLayout
@@ -52,11 +48,6 @@
 
         </LinearLayout>
 
-        <View
-            android:layout_marginLeft="45dp"
-            android:background="@color/theme_blue_with_alpha"
-            android:layout_width="match_parent"
-            android:layout_height="1px"/>
 
 
         <LinearLayout
@@ -78,11 +69,6 @@
                 android:text="Д410"
                 android:textSize="20sp" />
         </LinearLayout>
-        <View
-            android:layout_marginLeft="45dp"
-            android:background="@color/theme_blue_with_alpha"
-            android:layout_width="match_parent"
-            android:layout_height="1px"/>
 
         <LinearLayout
             android:padding="7dp"
@@ -104,11 +90,6 @@
                 android:textSize="20sp" />
         </LinearLayout>
 
-        <View
-            android:layout_marginLeft="45dp"
-            android:background="@color/theme_blue_with_alpha"
-            android:layout_width="match_parent"
-            android:layout_height="1px"/>
 
 
         <LinearLayout

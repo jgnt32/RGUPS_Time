@@ -10,8 +10,8 @@
     <com.astuetz.PagerSlidingTabStrip
 
         android:id="@+id/single_lessons_tabs"
-        app:pstsIndicatorColor="@color/theme_green"
-        app:pstsUnderlineColor="@color/theme_green"
+        app:pstsIndicatorColor="@color/accent"
+        app:pstsUnderlineColor="@color/accent"
         android:layout_width="match_parent"
         android:layout_height="48dip" />
 

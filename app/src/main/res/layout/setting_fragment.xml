@@ -22,7 +22,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/theme_blue_with_alpha" />
+            android:background="@color/primary_dark" />
 
         <TextView
             android:id="@+id/setting_facultet_title"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:gravity="left|center_vertical"
-            android:textColor="@color/theme_blue"
+            android:textColor="@color/primary_text"
             android:textSize="17sp" />
         <TextView
             android:id="@+id/setting_group_title"
@@ -38,18 +38,18 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:gravity="left|center_vertical"
-            android:textColor="@color/theme_blue"
+            android:textColor="@color/primary_text"
             android:textSize="17sp" />
 
         <View
-            android:background="@color/theme_blue_with_alpha"
+            android:background="@color/primary_dark"
             android:layout_width="match_parent"
             android:layout_height="2dp"/>
 
         <Button
             android:id="@+id/setting_about"
             android:background="@drawable/base_selector"
-            android:textColor="@color/theme_blue"
+            android:textColor="@color/primary_text"
             android:gravity="left|center_vertical"
             android:padding="5dp"
             android:layout_width="match_parent"
@@ -59,7 +59,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/theme_blue_with_alpha" />
+            android:background="@color/primary_dark" />
 
         <LinearLayout
             android:padding="5dp"
@@ -94,12 +94,12 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/theme_blue_with_alpha" />
+            android:background="@color/primary_dark" />
 
         <Button
             android:id="@+id/setting_full_time_button"
             android:background="@drawable/base_selector"
-            android:textColor="@color/theme_blue"
+            android:textColor="@color/primary_text"
             android:gravity="left|center_vertical"
             android:padding="5dp"
             android:layout_width="match_parent"
@@ -109,11 +109,11 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/theme_blue_with_alpha" />
+            android:background="@color/primary_dark" />
         <Button
             android:id="@+id/setting_logout_button"
             android:background="@drawable/base_selector"
-            android:textColor="@color/theme_blue"
+            android:textColor="@color/primary_text"
             android:gravity="left|center_vertical"
             android:padding="5dp"
             android:layout_width="match_parent"
