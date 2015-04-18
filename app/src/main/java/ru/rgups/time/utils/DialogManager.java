@@ -1,11 +1,12 @@
 package ru.rgups.time.utils;
 
-import ru.rgups.time.R;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface.OnClickListener;
 import android.view.View;
+
+import ru.rgups.time.R;
 
 public class DialogManager {
 	

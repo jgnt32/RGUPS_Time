@@ -1,15 +1,14 @@
 package ru.rgups.time.spice;
 
+import android.util.Log;
+
+import com.octo.android.robospice.request.springandroid.SpringAndroidSpiceRequest;
+
 import org.springframework.web.client.RestClientException;
 
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.utils.PreferenceManager;
-
-import android.support.v4.util.DebugUtils;
-import android.util.Log;
-
-import com.octo.android.robospice.request.springandroid.SpringAndroidSpiceRequest;
 
 public class TimeTableRequest extends SpringAndroidSpiceRequest< LessonList > {
 

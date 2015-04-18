@@ -1,19 +1,5 @@
 package ru.rgups.time.fragments;
 
-import java.util.ArrayList;
-
-import ru.rgups.time.BaseFragment;
-import ru.rgups.time.R;
-import ru.rgups.time.adapters.GroupListAdapter;
-import ru.rgups.time.interfaces.AuthListener;
-import ru.rgups.time.loaders.GroupListLoader;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.entity.Group;
-import ru.rgups.time.model.entity.GroupList;
-import ru.rgups.time.rest.RestManager;
-import ru.rgups.time.spice.GroupListRequest;
-import ru.rgups.time.utils.PreferenceManager;
-import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
@@ -24,10 +10,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
+import java.util.ArrayList;
+
+import ru.rgups.time.BaseFragment;
+import ru.rgups.time.R;
+import ru.rgups.time.adapters.GroupListAdapter;
+import ru.rgups.time.interfaces.AuthListener;
+import ru.rgups.time.loaders.GroupListLoader;
+import ru.rgups.time.model.entity.Group;
+import ru.rgups.time.rest.RestManager;
+import ru.rgups.time.utils.PreferenceManager;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 
 

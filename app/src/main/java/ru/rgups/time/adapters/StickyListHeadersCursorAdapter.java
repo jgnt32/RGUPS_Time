@@ -1,11 +1,12 @@
 package ru.rgups.time.adapters;
 
-import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+
+import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 public abstract class StickyListHeadersCursorAdapter extends CursorAdapter implements StickyListHeadersAdapter{
 

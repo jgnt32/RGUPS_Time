@@ -1,10 +1,6 @@
 package ru.rgups.time.model.entity.teachers;
 
-import com.google.gson.Gson;
-
 import org.simpleframework.xml.Element;
-
-import java.util.ArrayList;
 
 import io.realm.RealmObject;
 

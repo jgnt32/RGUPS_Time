@@ -1,7 +1,5 @@
 package ru.rgups.time.spice;
 
-import android.content.Context;
-
 import com.octo.android.robospice.request.springandroid.SpringAndroidSpiceRequest;
 
 import java.util.HashMap;

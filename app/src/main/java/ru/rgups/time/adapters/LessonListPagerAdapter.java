@@ -1,11 +1,11 @@
 package ru.rgups.time.adapters;
 
-import ru.rgups.time.fragments.StudentLessonFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
+
+import ru.rgups.time.fragments.StudentLessonFragment;
 
 
 public class LessonListPagerAdapter extends FragmentPagerAdapter{

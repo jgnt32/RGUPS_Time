@@ -1,7 +1,6 @@
 package ru.rgups.time.loaders;
 
 import android.content.Context;
-import android.database.ContentObservable;
 import android.database.ContentObserver;
 import android.support.v4.content.AsyncTaskLoader;
 

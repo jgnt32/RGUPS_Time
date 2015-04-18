@@ -1,12 +1,5 @@
 package ru.rgups.time.adapters;
 
-import ru.rgups.time.R;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.HomeWork;
-import ru.rgups.time.model.entity.LessonInformation;
-import ru.rgups.time.utils.CalendarManager;
-import ru.rgups.time.utils.Slipper;
-
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Build;
@@ -14,7 +7,6 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,6 +15,13 @@ import android.widget.ToggleButton;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import java.util.ArrayList;
+
+import ru.rgups.time.R;
+import ru.rgups.time.model.DataManager;
+import ru.rgups.time.model.HomeWork;
+import ru.rgups.time.model.entity.LessonInformation;
+import ru.rgups.time.utils.CalendarManager;
+import ru.rgups.time.utils.Slipper;
 
 public class HomeWorkCursorAdapter extends StickyListHeadersCursorAdapter implements CompoundButton.OnCheckedChangeListener{
 

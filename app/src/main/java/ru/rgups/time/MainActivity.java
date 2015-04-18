@@ -23,6 +23,7 @@ import net.simonvt.menudrawer.MenuDrawer;
 import net.simonvt.menudrawer.Position;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
+import io.fabric.sdk.android.Fabric;
 import ru.rgups.time.activities.HomeWorkActivity;
 import ru.rgups.time.adapters.DrawerListAdapter;
 import ru.rgups.time.fragments.ClapFragment;
@@ -59,8 +60,9 @@ public class MainActivity extends BaseDrawerActivity implements  SettingListener
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);		
-		Crashlytics.start(this);
+		super.onCreate(savedInstanceState);
+		Fabric.with(this, new Crashlytics());
+
         setTitle(null);
         if(mDrawer == null){
             mDrawer = MenuDrawer.attach(this, MenuDrawer.Type.BEHIND, Position.LEFT, MenuDrawer.MENU_DRAG_WINDOW);

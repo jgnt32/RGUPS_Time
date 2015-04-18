@@ -1,9 +1,9 @@
 package ru.rgups.time.model.entity;
 
-import org.simpleframework.xml.Element;
-
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import org.simpleframework.xml.Element;
 
 @DatabaseTable(tableName = "lesson_information_table")
 public class LessonInformation {

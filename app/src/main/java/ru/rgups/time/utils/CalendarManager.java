@@ -1,12 +1,10 @@
 package ru.rgups.time.utils;
 
+import android.os.Build;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Locale;
-
-import android.os.Build;
-import android.text.format.DateFormat;
 
 public class CalendarManager {
 

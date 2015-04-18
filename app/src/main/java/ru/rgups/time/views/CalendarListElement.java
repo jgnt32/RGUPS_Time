@@ -1,9 +1,10 @@
 package ru.rgups.time.views;
 
-import ru.rgups.time.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
+
+import ru.rgups.time.R;
 
 public class CalendarListElement extends RelativeLayout{
 

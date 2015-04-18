@@ -12,7 +12,7 @@
                         android:bottomLeftRadius="0dp"
                         android:topRightRadius="2dp"
                         android:bottomRightRadius="2dp"/>
-                    <solid android:color="@color/primary" />
+                    <solid android:color="@color/accent" />
 
 
 
@@ -42,7 +42,7 @@
                         android:bottomLeftRadius="0dp"
                         android:topRightRadius="2dp"
                         android:bottomRightRadius="2dp"/>
-                    <solid android:color="@color/accent" />
+                    <solid android:color="@color/lesson_free" />
 
 
 

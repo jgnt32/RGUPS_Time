@@ -1,7 +1,5 @@
 package ru.rgups.time.adapters;
 
-import ru.rgups.time.R;
-import ru.rgups.time.model.entity.Facultet;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
@@ -9,6 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import ru.rgups.time.R;
+import ru.rgups.time.model.entity.Facultet;
 
 public class FacultetListAdapter extends CursorAdapter{
 

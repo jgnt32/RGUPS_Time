@@ -9,8 +9,6 @@ import android.view.View;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-import java.util.Collection;
-
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.BaseCalendarAdapter;
 import ru.rgups.time.adapters.LessonListPagerAdapter;
@@ -19,7 +17,6 @@ import ru.rgups.time.adapters.TeachersCalendarAdapter;
 import ru.rgups.time.loaders.LessonExistingVector;
 import ru.rgups.time.model.entity.StudentCalendarLessonInfo;
 import ru.rgups.time.model.entity.teachers.TeacherLessonList;
-import ru.rgups.time.model.entity.teachers.TeachersLesson;
 import ru.rgups.time.rest.RestManager;
 import ru.rgups.time.utils.CalendarManager;
 

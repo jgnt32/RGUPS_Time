@@ -1,13 +1,5 @@
 package ru.rgups.time.fragments;
 
-import ru.rgups.time.BaseDialogFragment;
-import ru.rgups.time.R;
-import ru.rgups.time.adapters.FacultetListAdapter;
-import ru.rgups.time.interfaces.AuthListener;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.entity.FacultetList;
-import ru.rgups.time.spice.FacultetListRequest;
-import ru.rgups.time.utils.PreferenceManager;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -19,6 +11,15 @@ import android.widget.ListView;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
+
+import ru.rgups.time.BaseDialogFragment;
+import ru.rgups.time.R;
+import ru.rgups.time.adapters.FacultetListAdapter;
+import ru.rgups.time.interfaces.AuthListener;
+import ru.rgups.time.model.DataManager;
+import ru.rgups.time.model.entity.FacultetList;
+import ru.rgups.time.spice.FacultetListRequest;
+import ru.rgups.time.utils.PreferenceManager;
 
 public class FacultetListFragment extends BaseDialogFragment implements OnItemClickListener{
 	private ListView mListView;

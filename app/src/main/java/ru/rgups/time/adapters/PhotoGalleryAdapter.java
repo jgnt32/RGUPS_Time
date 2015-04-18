@@ -1,8 +1,5 @@
 package ru.rgups.time.adapters;
 
-import java.util.ArrayList;
-
-import ru.rgups.time.R;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -10,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+
+import java.util.ArrayList;
+
+import ru.rgups.time.R;
 
 public class PhotoGalleryAdapter extends BaseAdapter{
 	private View mView;

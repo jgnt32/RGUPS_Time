@@ -1,5 +1,12 @@
 package ru.rgups.time.adapters;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,12 +14,6 @@ import java.util.Comparator;
 import ru.rgups.time.R;
 import ru.rgups.time.model.entity.Group;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
 
 public class GroupListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
 	private ArrayList<Group> mGroupList;

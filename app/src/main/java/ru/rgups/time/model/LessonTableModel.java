@@ -1,12 +1,12 @@
 package ru.rgups.time.model;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.util.ArrayList;
 
 import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.utils.PreferenceManager;
-
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
 @DatabaseTable(tableName = "lesson_table")
 public class LessonTableModel {

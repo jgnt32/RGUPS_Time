@@ -1,10 +1,10 @@
 package ru.rgups.time.model.entity;
 
-import org.simpleframework.xml.Element;
-import org.simpleframework.xml.Root;
-
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+
+import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
 @Root(name = "blok")
 @DatabaseTable(tableName = "group_table")

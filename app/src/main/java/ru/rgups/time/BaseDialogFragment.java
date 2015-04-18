@@ -1,9 +1,10 @@
 package ru.rgups.time;
 
-import ru.rgups.time.spice.SampleSpiceService;
 import android.support.v4.app.DialogFragment;
 
 import com.octo.android.robospice.SpiceManager;
+
+import ru.rgups.time.spice.SampleSpiceService;
 
 public class BaseDialogFragment extends DialogFragment{
     private SpiceManager spiceManager = new SpiceManager( SampleSpiceService.class );

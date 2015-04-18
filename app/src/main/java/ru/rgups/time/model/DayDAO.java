@@ -1,11 +1,11 @@
 package ru.rgups.time.model;
 
+import com.j256.ormlite.dao.BaseDaoImpl;
+import com.j256.ormlite.support.ConnectionSource;
+
 import java.sql.SQLException;
 
 import ru.rgups.time.model.entity.Day;
-
-import com.j256.ormlite.dao.BaseDaoImpl;
-import com.j256.ormlite.support.ConnectionSource;
 
 public class DayDAO extends BaseDaoImpl<Day, Integer>{
 

@@ -1,11 +1,5 @@
 package ru.rgups.time.fragments;
 
-import ru.rgups.time.R;
-import ru.rgups.time.interfaces.LessonListener;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.LessonListElement;
-import ru.rgups.time.model.entity.LessonInformation;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import ru.rgups.time.R;
+import ru.rgups.time.interfaces.LessonListener;
+import ru.rgups.time.model.DataManager;
+import ru.rgups.time.model.LessonListElement;
+import ru.rgups.time.model.entity.LessonInformation;
 
 public class SingleLessonFragment extends Fragment{
 	

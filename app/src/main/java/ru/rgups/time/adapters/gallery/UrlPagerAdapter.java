@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-import ru.rgups.time.adapters.gallery.BasePagerAdapter;
 import ru.rgups.time.views.touchview.UrlTouchImageView;
 
 

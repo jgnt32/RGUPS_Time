@@ -1,28 +1,10 @@
 package ru.rgups.time.fragments;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import ru.rgups.time.BaseFragment;
-import ru.rgups.time.R;
-import ru.rgups.time.adapters.HomeWorkCursorAdapter;
-import ru.rgups.time.adapters.HomeWorkListAdapter;
-import ru.rgups.time.interfaces.LessonListener;
-import ru.rgups.time.loaders.HomeWorkCursorLoader;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.HomeWork;
-import ru.rgups.time.rest.ApigeeManager;
-import ru.rgups.time.rest.RestManager;
-import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
-
 import android.app.Activity;
 import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v4.view.MenuCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -33,8 +15,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.Spinner;
+
+import ru.rgups.time.BaseFragment;
+import ru.rgups.time.R;
+import ru.rgups.time.adapters.HomeWorkCursorAdapter;
+import ru.rgups.time.interfaces.LessonListener;
+import ru.rgups.time.loaders.HomeWorkCursorLoader;
+import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 
 public class HomeWorkListFragment extends BaseFragment implements OnItemClickListener,

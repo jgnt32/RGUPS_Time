@@ -1,21 +1,5 @@
 package ru.rgups.time.fragments;
 
-import it.sephiroth.android.library.widget.AbsHListView;
-import it.sephiroth.android.library.widget.AbsHListView.OnScrollListener;
-import it.sephiroth.android.library.widget.AdapterView;
-import it.sephiroth.android.library.widget.AdapterView.OnItemClickListener;
-import it.sephiroth.android.library.widget.HListView;
-
-import java.lang.reflect.Field;
-
-import ru.rgups.time.BaseFragment;
-import ru.rgups.time.R;
-import ru.rgups.time.adapters.BaseCalendarAdapter;
-import ru.rgups.time.adapters.LessonListPagerAdapter;
-import ru.rgups.time.datamanagers.LessonManager;
-import ru.rgups.time.interfaces.LessonListener;
-import ru.rgups.time.utils.CalendarManager;
-import ru.rgups.time.views.CalendarHint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -26,7 +10,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+
+import java.lang.reflect.Field;
+
+import it.sephiroth.android.library.widget.AbsHListView;
+import it.sephiroth.android.library.widget.AdapterView;
+import it.sephiroth.android.library.widget.AdapterView.OnItemClickListener;
+import it.sephiroth.android.library.widget.HListView;
+import ru.rgups.time.BaseFragment;
+import ru.rgups.time.R;
+import ru.rgups.time.adapters.BaseCalendarAdapter;
+import ru.rgups.time.adapters.LessonListPagerAdapter;
+import ru.rgups.time.interfaces.LessonListener;
+import ru.rgups.time.utils.CalendarManager;
+import ru.rgups.time.views.CalendarHint;
 
 public abstract class BasePageTameTableFragment extends BaseFragment implements it.sephiroth.android.library.widget.AbsHListView.OnScrollListener,
 OnItemClickListener, android.widget.AdapterView.OnItemClickListener, ViewPager.OnPageChangeListener{

@@ -1,13 +1,13 @@
 package ru.rgups.time.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @DatabaseTable(tableName = "home_work_table")

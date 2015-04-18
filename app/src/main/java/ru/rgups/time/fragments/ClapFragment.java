@@ -1,10 +1,12 @@
 package ru.rgups.time.fragments;
-import ru.rgups.time.R;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import ru.rgups.time.R;
 
 
 public class ClapFragment extends Fragment{

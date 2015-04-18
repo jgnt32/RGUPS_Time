@@ -1,9 +1,10 @@
 package ru.rgups.time;
 
-import ru.rgups.time.spice.SampleSpiceService;
 import android.support.v7.app.ActionBarActivity;
 
 import com.octo.android.robospice.SpiceManager;
+
+import ru.rgups.time.spice.SampleSpiceService;
 
 public class BaseDrawerActivity extends ActionBarActivity{
 

@@ -1,8 +1,13 @@
 package ru.rgups.time.spice;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import android.app.Application;
+import android.app.Notification;
+import android.content.Intent;
+
+import com.octo.android.robospice.SpringAndroidSpiceService;
+import com.octo.android.robospice.persistence.CacheManager;
+import com.octo.android.robospice.persistence.ormlite.InDatabaseObjectPersisterFactory;
+import com.octo.android.robospice.persistence.ormlite.RoboSpiceDatabaseHelper;
 
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -11,7 +16,9 @@ import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.xml.SimpleXmlHttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import ru.rgups.time.R;
+import java.util.ArrayList;
+import java.util.List;
+
 import ru.rgups.time.model.HelperManager;
 import ru.rgups.time.model.entity.Day;
 import ru.rgups.time.model.entity.DoubleLine;
@@ -21,16 +28,6 @@ import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
-import android.app.Application;
-import android.app.Notification;
-import android.content.Intent;
-
-import com.octo.android.robospice.SpringAndroidSpiceService;
-import com.octo.android.robospice.persistence.CacheManager;
-import com.octo.android.robospice.persistence.ormlite.InDatabaseObjectPersisterFactory;
-import com.octo.android.robospice.persistence.ormlite.RoboSpiceDatabaseHelper;
-import com.octo.android.robospice.request.CachedSpiceRequest;
-import com.octo.android.robospice.request.listener.RequestListener;
 
 /**
  * Simple service

@@ -1,12 +1,5 @@
 package ru.rgups.time.fragments;
 
-import ru.rgups.time.adapters.LessonAdapter;
-import ru.rgups.time.datamanagers.LessonManager;
-import ru.rgups.time.loaders.StudentsLessonLoader;
-import ru.rgups.time.model.LessonListElement;
-import ru.rgups.time.utils.CalendarManager;
-
-import android.content.Loader;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.view.View;
@@ -14,6 +7,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import ru.rgups.time.adapters.LessonAdapter;
+import ru.rgups.time.loaders.StudentsLessonLoader;
+import ru.rgups.time.model.LessonListElement;
+import ru.rgups.time.utils.CalendarManager;
 
 public class StudentLessonFragment extends LessonListFragment implements LoaderManager.LoaderCallbacks<ArrayList<LessonListElement>> {
 

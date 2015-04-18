@@ -1,11 +1,12 @@
 package ru.rgups.time.model;
 
-import java.sql.SQLException;
-
-import ru.rgups.time.model.entity.Day;
 import android.content.Context;
 
 import com.octo.android.robospice.persistence.ormlite.RoboSpiceDatabaseHelper;
+
+import java.sql.SQLException;
+
+import ru.rgups.time.model.entity.Day;
 
 public class HelperManager {
 	public static final String DB_NAME = "rgups_time_database.db";

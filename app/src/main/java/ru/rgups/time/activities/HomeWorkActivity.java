@@ -1,12 +1,13 @@
 package ru.rgups.time.activities;
 
-import ru.rgups.time.R;
-import ru.rgups.time.fragments.HomeWorkEditFragment;
-import ru.rgups.time.interfaces.HomeWorkListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
+
+import ru.rgups.time.R;
+import ru.rgups.time.fragments.HomeWorkEditFragment;
+import ru.rgups.time.interfaces.HomeWorkListener;
 
 public class HomeWorkActivity extends ActionBarActivity implements HomeWorkListener{
 

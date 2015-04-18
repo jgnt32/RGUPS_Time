@@ -19,7 +19,6 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 
-import io.realm.Realm;
 import ru.rgups.time.fragments.HomeWorkListFragment;
 import ru.rgups.time.model.entity.Day;
 import ru.rgups.time.model.entity.DoubleLine;
@@ -30,7 +29,6 @@ import ru.rgups.time.model.entity.LessonInformation;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.model.entity.OverLine;
 import ru.rgups.time.model.entity.UnderLine;
-import ru.rgups.time.model.entity.teachers.Teacher;
 import ru.rgups.time.utils.CalendarManager;
 import ru.rgups.time.utils.NotificationManager;
 import ru.rgups.time.utils.PreferenceManager;

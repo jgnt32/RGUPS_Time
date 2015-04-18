@@ -3,6 +3,7 @@ package ru.rgups.time.model.entity.teachers;
 import org.simpleframework.xml.Element;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Ignore;
 import io.realm.annotations.Index;
 
 /**
@@ -10,6 +11,11 @@ import io.realm.annotations.Index;
  */
 
 public class Teacher extends RealmObject {
+
+
+    @Ignore public static final String ID = "id";
+    @Ignore public static final String NAME_SHORT = "shortName";
+    @Ignore public static final String NAME_FULL = "fullName";
 
     @Element(name = "id")
     private long id;

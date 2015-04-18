@@ -3,11 +3,8 @@ package ru.rgups.time.fragments;
 import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,22 +15,20 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.FilterQueryProvider;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import io.realm.Realm;
+import io.realm.RealmResults;
 import ru.rgups.time.BaseFragment;
 import ru.rgups.time.R;
 import ru.rgups.time.adapters.TeacherListAdapter;
 import ru.rgups.time.interfaces.LessonListener;
 import ru.rgups.time.loaders.RTCursorLoader;
-import ru.rgups.time.loaders.TecherListLoader;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.entity.teachers.Teacher;
 import ru.rgups.time.rest.RestManager;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
-public class TeachersListFragment extends BaseFragment implements OnItemClickListener, LoaderCallbacks<List<Teacher>>,
-																SearchView.OnQueryTextListener, FilterQueryProvider, MenuItemCompat.OnActionExpandListener{
+public class TeachersListFragment extends BaseFragment implements OnItemClickListener,
+																SearchView.OnQueryTextListener, MenuItemCompat.OnActionExpandListener{
 	private StickyListHeadersListView mListView;
 	private TeacherListAdapter mAdapter;
 	private RTCursorLoader mLoader;
@@ -46,9 +41,10 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	
 	private Cursor mTeacherListCursor;
 
-    private List<Teacher> teachers = new ArrayList<>();
-	
-	@Override
+    private RealmResults<Teacher> teachers;
+    private Realm realm;
+
+    @Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		mLessonListener = (LessonListener) activity;
@@ -59,11 +55,26 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 		super.onCreate(savedInstanceState);
 		setHasOptionsMenu(true);
 		setRetainInstance(true);
+        realm = Realm.getInstance(getActivity());
+        refetchTeachers("");
 		mAdapter = new TeacherListAdapter(getActivity(), teachers);
 	}
-	
-	
-	@Override
+
+    private void refetchTeachers(String name) {
+
+        String capitalizedName = "";
+        if (name.length() > 1) {
+            capitalizedName = name.substring(0, 1).toUpperCase() + name.substring(1, name.length());
+        }
+        teachers = realm.where(Teacher.class)
+                .contains(Teacher.NAME_FULL, name)
+                    .or()
+                .contains(Teacher.NAME_FULL, capitalizedName ).findAll();
+        teachers.sort(Teacher.NAME_FULL);
+    }
+
+
+    @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 //		View v = inflater.inflate(R.layout.simple_list_fragment, null);
@@ -80,8 +91,7 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
 	public void onResume() {
 		super.onResume();
         RestManager.getInstance().teacherListRequest(null);
-        getLoaderManager().restartLoader(0, null, this);
-        getLoaderManager().getLoader(0).forceLoad();
+
 	}
 	
 
@@ -102,47 +112,20 @@ public class TeachersListFragment extends BaseFragment implements OnItemClickLis
     }
 
 	@Override
-	public Loader<List<Teacher>> onCreateLoader(int c, Bundle arg1) {
-        String query = null;
-        if (mSearchView != null && mSearchView.getQuery() != null) {
-            query = mSearchView.getQuery().toString();
-        }
-        return new TecherListLoader(getActivity(), query);
-	}
-
-    @Override
-    public void onLoadFinished(Loader<List<Teacher>> loader, List<Teacher> data) {
-        Log.e("Teacher list","onLoadFinished "+data);
-        teachers.clear();
-        teachers.addAll(data);
-        mAdapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onLoaderReset(Loader<List<Teacher>> loader) {
-
-    }
-
-
-
-	@Override
 	public boolean onQueryTextChange(String value) {
-        getLoaderManager().restartLoader(0, null, this);
-        getLoaderManager().getLoader(0).forceLoad();
-		return true;
+        refetchTeachers(value);
+        mAdapter.swap(teachers);
+
+        return true;
 	}
 
 	@Override
 	public boolean onQueryTextSubmit(String value) {
-        getLoaderManager().restartLoader(0, null, this);
-        getLoaderManager().getLoader(0).forceLoad();
+
+
 		return false;
 	}
 
-	@Override
-	public Cursor runQuery(CharSequence constraint) {
-		return DataManager.getInstance().getFiltredTeachersCursor(constraint.toString());
-	}
 
 
 	@Override

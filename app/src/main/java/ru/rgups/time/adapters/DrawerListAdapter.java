@@ -1,12 +1,13 @@
 package ru.rgups.time.adapters;
 
-import ru.rgups.time.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import ru.rgups.time.R;
 
 public class DrawerListAdapter extends BaseAdapter{
 	public static enum FRAGMENTS {

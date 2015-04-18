@@ -4,6 +4,8 @@ package ru.rgups.time.utils;
  * Здесь будут всякие полезные няшки 
  */
 
+import android.util.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -13,8 +15,6 @@ import java.io.ObjectOutputStream;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-
-import android.util.Log;
 
 public class Slipper {
 	public static final Pattern pattern = Pattern.compile(".+@.+\\.[a-z].+");

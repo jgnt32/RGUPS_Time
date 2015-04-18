@@ -4,24 +4,24 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.List;
-
+import io.realm.RealmBaseAdapter;
+import io.realm.RealmResults;
 import ru.rgups.time.R;
 import ru.rgups.time.model.entity.teachers.Teacher;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
-public class TeacherListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
+public class TeacherListAdapter extends RealmBaseAdapter<Teacher> implements StickyListHeadersAdapter {
 	
 	private LayoutInflater mInflater;
-    private List<Teacher> teachers;
+    private RealmResults<Teacher> teachers;
 
-    public TeacherListAdapter(Context context, List<Teacher> teachers) {
+    public TeacherListAdapter(Context context, RealmResults<Teacher> teachers) {
+        super(context, teachers, true);
         this.teachers = teachers;
         mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
+    }
 
 
     @Override
@@ -63,4 +63,10 @@ public class TeacherListAdapter extends BaseAdapter implements StickyListHeaders
         name.setText(getItem(position).getShortName());
         return convertView;
     }
+
+    public void swap(RealmResults<Teacher> teachers){
+        this.teachers = teachers;
+        notifyDataSetChanged();
+    }
+
 }

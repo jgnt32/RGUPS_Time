@@ -1,9 +1,10 @@
 package ru.rgups.time.loaders;
 
-import ru.rgups.time.model.DataManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.content.CursorLoader;
+
+import ru.rgups.time.model.DataManager;
 
 public class RTCursorLoader extends CursorLoader{
 

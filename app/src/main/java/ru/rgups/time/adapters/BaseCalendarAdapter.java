@@ -1,11 +1,5 @@
 package ru.rgups.time.adapters;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import ru.rgups.time.R;
-import ru.rgups.time.utils.CalendarManager;
-
 import android.content.Context;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -13,6 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import ru.rgups.time.R;
+import ru.rgups.time.utils.CalendarManager;
 
 public abstract class BaseCalendarAdapter extends BaseAdapter{
 public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
@@ -88,12 +88,13 @@ public static final String HW_DATE_FORMAT = "dd-MM-yyyy";
 		}
 
         if(isLessonFree(position)){
-
+            mHolder.getText().setTextColor(mContext.getResources().getColorStateList(R.color.calendar_secondary_text_list_selector));
+            mHolder.getDayOfWeek().setTextColor(mContext.getResources().getColorStateList(R.color.calendar_secondary_text_list_selector));
             mView.setBackgroundResource(R.drawable.calendar_list_selector);
-         //   mHolder.getDayOfWeek().setTextColor(mBlueColor);
         } else {
             mView.setBackgroundResource(R.drawable.lesson_free_calendar_list_selector);
-        //    mHolder.getDayOfWeek().setTextColor(mLessonFreeColor);
+            mHolder.getText().setTextColor(mContext.getResources().getColorStateList(R.color.calendar_text_lesson_free_list_selector));
+            mHolder.getDayOfWeek().setTextColor(mContext.getResources().getColorStateList(R.color.calendar_text_lesson_free_list_selector));
 
         }
 		  mHolder.text.setText(DateFormat.format("d",CalendarManager.getDate(position)));

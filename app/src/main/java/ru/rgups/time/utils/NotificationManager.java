@@ -1,17 +1,13 @@
 package ru.rgups.time.utils;
 
+import android.app.AlarmManager;
+import android.content.Context;
+
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import ru.rgups.time.fragments.HomeWorkEditFragment;
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.HomeWork;
-import ru.rgups.time.receiver.HomeWorkNotificationReceiver;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 
 public class NotificationManager {
 	

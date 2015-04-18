@@ -22,9 +22,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:textStyle="bold"
-                android:text="TextView"
-                android:textSize="17sp" />
+                android:textSize="12sp"
+                android:text="TextView" />
 
             <TextView
                 android:id="@+id/homework_list_element_message"

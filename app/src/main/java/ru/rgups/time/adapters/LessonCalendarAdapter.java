@@ -1,10 +1,10 @@
 package ru.rgups.time.adapters;
 
-import ru.rgups.time.utils.CalendarManager;
-
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+
+import ru.rgups.time.utils.CalendarManager;
 
 
 public class LessonCalendarAdapter extends BaseCalendarAdapter{

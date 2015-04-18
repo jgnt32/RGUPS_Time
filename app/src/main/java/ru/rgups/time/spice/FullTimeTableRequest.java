@@ -1,5 +1,11 @@
 package ru.rgups.time.spice;
 
+import android.app.Activity;
+import android.text.TextUtils;
+import android.util.Log;
+
+import com.octo.android.robospice.request.springandroid.SpringAndroidSpiceRequest;
+
 import ru.rgups.time.model.DataManager;
 import ru.rgups.time.model.entity.Facultet;
 import ru.rgups.time.model.entity.FacultetList;
@@ -7,12 +13,6 @@ import ru.rgups.time.model.entity.Group;
 import ru.rgups.time.model.entity.GroupList;
 import ru.rgups.time.model.entity.LessonList;
 import ru.rgups.time.utils.PreferenceManager;
-import android.app.Activity;
-import android.content.Context;
-import android.text.TextUtils;
-import android.util.Log;
-
-import com.octo.android.robospice.request.springandroid.SpringAndroidSpiceRequest;
 
 public class FullTimeTableRequest extends SpringAndroidSpiceRequest< Boolean > {
 

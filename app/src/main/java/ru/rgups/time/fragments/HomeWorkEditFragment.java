@@ -1,17 +1,6 @@
 package ru.rgups.time.fragments;
 
-import ru.rgups.time.R;
-import ru.rgups.time.activities.PhotoFullScreenActivity;
-import ru.rgups.time.adapters.HomeWorkImageAdapter;
-import ru.rgups.time.interfaces.HomeWorkListener;
-import ru.rgups.time.interfaces.PickUpImageListener;
-import ru.rgups.time.model.DataManager;
-import ru.rgups.time.model.HomeWork;
-import ru.rgups.time.utils.DialogManager;
-import ru.rgups.time.utils.PreferenceManager;
-
 import android.app.Activity;
-import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -31,7 +20,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -40,6 +28,16 @@ import android.widget.GridView;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+
+import ru.rgups.time.R;
+import ru.rgups.time.activities.PhotoFullScreenActivity;
+import ru.rgups.time.adapters.HomeWorkImageAdapter;
+import ru.rgups.time.interfaces.HomeWorkListener;
+import ru.rgups.time.interfaces.PickUpImageListener;
+import ru.rgups.time.model.DataManager;
+import ru.rgups.time.model.HomeWork;
+import ru.rgups.time.utils.DialogManager;
+import ru.rgups.time.utils.PreferenceManager;
 
 public class HomeWorkEditFragment extends Fragment implements  AdapterView.OnItemClickListener,
         LoaderManager.LoaderCallbacks<HomeWork>, PickUpImageListener{
